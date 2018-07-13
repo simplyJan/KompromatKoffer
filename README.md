@@ -7,7 +7,7 @@ Author: https://scobiform.com
 
 You will need a Config.cs to run the app.
 
-```
+```C#
 using System;
 using System.Collections.Generic;
 using System.Linq;
