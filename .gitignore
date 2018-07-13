@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vscode
+/.vs
+/KompromatKoffer/bin/netcoreapp2.1
+/KompromatKoffer/obj
+/KompromatKoffer/Config.cs

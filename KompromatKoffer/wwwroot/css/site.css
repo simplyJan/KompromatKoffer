@@ -1,0 +1,78 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Last Hundred*/
+.lasthundred {
+    font-size: 16px;
+}
+
+.lasthundred img {
+    border-radius: 50%;
+}
+
+.tweetLink {
+    border-radius:0.5em;
+    padding-bottom:0.5em;
+}
+
+.tweetLink a {
+        display: block;
+        height: 100%;
+        padding: 0.5em;
+        border-radius: 1em;
+        text-decoration:none;
+        color:black;
+}
+
+.tweelink a:active, a:hover, a:focus {
+    background-color:whitesmoke;
+    display: block;
+    border-radius: 0.5em;
+}
+
+.dateTweet {
+    border-radius: 0.5em;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+    font-size: 0.5em
+}
+
+.profileDesc {
+    font-size: 0.7em;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
