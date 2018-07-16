@@ -5,7 +5,7 @@ NetCore 2.1 Web Application for displaying all recent tweets from every member o
 URL: https://kompromatkoffer.de
 Author: https://scobiform.com
 
-You will need a Config.cs to run the app.
+<b>You will need a Config.cs to run the app.</b>
 
 ```C#
 using System;
@@ -41,9 +41,10 @@ namespace KompromatKoffer
         }
     }
 } 
+```
 
-Also a appsettings.json for the MSSQL Connection
-```C#
+<b>Also a appsettings.json for the MSSQL Connection</b>
+```json
 {
   "Logging": {
     "LogLevel": {
@@ -54,3 +55,4 @@ Also a appsettings.json for the MSSQL Connection
   "ConnectionStrings": {
     "ApplicationContextConnection": "Data Source=SERVERNAME;Integrated Security=False;User ID=USERLOGIN;Password=PASSWORD;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
   }
+```
