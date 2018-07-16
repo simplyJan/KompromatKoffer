@@ -40,4 +40,16 @@ namespace KompromatKoffer
             public static string ScreenName { get; set; } = "wahl_beobachter";
         }
     }
-} ```
+} 
+
+Also a appsettings.json for the MSSQL Connection
+```{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "ApplicationContextConnection": "Data Source=SERVERNAME;Integrated Security=False;User ID=USERLOGIN;Password=PASSWORD;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+  }
