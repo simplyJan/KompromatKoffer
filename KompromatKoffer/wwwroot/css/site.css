@@ -1,4 +1,4 @@
-/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
 for details on configuring this project to bundle and minify static web assets. */
 body {
     padding-top: 50px;
@@ -23,26 +23,26 @@ body {
     font-size: 16px;
 }
 
-.lasthundred img {
-    border-radius: 50%;
-}
+    .lasthundred img {
+        border-radius: 50%;
+    }
 
 .tweetLink {
-    border-radius:0.5em;
-    padding-bottom:0.5em;
+    border-radius: 0.5em;
+    padding-bottom: 0.5em;
 }
 
-.tweetLink a {
+    .tweetLink a {
         display: block;
         height: 100%;
         padding: 0.5em;
         border-radius: 1em;
-        text-decoration:none;
-        color:black;
-}
+        text-decoration: none;
+        color: black;
+    }
 
 .tweelink a:active, a:hover, a:focus {
-    background-color:whitesmoke;
+    background-color: whitesmoke;
     display: block;
     border-radius: 0.5em;
 }

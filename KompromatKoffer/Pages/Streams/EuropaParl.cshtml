@@ -1,0 +1,63 @@
+﻿@page
+@model KompromatKoffer.Pages.Streams.EuropaParlModel
+@{
+    ViewData["Title"] = "EuropaParl";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+
+    <div class="lasthundred">
+        @{
+            var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListNameMEP, Config.Parameter.ScreenNameMEP);
+
+
+            //Settings for last 100
+            Tweetinvi.Parameters.GetTweetsFromListParameters getTweetsParameters = new Tweetinvi.Parameters.GetTweetsFromListParameters()
+            {
+                MaximumNumberOfTweetsToRetrieve = Config.Parameter.TweetsRetrieved,
+                IncludeRetweets = false,
+                IncludeEntities = true,
+            };
+
+            var tweets = list.GetTweets(getTweetsParameters);
+
+        }
+        <h3>Die letzten @Convert.ToString(tweets.Count()) Tweets aus dem Europäischen Parlament</h3>
+
+        <p>
+            @foreach (var x in tweets)
+            {
+
+                <div class="tweetLink">
+                    <a href="@x.Url" target="_blank">
+                        <img src="@x.CreatedBy.ProfileImageUrlHttps" />
+                        <br>
+                        @x.CreatedBy
+                        <br>
+            <p class="profileDesc">@x.CreatedBy.Description</p>
+
+            @{
+                if (x.ExtendedTweet != null)
+                {
+                    @x.ExtendedTweet.Text
+
+                }
+                else
+                {
+                    @x.Text
+                }
+
+            }
+            <p class="dateTweet">@x.CreatedAt</p>
+            </a>
+        </div>
+
+    }
+
+
+
+        </div>
+        </div>
+
+
