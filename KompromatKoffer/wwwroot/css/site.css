@@ -3,6 +3,8 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #1b1b1e;
+    color: #d8dbe2;
 }
 
 /* Wrapping element */
@@ -12,6 +14,11 @@ body {
     padding-right: 15px;
 }
 
+/*Navbar*/
+
+.navbar-inverse {
+    background-color: #1b1b1e;
+}
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
@@ -23,41 +30,60 @@ body {
     font-size: 16px;
 }
 
-    .lasthundred img {
-        border-radius: 50%;
-    }
+.lasthundred img {
+    border-radius: 50%;
+}
 
 .tweetLink {
     border-radius: 0.5em;
-    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #2f2f32;
+    color: #d8dbe2;
+    display: block;
 }
 
-    .tweetLink a {
-        display: block;
-        height: 100%;
-        padding: 0.5em;
-        border-radius: 1em;
-        text-decoration: none;
-        color: black;
-    }
+.tweetLink a {
+    display: block;
+    height: 100%;
+    border-radius: 1em;
+    text-decoration: none;
+    color: #d8dbe2;
+    padding:0.5em;
+}
 
 .tweelink a:active, a:hover, a:focus {
-    background-color: whitesmoke;
+    background-color: #444446;
     display: block;
     border-radius: 0.5em;
+    padding: 0.5em;
 }
 
 .dateTweet {
     border-radius: 0.5em;
-    padding: 0;
+    padding-top: 10px;
     margin: 0;
     text-align: right;
-    font-size: 0.5em
+    font-size: 0.5em;
 }
+
 
 .profileDesc {
     font-size: 0.7em;
 }
+
+.replyToName{
+    font-size: 0.7em;
+}
+
+.quotedTweet {
+    font-size: 0.7em;
+    background-color: #444446;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+
+
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {

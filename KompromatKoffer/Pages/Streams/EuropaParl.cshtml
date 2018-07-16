@@ -23,41 +23,60 @@
             var tweets = list.GetTweets(getTweetsParameters);
 
         }
-        <h3>Die letzten @Convert.ToString(tweets.Count()) Tweets aus dem Europäischen Parlament</h3>
+        <h3>Die letzten @Convert.ToString(tweets.Count()) Tweets aus dem europäischen Parlament</h3>
 
-        <p>
-            @foreach (var x in tweets)
-            {
+        @foreach (var x in tweets)
+        {
 
-                <div class="tweetLink">
-                    <a href="@x.Url" target="_blank">
-                        <img src="@x.CreatedBy.ProfileImageUrlHttps" />
-                        <br>
-                        @x.CreatedBy
-                        <br>
-            <p class="profileDesc">@x.CreatedBy.Description</p>
+            <div class="tweetLink">
+                <a href="@x.Url" target="_blank">
+                    <img src="@x.CreatedBy.ProfileImageUrlHttps" />
+                    <br>
+                    @x.CreatedBy
+                    <br>
+                    <p class="profileDesc">@x.CreatedBy.Description</p>
+                    @{
+                        if (x.InReplyToScreenName != null)
+                        {
+                            <p class="replyToName">Replying to: @x.InReplyToScreenName</p>
+                        }
+                    }
+                    @{
+                        if (x.QuotedTweet != null)
+                        {
 
-            @{
-                if (x.ExtendedTweet != null)
-                {
-                    @x.ExtendedTweet.Text
-
-                }
-                else
-                {
-                    @x.Text
-                }
-
-            }
-            <p class="dateTweet">@x.CreatedAt</p>
-            </a>
-        </div>
-
-    }
+                            <p class="quotedTweet">
+                                @x.QuotedTweet.CreatedBy
+                                <br>
+                                @x.QuotedTweet
+                            </p>
 
 
+                        }
+                    }
+                    @{
+                        if (x.ExtendedTweet != null)
+                        {
+                            @x.ExtendedTweet.Text
 
-        </div>
+                        }
+                        else
+                        {
+                            @x.Text
+                        }
+
+                    }
+                            <div class="dateTweet">
+                                @x.RetweetCount Retweets &emsp; @x.FavoriteCount Likes &emsp; @x.CreatedAt
+                            </div>
+                </a>
+            </div>
+
+        }
+
+
+
+    </div>
         </div>
 
 
