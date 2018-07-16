@@ -43,7 +43,8 @@ namespace KompromatKoffer
 } 
 
 Also a appsettings.json for the MSSQL Connection
-```{
+```C#
+{
   "Logging": {
     "LogLevel": {
       "Default": "Warning"
