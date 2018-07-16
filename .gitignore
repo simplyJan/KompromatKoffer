@@ -7,3 +7,6 @@
 /KompromatKoffer/bin/netcoreapp2.1
 /KompromatKoffer/obj
 /KompromatKoffer/Config.cs
+/KompromatKoffer/appsettings.json
+/KompromatKoffer/appsettings.Development.json
+/KompromatKoffer/bin
