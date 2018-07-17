@@ -129,6 +129,19 @@ a:hover, a:focus, a:active {
 /*Footer NAV*/
 
 
+/*Cookie Consent*/
+#cookieConsent{
+    position:relative;
+    bottom:10px;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #31b0d5;
+    border-color: #269abc;
+    display:inline;
+}
+
 
 
 /* Make .svg files in the carousel display properly in older browsers */
