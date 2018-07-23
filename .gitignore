@@ -10,5 +10,5 @@
 /KompromatKoffer/appsettings.json
 /KompromatKoffer/appsettings.Development.json
 /KompromatKoffer/bin
-/KompromatKoffer/Properties/
-/KompromatKoffer/Migrations/
+/KompromatKoffer/Properties
+/KompromatKoffer/Migrations
