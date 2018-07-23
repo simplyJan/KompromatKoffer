@@ -50,7 +50,7 @@ a:hover, a:focus, a:active {
     border-radius: 50%;
 }
 
-.tweetLink {
+#tweetLink {
     border-radius: 0.5em;
     margin-bottom: 0.5em;
     background-color: #1b1b1e;
@@ -59,20 +59,21 @@ a:hover, a:focus, a:active {
     padding:0.5em;
 }
 
-.tweetLink a {
-    display: block;
-    height: 100%;
-    border-radius: 1em;
-    text-decoration: none;
-    color: #d8dbe2;
-    padding:0.5em;
-}
+a.tweetLink {
+        display: block;
+        height: 100%;
+        border-radius: 1em;
+        text-decoration: none;
+        color: #d8dbe2;
+        padding: 0.5em;
+    }
 
-.tweetlink:active, .tweetlink:hover, .tweetlink:focus {
+a.tweetLink:active, a.tweetLink:hover, a.tweetLink:focus {
     background-color: #2f2f32;
     display: block;
     border-radius: 0.5em;
 }
+
 
 .dateTweet {
     border-radius: 0.5em;
@@ -163,7 +164,25 @@ a:hover, a:focus, a:active {
 }
 
 .MdBListTable th form p {
-    width: 270px;
+    width: 200px;
+}
+
+a.imageLink{
+    text-align:center;
+}
+
+a.imageLink img {
+    text-align: center;
+}
+
+a.imageLink p {
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size:1.25em;
+}
+
+.alignCenter {
+    text-align: center;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */

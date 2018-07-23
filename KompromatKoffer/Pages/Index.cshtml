@@ -28,8 +28,8 @@
             @foreach (var x in tweets)
             {
 
-                <div class="tweetLink">
-                    <a href="@x.Url" target="_blank">
+                <div id="tweetLink">
+                    <a href="@x.Url" target="_blank" class="tweetLink">
                         <img src="@x.CreatedBy.ProfileImageUrlHttps" />
                         <br>
                         @x.CreatedBy

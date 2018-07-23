@@ -6,7 +6,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>Liste aller Mitglieder des Bundestages</h2>
+<h2>Liste aller Mitglieder des Bundestages auf Twitter</h2>
 
 <table class="MdBListTable">
     <thead>
@@ -15,13 +15,9 @@
                 #
             </th>
             <th>
-
-                <p>
                     <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-currentFilter="@Model.CurrentFilter">
                         @Html.DisplayNameFor(model => model.MdBModel[0].TwitterName)
                     </a>
-                </p>
-
                 <form>
                     <p>
                         <input type="text" name="SearchString">
@@ -29,9 +25,6 @@
                     </p>
                 </form>
 
-            </th>
-            <th>
-                Photo
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MdBModel[0].Verified)
@@ -44,12 +37,21 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.MdBModel[0].Location)
+
+                <form>
+                    <p>
+                        <input type="text" name="SearchStringLocation">
+                        <input type="submit" value="Filter" />
+                    </p>
+                </form>
             </th>
             <th>
                 Website
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MdBModel[0].CreatedAt)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CreatedAtSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.MdBModel[0].CreatedAt)
+                </a>
             </th>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.StatusCountSort" asp-route-currentFilter="@Model.CurrentFilter">
@@ -72,11 +74,7 @@
                 </a>
             </th>
             <th>
-
-                <p>
                     @Html.DisplayNameFor(model => model.MdBModel[0].LastStatus)
-                </p>
-
                 <form>
                     <p>
                         <input type="text" name="SearchStringLastStatus">
@@ -119,12 +117,12 @@
 
                 </td>
                 <td>
-                    <a href="@Html.DisplayFor(modelItem => item.TwitterProfileUrl)" target="_blank">
-                        @Html.DisplayFor(modelItem => item.TwitterName)
-                    </a>
-                </td>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item.ProfileImageUrlHttps)" />
+                    <div class="alignCenter">
+                        <a href="@Html.DisplayFor(modelItem => item.TwitterProfileUrl)" target="_blank" class="imageLink">
+                            <img src="@Html.DisplayFor(modelItem => item.ProfileImageUrlHttps)" />
+                            <p>@Html.DisplayFor(modelItem => item.TwitterName)</p>
+                        </a>
+                    </div>
                 </td>
                 <td class="verified">
                     @Html.DisplayFor(modelItem => item.Verified)
@@ -139,7 +137,7 @@
                     @Html.DisplayFor(modelItem => item.Location)
                 </td>
                 <td class="verified">
-                    <a href="@Html.DisplayFor(modelItem => item.LinkedUrl)" target="_blank">link</a>
+                    <a href="@Html.DisplayFor(modelItem => item.LinkedUrl)" target="_blank"><i class="fas fa-link"></i></a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedAt)

@@ -29,10 +29,11 @@ namespace KompromatKoffer.Pages.Lists.MdB
         public string FavCountSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
+        public string CreatedAtSort { get; set; }
 
         public PaginatedList<MdBModel> MdBModel { get; set; }
 
-        public async Task OnGetAsync(string searchString, string sortOrder, string searchStringLastStatus, string currentFilter, int? pageIndex)
+        public async Task OnGetAsync(string searchString, string sortOrder, string searchStringLastStatus, string currentFilter, int? pageIndex, string searchStringLocation)
         {
 
             #region => Sorting - Filtering - Pagination
@@ -69,6 +70,14 @@ namespace KompromatKoffer.Pages.Lists.MdB
 
             }
 
+            if (!String.IsNullOrEmpty(searchStringLocation))
+            {
+                mdbs = mdbs.Where(
+                    s => s.Location.Contains(searchStringLocation)
+                    );
+
+            }
+
             //Sorting
             NameSort = sortOrder == "TwitterName" ? "TwitterName_Desc" : "TwitterName";
             StatusCountSort = sortOrder == "StatusesCount" ? "StatusesCount_Desc" : "StatusesCount";
@@ -76,6 +85,7 @@ namespace KompromatKoffer.Pages.Lists.MdB
             FriendsCountSort = sortOrder == "FriendsCount" ? "FriendsCount_Desc" : "FriendsCount";
             FavCountSort = sortOrder == "FavCount" ? "FavCount_Desc" : "FavCount";
             DateSort = sortOrder == "LastCreatedDate" ? "LastCreatedDate_Desc" : "LastCreatedDate";
+            CreatedAtSort = sortOrder == "CreatedAtDate" ? "CreatedAtDate_Desc" : "CreatedAtDate";
 
             switch (sortOrder)
             {
@@ -114,6 +124,12 @@ namespace KompromatKoffer.Pages.Lists.MdB
                     break;
                 case "LastCreatedDate_Desc":
                     mdbs = mdbs.OrderByDescending(s => s.LastStatusCreated);
+                    break;
+                case "CreatedAtDate":
+                    mdbs = mdbs.OrderBy(s => s.CreatedAt);
+                    break;
+                case "CreatedAtDate_Desc":
+                    mdbs = mdbs.OrderByDescending(s => s.CreatedAt);
                     break;
                 default:
                     mdbs = mdbs.OrderBy(s => s.TwitterName);
@@ -196,7 +212,7 @@ namespace KompromatKoffer.Pages.Lists.MdB
 
         }
 
-        public async Task GetStatusData()
+        public async Task UpdateStatusData()
         {
             var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
 
