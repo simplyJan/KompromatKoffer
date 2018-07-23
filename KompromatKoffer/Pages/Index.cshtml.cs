@@ -19,13 +19,7 @@ namespace KompromatKoffer.Pages
             Auth.SetUserCredentials(Config.Credentials.CONSUMER_KEY,Config.Credentials.CONSUMER_SECRET, Config.Credentials.ACCESS_TOKEN,Config.Credentials.ACCESS_TOKEN_SECRET);
 
 
-
-            
-
         }
-
-
-
 
     }
 }

@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using KompromatKoffer.Models;
 
 namespace KompromatKoffer
 {
@@ -40,6 +42,9 @@ namespace KompromatKoffer
                 options.ForwardedHeaders =
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
+
+            services.AddDbContext<MdBContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("MdBContext")));
 
         }
 

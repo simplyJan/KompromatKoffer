@@ -1,0 +1,85 @@
+﻿@page
+@model KompromatKoffer.Pages.Streams.MdLHessenModel
+@{
+    ViewData["Title"] = "MdLHessen";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+
+    <div class="lasthundred">
+        @{
+            var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListNameMdLHessen, Config.Parameter.ScreenNameMdLHessen);
+
+
+            //Settings for last 100
+            Tweetinvi.Parameters.GetTweetsFromListParameters getTweetsParameters = new Tweetinvi.Parameters.GetTweetsFromListParameters()
+            {
+                MaximumNumberOfTweetsToRetrieve = Config.Parameter.TweetsRetrieved,
+                IncludeRetweets = false,
+                IncludeEntities = true,
+            };
+
+            var tweets = list.GetTweets(getTweetsParameters);
+
+        }
+        <h3>Die letzten @Convert.ToString(tweets.Count()) Tweets aus dem hessischen Landtag</h3>
+
+        @foreach (var x in tweets)
+        {
+
+            <div class="tweetLink">
+                <a href="@x.Url" target="_blank">
+                    <img src="@x.CreatedBy.ProfileImageUrlHttps" />
+                    <br>
+                    @x.CreatedBy
+                    <br>
+                    <p class="profileDesc">@x.CreatedBy.Description</p>
+                    @{
+                        if (x.InReplyToScreenName != null)
+                        {
+                            <p class="replyToName">Replying to: @x.InReplyToScreenName</p>
+                        }
+                    }
+                    @{
+                        if (x.QuotedTweet != null)
+                        {
+
+                            <p class="quotedTweet">
+                                @x.QuotedTweet.CreatedBy
+                                <br>
+                                @x.QuotedTweet
+                            </p>
+
+
+                        }
+                    }
+                    @{
+                        if (x.ExtendedTweet != null)
+                        {
+                            @x.ExtendedTweet.Text
+
+                        }
+                        else
+                        {
+                            @x.Text
+                        }
+
+                    }
+                    <div class="dateTweet">
+                        @x.RetweetCount Retweets &emsp; @x.FavoriteCount Likes &emsp; @x.CreatedAt
+                    </div>
+                </a>
+            </div>
+
+        }
+
+
+
+    </div>
+</div>
+
+
+
+

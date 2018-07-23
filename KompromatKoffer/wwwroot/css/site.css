@@ -142,7 +142,29 @@ a:hover, a:focus, a:active {
     display:inline;
 }
 
+/*MdBList Table*/
+.MdBListTable td{
+    font-size:1em;
+    padding:5px;
+}
 
+.MdBListTable th {
+    font-size: 1em;
+    padding-right:5px;
+    padding-left:5px;
+}
+
+.MdBProfileLink {
+    text-align:center;
+}
+
+.verified {
+    text-align:center;
+}
+
+.MdBListTable th form p {
+    width: 270px;
+}
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {

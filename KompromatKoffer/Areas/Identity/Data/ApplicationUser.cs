@@ -9,6 +9,7 @@ namespace KompromatKoffer.Areas.Identity.Data
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        //
         public static string TwitterID { get; set;}
 
     }

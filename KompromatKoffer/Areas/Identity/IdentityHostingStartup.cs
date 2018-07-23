@@ -22,6 +22,9 @@ namespace KompromatKoffer.Areas.Identity
 
                 services.AddDefaultIdentity<ApplicationUser>()
                     .AddEntityFrameworkStores<ApplicationContext>();
+
+
+
             });
         }
     }
