@@ -18,9 +18,7 @@ namespace KompromatKoffer.Pages.Lists.MdB
 
         public IndexModel(KompromatKoffer.Models.MdBContext context)
         {
-            _context = context;
-
-            
+            _context = context;         
         }
 
         public string NameSort { get; set; }
@@ -32,22 +30,27 @@ namespace KompromatKoffer.Pages.Lists.MdB
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 
-        public IList<MdBModel> MdBModel { get;set; }
+        public PaginatedList<MdBModel> MdBModel { get; set; }
 
-        public async Task OnGetAsync(string searchString, string sortOrder, string searchStringLastStatus)
+        public async Task OnGetAsync(string searchString, string sortOrder, string searchStringLastStatus, string currentFilter, int? pageIndex)
         {
 
-            //Update Database MOVE Out
-            //await GetTwitterData();
-
-            //Update some Data
-            //await GetStatusData();
-
-            //var mdbs = from Twittername in _context.MdBModel
-            //             select Twittername;
+            #region => Sorting - Filtering - Pagination
+            CurrentSort = sortOrder;
 
             IQueryable<MdBModel> mdbs = from s in _context.MdBModel
-                                            select s;
+                                        select s;
+            //Indexing
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            CurrentFilter = searchString;
 
             //Search Filtering
             if (!String.IsNullOrEmpty(searchString))
@@ -71,39 +74,39 @@ namespace KompromatKoffer.Pages.Lists.MdB
             StatusCountSort = sortOrder == "StatusesCount" ? "StatusesCount_Desc" : "StatusesCount";
             FollowersCountSort = sortOrder == "FollowersCount" ? "FollowersCount_Desc" : "FollowersCount";
             FriendsCountSort = sortOrder == "FriendsCount" ? "FriendsCount_Desc" : "FriendsCount";
-            FavCountSort = sortOrder == "FavCounts" ? "FavCounts_Desc" : "FavCounts";
+            FavCountSort = sortOrder == "FavCount" ? "FavCount_Desc" : "FavCount";
             DateSort = sortOrder == "LastCreatedDate" ? "LastCreatedDate_Desc" : "LastCreatedDate";
-              
+
             switch (sortOrder)
             {
                 case "TwitterName":
-                mdbs = mdbs.OrderBy(s => s.TwitterName);
+                    mdbs = mdbs.OrderBy(s => s.TwitterName);
                     break;
                 case "TwitterName_Desc":
                     mdbs = mdbs.OrderByDescending(s => s.TwitterName);
                     break;
                 case "StatusesCount":
-                mdbs = mdbs.OrderBy(s => s.StatusesCount);
+                    mdbs = mdbs.OrderBy(s => s.StatusesCount);
                     break;
                 case "StatusesCount_Desc":
                     mdbs = mdbs.OrderByDescending(s => s.StatusesCount);
                     break;
-                case "FollowersCountSort":
-                mdbs = mdbs.OrderBy(s => s.FollowersCount);
+                case "FollowersCount":
+                    mdbs = mdbs.OrderBy(s => s.FollowersCount);
                     break;
                 case "FollowersCount_Desc":
                     mdbs = mdbs.OrderByDescending(s => s.FollowersCount);
                     break;
-                case "FriendsCountSort":
-                mdbs = mdbs.OrderBy(s => s.FriendsCount);
+                case "FriendsCount":
+                    mdbs = mdbs.OrderBy(s => s.FriendsCount);
                     break;
                 case "FriendsCount_Desc":
                     mdbs = mdbs.OrderByDescending(s => s.FriendsCount);
                     break;
-                case "FavCountSort":
-                mdbs = mdbs.OrderBy(s => s.FavCounts);
+                case "FavCount":
+                    mdbs = mdbs.OrderBy(s => s.FavCounts);
                     break;
-                case "FavCounts_Desc":
+                case "FavCount_Desc":
                     mdbs = mdbs.OrderByDescending(s => s.FavCounts);
                     break;
                 case "LastCreatedDate":
@@ -113,14 +116,22 @@ namespace KompromatKoffer.Pages.Lists.MdB
                     mdbs = mdbs.OrderByDescending(s => s.LastStatusCreated);
                     break;
                 default:
-                mdbs = mdbs.OrderBy(s => s.TwitterName);
+                    mdbs = mdbs.OrderBy(s => s.TwitterName);
                     break;
             }
 
-            MdBModel = await mdbs.AsNoTracking().ToListAsync();
-                  
-        }
 
+            int pageSize = 100;
+            MdBModel = await PaginatedList<MdBModel>.CreateAsync(
+                mdbs.AsNoTracking(), pageIndex ?? 1, pageSize);
+
+
+            #endregion
+
+            //Manual Update Database
+            //await GetTwitterData();
+
+        }
 
         public async Task GetTwitterData()
         {
@@ -133,8 +144,7 @@ namespace KompromatKoffer.Pages.Lists.MdB
             var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
               
             var AllMembers = list.GetMembers(600);
-
-            
+      
             foreach (var x in AllMembers)
             {
                 
@@ -167,7 +177,7 @@ namespace KompromatKoffer.Pages.Lists.MdB
                 if (x.Status == null)
                 {
                     entry.LastStatusCreated = new DateTime(666, 1, 1);
-                   
+
                 }
                 else
                 {
@@ -175,11 +185,13 @@ namespace KompromatKoffer.Pages.Lists.MdB
                 }
 
                 
-                _context.MdBModel.Add(entry);
+                 _context.MdBModel.Add(entry);
 
                 
             }
 
+
+            
             await _context.SaveChangesAsync();
 
         }
@@ -190,12 +202,13 @@ namespace KompromatKoffer.Pages.Lists.MdB
 
             var AllMembers = list.GetMembers(600);
 
-
             foreach (var x in AllMembers)
             {
 
                 var entry = new MdBModel();
-               
+
+                _context.MdBModel.Attach(entry);
+
                 entry.StatusesCount = x.StatusesCount;
                 entry.FollowersCount = x.FollowersCount;
                 entry.FriendsCount = x.FriendsCount;
@@ -222,14 +235,11 @@ namespace KompromatKoffer.Pages.Lists.MdB
                 }
 
 
-                _context.MdBModel.Update(entry);
-
+                _context.Entry(entry).Property("LastStatus").IsModified = true;
 
             }
 
             await _context.SaveChangesAsync();
-
-
 
         }
     }

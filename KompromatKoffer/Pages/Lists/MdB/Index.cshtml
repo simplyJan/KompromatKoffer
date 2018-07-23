@@ -17,9 +17,9 @@
             <th>
 
                 <p>
-                 <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
-                 @Html.DisplayNameFor(model => model.MdBModel[0].TwitterName)
-                </a>
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-currentFilter="@Model.CurrentFilter">
+                        @Html.DisplayNameFor(model => model.MdBModel[0].TwitterName)
+                    </a>
                 </p>
 
                 <form>
@@ -52,22 +52,22 @@
                 @Html.DisplayNameFor(model => model.MdBModel[0].CreatedAt)
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.StatusCountSort">
+                <a asp-page="./Index" asp-route-sortOrder="@Model.StatusCountSort" asp-route-currentFilter="@Model.CurrentFilter">
                     Statuses
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.FollowersCountSort">
+                <a asp-page="./Index" asp-route-sortOrder="@Model.FollowersCountSort" asp-route-currentFilter="@Model.CurrentFilter">
                     Followers
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.FriendsCountSort">
+                <a asp-page="./Index" asp-route-sortOrder="@Model.FriendsCountSort" asp-route-currentFilter="@Model.CurrentFilter">
                     Friends
                 </a>
             </th>
             <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.FavCountSort">
+                <a asp-page="./Index" asp-route-sortOrder="@Model.FavCountSort" asp-route-currentFilter="@Model.CurrentFilter">
                     Favs
                 </a>
             </th>
@@ -86,67 +86,103 @@
             </th>
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
-                @Html.DisplayNameFor(model => model.MdBModel[0].LastStatusCreated)
+                    @Html.DisplayNameFor(model => model.MdBModel[0].LastStatusCreated)
                 </a>
             </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.MdBModel)
-{
-        <tr>
-            <td>
-                @{
-                    int indexpos = Model.MdBModel.IndexOf(item);
-                }
+        @foreach (var item in Model.MdBModel)
+        {
+            <tr>
+                <td>
+                    @{
+                        int indexpos = Model.MdBModel.IndexOf(item);
 
-                @indexpos
-            </td>
-            <td>
-                <a href="@Html.DisplayFor(modelItem => item.TwitterProfileUrl)" target="_blank">
-                    @Html.DisplayFor(modelItem => item.TwitterName)
-                </a>
-            </td>
-            <td>
-                <img src="@Html.DisplayFor(modelItem => item.ProfileImageUrlHttps)" />
-            </td>
-            <td class="verified">
-                @Html.DisplayFor(modelItem => item.Verified)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TwitterDesc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Party)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td class="verified">
-                <a href="@Html.DisplayFor(modelItem => item.LinkedUrl)" target="_blank">link</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusesCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FollowersCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FriendsCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavCounts)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastStatusCreated)
-            </td>
-        </tr>
-}
+                    }
+
+                    @{
+                        if (Model.MdBModel.PageIndex == 1)
+                        {
+                            int newindex = indexpos + 1;
+                            @newindex;
+                        }
+                        if (Model.MdBModel.PageIndex > 1)
+                        {
+                            int newindex = indexpos + (Model.MdBModel.PageIndex * 100) + 1 -100;
+                            @newindex
+                        }
+
+                    }
+
+
+
+                </td>
+                <td>
+                    <a href="@Html.DisplayFor(modelItem => item.TwitterProfileUrl)" target="_blank">
+                        @Html.DisplayFor(modelItem => item.TwitterName)
+                    </a>
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.ProfileImageUrlHttps)" />
+                </td>
+                <td class="verified">
+                    @Html.DisplayFor(modelItem => item.Verified)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TwitterDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Party)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td class="verified">
+                    <a href="@Html.DisplayFor(modelItem => item.LinkedUrl)" target="_blank">link</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusesCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FollowersCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FriendsCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FavCounts)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastStatusCreated)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.MdBModel.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.MdBModel.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.MdBModel.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.MdBModel.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

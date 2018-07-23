@@ -68,7 +68,7 @@ a:hover, a:focus, a:active {
     padding:0.5em;
 }
 
-.tweetlink a:active, a:hover, a:focus {
+.tweetlink:active, .tweetlink:hover, .tweetlink:focus {
     background-color: #2f2f32;
     display: block;
     border-radius: 0.5em;
@@ -144,12 +144,12 @@ a:hover, a:focus, a:active {
 
 /*MdBList Table*/
 .MdBListTable td{
-    font-size:1em;
+    font-size:0.8em;
     padding:5px;
 }
 
 .MdBListTable th {
-    font-size: 1em;
+    font-size: 0.8em;
     padding-right:5px;
     padding-left:5px;
 }
