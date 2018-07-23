@@ -12,3 +12,5 @@
 /KompromatKoffer/bin
 /KompromatKoffer/Properties
 /KompromatKoffer/Migrations
+/KompromatKoffer/Migrations/20180714121324_CreateIdentitySchema.cs
+/KompromatKoffer/Migrations/20180714121324_CreateIdentitySchema.Designer.cs

@@ -72,7 +72,7 @@ namespace KompromatKoffer.Pages.Lists.MdB
             FollowersCountSort = sortOrder == "FollowersCount" ? "FollowersCount_Desc" : "FollowersCount";
             FriendsCountSort = sortOrder == "FriendsCount" ? "FriendsCount_Desc" : "FriendsCount";
             FavCountSort = sortOrder == "FavCounts" ? "FavCounts_Desc" : "FavCounts";
-            //DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+            DateSort = sortOrder == "LastCreatedDate" ? "LastCreatedDate_Desc" : "LastCreatedDate";
               
             switch (sortOrder)
             {
@@ -105,6 +105,12 @@ namespace KompromatKoffer.Pages.Lists.MdB
                     break;
                 case "FavCounts_Desc":
                     mdbs = mdbs.OrderByDescending(s => s.FavCounts);
+                    break;
+                case "LastCreatedDate":
+                    mdbs = mdbs.OrderBy(s => s.LastStatusCreated);
+                    break;
+                case "LastCreatedDate_Desc":
+                    mdbs = mdbs.OrderByDescending(s => s.LastStatusCreated);
                     break;
                 default:
                 mdbs = mdbs.OrderBy(s => s.TwitterName);

@@ -85,7 +85,9 @@
                 </form>
             </th>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
                 @Html.DisplayNameFor(model => model.MdBModel[0].LastStatusCreated)
+                </a>
             </th>
         </tr>
     </thead>
