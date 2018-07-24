@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using KompromatKoffer.Model;
 using KompromatKoffer.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using KompromatKoffer.Areas.Identity.Data;
+using static KompromatKoffer.Areas.Identity.Pages.Account.ExternalLoginModel;
 
 namespace KompromatKoffer.Pages.Lists.MdB
 {
@@ -33,8 +36,10 @@ namespace KompromatKoffer.Pages.Lists.MdB
 
         public PaginatedList<MdBModel> MdBModel { get; set; }
 
-        public async Task OnGetAsync(string searchString, string sortOrder, string searchStringLastStatus, string currentFilter, int? pageIndex, string searchStringLocation)
+        public async Task OnGetAsync(string searchString, string sortOrder, string searchStringLastStatus, string currentFilter, int? pageIndex, string searchStringLocation, string searchStringDesc)
         {
+
+
 
             #region => Sorting - Filtering - Pagination
             CurrentSort = sortOrder;
@@ -74,6 +79,14 @@ namespace KompromatKoffer.Pages.Lists.MdB
             {
                 mdbs = mdbs.Where(
                     s => s.Location.Contains(searchStringLocation)
+                    );
+
+            }
+
+            if (!String.IsNullOrEmpty(searchStringDesc))
+            {
+                mdbs = mdbs.Where(
+                    s => s.TwitterDesc.Contains(searchStringDesc)
                     );
 
             }
@@ -258,5 +271,7 @@ namespace KompromatKoffer.Pages.Lists.MdB
             await _context.SaveChangesAsync();
 
         }
+
+        
     }
 }

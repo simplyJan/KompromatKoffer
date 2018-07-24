@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Tweetinvi;
 using Tweetinvi.Models;
 using Tweetinvi.Parameters;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
+using KompromatKoffer.Areas.Identity.Data;
+using static KompromatKoffer.Areas.Identity.Pages.Account.ExternalLoginModel;
 
 namespace KompromatKoffer.Pages
 {
@@ -15,11 +19,8 @@ namespace KompromatKoffer.Pages
 
         public void OnGet()
         {
-
-            Auth.SetUserCredentials(Config.Credentials.CONSUMER_KEY,Config.Credentials.CONSUMER_SECRET, Config.Credentials.ACCESS_TOKEN,Config.Credentials.ACCESS_TOKEN_SECRET);
-
-
+            
         }
-
+      
     }
 }

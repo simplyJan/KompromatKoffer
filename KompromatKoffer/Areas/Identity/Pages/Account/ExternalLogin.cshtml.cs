@@ -80,6 +80,7 @@ namespace KompromatKoffer.Areas.Identity.Pages.Account
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+                _logger.LogInformation("{AuthenticationTokens} ", info.AuthenticationTokens);
                 return LocalRedirect(returnUrl);
             }
             if (result.IsLockedOut)
@@ -124,6 +125,7 @@ namespace KompromatKoffer.Areas.Identity.Pages.Account
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+
                         return LocalRedirect(returnUrl);
                     }
                 }

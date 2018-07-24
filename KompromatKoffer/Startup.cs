@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using KompromatKoffer.Models;
+using KompromatKoffer.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace KompromatKoffer
 {
@@ -46,6 +48,8 @@ namespace KompromatKoffer
             services.AddDbContext<MdBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MdBContext")));
 
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,8 +69,6 @@ namespace KompromatKoffer
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
-
-            
 
             app.UseHttpsRedirection();
 

@@ -7,6 +7,8 @@
 }
 
 <h2>Liste aller Mitglieder des Bundestages auf Twitter</h2>
+<p>Top10 Follower: &emsp; <a href="?sortOrder=FollowersCount_Desc">ALL</a> &emsp; <a href="?searchStringDesc=afd&&sortOrder=FollowersCount_Desc">AFD</a> &emsp; <a href="?searchStringDesc=csu&&sortOrder=FollowersCount_Desc">CSU</a> &emsp; <a href="?searchStringDesc=cdu&&sortOrder=FollowersCount_Desc">CDU</a> &emsp; <a href="?searchStringDesc=grüne&&sortOrder=FollowersCount_Desc">GRÜNE</a> &emsp; <a href="?searchStringDesc=link&&sortOrder=FollowersCount_Desc">Die Linke</a> &emsp; <a href="?searchStringDesc=fdp&&sortOrder=FollowersCount_Desc">FDP</a> &emsp; <a href="?searchStringDesc=spd&&sortOrder=FollowersCount_Desc">SPD</a></p>
+<p><pre>*Diese Werte sind noch nicht repräsentativ, da nur innerhalb der Description nach einem Parteikürzel gesucht wird.</pre></p>
 
 <table class="MdBListTable">
     <thead>
@@ -14,10 +16,10 @@
             <th>
                 #
             </th>
-            <th>
-                    <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-currentFilter="@Model.CurrentFilter">
-                        @Html.DisplayNameFor(model => model.MdBModel[0].TwitterName)
-                    </a>
+            <th class="MdBNameTh">
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.MdBModel[0].TwitterName)
+                </a>
                 <form>
                     <p>
                         <input type="text" name="SearchString">
@@ -25,25 +27,6 @@
                     </p>
                 </form>
 
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MdBModel[0].Verified)
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MdBModel[0].Party)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MdBModel[0].Location)
-
-                <form>
-                    <p>
-                        <input type="text" name="SearchStringLocation">
-                        <input type="submit" value="Filter" />
-                    </p>
-                </form>
             </th>
             <th>
                 Website
@@ -74,7 +57,7 @@
                 </a>
             </th>
             <th>
-                    @Html.DisplayNameFor(model => model.MdBModel[0].LastStatus)
+                @Html.DisplayNameFor(model => model.MdBModel[0].LastStatus)
                 <form>
                     <p>
                         <input type="text" name="SearchStringLastStatus">
@@ -107,7 +90,7 @@
                         }
                         if (Model.MdBModel.PageIndex > 1)
                         {
-                            int newindex = indexpos + (Model.MdBModel.PageIndex * 100) + 1 -100;
+                            int newindex = indexpos + (Model.MdBModel.PageIndex * 100) + 1 - 100;
                             @newindex
                         }
 
@@ -123,18 +106,6 @@
                             <p>@Html.DisplayFor(modelItem => item.TwitterName)</p>
                         </a>
                     </div>
-                </td>
-                <td class="verified">
-                    @Html.DisplayFor(modelItem => item.Verified)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TwitterDesc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Party)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
                 </td>
                 <td class="verified">
                     <a href="@Html.DisplayFor(modelItem => item.LinkedUrl)" target="_blank"><i class="fas fa-link"></i></a>

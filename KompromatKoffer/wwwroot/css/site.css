@@ -163,12 +163,32 @@ a.tweetLink:active, a.tweetLink:hover, a.tweetLink:focus {
     text-align:center;
 }
 
-.MdBListTable th form p {
-    width: 200px;
+
+.MdBListTable th input, .MdBListTable th button, .MdBListTable th select, .MdBListTable th textarea {
+    font-size: 0.8em;
+    color: black;
+    width:100%;
 }
 
-a.imageLink{
-    text-align:center;
+.MdBNameTh{
+    width:15%;
+}
+
+.MdBLocationTh{
+    width:100px;
+}
+
+.MdBLocationTd{
+    max-width:100px;
+}
+
+.MdBDescTh {
+    min-width: 15%;
+}
+
+
+a.imageLink {
+    text-align: center;
 }
 
 a.imageLink img {
