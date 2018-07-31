@@ -33,14 +33,7 @@ namespace KompromatKoffer
                 return new TwitterCredentials(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
             }
 
-        }
-
-        public static class Parameter
-        {
-            public static int TweetsRetrieved { get; set; } = 100;
-            public static string ListName { get; set; } = "mdb-bundestag";
-            public static string ScreenName { get; set; } = "wahl_beobachter";
-        }
+        } 
     }
 } 
 ```
