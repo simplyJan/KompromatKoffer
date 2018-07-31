@@ -5,6 +5,7 @@ body {
     padding-bottom: 20px;
     background-color: #440c50;
     color: #e3e7d3;
+    font-family: 'Roboto', sans-serif;
 }
 
 /* Wrapping element */
@@ -25,6 +26,11 @@ a:hover, a:focus, a:active {
     text-decoration:none;
 }
 
+/*Main Elements*/
+footer{
+    float:right;
+    position:static;
+}
 /*Buttons // Interactions*/
 .btn-default {
     color: #e3e7d3;
@@ -61,6 +67,9 @@ h4 {
     border-radius: 15px;
     text-align: center;
     padding: 10px;
+    width: 85%;
+    margin: 0 auto;
+    font-family: 'Roboto', light;
 }
 
 /* Carousel */
@@ -81,10 +90,18 @@ h4 {
 #tweetLink {
     border-radius: 0.5em;
     margin-bottom: 0.5em;
-    background-color: #1b1b1e;
+    background-color: #27182b;
     color: #d8dbe2;
     display: block;
-    padding:0.5em;
+    padding: 0.5em;
+    transition: width 1s;
+    -webkit-transition: width 1s; /* Safari 3.1 to 6.0 */
+    margin: 0.5em auto;
+    width:85%
+}
+
+#tweetLink:hover {
+        width:90%
 }
 
 a.tweetLink {
@@ -94,13 +111,13 @@ a.tweetLink {
         text-decoration: none;
         color: #d8dbe2;
         padding: 0.5em;
-    }
+}
 
-    a.tweetLink:active, a.tweetLink:hover, a.tweetLink:focus {
+a.tweetLink:active, a.tweetLink:hover, a.tweetLink:focus {
         background-color: #27182b;
         display: block;
         border-radius: 0.5em;
-    }
+}
 
 .dateTweet {
     border-radius: 0.5em;

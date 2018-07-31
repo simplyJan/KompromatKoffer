@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,900&amp;subset=cyrillic-ext" rel="stylesheet">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -16,6 +17,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,900&amp;subset=cyrillic-ext" rel="stylesheet">
     </environment>
 </head>
 <body>
@@ -48,9 +50,7 @@
         @RenderBody()
         <footer>
             <p>&copy; 2018 - kompromatkoffer.de - Kompromittiere den Bundestag</p>
-            <ul>
-                <li><a asp-page="/Impressum">Impressum</a></li>
-                <li><a asp-page="/Privacy">Datenschutzerklärung</a></li>
+            <a asp-page="/Impressum">Impressum</a>&nbsp; <a asp-page="/Privacy">Datenschutzerklärung</a><
             </ul>
         </footer>
     </div>
