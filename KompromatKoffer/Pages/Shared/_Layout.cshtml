@@ -33,7 +33,6 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-page="/Index">MdB</a></li>
-                    <li><a asp-page="/Lists/MdB/Index">MdB List</a></li>
                     <li><a asp-page="/Streams/EuropaParl">MeP</a></li>
                     <li><a asp-page="/Streams/MdLHessen">MdLHessen</a></li>
                     <li><a asp-page="/Streams/MdLBayern">MdLBayern</a></li>
@@ -47,10 +46,9 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
         <footer>
             <p>&copy; 2018 - kompromatkoffer.de - Kompromittiere den Bundestag</p>
-            <ul class="nav">
+            <ul>
                 <li><a asp-page="/Impressum">Impressum</a></li>
                 <li><a asp-page="/Privacy">Datenschutzerklärung</a></li>
             </ul>

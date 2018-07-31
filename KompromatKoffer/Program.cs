@@ -21,7 +21,6 @@ namespace KompromatKoffer
             {
                 var services = scope.ServiceProvider;
 
-                
             }
 
             host.Run();
@@ -31,4 +30,5 @@ namespace KompromatKoffer
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
     }
+
 }

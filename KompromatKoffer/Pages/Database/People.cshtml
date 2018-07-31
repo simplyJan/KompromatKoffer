@@ -1,0 +1,100 @@
+﻿@page
+@model KompromatKoffer.Areas.Database.Pages.PeopleModel
+@{
+}
+
+<div class="twitterUserSearch">
+    <form>
+        <p>
+            <input type="text" name="SearchString" class="twitterUserSearchInput">
+        </p>
+    </form>
+</div>
+
+<div class="twitterUserFilter">
+    <a asp-page=""
+       asp-route-sortOrder="@Model.StatusCountSort"
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Tweets">
+        <i class="fab fa-twitter"></i>
+    </a>
+    &nbsp;
+    <a asp-page=""
+       asp-route-sortOrder="@Model.FollowersCountSort"
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Followers">
+        <i class="fas fa-grin-hearts"></i>
+    </a>
+    &nbsp;
+    <a asp-page=""
+       asp-route-sortOrder="@Model.FriendsCountSort"
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Friends">
+        <i class="fas fa-meh-rolling-eyes"></i>
+    </a>
+    &nbsp;
+    <a asp-page=""
+       asp-route-sortOrder="@Model.FavCountSort"
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Likes">
+        <i class="fas fa-heart"></i>
+    </a>
+</div>
+
+@foreach (var item in Model.TwitterUserModel)
+{
+    <div class="twitterUserPosition">
+        @{
+            int indexpos = Model.TwitterUserModel.IndexOf(item);
+
+            if (Model.TwitterUserModel.PageIndex == 1)
+            {
+                int newindex = indexpos + 1;
+                @newindex;
+            }
+            if (Model.TwitterUserModel.PageIndex > 1)
+            {
+                int newindex = indexpos + (Model.TwitterUserModel.PageIndex * 100) + 1 - 100;
+                @newindex
+            }
+        }
+    </div>
+    <div class="twitterUserMainView">
+        <a href="https://twitter.com/@Html.DisplayFor(modelItem => item.Screen_name)" target="_blank" class="twitterUserLink">
+            <img class="twitterUserImage" src="@Html.DisplayFor(modelItem => item.Profile_image_url_https)" />
+            <p class="twitterUserScreenName">@Html.DisplayFor(modelItem => item.Name)</p>
+            <p class="twitterUserLocation">@Html.DisplayFor(modelItem => item.Location)</p>
+            <p class="twitterUserDesc">@Html.DisplayFor(modelItem => item.Description)
+            <p class="twitterUserCounts">
+                <i class="fab fa-twitter"></i>&nbsp;@Html.DisplayFor(modelItem => item.Statuses_count)
+                &nbsp;
+                <i class="fas fa-grin-hearts"></i>&nbsp;@Html.DisplayFor(modelItem => item.Followers_count)
+                &nbsp;
+                <i class="fas fa-meh-rolling-eyes"></i>&nbsp;@Html.DisplayFor(modelItem => item.Friends_count)
+                &nbsp;
+                <i class="fas fa-heart"></i>&nbsp;@Html.DisplayFor(modelItem => item.Favourites_count)
+                &nbsp;
+                <i class="fas fa-list-ul"></i>&nbsp;@Html.DisplayFor(modelItem => item.Listed_count)
+            </p>
+        </a>
+    </div>
+}
+
+@{
+    var prevDisabled = !Model.TwitterUserModel.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.TwitterUserModel.HasNextPage ? "disabled" : "";
+
+}
+
+    <div class="twitterUserPageing">
+        <a asp-page=""
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.TwitterUserModel.PageIndex - 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-default @prevDisabled">
+            <<
+        </a>
+        <a asp-page=""
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.TwitterUserModel.PageIndex + 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-default @nextDisabled">
+            >>
+        </a>
+    </div>

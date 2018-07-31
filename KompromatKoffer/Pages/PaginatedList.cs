@@ -36,12 +36,12 @@ namespace KompromatKoffer.Pages
         }
 
         public static async Task<PaginatedList<T>> CreateAsync(
-            IQueryable<T> source, int pageIndex, int pageSize)
+            IEnumerable<T> source, int pageIndex, int pageSize)
         {
-            var count = await source.CountAsync();
-            var items = await source.Skip(
+            var count = source.Count();
+            var items = source.Skip(
                 (pageIndex - 1) * pageSize)
-                .Take(pageSize).ToListAsync();
+                .Take(pageSize).ToList();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }

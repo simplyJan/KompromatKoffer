@@ -2,10 +2,14 @@
 @model IndexModel
 @{
     ViewData["Title"] = "компроматkoffer.de - Kompromittiere den Bundestag";
+
 }
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
 
+    <div class="interactionMenuBar">
+        <a asp-page="/Database/People" title="Database" class="iconHoverPages interactionMenu"><i class="fas fa-database"></i></a>
+    </div>
 
     <div class="lasthundred">
         @{
@@ -23,63 +27,63 @@
             var tweets = list.GetTweets(getTweetsParameters);
 
         }
-        <h3>Die letzten @Convert.ToString(tweets.Count()) Tweets aus dem Bundestag</h3>
+        <h4>Die letzten @Convert.ToString(tweets.Count()) Tweets aus dem Bundestag</h4>
 
-            @foreach (var x in tweets)
-            {
+        @foreach (var x in tweets)
+        {
 
-                <div id="tweetLink">
-                    <a href="@x.Url" target="_blank" class="tweetLink">
-                        <img src="@x.CreatedBy.ProfileImageUrlHttps" />
-                        <br>
-                        @x.CreatedBy
-                        <br>
-            <p class="profileDesc">@x.CreatedBy.Description</p>
-            @{
-                if (x.InReplyToScreenName != null)
-                {
-                    <p class="replyToName">Replying to: @x.InReplyToScreenName</p>
-                }
-            }
-            @{
-                if (x.QuotedTweet != null)
-                {
+            <div id="tweetLink">
+                <a href="@x.Url" target="_blank" class="tweetLink">
+                    <img src="@x.CreatedBy.ProfileImageUrlHttps" />
+                    <br>
+                    @x.CreatedBy
+                    <br>
+                    <p class="profileDesc">@x.CreatedBy.Description</p>
+                    @{
+                        if (x.InReplyToScreenName != null)
+                        {
+                            <p class="replyToName">Replying to: @x.InReplyToScreenName</p>
+                        }
+                    }
+                    @{
+                        if (x.QuotedTweet != null)
+                        {
 
-                    <p class="quotedTweet">
-                        @x.QuotedTweet.CreatedBy
-                        <br>
-                        @x.QuotedTweet
-                    </p>
+                            <p class="quotedTweet">
+                                @x.QuotedTweet.CreatedBy
+                                <br>
+                                @x.QuotedTweet
+                            </p>
 
 
-                }
-            }
-            @{
-                if (x.ExtendedTweet != null)
-                {
-                    @x.ExtendedTweet.Text
+                        }
+                    }
+                    @{
+                        if (x.ExtendedTweet != null)
+                        {
+                            @x.ExtendedTweet.Text
 
-                }
-                else
-                {
-                    @x.Text
-                }
+                        }
+                        else
+                        {
+                            @x.Text
+                        }
 
-            }
+                    }
                     <div class="dateTweet">
                         @x.RetweetCount Retweets &emsp; @x.FavoriteCount Likes &emsp; @x.CreatedAt
                     </div>
-            </a>
-        </div>
+                </a>
+            </div>
 
-                }
+        }
 
-             }
-
-
+        }
 
 
 
 
-        </div>
+
+
     </div>
+</div>
