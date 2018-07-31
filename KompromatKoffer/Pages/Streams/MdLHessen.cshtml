@@ -24,12 +24,12 @@
             var tweets = list.GetTweets(getTweetsParameters);
 
         }
-        <h3>Die letzten @Convert.ToString(tweets.Count()) Tweets aus dem hessischen Landtag</h3>
+        <h4>Die letzten @Convert.ToString(tweets.Count()) Tweets aus dem hessischen Landtag</h4>
 
         @foreach (var x in tweets)
         {
 
-            <div class="tweetLink">
+            <div id="tweetLink">
                 <a href="@x.Url" target="_blank">
                     <img src="@x.CreatedBy.ProfileImageUrlHttps" />
                     <br>

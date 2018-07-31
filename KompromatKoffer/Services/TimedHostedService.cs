@@ -1,4 +1,4 @@
-﻿using KompromatKoffer.Areas.Lists.Data;
+﻿
 using KompromatKoffer.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -12,12 +12,10 @@ namespace KompromatKoffer.Areas.Lists.Services
     {
         private readonly ILogger _logger;
         private Timer _timer;
-        private TwitterContext _context;
 
-        public TimedHostedService(ILogger<TimedHostedService> logger, TwitterContext context)
+        public TimedHostedService(ILogger<TimedHostedService> logger)
         {
             _logger = logger;
-            _context = context;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

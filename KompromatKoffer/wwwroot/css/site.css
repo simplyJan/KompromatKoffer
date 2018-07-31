@@ -94,14 +94,15 @@ h4 {
     color: #d8dbe2;
     display: block;
     padding: 0.5em;
-    transition: width 1s;
-    -webkit-transition: width 1s; /* Safari 3.1 to 6.0 */
+    transition: width 1s, font-size 1s;
+    -webkit-transition: width 1s, font-size 1s; /* Safari 3.1 to 6.0 */
     margin: 0.5em auto;
-    width:85%
+    width: 85%
 }
 
 #tweetLink:hover {
-        width:90%
+        width:90%;
+        font-size:1.5em;
 }
 
 a.tweetLink {
