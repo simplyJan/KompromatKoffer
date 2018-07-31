@@ -1,11 +1,14 @@
 <b>компроматkoffer.de - Kompromittiere den Bundestag</b>
 
-NetCore 2.1 Web Application for displaying all recent tweets from every member of the german parliament. Currently the app just outputs a twitter list made by martin fuchs (http://martin-fuchs.org).
+ASP.Net Core 2.1 Web Application for displaying all recent tweets from every member of the german parliament. Currently the app outputs a twitter list made by martin fuchs (http://martin-fuchs.org) and right now I am implementing the NoSQL Database (LiteDB) to store  data and generate analytical profiles from each dataset.
 
 Using https://github.com/linvi/tweetinvi - MIT License - Copyright (c) 2017 Thomas Imart
 
 URL: https://kompromatkoffer.de
 Author: https://scobiform.com
+
+Icons: https://fontawesome.com
+Color Scheme: https://coolors.co/440c50-82204a-e3e7d3-27182b-fbfbfb
 
 <b>You will need a Config.cs to run the app.</b>
 
