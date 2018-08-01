@@ -5,27 +5,26 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+<div class="interactionMenuBar">
+    <a asp-page=""
+       asp-route-sortOrder="@Model.FavCountSort"
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Most Likes Today">
+        <i class="fas fa-heart"> </i>
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sortOrder="@Model.CreatedAtSort"
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Latest Tweets">
+        <i class="fas fa-clock"></i>
+        &nbsp;
+    </a>
+</div>
 
-    <div class="lasthundred">
-        @{
-            var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListNameMdLBayern, Config.Parameter.ScreenName);
+<div class="lasthundred">
 
+        <h4>Die letzten @Convert.ToString(Model.TweetList.Count()) Tweets aus dem bayrischen Landtag</h4>
 
-            //Settings for last 100
-            Tweetinvi.Parameters.GetTweetsFromListParameters getTweetsParameters = new Tweetinvi.Parameters.GetTweetsFromListParameters()
-            {
-                MaximumNumberOfTweetsToRetrieve = Config.Parameter.TweetsRetrieved,
-                IncludeRetweets = false,
-                IncludeEntities = true,
-            };
-
-            var tweets = list.GetTweets(getTweetsParameters);
-
-        }
-        <h4>Die letzten @Convert.ToString(tweets.Count()) Tweets aus dem bayrischen Landtag</h4>
-
-        @foreach (var x in tweets)
+        @foreach (var x in Model.TweetList)
         {
 
             <div id="tweetLink">
@@ -66,16 +65,15 @@
                         }
 
                     }
-                    <div class="dateTweet">
-                        @x.RetweetCount Retweets &emsp; @x.FavoriteCount Likes &emsp; @x.CreatedAt
-                    </div>
+                    <hr class="IndexHR" />
+                    <p class="socialIconsIndex">
+                        <i class="fas fa-retweet"></i> @x.RetweetCount &emsp; <i class="fas fa-heart"></i> @x.FavoriteCount &emsp; @x.CreatedAt.ToString("dd.MM.yy - H:mm")
+                    </p>
                 </a>
             </div>
 
         }
 
-
-
-    </div>
 </div>
+
 

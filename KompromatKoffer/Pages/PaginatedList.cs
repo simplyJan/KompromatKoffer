@@ -35,9 +35,9 @@ namespace KompromatKoffer.Pages
             }
         }
 
-        public static async Task<PaginatedList<T>> CreateAsync(
-            IEnumerable<T> source, int pageIndex, int pageSize)
+        public static async Task<PaginatedList<T>> CreateAsync(IEnumerable<T> source, int pageIndex, int pageSize)
         {
+            await Task.Delay(1);
             var count = source.Count();
             var items = source.Skip(
                 (pageIndex - 1) * pageSize)

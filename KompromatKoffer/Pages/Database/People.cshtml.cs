@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace KompromatKoffer.Areas.Database.Pages
 {
- 
+
     public class PeopleModel : PageModel
     {
         private readonly ILogger<PeopleModel> _logger;
@@ -44,8 +44,7 @@ namespace KompromatKoffer.Areas.Database.Pages
 
         public async Task OnGet(string searchString, int? pageIndex, string currentFilter, string sortOrder)
         {
-            StartTasksAsync();
-
+            
             using (var db = new LiteDatabase(path + dataDirectory + @"\TwitterData.db"))
             {
 
@@ -136,16 +135,10 @@ namespace KompromatKoffer.Areas.Database.Pages
 
         public async void StartTasksAsync()
         {
-            //await SaveTwitterUserAsync();
-            //await GetTwitterUsersFromDB();
+            await SaveTwitterUserAsync();
 
         }
     
-        public async Task GetTwitterUsersFromDB()
-        {
-            await Task.Delay(5);
-        }
-        
         //Make Services for Updating Users - - Move to Services
         public async Task SaveTwitterUserAsync()
         {

@@ -36,6 +36,13 @@ footer{
     color: #e3e7d3;
     background-color: #27182b;
 }
+/*HRs*/
+hr.IndexHR {
+    color: #440c50;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    border-top: 1px solid #440c50;
+}
 
 .btn-default:hover {
     background-color: #e3e7d3;
@@ -60,14 +67,14 @@ footer{
 
 /*Text format*/
 h4 {
-    color: #e3e7d3;
+    color: #440c50;
     font-size: 1em;
     margin-bottom: 5px;
     background-color: #27182b;
     border-radius: 15px;
     text-align: center;
     padding: 10px;
-    width: 85%;
+    width: 75%;
     margin: 0 auto;
     font-family: 'Roboto', light;
 }
@@ -96,13 +103,15 @@ h4 {
     padding: 0.5em;
     transition: width 1s, font-size 1s;
     -webkit-transition: width 1s, font-size 1s; /* Safari 3.1 to 6.0 */
+    -moz-transition: width 1s, font-size 1s;
+    -o-transition: width 1s, font-size 1s;
     margin: 0.5em auto;
     width: 85%
 }
 
 #tweetLink:hover {
         width:90%;
-        font-size:1.5em;
+        font-size:1.2em;
 }
 
 a.tweetLink {
@@ -272,6 +281,8 @@ a.imageLink p {
     border-radius: 15px;
     transition: width 1s;
     -webkit-transition: width 1s; /* Safari 3.1 to 6.0 */
+    -o-transition: width 1s;
+    -moz-transition: width 1s;
 }
 .twitterUserMainView:hover{
     width:320px;
@@ -280,7 +291,6 @@ a.imageLink p {
 
 .twitterUserMainView p {
     margin: 0;
-    padding: 5px;
     background-color: #27182b;
     padding: 5px;
 }
@@ -306,7 +316,7 @@ a.imageLink p {
 .twitterUserLocation {
     font-size: 0.74em;
     text-transform: capitalize;
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
 .twitterUserImage{
@@ -316,20 +326,21 @@ a.imageLink p {
 }
 
 .twitterUserSearch {
-    margin: 0 auto !Important;
+    margin: 0 auto !important;
     width: 320px;
     padding: 5px;
-    margin-top: 20px !important;
 }
 
 .twitterUserSearchInput {
-    width: 310px;
+    width: 100%;
     border-radius: 15px;
-    color: #e3e7d3; 
+    color: #e3e7d3;
     background-color: #27182b;
-    border:0;
-    padding:5px;
+    border: 0;
+    padding: 5px;
+    margin-top: 20px;
 }
+
 
 .twitterUserPageing{
     width:112px;
@@ -338,11 +349,9 @@ a.imageLink p {
 
 .twitterUserFilter {
     width: 320px;
-    font-size: 32px;
     margin: 0 auto;
     text-align: center;
     color: #e3e7d3;
-    transition: font-size 1s;
     -webkit-transition: color 2s, font-size 2s;
     -moz-transition: color 2s, font-size 2s;
     -o-transition: color 2s, font-size 2s;
@@ -353,8 +362,7 @@ a.imageLink p {
 /*Interaction Menu*/
 .interactionMenu {
     padding-top: 10px;
-    font-size: 4.5em !Important;
-    margin-bottom: -15px !Important;
+    font-size: 4.5em;
 }
 
 .interactionMenuBar{
@@ -363,17 +371,27 @@ a.imageLink p {
     margin:0 auto;
 }
 
+/*Icon for TweetLists*/
+.socialIconsIndex {
+    font-size: 0.72em;
+    margin: 0;
+    color: #e3e7d3;
+}
+
+.socialIconsIndex i {
+    padding-right:2px;
+    padding-top:5px;
+}
 /*Icon Menu*/
 .iconHoverPages {
     font-size: 36px;
     margin: 0 auto;
     text-align: center;
     color: #27182b;
-    transition: font-size 1s !Important;
-    -webkit-transition: color 0.5s, font-size 0.5s !Important;
-    -moz-transition: color 0.5s, font-size 0.5s !Important;
-    -o-transition: color 0.5s, font-size 0.5s !Important;
-    transition: color 0.5s, font-size 0.5s !Important;
+    -webkit-transition: color 0.5s, font-size 0.5s !important;
+    -moz-transition: color 0.5s, font-size 0.5s !important;
+    -o-transition: color 0.5s, font-size 0.5s !important;
+    transition: color 0.5s, font-size 0.5s !important;
 }
 
 .iconHoverPages:hover {
@@ -383,7 +401,7 @@ a.imageLink p {
 
 /*Footer NAV*/
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
+.carousel-inner .item img {
     width: 100%;
 }
 

@@ -3,15 +3,11 @@
 @{
 }
 
-<div class="twitterUserSearch">
-    <form>
-        <p>
-            <input type="text" name="SearchString" class="twitterUserSearchInput">
-        </p>
-    </form>
-</div>
 
 <div class="twitterUserFilter">
+    <form>
+        <input type="text" name="SearchString" class="twitterUserSearchInput" placeholder="Search...">
+    </form>
     <a asp-page=""
        asp-route-sortOrder="@Model.StatusCountSort"
        asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Tweets">
