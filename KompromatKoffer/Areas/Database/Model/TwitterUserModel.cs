@@ -5,7 +5,7 @@ namespace KompromatKoffer.Areas.Database.Model
 {
     public class TwitterUserModel
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Screen_name { get; set; }
         public string Description { get; set; }
@@ -21,7 +21,7 @@ namespace KompromatKoffer.Areas.Database.Model
         public int Favourites_count { get; set; }
         public int Listed_count { get; set; }
 
-        //Check when userr was updated last time
-        public DateTime UserUpdated { get; set; }
+        //Check when user was updated
+        public DateTime UserUpdated { get; set; } = DateTime.Now;
     }
 }

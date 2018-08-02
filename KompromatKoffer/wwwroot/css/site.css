@@ -73,20 +73,22 @@ hr.IndexHR {
 /*Text format*/
 h4 {
     color: #440c50;
-    font-size: 1em;
+    font-size: 1.25em;
     margin-bottom: 5px;
     background-color: #27182b;
     border-radius: 15px;
     text-align: center;
-    padding: 10px;
-    width: 75%;
+    padding: 5px;
+    width: 85%;
     margin: 0 auto;
-    font-family: 'Roboto', light;
-    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
-    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    font-family: "Roboto",sans-serif;
+    -webkit-animation-name: example;
+    -webkit-animation-duration: 4s;
     animation-name: example;
     animation-duration: 4s;
 }
+
+
 
 
 
@@ -390,8 +392,8 @@ a.imageLink p {
 }
 
 .interactionMenuBar {
-    width: 320px;
-    text-align: center;
+    width: 300px;
+    text-align: center; 
     margin: 0 auto;
     height: 45px;
     padding: 5px;

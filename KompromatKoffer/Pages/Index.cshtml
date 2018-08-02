@@ -27,61 +27,60 @@
     </a>
 </div>
 
- 
+<h4>Die letzten @Convert.ToString(Model.TweetList.Count()) Tweets aus dem Bundestag</h4>
 
-    <div class="lasthundred">
-        
-        <h4>Die letzten @Convert.ToString(Model.TweetList.Count()) Tweets aus dem Bundestag</h4>
+<div class="lasthundred">
 
-        @foreach (var x in Model.TweetList)
-        {
 
-            <div id="tweetLink">
-                <a href="@x.Url" target="_blank" class="tweetLink">
-                    <img src="@x.CreatedBy.ProfileImageUrlHttps" />
-                    <br>
-                    @x.CreatedBy
-                    <br>
-                    <p class="profileDesc">@x.CreatedBy.Description</p>
-                    @{
-                        if (x.InReplyToScreenName != null)
-                        {
-                            <p class="replyToName">Replying to: @x.InReplyToScreenName</p>
-                        }
+    @foreach (var x in Model.TweetList)
+    {
+
+        <div id="tweetLink">
+            <a href="@x.Url" target="_blank" class="tweetLink">
+                <img src="@x.CreatedBy.ProfileImageUrlHttps" />
+                <br>
+                @x.CreatedBy
+                <br>
+                <p class="profileDesc">@x.CreatedBy.Description</p>
+                @{
+                    if (x.InReplyToScreenName != null)
+                    {
+                        <p class="replyToName">Replying to: @x.InReplyToScreenName</p>
                     }
-                    @{
-                        if (x.QuotedTweet != null)
-                        {
+                }
+                @{
+                    if (x.QuotedTweet != null)
+                    {
 
-                            <p class="quotedTweet">
-                                @x.QuotedTweet.CreatedBy
-                                <br>
-                                @x.QuotedTweet
-                            </p>
+                        <p class="quotedTweet">
+                            @x.QuotedTweet.CreatedBy
+                            <br>
+                            @x.QuotedTweet
+                        </p>
 
-
-                        }
-                    }
-                    @{
-                        if (x.ExtendedTweet != null)
-                        {
-                            @x.ExtendedTweet.Text
-
-                        }
-                        else
-                        {
-                            @x.Text
-                        }
 
                     }
-                    <hr class="IndexHR" />
-                    <p class="socialIconsIndex">
-                        <i class="fas fa-retweet"></i> @x.RetweetCount &emsp; <i class="fas fa-heart"></i> @x.FavoriteCount &emsp; @x.CreatedAt.ToString("dd.MM.yy - H:mm")
-                    </p>
+                }
+                @{
+                    if (x.ExtendedTweet != null)
+                    {
+                        @x.ExtendedTweet.Text
 
-                </a>
-            </div>
+                    }
+                    else
+                    {
+                        @x.Text
+                    }
 
-        }
+                }
+                <hr class="IndexHR" />
+                <p class="socialIconsIndex">
+                    <i class="fas fa-retweet"></i> @x.RetweetCount &emsp; <i class="fas fa-heart"></i> @x.FavoriteCount &emsp; @x.CreatedAt.ToString("dd.MM.yy - H:mm")
+                </p>
 
-    </div>
+            </a>
+        </div>
+
+    }
+
+</div>
