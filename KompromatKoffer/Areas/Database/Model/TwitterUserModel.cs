@@ -19,6 +19,9 @@ namespace KompromatKoffer.Areas.Database.Model
         public bool Verified { get; set; }
         public string Profile_image_url_https { get; set; }
         public int Favourites_count { get; set; }
-        public int Listed_count { get; set; }      
+        public int Listed_count { get; set; }
+
+        //Check when userr was updated last time
+        public DateTime UserUpdated { get; set; }
     }
 }

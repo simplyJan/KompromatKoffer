@@ -54,3 +54,11 @@ namespace KompromatKoffer
     "ApplicationContextConnection": "Data Source=SERVERNAME;Integrated Security=False;User ID=USERLOGIN;Password=PASSWORD;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
   }
 ```
+
+
+Project
+The Main project will be "kompromatkoffer.de" - goal is to publish live tweets from every member of the german bundestag (Parliament) and make twitter data from this group of people available for analyticcal purpose through a database (LiteDB). The website (ASP.Net Core Razor Pages) will be free for all visitors and the project is mostly made as a tool for journalists and people who are interested in politics - to search for informations and see what our german politicians are doing on twitter. Transparency and freedom of open information are the fundmental principles. The source code will be open for everyone on GitHub (https://github.com/Scobiform/KompromatKoffer)
+
+The project is currently in alpha and I am still testing many parts of the project. 
+
+I really appreciate your offer for developers to learn through your API. 

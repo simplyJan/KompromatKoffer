@@ -6,6 +6,7 @@ body {
     background-color: #440c50;
     color: #e3e7d3;
     font-family: 'Roboto', sans-serif;
+    font-size:1em;
 }
 
 /* Wrapping element */
@@ -53,7 +54,6 @@ hr.IndexHR {
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
     color: #d8dbe2;
-    background-color: transparent;
     border-radius: 0;
     display: inline;
     padding:15px 15px;
@@ -64,6 +64,11 @@ hr.IndexHR {
     margin-left: -15px;
     background-color: #27182b;
 }
+
+.navbar-inverse {
+    background-color: #27182b;
+}
+
 
 /*Text format*/
 h4 {
@@ -77,7 +82,13 @@ h4 {
     width: 75%;
     margin: 0 auto;
     font-family: 'Roboto', light;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 4s;
 }
+
+
 
 /* Carousel */
 .carousel-caption p {
@@ -87,7 +98,8 @@ h4 {
 
 /* Last Hundred*/
 .lasthundred {
-    font-size: 16px;
+    font-size: 1.5em;
+    margin: 0 auto;
 }
 
 .lasthundred img {
@@ -332,14 +344,22 @@ a.imageLink p {
 }
 
 .twitterUserSearchInput {
-    width: 100%;
+    width: 35%;
     border-radius: 15px;
     color: #e3e7d3;
     background-color: #27182b;
     border: 0;
     padding: 5px;
-    margin-top: 20px;
+    margin-top: 6px;
+    float: right;
+    padding-bottom: 5px;
+    padding-right: 55px;
+    margin-right: 35px;
 }
+
+
+
+
 
 
 .twitterUserPageing{
@@ -365,11 +385,15 @@ a.imageLink p {
     font-size: 4.5em;
 }
 
-.interactionMenuBar{
-    width:320px;
-    text-align:center;
-    margin:0 auto;
+.interactionMenuBar {
+    width: 320px;
+    text-align: center;
+    margin: 0 auto;
+    height: 45px;
+    padding: 5px;
 }
+
+
 
 /*Icon for TweetLists*/
 .socialIconsIndex {
@@ -384,15 +408,18 @@ a.imageLink p {
 }
 /*Icon Menu*/
 .iconHoverPages {
-    font-size: 36px;
+    font-size: 26px;
     margin: 0 auto;
     text-align: center;
     color: #27182b;
+    margin-top: 10px;
+    padding-top: 5px;
     -webkit-transition: color 0.5s, font-size 0.5s !important;
     -moz-transition: color 0.5s, font-size 0.5s !important;
     -o-transition: color 0.5s, font-size 0.5s !important;
     transition: color 0.5s, font-size 0.5s !important;
 }
+
 
 .iconHoverPages:hover {
     font-size: 32px;
@@ -410,6 +437,25 @@ a.imageLink p {
     margin: 15px;
 }
 
+/*Icon Bar*/
+.icon-bar {
+    width: 90px;
+    background-color: #555;
+}
+
+    .icon-bar a {
+        display: block;
+        text-align: center;
+        padding: 16px;
+        transition: all 0.3s ease;
+        color: white;
+        font-size: 36px;
+    }
+
+        .icon-bar a:hover {
+            background-color: #000;
+        }
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
@@ -424,4 +470,49 @@ a.imageLink p {
         text-align: center;
     }
 
+}
+
+@-webkit-keyframes example {
+    0% {
+        color: #fbfbfb;
+    }
+
+    25% {
+        color: #27182b;
+    }
+
+    50% {
+        color: #e3e7d3;
+    }
+
+    75% {
+        color: #e3e7d3;
+    }
+
+    100% {
+        color: #440c50;
+    }
+}
+
+/* Standard syntax */
+@keyframes example {
+    0% {
+        color: #fbfbfb;
+    }
+
+    25% {
+        color: #27182b;
+    }
+
+    50% {
+        color: #e3e7d3;
+    }
+
+    75% {
+        color: #e3e7d3;
+    }
+
+    100% {
+        color: #440c50;
+    }
 }
