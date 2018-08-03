@@ -39,8 +39,7 @@ namespace KompromatKoffer
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
 
-        
-
+            //Set DB to Update after StartUp
             Config.Parameter.DbLastUpdated = DateTime.Now;
 
         }

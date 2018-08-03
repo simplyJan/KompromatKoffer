@@ -16,7 +16,7 @@ using Tweetinvi.Models;
 
 namespace KompromatKoffer.Areas.Database.Pages
 {
-
+    [Authorize]
     public class PeopleModel : PageModel
     {
         private readonly ILogger<PeopleModel> _logger;
@@ -176,14 +176,16 @@ namespace KompromatKoffer.Areas.Database.Pages
                 //foreach user get json from Twitter and save to disk
                 foreach (var x in AllMembers)
                 {
-                    //Put CurrentUser in context
-                    CurrentUser = x;
+                    
+                        //Put CurrentUser in context
+                        CurrentUser = x;
 
-                    //Get timeline for screenname from twitter using Tweetinvi
-                    var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
-                    var userJson = Tweetinvi.JsonSerializer.ToJson(user);
+                        //Get timeline for screenname from twitter using Tweetinvi
+                        var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
+                        var userJson = Tweetinvi.JsonSerializer.ToJson(user);
 
-                    await SaveToDatabase();
+                        await SaveToDatabase();
+                    
                 }
             }
         }
@@ -205,10 +207,10 @@ namespace KompromatKoffer.Areas.Database.Pages
                 //Search for the Name
                 var name = col.FindOne(a => a.Screen_name == x.ScreenName);
 
-                if (name.UserUpdated.AddMinutes(Config.Parameter.SaveInterval) < DateTime.Now)
+                if (name == null)
                 {
-                        //Create UserModel for User
-                        var twitterUser = new TwitterUserModel
+                    //Create UserModel for User
+                    var twitterUser = new TwitterUserModel
                     {
                         Id = x.Id,
                         Name = x.Name,
@@ -228,23 +230,54 @@ namespace KompromatKoffer.Areas.Database.Pages
                         UserUpdated = DateTime.Now
                     };
 
-                    //If Name in Database do update or already updated
-                    if (name != null)
-                    {                 
-                            col.Update(twitterUser);
-                            _logger.LogInformation("...updated dbentry => " + x.ScreenName);               
-                    }
-                    else
-                    {
-                        col.Insert(twitterUser);
-                        _logger.LogInformation("...created new dbentry => " + x.ScreenName);
-                    }
+                    //Create new database entry for given user
+                    col.Insert(twitterUser);
+                    _logger.LogInformation("...created new dbentry => " + x.ScreenName);
+
                 }
                 else
                 {
-                    _logger.LogInformation("...already updated => " + x.ScreenName);
+                    if (name.UserUpdated.AddMinutes(Config.Parameter.SaveInterval) < DateTime.Now)
+                    {
+                        //Create UserModel for User
+                        var twitterUser = new TwitterUserModel
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            Screen_name = x.ScreenName,
+                            Description = x.Description,
+                            Created_at = x.CreatedAt,
+                            Location = x.Location,
+                            Geo_enabled = x.GeoEnabled,
+                            Url = x.Url,
+                            Statuses_count = x.StatusesCount,
+                            Followers_count = x.FollowersCount,
+                            Friends_count = x.FriendsCount,
+                            Verified = x.Verified,
+                            Profile_image_url_https = x.ProfileImageUrlHttps,
+                            Favourites_count = x.FavouritesCount,
+                            Listed_count = x.ListedCount,
+                            UserUpdated = DateTime.Now
+                        };
+
+                        //Update User if name is not null and if the saveinterval is reached^^
+                        col.Update(twitterUser);
+                        _logger.LogInformation("...updated dbentry => " + x.ScreenName);
+
+                    }
+                    else
+                    {
+                        if (name != null)
+                        {
+                            _logger.LogInformation("...already updated => " + x.ScreenName);
+                        }
+                        else
+                        {
+                            _logger.LogInformation("...not found => " + x.ScreenName);
+                        }
+                    }
                 }
-                await Task.Delay(1);
+                await Task.Delay(200);
             }
         }     
     }

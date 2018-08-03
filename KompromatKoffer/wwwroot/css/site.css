@@ -12,13 +12,13 @@ body {
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 a {
     background-color: transparent;
-    color: #d8dbe2;
+    color: #e3e7d3;
 }
 
 a:hover, a:focus, a:active {
@@ -69,16 +69,40 @@ hr.IndexHR {
     background-color: #27182b;
 }
 
+    .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+        background-color: #27182b;
+    }
+
+.navbar-inverse .navbar-toggle {
+    border-color: #27182b;
+}
+
+.navbar-toggle {
+    position: relative;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 0;
+    margin-bottom: 0;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    float: left;
+}
+
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0;
+}
+
 
 /*Text format*/
 h4 {
     color: #440c50;
     font-size: 1.25em;
     margin-bottom: 5px;
-    background-color: #27182b;
     border-radius: 15px;
     text-align: center;
-    padding: 5px;
     width: 85%;
     margin: 0 auto;
     font-family: "Roboto",sans-serif;
@@ -86,6 +110,8 @@ h4 {
     -webkit-animation-duration: 4s;
     animation-name: example;
     animation-duration: 4s;
+    text-transform:fullsize-kana;
+    letter-spacing:2px;
 }
 
 
@@ -195,10 +221,14 @@ a.tweetLink:active, a.tweetLink:hover, a.tweetLink:focus {
     background-color: transparent;
 }
 
+.btn-twitter{
+    margin:0 auto;
+}
+
 /*Cookie Consent*/
-#cookieConsent{
-    position:relative;
-    bottom:10px;
+#cookieConsent {
+    position: relative;
+    bottom: 10px;
 }
 
 .btn-info:hover {
@@ -208,47 +238,12 @@ a.tweetLink:active, a.tweetLink:hover, a.tweetLink:focus {
     display:inline;
 }
 
-/*MdBList Table*/
-.MdBListTable td{
-    font-size:0.8em;
-    padding:5px;
-}
-
-.MdBListTable th {
-    font-size: 0.8em;
-    padding-right:5px;
-    padding-left:5px;
-}
-
-.MdBProfileLink {
-    text-align:center;
-}
+/*Old Stuff*/
 
 .verified {
     text-align:center;
 }
 
-.MdBListTable th input, .MdBListTable th button, .MdBListTable th select, .MdBListTable th textarea {
-    font-size: 0.8em;
-    color: black;
-    width:100%;
-}
-
-.MdBNameTh{
-    width:15%;
-}
-
-.MdBLocationTh{
-    width:100px;
-}
-
-.MdBLocationTd{
-    max-width:100px;
-}
-
-.MdBDescTh {
-    min-width: 15%;
-}
 
 .websiteLink{
     padding:0;
@@ -276,7 +271,6 @@ a.imageLink p {
 .twitterUserPosition {
     color: #27182b;
     font-size: 1.3em;
-    text-align: center;
 }
 
 /*
@@ -356,12 +350,14 @@ a.imageLink p {
     background-color: #27182b;
     border: 0;
     padding: 5px;
-    margin-top: 6px;
+    margin-top: 4px;
     float: right;
     padding-bottom: 5px;
     padding-right: 55px;
     margin-right: 35px;
+    height: 22px;
 }
+
 
 
 
@@ -392,12 +388,13 @@ a.imageLink p {
 }
 
 .interactionMenuBar {
-    width: 300px;
-    text-align: center; 
+    width: 290px;
+    text-align: center;
     margin: 0 auto;
-    height: 45px;
+    height: 38px;
     padding: 5px;
 }
+
 
 
 
@@ -414,7 +411,7 @@ a.imageLink p {
 }
 /*Icon Menu*/
 .iconHoverPages {
-    font-size: 26px;
+    font-size: 22px;
     margin: 0 auto;
     text-align: center;
     color: #27182b;
@@ -425,6 +422,7 @@ a.imageLink p {
     -o-transition: color 0.5s, font-size 0.5s !important;
     transition: color 0.5s, font-size 0.5s !important;
 }
+
 
 
 .iconHoverPages:hover {
