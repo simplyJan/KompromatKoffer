@@ -57,21 +57,11 @@
         List<string> retweetList = new List<string>();
     }
 
-    @{ 
-        List<string> colorList = new List<string>();
-        List<string> colorList2 = new List<string>();
-        List<string> borderList = new List<string>();
-        List<string> borderList2 = new List<string>();
-    }
 
     @foreach (var dates in Model.AllTweetsFromUser)
     {
-          
+
         string likeIntString = dates.FavoriteCount + ", ";
-        string colorString = "'" + "rgba(130, 32, 74, 1.0)" + "'" + ", ";
-        string colorString2 = "'" + "rgba(227, 231, 211, 1.0)" + "'" + ", ";
-        string borderString = "'" + "#82204a" + "'" + ", ";
-        string borderString2 = "'" + "#fbfbfb" + "'" + ", ";
         var dateString = "'" + dates.CreatedAt.ToString("dd.MM.yy") + "'" + ", ";
 
         string retweetString = dates.RetweetCount + ", ";
@@ -79,13 +69,6 @@
         dateList.Add(dateString);
 
         likesList.Add(likeIntString);
-
-        colorList.Add(colorString);
-
-        colorList2.Add(colorString2);
-
-        borderList.Add(borderString);
-        borderList2.Add(borderString2);
 
         retweetList.Add(retweetString);
 
@@ -110,37 +93,27 @@
                 labels: [
                     @foreach (var listitem in dateList)
                     {
-                        
+
                         @Html.Raw(listitem);
-                        
+
                     }
-                    
+
                 ],
                 datasets: [{
                             label: 'Likes per Post',
                     data: [
                          @foreach (var likeitem in likesList)
                     {
-                        
+
                         @Html.Raw(likeitem);
-                        
+
                     }
                     ],
                     backgroundColor: [
-                        @foreach (var coloritem in colorList)
-                    {
-                        
-                        @Html.Raw(coloritem);
-                        
-                    }
+                        'rgba(130, 32, 74, 1.0)'
                     ],
                     borderColor: [
-                        @foreach (var borderitem in borderList)
-                    {
-                        
-                        @Html.Raw(borderitem);
-                        
-                    }
+                        'rgba(130, 32, 74, 1.0)'
                     ],
                     borderWidth: 1
                 },
@@ -149,26 +122,16 @@
                     data: [
                          @foreach (var retweetitem in retweetList)
                     {
-                        
+
                         @Html.Raw(retweetitem);
-                        
+
                     }
                     ],
                     backgroundColor: [
-                        @foreach (var coloritem in colorList2)
-                    {
-                        
-                        @Html.Raw(coloritem);
-                        
-                    }
+                        'rgba(227, 231, 211, 1.0)'
                     ],
                     borderColor: [
-                        @foreach (var borderitem in borderList2)
-                    {
-                        
-                        @Html.Raw(borderitem);
-                        
-                    }
+                        'rgba(227, 231, 211, 1.0)'
                     ],
                     borderWidth: 1
                 }]
