@@ -67,12 +67,12 @@
             @{
                 if (x.ExtendedTweet != null)
                 {
-                    @x.ExtendedTweet.Text
+                    @Html.Raw(x.ExtendedTweet.Text)
 
                 }
                 else
                 {
-                    @x.Text
+                    @Html.Raw(x.Text)
                 }
 
             }
