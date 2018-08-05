@@ -54,11 +54,14 @@
 
     @{ 
         List<string> likesList = new List<string>();
+        List<string> retweetList = new List<string>();
     }
 
     @{ 
         List<string> colorList = new List<string>();
+        List<string> colorList2 = new List<string>();
         List<string> borderList = new List<string>();
+        List<string> borderList2 = new List<string>();
     }
 
     @foreach (var dates in Model.AllTweetsFromUser)
@@ -66,8 +69,12 @@
 
         string likeIntString = dates.FavoriteCount + ", ";
         string colorString = "'" + "#27182b" + "'" + ", ";
+        string colorString2 = "'" + "#e3e7d3" + "'" + ", ";
         string borderString = "'" + "#82204a" + "'" + ", ";
+        string borderString2 = "'" + "#fbfbfb" + "'" + ", ";
         var dateString = "'" + dates.CreatedAt.ToString("dd.MM.yy") + "'" + ", ";
+
+        string retweetString = dates.RetweetCount + ", ";
 
         dateList.Add(dateString);
 
@@ -75,7 +82,12 @@
 
         colorList.Add(colorString);
 
+        colorList2.Add(colorString2);
+
         borderList.Add(borderString);
+        borderList2.Add(borderString2);
+
+        retweetList.Add(retweetString);
 
     }
 
@@ -124,6 +136,34 @@
                     ],
                     borderColor: [
                         @foreach (var borderitem in borderList)
+                    {
+                        
+                        @Html.Raw(borderitem);
+                        
+                    }
+                    ],
+                    borderWidth: 1
+                },
+                {
+                            label: 'Retweets per Post',
+                    data: [
+                         @foreach (var retweetitem in retweetList)
+                    {
+                        
+                        @Html.Raw(retweetitem);
+                        
+                    }
+                    ],
+                    backgroundColor: [
+                        @foreach (var coloritem in colorList2)
+                    {
+                        
+                        @Html.Raw(coloritem);
+                        
+                    }
+                    ],
+                    borderColor: [
+                        @foreach (var borderitem in borderList2)
                     {
                         
                         @Html.Raw(borderitem);
