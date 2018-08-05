@@ -3,6 +3,7 @@
 ASP.Net Core 2.1 Web Application for displaying all recent tweets from every member of the german parliament. Currently the app outputs a twitter list made by martin fuchs (http://martin-fuchs.org) and right now I am implementing the NoSQL Database (LiteDB) to store  data and generate analytical profiles from each dataset.
 
 Using https://github.com/linvi/tweetinvi - MIT License - Copyright (c) 2017 Thomas Imart
+Using https://github.com/chartjs/Chart.js - MIT License - Copyright (c) 2018 Chart.js Contributors
 
 URL: https://kompromatkoffer.de
 Author: https://scobiform.com

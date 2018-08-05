@@ -1,9 +1,194 @@
-﻿@page
+﻿@page "{screenname}"
 @model KompromatKoffer.Pages.Database.PeopleDetailModel
 @{
     ViewData["Title"] = "PeopleDetail";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>PeopleDetail</h2>
 
+
+<div class="interactionMenuBar">
+    <form>
+        <input type="text" name="screenname" class="twitterUserSearchInput" placeholder="Search...">
+    </form>
+    <a asp-page="/Database/People" title="Database" class="iconHoverPages interactionMenu">
+        <i class="fas fa-database"> </i>
+        &nbsp;
+    </a>
+</div>
+
+
+
+<div class="TwitterUserTimline">
+
+
+    <a href="https://twitter.com/@Model.CurrentTwitterUser.ScreenName" target="_blank" class="twitterUserLink">
+
+
+        <img class="twitterUserImage" src="@Html.DisplayFor(modelItem => Model.CurrentTwitterUser.ProfileImageUrlHttps)" />
+    </a>
+    <h3>@Model.CurrentTwitterUser.Name</h3>
+    <p>
+        @Model.CurrentTwitterUser.Description
+    </p>
+    <p>
+        <i class="fas fa-map-marker-alt"></i> @Model.CurrentTwitterUser.Location
+        <i>&nbsp;</i>
+        <i class="fas fa-home"></i> <a href="@Model.CurrentTwitterUser.Url" target="_blank" class="twitterUserWebsite">Website</a>
+    </p>
+    <p>
+        <i class="fab fa-twitter"></i>&nbsp; @Model.CurrentTwitterUser.StatusesCount
+        &nbsp;
+        <i class="fas fa-grin-hearts"></i>&nbsp; @Model.CurrentTwitterUser.FollowersCount
+        &nbsp;
+        <i class="fas fa-meh-rolling-eyes"></i>&nbsp; @Model.CurrentTwitterUser.FriendsCount
+        &nbsp;
+        <i class="fas fa-heart"></i>&nbsp; @Model.CurrentTwitterUser.FavouritesCount
+        &nbsp;
+        <i class="fas fa-list-ul"></i>&nbsp; @Model.CurrentTwitterUser.ListedCount
+    </p>
+
+    @{
+        List<string> dateList = new List<string>();
+    }
+
+    @{ 
+        List<string> likesList = new List<string>();
+    }
+
+    @{ 
+        List<string> colorList = new List<string>();
+        List<string> borderList = new List<string>();
+    }
+
+    @foreach (var dates in Model.AllTweetsFromUser)
+    {
+
+        string likeIntString = dates.FavoriteCount + ", ";
+        string colorString = "'" + "#27182b" + "'" + ", ";
+        string borderString = "'" + "#82204a" + "'" + ", ";
+        var dateString = "'" + dates.CreatedAt.ToString("dd.MM.yy") + "'" + ", ";
+
+        dateList.Add(dateString);
+
+        likesList.Add(likeIntString);
+
+        colorList.Add(colorString);
+
+        borderList.Add(borderString);
+
+    }
+
+    @{
+        Model.TweetHistoryDates = dateList;
+    }
+
+    @dateList.Count()
+
+
+
+
+
+    <canvas id="TwitterUserActivity" width="200" height="100"></canvas>
+    <script>
+        var ctx = document.getElementById("TwitterUserActivity").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [
+                    @foreach (var listitem in dateList)
+                    {
+                        
+                        @Html.Raw(listitem);
+                        
+                    }
+                    
+                ],
+                datasets: [{
+                            label: 'Likes per Post',
+                    data: [
+                         @foreach (var likeitem in likesList)
+                    {
+                        
+                        @Html.Raw(likeitem);
+                        
+                    }
+                    ],
+                    backgroundColor: [
+                        @foreach (var coloritem in colorList)
+                    {
+                        
+                        @Html.Raw(coloritem);
+                        
+                    }
+                    ],
+                    borderColor: [
+                        @foreach (var borderitem in borderList)
+                    {
+                        
+                        @Html.Raw(borderitem);
+                        
+                    }
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+
+
+
+    <h4>Die letzten @Model.AllTweetsFromUser.Count() Tweets von @Model.CurrentTwitterUser.Name</h4>
+
+
+
+
+    <div class="TwitterUserTimelineOverview">
+        @foreach (var item in Model.AllTweetsFromUser)
+        {
+
+            <div id="tweetLink" class="redBG">
+                @item.Id
+                <a href="@item.Url" class="TwitterUserTimeline" target="_blank">
+                    <p>
+                        @Html.DisplayFor(modelItem => item.FullText)
+                    </p>
+                    <p>
+                        @{
+                            var hashtags = item.Entities.Hashtags;
+
+                            foreach (var member in hashtags)
+                            {
+
+                                <i>@member.ToString() &nbsp;</i>
+
+
+                            }
+
+                        }
+                    </p>
+
+                    <i class="fas fa-retweet"></i> @item.RetweetCount &emsp; <i class="fas fa-heart"></i> @item.FavoriteCount &emsp; <i class="far fa-calendar-alt"></i>&nbsp;@item.CreatedAt.ToString("dd.MM.yy - H:mm")
+
+                </a>
+
+            </div>
+
+
+
+
+        }
+
+    </div>
+
+</div>
