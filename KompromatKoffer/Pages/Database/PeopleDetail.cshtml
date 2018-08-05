@@ -66,10 +66,10 @@
 
     @foreach (var dates in Model.AllTweetsFromUser)
     {
-
+          
         string likeIntString = dates.FavoriteCount + ", ";
-        string colorString = "'" + "#27182b" + "'" + ", ";
-        string colorString2 = "'" + "#e3e7d3" + "'" + ", ";
+        string colorString = "'" + "rgba(130, 32, 74, 1.0)" + "'" + ", ";
+        string colorString2 = "'" + "rgba(227, 231, 211, 1.0)" + "'" + ", ";
         string borderString = "'" + "#82204a" + "'" + ", ";
         string borderString2 = "'" + "#fbfbfb" + "'" + ", ";
         var dateString = "'" + dates.CreatedAt.ToString("dd.MM.yy") + "'" + ", ";
