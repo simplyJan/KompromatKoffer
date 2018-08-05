@@ -195,6 +195,18 @@ a.tweetLink:active, a.tweetLink:hover, a.tweetLink:focus {
     color: #e3e7d3;
 }
 
+.dataBaseProfile {
+    font-size: 1em;
+    text-align: center;
+    padding-left: 6px;
+    float: right;
+}
+
+
+a.dataBaseProfile:hover, a.dataBaseProfile:focus, a.dataBaseProfile:active {
+    font-size: 2em;
+    text-align: center;
+}
 /*User Account View | Login | ETC */
 .form-group a {
     color: #fff;
