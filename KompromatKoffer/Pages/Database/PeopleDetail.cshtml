@@ -81,7 +81,7 @@
 
         urlList.Add(urlString);
 
-
+        
 
     }
 
@@ -93,9 +93,6 @@
 
 
     <h4>Die letzten @dateList.Count() Tweets...</h4>
-
-
-
 
 
     <canvas id="TwitterUserActivity" width="200" height="100"></canvas>
@@ -164,7 +161,7 @@
 
 
 
-    <h4>Hashtags, die dieser Politiker nutzt</h4>
+    <h4>Hashtags, die @Model.CurrentTwitterUser.Name nutzt</h4>
     <p>
 
         @{ 
@@ -194,32 +191,40 @@
         @foreach (var item in Model.AllTweetsFromUser)
         {
 
-            <div id="tweetLink" class="redBG">
-                @item.Id
-                <a href="@item.Url" class="TwitterUserTimeline" target="_blank">
-                    <p>
-                        @Html.DisplayFor(modelItem => item.FullText)
-                    </p>
-                    <p>
-                        @{
-                            var hashtags = item.Entities.Hashtags;
+        <div id="tweetLink" class="redBG">
+            @item.Id
+            <a href="@item.Url" class="TwitterUserTimeline" target="_blank">
+                <p>
+                    @Html.DisplayFor(modelItem => item.FullText)
+                </p>
+                <p>
+                    @{
+                        var hashtags = item.Entities.Hashtags;
 
-                            foreach (var member in hashtags)
-                            {
+                        foreach (var member in hashtags)
+                        {
 
-                                <i>@member.ToString() &nbsp;</i>
+                            <i>@member.ToString() &nbsp;</i>
 
-
-                            }
 
                         }
-                    </p>
 
-                    <i class="fas fa-retweet"></i> @item.RetweetCount &emsp; <i class="fas fa-heart"></i> @item.FavoriteCount &emsp; <i class="far fa-calendar-alt"></i>&nbsp;@item.CreatedAt.ToString("dd.MM.yy - H:mm")
+                    }
+                </p>
 
-                </a>
 
-            </div>
+                <i class="fas fa-retweet"></i> @item.RetweetCount &emsp; <i class="fas fa-heart"></i> @item.FavoriteCount &emsp; <i class="far fa-calendar-alt"></i>&nbsp;@item.CreatedAt.ToString("dd.MM.yy - H:mm")
+
+            </a>
+            &emsp;
+            Source: @item.Source
+            &emsp;
+            Textrange: @item.DisplayTextRange.Sum()
+            &emsp;
+
+
+
+        </div>
 
 
 
