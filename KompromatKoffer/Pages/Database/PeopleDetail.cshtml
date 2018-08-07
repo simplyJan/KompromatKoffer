@@ -51,6 +51,7 @@
         List<string> likesList = new List<string>();
         List<string> retweetList = new List<string>();
         List<string> hashTagList = new List<string>();
+        List<string> textRangeList = new List<string>();
     }
 
 
@@ -73,6 +74,8 @@
 
         }
 
+        string textRange = Convert.ToString(dates.DisplayTextRange.Sum()) + ", ";
+
         dateList.Add(dateString);
 
         likesList.Add(likeIntString);
@@ -81,7 +84,7 @@
 
         urlList.Add(urlString);
 
-        
+        textRangeList.Add(textRange);
 
     }
 
@@ -90,10 +93,7 @@
     }
 
 
-
-
     <h4>Die letzten @dateList.Count() Tweets...</h4>
-
 
     <canvas id="TwitterUserActivity" width="200" height="100"></canvas>
     <script>
@@ -145,7 +145,25 @@
                         'rgba(227, 231, 211, 1.0)'
                     ],
                     borderWidth: 1
-                }]
+                    },
+                {
+                    label: 'TextRange per Tweet',
+                    data: [
+                         @foreach (var textRange in textRangeList)
+                    {
+
+                        @Html.Raw(textRange);
+
+                    }
+                    ],
+                    backgroundColor: [
+                        'rgba(68, 12 80, 1.0)'
+                    ],
+                    borderColor: [
+                        'rgba(68, 12, 80, 1.0)'
+                    ],
+                    borderWidth: 1
+                },]
             },
             options: {
                 scales: {
@@ -160,11 +178,10 @@
     </script>
 
 
-
     <h4>Hashtags, die @Model.CurrentTwitterUser.Name nutzt</h4>
     <p>
 
-        @{ 
+        @{
             var hashTagListClean = hashTagList.Distinct().ToList();
         }
 
@@ -178,53 +195,60 @@
     </p>
 
 
-
-
-
-
     <h4>Die letzten @Model.AllTweetsFromUser.Count() Tweets von @Model.CurrentTwitterUser.Name</h4>
 
+    <a asp-page=""
+       asp-route-sortOrder="@Model.FavCountSort"
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPagesPeopleDetail interactionMenu" title="Most Likes AllTime">
+        <i class="fas fa-heart"> </i>
+        &nbsp;
+    </a>
 
-
+    <a asp-page=""
+       asp-route-sortOrder="@Model.CreatedAtSort"
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPagesPeopleDetail interactionMenu" title="Latest Tweets">
+        <i class="fas fa-clock"></i>
+        &nbsp;
+    </a>
 
     <div class="TwitterUserTimelineOverview">
         @foreach (var item in Model.AllTweetsFromUser)
         {
 
-        <div id="tweetLink" class="redBG">
-            @item.Id
-            <a href="@item.Url" class="TwitterUserTimeline" target="_blank">
-                <p>
-                    @Html.DisplayFor(modelItem => item.FullText)
-                </p>
-                <p>
-                    @{
-                        var hashtags = item.Entities.Hashtags;
+            <div id="tweetLink" class="redBG">
+                @item.Id
+                <a href="@item.Url" class="TwitterUserTimeline" target="_blank">
+                    <p>
+                        @Html.DisplayFor(modelItem => item.FullText)
+                    </p>
+                    <p>
+                        @{
+                            var hashtags = item.Entities.Hashtags;
 
-                        foreach (var member in hashtags)
-                        {
+                            foreach (var member in hashtags)
+                            {
 
-                            <i>@member.ToString() &nbsp;</i>
+                                <i>@member.ToString() &nbsp;</i>
 
+
+                            }
 
                         }
-
-                    }
-                </p>
+                    </p>
 
 
-                <i class="fas fa-retweet"></i> @item.RetweetCount &emsp; <i class="fas fa-heart"></i> @item.FavoriteCount &emsp; <i class="far fa-calendar-alt"></i>&nbsp;@item.CreatedAt.ToString("dd.MM.yy - H:mm")
+                    <i class="fas fa-retweet"></i> @item.RetweetCount &emsp; <i class="fas fa-heart"></i> @item.FavoriteCount &emsp; <i class="far fa-calendar-alt"></i>&nbsp;@item.CreatedAt.ToString("dd.MM.yy - H:mm")
 
-            </a>
-            &emsp;
-            Source: @item.Source
-            &emsp;
-            Textrange: @item.DisplayTextRange.Sum()
-            &emsp;
+                </a>
+                &emsp;
+                Source: @Html.Raw(item.Source)
+                &emsp;
+                Textrange: @item.DisplayTextRange.Sum()
+                &emsp;
 
 
 
-        </div>
+            </div>
 
 
 
@@ -232,5 +256,6 @@
         }
 
     </div>
+
 
 </div>

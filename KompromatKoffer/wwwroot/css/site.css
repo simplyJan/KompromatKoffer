@@ -449,6 +449,19 @@ a.imageLink p {
     transition: color 0.5s, font-size 0.5s !important;
 }
 
+.iconHoverPagesPeopleDetail {
+    font-size: 22px;
+    margin: 0 auto;
+    text-align: center;
+    color: #e3e7d3;
+    margin-top: 10px;
+    padding-top: 5px;
+    -webkit-transition: color 0.5s, font-size 0.5s !important;
+    -moz-transition: color 0.5s, font-size 0.5s !important;
+    -o-transition: color 0.5s, font-size 0.5s !important;
+    transition: color 0.5s, font-size 0.5s !important;
+}
+
 
 
 .iconHoverPages:hover {
@@ -456,6 +469,10 @@ a.imageLink p {
     color: #e3e7d3;
 }
 
+.iconHoverPagesPeopleDetail:hover {
+    font-size: 32px;
+    color: #e3e7d3;
+}
 /*Footer NAV*/
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img {
