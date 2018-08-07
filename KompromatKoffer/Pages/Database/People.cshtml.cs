@@ -92,10 +92,10 @@ namespace KompromatKoffer.Areas.Database.Pages
 
                 //Sorting
                 NameSort = sortOrder == "TwitterName" ? "TwitterName_Desc" : "TwitterName";
-                StatusCountSort = sortOrder == "StatusesCount" ? "StatusesCount" : "StatusesCount_Desc";
-                FollowersCountSort = sortOrder == "FollowersCount" ? "FollowersCount" : "FollowersCount_Desc";
-                FriendsCountSort = sortOrder == "FriendsCount" ? "FriendsCount" : "FriendsCount_Desc";
-                FavCountSort = sortOrder == "FavCount" ? "FavCount" : "FavCount_Desc";
+                StatusCountSort = sortOrder == "StatusesCount_Desc" ? "StatusesCount" : "StatusesCount_Desc";
+                FollowersCountSort = sortOrder == "FollowersCount_Desc" ? "FollowersCount" : "FollowersCount_Desc";
+                FriendsCountSort = sortOrder == "FriendsCount_Desc" ? "FriendsCount" : "FriendsCount_Desc";
+                FavCountSort = sortOrder == "FavCount_Desc" ? "FavCount" : "FavCount_Desc";
                 DateSort = sortOrder == "LastCreatedDate" ? "LastCreatedDate_Desc" : "LastCreatedDate";
                 CreatedAtSort = sortOrder == "CreatedAtDate" ? "CreatedAtDate_Desc" : "CreatedAtDate";
 

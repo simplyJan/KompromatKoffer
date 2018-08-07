@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LiteDB;
+using System;
 
-namespace KompromatKoffer.Areas.Database.Model
+    namespace KompromatKoffer.Pages.Database
 {
-    public class TwitteruserTimelineModel
+    public class TwitterUserTimelineModel
     {
-
-        public static DateTime Date;
-
-
     }
-
-
-
 }
