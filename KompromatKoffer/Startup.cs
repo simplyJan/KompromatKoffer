@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using KompromatKoffer.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -41,6 +42,10 @@ namespace KompromatKoffer
 
             //Set DB to Update after StartUp
             Config.Parameter.DbLastUpdated = DateTime.Now;
+
+
+            //Background Service for daily saving TwitterUser data to database
+            services.AddHostedService<TimedHostedService>();
 
         }
 
