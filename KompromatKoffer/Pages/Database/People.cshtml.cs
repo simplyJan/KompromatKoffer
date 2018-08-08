@@ -146,7 +146,7 @@ namespace KompromatKoffer.Areas.Database.Pages
                 TwitterUserModel = await PaginatedList<TwitterUserModel>.CreateAsync(
                 CompleteDB, pageIndex ?? 1, pageSize);
 
-                StartTasksAsync();
+                //StartTasksAsync();
 
             }
         }
@@ -282,5 +282,6 @@ namespace KompromatKoffer.Areas.Database.Pages
                 await Task.Delay(200);
             }
         }     
+
     }
 }

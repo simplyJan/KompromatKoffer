@@ -15,12 +15,12 @@ using Tweetinvi.Exceptions;
 
 namespace KompromatKoffer.Services
 {
-    internal class TimedHostedService : IHostedService, IDisposable
+    internal class TwitterUserDailyData : IHostedService, IDisposable
     {
         private readonly ILogger _logger;
         private Timer _timer;
 
-        public TimedHostedService(ILogger<TimedHostedService> logger)
+        public TwitterUserDailyData(ILogger<TwitterUserDailyData> logger)
         {
             _logger = logger;
         }
@@ -30,7 +30,7 @@ namespace KompromatKoffer.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Twitter User Daily Saving to Database Background Service is starting.");
+            _logger.LogInformation("Twitter User Daily Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromSeconds(Config.Parameter.TwitterUserDailyUpdateInterval));
@@ -40,7 +40,7 @@ namespace KompromatKoffer.Services
 
         private void DoWork(object state)
         {
-            _logger.LogInformation("Twitter User Daily Saving to Database Background Service is working.");
+            _logger.LogInformation("Twitter User Daily Service is working.");
 
 
             try
@@ -85,7 +85,7 @@ namespace KompromatKoffer.Services
                         }
                         else
                         {
-                            _logger.LogInformation("...already uptodate => " + x.ScreenName);
+                            _logger.LogInformation("TU24...already uptodate => " + x.ScreenName);
                         }
 
 
@@ -118,7 +118,7 @@ namespace KompromatKoffer.Services
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Twitter User Daily Saving to Database Background Service is stopping.");
+            _logger.LogInformation("Twitter User Daily Service is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 
