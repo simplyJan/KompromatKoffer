@@ -37,6 +37,7 @@ namespace KompromatKoffer.Pages.Database
         public string CurrentSort { get; set; }
         public string FavCountSort { get; set; }
         public string CreatedAtSort { get; set; }
+        public string RetweetCountSort { get; set; }
 
         public async Task OnGetAsync(string screenname, string sortOrder, string currentFilter)
         {
@@ -111,6 +112,7 @@ namespace KompromatKoffer.Pages.Database
                 //Sorting
                 FavCountSort = sortOrder == "FavCount_Desc" ? "FavCount" : "FavCount_Desc";
                 CreatedAtSort = sortOrder == "CreatedAtDate_desc" ? "CreatedAtDate" : "CreatedAtDate_desc";
+                RetweetCountSort = sortOrder == "RetweetCount_Desc" ? "RetweetCount" : "RetweetCount_Desc";
 
                 switch (sortOrder)
                 {
@@ -119,6 +121,12 @@ namespace KompromatKoffer.Pages.Database
                         break;
                     case "FavCount_Desc":
                         AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.FavoriteCount).ToList();
+                        break;
+                    case "RetweetCount":
+                        AllTweetsFromUser = AllTweetsFromUser.OrderBy(s => s.RetweetCount).ToList();
+                        break;
+                    case "RetweetCount_Desc":
+                        AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.RetweetCount).ToList();
                         break;
                     case "CreatedAtDate":
                         AllTweetsFromUser = AllTweetsFromUser.OrderBy(s => s.CreatedAt).ToList();
