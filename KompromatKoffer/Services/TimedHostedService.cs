@@ -108,6 +108,10 @@ namespace KompromatKoffer.Services
             {
                 _logger.LogInformation("LiteDB Exception..." + ex);
             }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Exception..." + ex);
+            }
 
 
         }
