@@ -57,7 +57,7 @@ namespace KompromatKoffer
 ```
 
 
-#<b>ProjectOverview:</b>
+<b>ProjectOverview:</b>
 Goal is to publish live tweets from every member of the german bundestag (Parliament) and make twitter data from this group of people available for analyticcal purpose through a database (LiteDB). The website (ASP.Net Core Razor Pages) will be free for all visitors and the project is mostly made as a tool for journalists and people who are interested in politics - to search for informations and see what our politicians are doing on twitter. Transparency and freedom of open information are the fundmental principles. The source code will be open for everyone on GitHub (https://github.com/Scobiform/KompromatKoffer). 
 
 The project is currently in alpha and I am still testing many parts of the project. Right now I am intregrating services for the updates to the database. Also I am starting to create charts for the count data.
