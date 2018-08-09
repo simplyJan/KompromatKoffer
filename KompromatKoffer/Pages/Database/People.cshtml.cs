@@ -239,7 +239,7 @@ namespace KompromatKoffer.Areas.Database.Pages
                 }
                 else
                 {
-                    if (name.UserUpdated.AddMinutes(Config.Parameter.SaveInterval) < DateTime.Now)
+                    if (name.UserUpdated.AddMinutes(Config.Parameter.TwitterUserUpdateInterval) < DateTime.Now)
                     {
                         //Create UserModel for User
                         var twitterUser = new TwitterUserModel

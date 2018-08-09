@@ -33,7 +33,7 @@ namespace KompromatKoffer.Services
             _logger.LogInformation("Twitter User Data Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(Config.Parameter.TwitterUserDailyUpdateInterval));
+                TimeSpan.FromSeconds(Config.Parameter.TwitterUserUpdateInterval));
 
             return Task.CompletedTask;
         }
@@ -108,7 +108,7 @@ namespace KompromatKoffer.Services
                             }
                             else
                             {
-                                if (name.UserUpdated.AddMinutes(Config.Parameter.SaveInterval) < DateTime.Now)
+                                if (name.UserUpdated.AddMinutes(Config.Parameter.TwitterUserUpdateInterval) < DateTime.Now)
                                 {
                                     //Create UserModel for User
                                     var twitterUser = new TwitterUserModel

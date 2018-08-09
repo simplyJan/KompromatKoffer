@@ -76,17 +76,17 @@ namespace KompromatKoffer.Pages.Database
                 CurrentTwitterUser = user;
                 var userIdentifier = user.UserIdentifier;
 
-                var lastTweets = Timeline.GetUserTimeline(currentUserScreenname, 25).ToArray();
+                var lastTweets = Timeline.GetUserTimeline(currentUserScreenname, 15).ToArray();
 
                 var allTweets = new List<ITweet>(lastTweets);
                 var beforeLast = allTweets;
 
                 //Get more Tweets from User
-                while (lastTweets.Length > 0 && allTweets.Count <= 50)
+                while (lastTweets.Length > 0 && allTweets.Count <= 30)
                 {
                     var idOfOldestTweet = lastTweets.Select(x => x.Id).Min();
 
-                    var numberOfTweetsToRetrieve = allTweets.Count > 25 ? 50 - allTweets.Count : 25;
+                    var numberOfTweetsToRetrieve = allTweets.Count > 15 ? 30 - allTweets.Count : 15;
 
                     // Get the UserTimeline
                     // Get more control over the request with a UserTimelineParameters
