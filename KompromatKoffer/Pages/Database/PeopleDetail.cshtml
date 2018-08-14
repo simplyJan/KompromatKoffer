@@ -22,7 +22,7 @@
     List<int> StatusesDaily = new List<int>();
     List<int> FavouritesDaily = new List<int>();
 
-    var name = Model.CompleteDB.Find(s => s.DateToday <= DateTime.Today.AddDays(-1)).Where(s => s.Screen_name == Model.CurrentUserScreenname);
+    var name = Model.CompleteDB.Find(s => s.DateToday <= DateTime.Today).Where(s => s.Screen_name == Model.CurrentUserScreenname);
 
     var groupBy = name.GroupBy(s => s.Screen_name);
 
@@ -92,6 +92,24 @@
 
                 ],
                 datasets: [{
+                    label: 'Tweets',
+                    data: [
+                         @foreach (var item in StatusesDaily)
+                         {
+                             var statusesConvert = "'" + Convert.ToString(item) + "'" + ", ";
+
+                             @Html.Raw(statusesConvert)
+
+                         }
+                    ],
+                    backgroundColor: [
+                        'rgba(227, 231, 211, 0.1)'
+                    ],
+                    borderColor: [
+                        'rgba(227, 231, 211, 1.0)'
+                    ],
+                    borderWidth: 1
+                },{
                     label: 'Followers',
                     data: [
                          @foreach (var item in FollowerDaily)
@@ -110,25 +128,7 @@
                     ],
                     borderWidth: 1
                 },{
-                    label: 'Statuses',
-                    data: [
-                         @foreach (var item in StatusesDaily)
-                         {
-                             var statusesConvert = "'" + Convert.ToString(item) + "'" + ", ";
-
-                             @Html.Raw(statusesConvert)
-
-                         }
-                    ],
-                    backgroundColor: [
-                        'rgba(227, 231, 211, 0.1)'
-                    ],
-                    borderColor: [
-                        'rgba(227, 231, 211, 1.0)'
-                    ],
-                    borderWidth: 1
-                },{
-                    label: 'Friends',
+                    label: 'Following',
                     data: [
                          @foreach (var item in FriendsDaily)
                          {
