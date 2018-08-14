@@ -47,7 +47,7 @@ namespace KompromatKoffer.Services
         {
             _logger.LogInformation("Twitter User Timeline Data Service - " + DateTime.Now);
 
-            Task.Delay(Config.Parameter.TaskDelay);
+            Task.Delay(Config.Parameter.TwitterUserTimelineTaskDelay);
 
             try
             {

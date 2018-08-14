@@ -42,6 +42,7 @@ namespace KompromatKoffer.Services
         {
             _logger.LogInformation("Twitter User Daily Service is working.");
 
+            Task.Delay(Config.Parameter.TwitterUserDailyTaskDelay);
 
             try
             { 
