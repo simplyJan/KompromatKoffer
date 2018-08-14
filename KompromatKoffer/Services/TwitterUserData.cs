@@ -33,7 +33,7 @@ namespace KompromatKoffer.Services
             _logger.LogInformation("Twitter User Data Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(Config.Parameter.TwitterUserUpdateInterval));
+                TimeSpan.FromMinutes(Config.Parameter.TwitterUserUpdateInterval));
 
             return Task.CompletedTask;
         }
@@ -41,6 +41,8 @@ namespace KompromatKoffer.Services
         private void DoWork(object state)
         {
             _logger.LogInformation("Twitter User Data Service - " + DateTime.Now);
+
+            Task.Delay(Config.Parameter.TaskDelay);
 
             try
             {

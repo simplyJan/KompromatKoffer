@@ -6,7 +6,6 @@
 }
 
 
-
 <div class="interactionMenuBar">
     <a asp-page="/Database/People" title="Database" class="iconHoverPages interactionMenu">
         <i class="fas fa-database"> </i>
@@ -15,81 +14,66 @@
 </div>
 
 
+@{
+
+    List<DateTime> DailyDate = new List<DateTime>();
+    List<int> FollowerDaily = new List<int>();
+    List<int> FriendsDaily = new List<int>();
+    List<int> StatusesDaily = new List<int>();
+    List<int> FavouritesDaily = new List<int>();
+
+    var name = Model.CompleteDB.Find(s => s.DateToday <= DateTime.Today.AddDays(-1)).Where(s => s.Screen_name == Model.CurrentUserScreenname);
+
+    var groupBy = name.GroupBy(s => s.Screen_name);
+
+    foreach (var item in groupBy)
+    {
+
+        foreach (var items in item)
+        {
+            StatusesDaily.Add(items.Statuses_count);
+            FollowerDaily.Add(items.Followers_count);
+            FriendsDaily.Add(items.Friends_count);
+            FavouritesDaily.Add(items.Favourites_count);
+            DailyDate.Add(items.DateToday);
+
+        }
+
+    }
+
+
+    //Get the Data from the TwitterUserData Collection
+    var twitterUser = Model.TwitterUserData.FindOne(s => s.Screen_name == Model.CurrentUserScreenname);
+
+
+}
 
 <div class="TwitterUserTimline">
 
 
-    <a href="https://twitter.com/@Model.CurrentTwitterUser.ScreenName" target="_blank" class="twitterUserLink">
+    <a href="https://twitter.com/@twitterUser.Screen_name" target="_blank" class="twitterUserLink">
 
 
-        <img class="twitterUserImage" src="@Html.DisplayFor(modelItem => Model.CurrentTwitterUser.ProfileImageUrlHttps)" />
+        <img class="twitterUserImage" src="@Html.Raw(twitterUser.Profile_image_url_https)" />
     </a>
-    <h3>@Model.CurrentTwitterUser.Name</h3>
+    <h3>@Html.Raw(twitterUser.Name)</h3>
     <p>
-        @Model.CurrentTwitterUser.Description
+        @Html.Raw(twitterUser.Description)
     </p>
     <p>
-        <i class="fas fa-map-marker-alt"></i> @Model.CurrentTwitterUser.Location
+        <i class="fas fa-map-marker-alt"></i> @Html.Raw(twitterUser.Location)
         <i>&nbsp;</i>
-        <i class="fas fa-home"></i> <a href="@Model.CurrentTwitterUser.Url" target="_blank" class="twitterUserWebsite">Website</a>
+        <i class="fas fa-home"></i> <a href="@Html.Raw(twitterUser.Url)" target="_blank" class="twitterUserWebsite">Website</a>
     </p>
     <p>
-        <i class="fab fa-twitter"></i>&nbsp; @Model.CurrentTwitterUser.StatusesCount
+        <i class="fab fa-twitter"></i>&nbsp; @Html.Raw(twitterUser.Statuses_count)
         &nbsp;
-        <i class="fas fa-grin-hearts"></i>&nbsp; @Model.CurrentTwitterUser.FollowersCount
+        <i class="fas fa-grin-hearts"></i>&nbsp; @Html.Raw(twitterUser.Followers_count)
         &nbsp;
-        <i class="fas fa-meh-rolling-eyes"></i>&nbsp; @Model.CurrentTwitterUser.FriendsCount
+        <i class="fas fa-meh-rolling-eyes"></i>&nbsp; @Html.Raw(twitterUser.Friends_count)
         &nbsp;
-        <i class="fas fa-heart"></i>&nbsp; @Model.CurrentTwitterUser.FavouritesCount
-        &nbsp;
-        <i class="fas fa-list-ul"></i>&nbsp; @Model.CurrentTwitterUser.ListedCount
+        <i class="fas fa-heart"></i>&nbsp; @Html.Raw(twitterUser.Favourites_count)
     </p>
-
-    @{
-        List<string> dateList = new List<string>();
-        List<string> urlList = new List<string>();
-        List<string> likesList = new List<string>();
-        List<string> retweetList = new List<string>();
-        List<string> hashTagList = new List<string>();
-    }
-
-
-    @foreach (var dates in Model.AllTweetsFromUser)
-    {
-
-        string likeIntString = dates.FavoriteCount + ", ";
-        var dateString = "'" + dates.CreatedAt.ToString("dd.MM.yy") + "'" + ", ";
-
-        string retweetString = dates.RetweetCount + ", ";
-
-        string urlString = "'" + dates.Url + "'" + ", ";
-
-        var hashTags = dates.Entities.Hashtags;
-
-        foreach (var member in hashTags)
-        {
-
-            hashTagList.Add(member.ToString());
-
-        }
-
-        dateList.Add(dateString);
-
-        likesList.Add(likeIntString);
-
-        retweetList.Add(retweetString);
-
-        urlList.Add(urlString);
-
-
-    }
-
-    @{
-        Model.TweetHistoryDates = dateList;
-    }
-
-
-    <h4>Die letzten @dateList.Count() Tweets...</h4>
 
     <canvas id="TwitterUserActivity" width="200" height="100"></canvas>
     <script>
@@ -98,50 +82,88 @@
             type: 'line',
             data: {
                 labels: [
-                    @foreach (var listitem in dateList)
+                    @foreach (var item in DailyDate)
                     {
+                        var dateConvert = "'" + item.ToString("dd.MM.yy") + "'" + ", ";
 
-                        @Html.Raw(listitem);
+                        @Html.Raw(dateConvert)
 
                     }
 
                 ],
                 datasets: [{
-                    label: 'Likes per Tweet',
+                    label: 'Followers',
                     data: [
-                         @foreach (var likeitem in likesList)
-                    {
+                         @foreach (var item in FollowerDaily)
+                         {
+                             var followerConvert = "'" + Convert.ToString(item) + "'" + ", ";
 
-                        @Html.Raw(likeitem);
+                             @Html.Raw(followerConvert)
 
-                    }
+                         }
                     ],
                     backgroundColor: [
-                        'rgba(130, 32, 74, 1.0)'
+                        'rgba(130, 32, 74, 0.1)'
                     ],
                     borderColor: [
                         'rgba(130, 32, 74, 1.0)'
                     ],
                     borderWidth: 1
-                },
-                {
-                    label: 'Retweets per Tweet',
+                },{
+                    label: 'Statuses',
                     data: [
-                         @foreach (var retweetitem in retweetList)
-                    {
+                         @foreach (var item in StatusesDaily)
+                         {
+                             var statusesConvert = "'" + Convert.ToString(item) + "'" + ", ";
 
-                        @Html.Raw(retweetitem);
+                             @Html.Raw(statusesConvert)
 
-                    }
+                         }
                     ],
                     backgroundColor: [
-                        'rgba(227, 231, 211, 1.0)'
+                        'rgba(227, 231, 211, 0.1)'
                     ],
                     borderColor: [
                         'rgba(227, 231, 211, 1.0)'
                     ],
                     borderWidth: 1
-                    },
+                },{
+                    label: 'Friends',
+                    data: [
+                         @foreach (var item in FriendsDaily)
+                         {
+                             var friendsConvert = "'" + Convert.ToString(item) + "'" + ", ";
+
+                             @Html.Raw(friendsConvert)
+
+                         }
+                    ],
+                    backgroundColor: [
+                        'rgba(68, 12, 80, 0.1)'
+                    ],
+                    borderColor: [
+                        'rgba(68, 12, 80, 1.0)'
+                    ],
+                    borderWidth: 1
+                },{
+                    label: 'Likes',
+                    data: [
+                         @foreach (var item in FavouritesDaily)
+                         {
+                             var favouriteConvert = "'" + Convert.ToString(item) + "'" + ", ";
+
+                             @Html.Raw(favouriteConvert)
+
+                         }
+                    ],
+                    backgroundColor: [
+                        'rgba(251, 251, 251, 0.1)'
+                    ],
+                    borderColor: [
+                        'rgba(251, 251, 251, 1.0)'
+                    ],
+                    borderWidth: 1
+                }
                ]
             },
             options: {
@@ -155,94 +177,6 @@
             }
         });
     </script>
-
-
-    <h4>Hashtags, die @Model.CurrentTwitterUser.Name nutzt</h4>
-    <p>
-
-        @{
-            var hashTagListClean = hashTagList.Distinct().ToList();
-        }
-
-        @foreach (var hashme in hashTagListClean)
-        {
-            string hashtag = hashme + " ";
-
-            <a href="https://twitter.com/search?q=@hashtag.Replace("#","%23")" target="_blank">@hashtag</a>
-
-        }
-    </p>
-
-
-    <h4>Die letzten @Model.AllTweetsFromUser.Count() Tweets von @Model.CurrentTwitterUser.Name</h4>
-
-    <a asp-page=""
-       asp-route-sortOrder="@Model.FavCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPagesPeopleDetail interactionMenu" title="Most Likes of latest @Model.AllTweetsFromUser.Count() Tweets ">
-        <i class="fas fa-heart"> </i>
-        &nbsp;
-    </a>
-
-    <a asp-page=""
-       asp-route-sortOrder="@Model.RetweetCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPagesPeopleDetail interactionMenu" title="Most Retweets of latest @Model.AllTweetsFromUser.Count() Tweets">
-        <i class="fas fa-retweet"></i>
-        &nbsp;
-    </a>
-
-    <a asp-page=""
-       asp-route-sortOrder="@Model.CreatedAtSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPagesPeopleDetail interactionMenu" title="Latest Tweets">
-        <i class="fas fa-clock"></i>
-        &nbsp;
-    </a>
-
-    <div class="TwitterUserTimelineOverview">
-        @foreach (var item in Model.AllTweetsFromUser)
-        {
-
-        <div id="tweetLink" class="redBG">
-
-            <a href="@item.Url" class="TwitterUserTimeline" target="_blank">
-                <p>
-                    @Html.DisplayFor(modelItem => item.FullText)
-                </p>
-                <p>
-                    @{
-                        var hashtags = item.Entities.Hashtags;
-
-                        foreach (var member in hashtags)
-                        {
-
-                            <i>@member.ToString() &nbsp;</i>
-
-
-                        }
-
-                    }
-                </p>
-
-
-                <i class="fas fa-retweet"></i> @item.RetweetCount &emsp; <i class="fas fa-heart"></i> @item.FavoriteCount &emsp; <i class="far fa-calendar-alt"></i>&nbsp;@item.CreatedAt.ToString("dd.MM.yy - H:mm")
-
-            </a>
-            &emsp;
-            Source: @Html.Raw(item.Source)
-            &emsp;
-            Textrange: @item.DisplayTextRange.Sum()
-            &emsp;
-            ID: @item.Id
-
-
-
-        </div>
-
-
-
-
-        }
-
-    </div>
 
 
 </div>

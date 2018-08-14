@@ -47,6 +47,7 @@ namespace KompromatKoffer
             //Background Service for daily saving TwitterUser data to database
             services.AddHostedService<TwitterUserDailyData>();
             services.AddHostedService<TwitterUserData>();
+            services.AddHostedService<TwitterUserTimelineData>();
 
         }
 

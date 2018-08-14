@@ -11,7 +11,7 @@ ASP.Net Core 2.1 Web Application for displaying all recent tweets from every mem
 - Icons: https://fontawesome.com
 - Color Scheme: https://coolors.co/440c50-82204a-e3e7d3-27182b-fbfbfb
 
-<b>You will need a Config.cs to run the app.</b>
+<b>You will need a Config.cs to run the app. Don´t forget the Parameters ;)</b>
 
 ```C#
 using System;
