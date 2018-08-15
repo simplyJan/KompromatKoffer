@@ -65,7 +65,6 @@ namespace KompromatKoffer.Services
                     {
                         //Get timeline for screenname from twitter using Tweetinvi
                         var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
-                        var userJson = Tweetinvi.JsonSerializer.ToJson(user);
 
                         using (var db = new LiteDatabase("TwitterData.db"))
                         {
@@ -78,9 +77,9 @@ namespace KompromatKoffer.Services
                             var col = db.GetCollection<TwitterUserModel>("TwitterUser");
 
                             //Search for the Name
-                            var name = col.FindOne(a => a.Screen_name == x.ScreenName);
+                            var id = col.FindOne(a => a.Id == x.Id);
 
-                            if (name == null)
+                            if (id == null)
                             {
                                 //Create UserModel for User
                                 var twitterUser = new TwitterUserModel
@@ -110,7 +109,7 @@ namespace KompromatKoffer.Services
                             }
                             else
                             {
-                                if (name.UserUpdated.AddMinutes(Config.Parameter.TwitterUserUpdateInterval) < DateTime.Now)
+                                if (id.UserUpdated.AddMinutes(Config.Parameter.TwitterUserUpdateInterval) < DateTime.Now)
                                 {
                                     //Create UserModel for User
                                     var twitterUser = new TwitterUserModel
@@ -140,7 +139,7 @@ namespace KompromatKoffer.Services
                                 }
                                 else
                                 {
-                                    if (name != null)
+                                    if (id != null)
                                     {
                                         _logger.LogInformation("TUD...already updated => " + x.ScreenName);
                                     }
@@ -151,6 +150,8 @@ namespace KompromatKoffer.Services
                                 }
                             }
                         }
+
+                        Task.Delay(2500);
                     }
                 }
             }
