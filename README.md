@@ -38,6 +38,32 @@ namespace KompromatKoffer
             }
 
         } 
+        
+        public static class Parameter
+        {
+            //How many tweets would you like to receive
+            public static int TweetsRetrieved { get; set; } = 500;
+            //Listname and Screename of the TwitterUser
+            public static string ListName { get; set; } 
+            public static string ScreenName { get; set; } 
+            //Save TwitterUserData to Database
+            public static bool SaveToDatabase = true;
+            public static int TwitterUserUpdateInterval { get; set; } = 45;
+            //Standard Service Delay in ms for each Update to Database
+            public static int TaskDelay { get; set; } = 1000;
+            //Update Data
+            public static DateTime DbLastUpdated { get; set; }
+            public static int UpdateDelay { get; set; } = 45;
+            public static int TwitterUserDailyUpdateInterval { get; set; } = 240;
+            public static int TwitterUserDailyTaskDelay { get; set; } = 240000;
+            //Update Timeline Data
+            public static DateTime TimelineDbLastUpdated { get; set; }
+            public static int TimelineUpdateDelay { get; set; } = 90;
+            public static int TwitterUserTimelineUpdateInterval { get; set; } = 480;
+            public static int TwitterUserTimelineTaskDelay { get; set; } = 960000;
+            public static int TimelineHardlimitTweets { get; set; } = 20;
+            public static int TimelineSoftlimitTweets { get; set; } = 10;
+        }
     }
 } 
 ```
