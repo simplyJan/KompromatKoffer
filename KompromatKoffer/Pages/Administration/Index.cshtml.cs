@@ -16,8 +16,7 @@ namespace KompromatKoffer.Pages.Administration
 {
     [Authorize(Roles = "Administrator")]
     public class AdministrationModel : PageModel
-    {
-        
+    {       
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;

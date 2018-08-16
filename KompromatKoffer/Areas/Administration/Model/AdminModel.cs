@@ -12,6 +12,8 @@ namespace KompromatKoffer.Areas.Administration.Model
         public string Username { get; set; }
         public string Email { get; set; }
         public string Role { get; set; }
+        public string TwitterAccessToken { get; set; }
+        public string TwitterAccesTokenSecret { get; set; }
       
     }
 }

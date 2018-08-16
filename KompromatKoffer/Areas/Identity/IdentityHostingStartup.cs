@@ -27,6 +27,7 @@ namespace KompromatKoffer.Areas.Identity
                     .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultTokenProviders();
                 */
+
                 services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultUI()
