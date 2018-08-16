@@ -92,7 +92,10 @@ namespace KompromatKoffer.Pages
                         break;
                 }
 
-                _logger.LogInformation("Sort order is... " + sortOrder);
+                if (sortOrder != null)
+                {
+                    _logger.LogInformation("Sort order is... " + sortOrder);
+                }
             }
             catch(Exception ex)
             {

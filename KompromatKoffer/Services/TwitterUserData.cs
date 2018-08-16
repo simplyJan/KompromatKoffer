@@ -46,7 +46,6 @@ namespace KompromatKoffer.Services
 
             try
             {
-
                 var dbLastUpdated = Config.Parameter.DbLastUpdated;
 
                 //Updatedelay reached => New Update => wait for new Update

@@ -48,8 +48,8 @@ namespace KompromatKoffer
 
 
             //Background Service for daily saving TwitterUser data to database
-            //services.AddHostedService<TwitterUserDailyData>();
-            //services.AddHostedService<TwitterUserData>();
+            services.AddHostedService<TwitterUserData>();
+            services.AddHostedService<TwitterUserDailyData>();
             //services.AddHostedService<TwitterUserTimelineData>();
 
             //Authorize for Admins
@@ -65,9 +65,6 @@ namespace KompromatKoffer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, IServiceProvider services, ILoggerFactory loggerFactory)
         {
-
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {

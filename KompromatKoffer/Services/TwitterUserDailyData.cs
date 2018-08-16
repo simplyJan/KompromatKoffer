@@ -45,55 +45,59 @@ namespace KompromatKoffer.Services
             Task.Delay(Config.Parameter.TwitterUserDailyTaskDelay);
 
             try
-            { 
-            //Get all members from TwitterList - Tweetinvi
-            var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
-            //var AllMembers = list.GetMembers(5); //Just 5 Records for Debug Reasons
-            var AllMembers = list.GetMembers(list.MemberCount);
+            {
+                var dbLastUpdated = Config.Parameter.DbLastUpdated;
 
-                using (var db = new LiteDatabase("TwitterData.db"))
+                if (dbLastUpdated.AddMinutes(Config.Parameter.TwitterUserDailyUpdateDelay) < DateTime.Now)
                 {
-                    // Get Datbase Connection 
-                    var col = db.GetCollection<TwitterUserDailyModel>("TwitterUserDaily");
+                    //Get all members from TwitterList - Tweetinvi
+                    var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
+                    //var AllMembers = list.GetMembers(5); //Just 5 Records for Debug Reasons
+                    var AllMembers = list.GetMembers(list.MemberCount);
 
-                    //foreach user get Data from Twitter and save to database
-                    foreach (var x in AllMembers)
+                    using (var db = new LiteDatabase("TwitterData.db"))
                     {
+                        // Get Datbase Connection 
+                        var colTUD = db.GetCollection<TwitterUserDailyModel>("TwitterUserDaily");
 
-                        //Get timeline for screenname from twitter using Tweetinvi
-                        var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
-                        var userJson = Tweetinvi.JsonSerializer.ToJson(user);
-
-                        var alreadyUpdated = col.Find(s => s.Screen_name == x.ScreenName).Where(s => s.DateToday == DateTime.Today);
-
-                        if (alreadyUpdated.Count() == 0)
+                        //foreach user get Data from Twitter and save to database
+                        foreach (var x in AllMembers)
                         {
-                            var twitterUserDaily = new TwitterUserDailyModel
+
+                            //Get timeline for screenname from twitter using Tweetinvi
+                            var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
+
+                            var alreadyUpdated = colTUD.Find(s => s.Screen_name == x.ScreenName).Where(s => s.DateToday == DateTime.Today);
+
+                            if (alreadyUpdated.Count() == 0)
                             {
-                                Screen_name = x.ScreenName,
-                                Statuses_count = x.StatusesCount,
-                                Followers_count = x.FollowersCount,
-                                Friends_count = x.FriendsCount,
-                                Favourites_count = x.FavouritesCount,
-                                Listed_count = x.ListedCount,
-                                DateToday = DateTime.Today
-                            };
+                                var twitterUserDaily = new TwitterUserDailyModel
+                                {
+                                    Screen_name = x.ScreenName,
+                                    Statuses_count = x.StatusesCount,
+                                    Followers_count = x.FollowersCount,
+                                    Friends_count = x.FriendsCount,
+                                    Favourites_count = x.FavouritesCount,
+                                    Listed_count = x.ListedCount,
+                                    DateToday = DateTime.Today
+                                };
 
 
-                            //Create new database entry for given user
-                            col.Insert(twitterUserDaily);
-                            _logger.LogInformation("...created new dbentry => " + x.ScreenName + " on " + DateTime.Now.ToString("dd MM yy - hh:mm:ss"));
+                                //Create new database entry for given user
+                                colTUD.Insert(twitterUserDaily);
+                                _logger.LogInformation("...created new dbentry => " + x.ScreenName + " on " + DateTime.Now.ToString("dd MM yy - hh:mm:ss"));
+                            }
+                            else
+                            {
+                                _logger.LogInformation("TU24...already uptodate => " + x.ScreenName);
+                            }
+
+                            Task.Delay(1000);
                         }
-                        else
-                        {
-                            _logger.LogInformation("TU24...already uptodate => " + x.ScreenName);
-                        }
+
 
 
                     }
-                   
-
-
                 }
             }
             catch (TwitterException ex)

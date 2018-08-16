@@ -76,9 +76,9 @@ namespace KompromatKoffer.Services
                         };
 
                         //Get timeline for screenname from twitter using Tweetinvi
-                        var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
+                        var user = Tweetinvi.User.GetUserFromId(x.Id);
 
-                        var lastTweets = Timeline.GetUserTimeline(x.ScreenName, 15).ToArray();
+                        var lastTweets = Timeline.GetUserTimeline(user.Id, 15).ToArray();
 
                         var allTweets = new List<ITweet>(lastTweets);
                         var beforeLast = allTweets;
@@ -101,7 +101,7 @@ namespace KompromatKoffer.Services
                             };
 
 
-                            lastTweets = Timeline.GetUserTimeline(x.ScreenName, userTimelineParameters).ToArray();
+                            lastTweets = Timeline.GetUserTimeline(user.Id, userTimelineParameters).ToArray();
                             allTweets.AddRange(lastTweets);
 
                             //var userTimeline = Timeline.GetUserTimeline(userIdentifier, userTimelineParameters);
@@ -119,6 +119,7 @@ namespace KompromatKoffer.Services
                             mapper.Entity<TwitterUserModel>()
                                 .Id(y => y.Id); // set your document ID
 
+                            //Get DB Collection from LiteDB
                             var col = db.GetCollection<TwitterUserTimelineModel>("TwitterUserTimeline");
 
 

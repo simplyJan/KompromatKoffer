@@ -8,10 +8,27 @@
 <h2>Administration</h2>
 
 
-@foreach (var user in Model.UserWithRoles)
-{
+<h3>Settings</h3>
+<p>ListeName:&nbsp; @Config.Parameter.ListName</p>
+<p>ListOwner:&nbsp; @Config.Parameter.ScreenName</p>
+<p>TweetRetrieved: &nbsp; @Config.Parameter.TweetsRetrieved</p>
+<br />
+<p>DBLastUpdated: &nbsp; @Config.Parameter.DbLastUpdated</p>
+<p>UpdateDelay: &nbsp; @Config.Parameter.UpdateDelay</p>
+<p>TaskDelay: &nbsp; @Config.Parameter.TaskDelay</p>
 
-<p>@user.UserId &nbsp; @user.Username &nbsp; @user.Email </p>
+<p>TwitterUserUpdateInterval: &nbsp; @Config.Parameter.TwitterUserUpdateInterval</p>
+<p>TwitterUserDailyUpdateInterval: @Config.Parameter.TwitterUserDailyUpdateInterval</p>
+<p>TwitterUserDailyTaskDelay: &nbsp; @Config.Parameter.TwitterUserDailyTaskDelay</p>
+<p>TwitterUserDailyUpdateDelay: &nbsp; @Config.Parameter.TwitterUserDailyUpdateDelay</p>
+
+
+
+    <h3>All Users:</h3>
+    @foreach (var user in Model.UserWithRoles)
+    {
+
+    <p>@user.UserId &nbsp; @user.Username &nbsp; @user.Email </p>
 
 
 
@@ -21,7 +38,7 @@
 
 
 
-<p class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.UserWithRoles.Count()</span></p>
+    <p class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.UserWithRoles.Count()</span></p>
 
 
 
