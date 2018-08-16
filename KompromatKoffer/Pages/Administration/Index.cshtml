@@ -1,0 +1,29 @@
+﻿@page
+@model KompromatKoffer.Pages.Administration.AdministrationModel
+@{
+    ViewData["Title"] = "Administration";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Administration</h2>
+
+
+@foreach (var user in Model.UserWithRoles)
+{
+
+<p>@user.UserId &nbsp; @user.Username &nbsp; @user.Email </p>
+
+
+
+
+}
+
+
+
+
+<p class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.UserWithRoles.Count()</span></p>
+
+
+
+
+

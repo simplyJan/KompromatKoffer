@@ -1,14 +1,17 @@
-﻿using KompromatKoffer.Services;
+﻿using KompromatKoffer.Areas.Identity.Data;
+using KompromatKoffer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace KompromatKoffer
 {
@@ -45,15 +48,22 @@ namespace KompromatKoffer
 
 
             //Background Service for daily saving TwitterUser data to database
-            services.AddHostedService<TwitterUserDailyData>();
-            services.AddHostedService<TwitterUserData>();
-            services.AddHostedService<TwitterUserTimelineData>();
+            //services.AddHostedService<TwitterUserDailyData>();
+            //services.AddHostedService<TwitterUserData>();
+            //services.AddHostedService<TwitterUserTimelineData>();
+
+            //Authorize for Admins
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
+            });
+
 
         }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, IServiceProvider services)
         {
             if (env.IsDevelopment())
             {
@@ -79,7 +89,11 @@ namespace KompromatKoffer
             app.UseAuthentication();
 
             app.UseMvc();
+
         }
+
+
+        
     }
 
     
