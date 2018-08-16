@@ -47,6 +47,10 @@ namespace KompromatKoffer
             Config.Parameter.DbLastUpdated = DateTime.Now;
 
 
+            // Add application services.
+            services.AddSingleton<IEmailSender, EmailSender>();
+
+
             //Background Service for daily saving TwitterUser data to database
             services.AddHostedService<TwitterUserData>();
             services.AddHostedService<TwitterUserDailyData>();
