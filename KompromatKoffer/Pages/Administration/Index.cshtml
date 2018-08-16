@@ -5,42 +5,101 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>Administration</h2>
+<div class="interactionMenuBar">
 
+</div>
 
-<h3>Settings</h3>
-<p>ListeName:&nbsp; @Config.Parameter.ListName</p>
-<p>ListOwner:&nbsp; @Config.Parameter.ScreenName</p>
-<p>TweetRetrieved: &nbsp; @Config.Parameter.TweetsRetrieved</p>
-<br />
-<p>DBLastUpdated: &nbsp; @Config.Parameter.DbLastUpdated</p>
-<p>UpdateDelay: &nbsp; @Config.Parameter.UpdateDelay</p>
-<p>TaskDelay: &nbsp; @Config.Parameter.TaskDelay</p>
+<div class="adminMainView">
+    <div class="settingsContainer">
+        <h3>Settings</h3>
+        <div class="settingsView">
+            <p>
+                ListName:
+                <input type="text" name="ListName" value="@Config.Parameter.ListName" />
+            </p>
+            <p>
+                ListOwner:
+                <input type="text" name="ListOwner" value="@Config.Parameter.ScreenName" />
+            </p>
+            <p>
+                TweetRetrieved:
+                <input type="text" name="TweetRetrieved" value="@Config.Parameter.TweetsRetrieved" />
+            </p>
+            <p>
+                DBLastUpdated:
+                <input type="text" name="DBLastUpdated" value="@Config.Parameter.DbLastUpdated" />
+            </p>
+            <p>
+                UpdateDelay:
+                <input type="text" name="UpdateDelay" value="@Config.Parameter.UpdateDelay" />
+            </p>
+            <p>
+                TaskDelay:
+                <input type="text" name="TaskDelay" value="@Config.Parameter.TaskDelay" />
+            </p>
 
-<p>TwitterUserUpdateInterval: &nbsp; @Config.Parameter.TwitterUserUpdateInterval</p>
-<p>TwitterUserDailyUpdateInterval: @Config.Parameter.TwitterUserDailyUpdateInterval</p>
-<p>TwitterUserDailyTaskDelay: &nbsp; @Config.Parameter.TwitterUserDailyTaskDelay</p>
-<p>TwitterUserDailyUpdateDelay: &nbsp; @Config.Parameter.TwitterUserDailyUpdateDelay</p>
+            <p>
+                TwitterUserUpdateInterval:
+                <input type="text" name="TwitterUserUpdateInterval" value="@Config.Parameter.TwitterUserUpdateInterval" />
+            </p>
+            <p>
+                TwitterUserDailyUpdateInterval
+                <input type="text" name="TaskTwitterUserDailyUpdateIntervalDelay" value="@Config.Parameter.TwitterUserDailyUpdateInterval" />
+            </p>
+            <p>
+                TwitterUserDailyTaskDelay:
+                <input type="text" name="TwitterUserDailyTaskDelay" value="@Config.Parameter.TwitterUserDailyTaskDelay" />
+            </p>
+            <p>
+                TwitterUserDailyUpdateDelay:
+                <input type="text" name="TwitterUserDailyUpdateDelay" value="@Config.Parameter.TwitterUserDailyUpdateDelay" />
+            </p>
 
+        </div>
 
+        <div class="emailSettingsView">
+            <h3>Email Settings</h3>
+            <p>
+                Mail Address:
+                <input type="text" name="Mail Address" value="@Config.Parameter.Mail_From_Email_Address" />
+            </p>
+            <p>
+                FROM Mail Displayname:
+                <input type="text" name="Mail Address" value="@Config.Parameter.Mail_From_Email_Address" />
+            </p>
+            <p>
+                Mail Host:
+                <input type="text" name="Mail Host" value="@Config.Parameter.Mail_Host" />
+            </p>
+            <p>
+                Mail Port:
+                <input type="text" name="Mail Port" value="@Config.Parameter.Mail_Port" />
+            </p>
+            <p>
+                Login:
+                <input type="text" name="Login" value="@Config.Parameter.Mail_Email_Login" />
+            </p>
+            <p>
+                Password:
+                <input type="text" name="Password" value="@Config.Parameter.Mail_Email_Passwort" />
+            </p>
+        </div>
+    </div>
 
-    <h3>All Users:</h3>
-    @foreach (var user in Model.UserWithRoles)
-    {
+    <div class="userOverview">
+        <h3>User Overview</h3>
+        @foreach (var user in Model.UserWithRoles)
+        {
 
-    <p>@user.UserId &nbsp; @user.Username &nbsp; @user.Email </p>
+            <p> @user.UserId
+                @user.Username
+            </p>
 
+        }
+        <p>Total Users @Model.UserWithRoles.Count()</p>
+    </div>
 
-
-
-}
-
-
-
-
-    <p class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.UserWithRoles.Count()</span></p>
-
-
-
+    <div class="space"></div>
+</div>
 
 

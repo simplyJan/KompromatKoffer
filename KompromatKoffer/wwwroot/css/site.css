@@ -531,6 +531,56 @@ a.TwitterUserTimeline:active, a.TwitterUserTimeline:hover, a.TwitterUserTimeline
     border-radius: 0.5em;
 }
 
+/*Administration View*/
+
+.adminMainView {
+    width: 85%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: #27182b;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    font-size: 1.0em;
+}
+
+.adminMainView input {
+        color:#27182b;
+        width:175px;
+}
+
+.settingsView{
+
+}
+
+.settingsView p {
+    width:150px;
+}
+
+.emailSettingsView {
+}
+
+.emailSettingsView p {
+    width: 150px;
+}
+
+.settingsContainer{
+    width:200px;
+    float:left
+}
+
+.userOverview{
+    
+    margin-left:25px;
+    float:left;
+}
+
+.space{
+    clear:both;
+    widtH:100%;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
