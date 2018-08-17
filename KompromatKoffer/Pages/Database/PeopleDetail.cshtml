@@ -26,11 +26,15 @@
 
     var groupBy = name.GroupBy(s => s.Screen_name);
 
+
+
     foreach (var item in groupBy)
     {
+        
 
         foreach (var items in item)
         {
+            
             StatusesDaily.Add(items.Statuses_count);
             FollowerDaily.Add(items.Followers_count);
             FriendsDaily.Add(items.Friends_count);
@@ -96,7 +100,7 @@
                     data: [
                          @foreach (var item in StatusesDaily)
                          {
-                             var statusesConvert = "'" + Convert.ToString(item) + "'" + ", ";
+                             var statusesConvert = "'" + Convert.ToString(item - StatusesDaily.Min()) + "'" + ", ";
 
                              @Html.Raw(statusesConvert)
 
@@ -114,7 +118,7 @@
                     data: [
                          @foreach (var item in FollowerDaily)
                          {
-                             var followerConvert = "'" + Convert.ToString(item) + "'" + ", ";
+                             var followerConvert = "'" + Convert.ToString(item - FollowerDaily.Min()) + "'" + ", ";
 
                              @Html.Raw(followerConvert)
 
@@ -132,7 +136,7 @@
                     data: [
                          @foreach (var item in FriendsDaily)
                          {
-                             var friendsConvert = "'" + Convert.ToString(item) + "'" + ", ";
+                             var friendsConvert = "'" + Convert.ToString(item - FriendsDaily.Min()) + "'" + ", ";
 
                              @Html.Raw(friendsConvert)
 
@@ -150,7 +154,7 @@
                     data: [
                          @foreach (var item in FavouritesDaily)
                          {
-                             var favouriteConvert = "'" + Convert.ToString(item) + "'" + ", ";
+                             var favouriteConvert = "'" + Convert.ToString(item - FavouritesDaily.Min()) + "'" + ", ";
 
                              @Html.Raw(favouriteConvert)
 
