@@ -548,10 +548,15 @@ a.TwitterUserTimeline:active, a.TwitterUserTimeline:hover, a.TwitterUserTimeline
 .adminMainView input {
         color:#27182b;
         width:175px;
+        border-radius:5px;
+        padding:5px;
+        border:0;
 }
 
 .settingsView{
-
+    margin-left:15px;
+    float:left;
+    width:180px;
 }
 
 .settingsView p {
@@ -559,26 +564,33 @@ a.TwitterUserTimeline:active, a.TwitterUserTimeline:hover, a.TwitterUserTimeline
 }
 
 .emailSettingsView {
+    margin-left:15px;
+    float:left
 }
 
 .emailSettingsView p {
-    width: 150px;
+    width: 180px;
 }
 
 .settingsContainer{
-    width:200px;
-    float:left
+    margin:0;
 }
 
 .userOverview{
     
-    margin-left:25px;
+    margin-left:15px;
     float:left;
 }
 
 .space{
     clear:both;
     widtH:100%;
+}
+
+input.settingssubmit{
+    width:100%;
+
+
 }
 
 /* Hide/rearrange for smaller screens */

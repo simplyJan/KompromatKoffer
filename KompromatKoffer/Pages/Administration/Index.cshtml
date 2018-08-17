@@ -11,8 +11,8 @@
 
 <div class="adminMainView">
     <div class="settingsContainer">
-        <h3>Settings</h3>
         <div class="settingsView">
+            <h5>Settings</h5>
             <p>
                 ListName:
                 <input type="text" name="ListName" value="@Config.Parameter.ListName" />
@@ -26,8 +26,7 @@
                 <input type="text" name="TweetRetrieved" value="@Config.Parameter.TweetsRetrieved" />
             </p>
             <p>
-                DBLastUpdated:
-                <input type="text" name="DBLastUpdated" value="@Config.Parameter.DbLastUpdated" />
+                LastStarted: @Config.Parameter.DbLastUpdated.ToString("dd.MM.yy - hh.mm")
             </p>
             <p>
                 UpdateDelay:
@@ -58,7 +57,7 @@
         </div>
 
         <div class="emailSettingsView">
-            <h3>Email Settings</h3>
+            <h5>Email Settings</h5>
             <p>
                 Mail Address:
                 <input type="text" name="Mail Address" value="@Config.Parameter.Mail_From_Email_Address" />
@@ -81,17 +80,17 @@
             </p>
             <p>
                 Password:
-                <input type="text" name="Password" value="@Config.Parameter.Mail_Email_Passwort" />
+                <input type="password" name="Password" value="@Config.Parameter.Mail_Email_Passwort" />
             </p>
         </div>
     </div>
 
     <div class="userOverview">
-        <h3>User Overview</h3>
+        <h5>User</h5>
         @foreach (var user in Model.UserWithRoles)
         {
 
-            <p> @user.UserId
+            <p>
                 @user.Username
             </p>
 
@@ -100,6 +99,7 @@
     </div>
 
     <div class="space"></div>
+    <input type="submit" value="Save Settings" class="settingssubmit" />
 </div>
 
 
