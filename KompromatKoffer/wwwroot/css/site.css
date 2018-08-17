@@ -97,6 +97,13 @@ hr.IndexHR {
     border-width: 0;
 }
 
+.navbar-right i{
+    font-size:1.5em;
+}
+
+.navbar-right a {
+    font-size: 1.5em;
+}
 
 /*Text format*/
 h4 {
@@ -112,8 +119,8 @@ h4 {
     -webkit-animation-duration: 4s;
     animation-name: example;
     animation-duration: 4s;
-    letter-spacing:2px;
-    opacity:1;
+    letter-spacing: 2px;
+    opacity: 1;
 }
 
 
