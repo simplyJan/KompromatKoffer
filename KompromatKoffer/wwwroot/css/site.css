@@ -600,6 +600,21 @@ input.settingssubmit{
 
 }
 
+/*AccountMainView*/
+
+.accountMainView {
+    width: 85%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: #27182b;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    font-size: 1.0em;
+    margin-top:15px;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
