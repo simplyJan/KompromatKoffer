@@ -255,6 +255,7 @@ a.dataBaseProfile:hover, a.dataBaseProfile:focus, a.dataBaseProfile:active {
 #cookieConsent {
     position: relative;
     bottom: 10px;
+    background-color: #27182b;
 }
 
 .btn-info:hover {
