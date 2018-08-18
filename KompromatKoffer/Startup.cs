@@ -45,6 +45,7 @@ namespace KompromatKoffer
 
             //Set DB to Update after StartUp
             Config.Parameter.DbLastUpdated = DateTime.Now;
+            Config.Parameter.UserDailyDataLastUpdated = DateTime.Now.AddMinutes(5);
 
 
             // Add application services.

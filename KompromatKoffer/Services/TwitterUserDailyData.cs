@@ -46,7 +46,7 @@ namespace KompromatKoffer.Services
 
             try
             {
-                var dbLastUpdated = Config.Parameter.DbLastUpdated;
+                var dbLastUpdated = Config.Parameter.UserDailyDataLastUpdated;
 
                 if (dbLastUpdated.AddMinutes(Config.Parameter.TwitterUserDailyUpdateDelay) < DateTime.Now)
                 {
