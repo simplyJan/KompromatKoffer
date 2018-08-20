@@ -79,7 +79,9 @@ namespace KompromatKoffer.Services
                                     Friends_count = x.FriendsCount,
                                     Favourites_count = x.FavouritesCount,
                                     Listed_count = x.ListedCount,
-                                    DateToday = DateTime.Today
+                                    DateToday = DateTime.Today,
+                                    TwitterId = x.Id,
+                                    TwitterName = x.Name
                                 };
 
 

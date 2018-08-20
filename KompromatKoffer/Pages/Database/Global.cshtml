@@ -1,0 +1,164 @@
+﻿@page
+@model KompromatKoffer.Pages.Database.GlobalModel
+@{
+    ViewData["Title"] = "Global";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="interactionMenuBar">
+    <a asp-page="/Database/People" title="Database" class="iconHoverPages interactionMenu">
+        <i class="fas fa-database"> </i>
+        &nbsp;
+    </a>
+</div>
+
+<div class="GlobalChartView">
+    @{
+
+        List<string> allScreenNames = new List<string>();
+
+        var name = Model.CompleteDB.Find(s => s.DateToday < DateTime.Today.AddDays(+1)).Where(s => s.Screen_name == s.Screen_name);
+
+
+        var FollowersCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Followers_count).Last() - s.Select(item => item.Followers_count).First());
+        var FriendsCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Friends_count).Last() - s.Select(item => item.Friends_count).First());
+        var StatusesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Statuses_count).Last() - s.Select(item => item.Statuses_count).First());
+        var FavouritesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Favourites_count).Last() - s.Select(item => item.Favourites_count).First());
+
+        var allEntries = name.GroupBy(s => s.Screen_name);
+
+
+
+        /*
+        foreach (var item in StatusesCountAll.Select((value, i) => new { i, value }))
+        {
+            <p>
+                @item.i
+                @item.value
+            </p>
+
+        }
+        */
+
+        foreach (var item in allEntries)
+        {
+            foreach (var items in item)
+            {
+                allScreenNames.Add(items.Screen_name);
+
+            }
+
+        }
+
+        var distinctScreenNames = allScreenNames.Distinct();
+
+
+
+    }
+
+
+    <canvas id="TwitterUserActivity" width="800" height="800"></canvas>
+    <script>
+        var ctx = document.getElementById("TwitterUserActivity").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [
+                    @foreach (var item in distinctScreenNames)
+                    {
+                        var dateConvert = "'" + item + "'" + ", ";
+
+                        @Html.Raw(dateConvert)
+
+                    }
+
+                ],
+                datasets: [{
+                    label: 'Tweets',
+                    data: [
+                         @foreach (var item in StatusesCountAll)
+                         {
+                             var statusesConvert = "'" + Convert.ToString(item) + "'" + ", ";
+
+                             @Html.Raw(statusesConvert)
+
+                         }
+                    ],
+                    backgroundColor: [
+                        'rgba(0, 172, 237, 1.0)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 172, 237, 1.0)'
+                    ],
+                    borderWidth: 1
+                },{
+                    label: 'Followers',
+                    data: [
+                         @foreach (var item in FollowersCountAll)
+                         {
+                             var followerConvert = "'" + Convert.ToString(item) + "'" + ", ";
+
+                             @Html.Raw(followerConvert)
+
+                         }
+                    ],
+                    backgroundColor: [
+                        'rgba(130, 32, 74, 1.0)'
+                    ],
+                    borderColor: [
+                        'rgba(130, 32, 74, 1.0)'
+                    ],
+                    borderWidth: 1
+                },{
+                    label: 'Following',
+                    data: [
+                         @foreach (var item in FriendsCountAll)
+                         {
+                             var friendsConvert = "'" + Convert.ToString(item) + "'" + ", ";
+
+                             @Html.Raw(friendsConvert)
+
+                         }
+                    ],
+                    backgroundColor: [
+                        'rgba(68, 12, 80, 1.0)'
+                    ],
+                    borderColor: [
+                        'rgba(68, 12, 80, 1.0)'
+                    ],
+                    borderWidth: 1
+                },{
+                    label: 'Likes',
+                    data: [
+                         @foreach (var item in FavouritesCountAll)
+                         {
+                             var favouriteConvert = "'" + Convert.ToString(item) + "'" + ", ";
+
+                             @Html.Raw(favouriteConvert)
+
+                         }
+                    ],
+                    backgroundColor: [
+                        'rgba(251, 251, 251, 1.0)'
+                    ],
+                    borderColor: [
+                        'rgba(251, 251, 251, 1.0)'
+                    ],
+                    borderWidth: 1
+                }
+               ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false,
+                            stacked: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    </div>

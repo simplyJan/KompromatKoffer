@@ -26,8 +26,6 @@
 
     var groupBy = name.GroupBy(s => s.Screen_name);
 
-
-
     foreach (var item in groupBy)
     {
         
@@ -48,7 +46,6 @@
 
     //Get the Data from the TwitterUserData Collection
     var twitterUser = Model.TwitterUserData.FindOne(s => s.Screen_name == Model.CurrentUserScreenname);
-
 
 }
 

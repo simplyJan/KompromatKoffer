@@ -16,5 +16,9 @@ namespace KompromatKoffer.Areas.Database.Model
 
         public DateTime DateToday { get; set; }
 
+        public long TwitterId { get; set; }
+        public string TwitterName { get; set; }
+
+
     }
 }
