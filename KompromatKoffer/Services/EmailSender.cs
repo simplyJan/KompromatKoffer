@@ -24,7 +24,7 @@ namespace KompromatKoffer.Services
 
                 string sHost = Config.Parameter.Mail_Host;
 
-                string intPort = Config.Parameter.Mail_Port;
+                int intPort = Config.Parameter.Mail_Port;
 
                 string sEmail_Login = Config.Parameter.Mail_Email_Login;
 

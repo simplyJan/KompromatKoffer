@@ -12,108 +12,106 @@
 <div class="adminMainView">
     <div class="settingsContainer">
         <div class="settingsView">
-            <form id="ListSettings">
+            <form id="ListSettings" method="post">
                 <h3>Settings</h3>
                 <p>
-                    <label for="ListName">ListName</label>
-                    <input type="text" name="ListName" value="@Config.Parameter.ListName" />
+                    <label for="ListSettings.ListName">ListName</label>
+                    <input type="text" asp-for="ListSettings.ListName" />
                 </p>
                 <p>
 
-                    <label for="ListOwner">ListOwner</label>
-                    <input type="text" name="ListOwner" value="@Config.Parameter.ScreenName" />
+                    <label for="istSettings.ListOwner">ListOwner</label>
+                    <input type="text" asp-for="ListSettings.ListOwner"  />
                 </p>
                 <p>
 
-                    <label for="TweetRetrieved">TweetRetrieved</label>
-                    <input type="text" name="TweetRetrieved" value="@Config.Parameter.TweetsRetrieved" />
+                    <label for="ListSettings.TweetsRetrieved">TweetsRetrieved</label>
+                    <input type="number" asp-for="ListSettings.TweetsRetrieved"  />
                 </p>
                 <p>
-                    <label for="UpdateDelay">UpdateDelay</label>
-                    <input type="text" name="UpdateDelay" value="@Config.Parameter.UpdateDelay" />
-                </p>
-                <p>
-
-                    <label for="TaskDelay">TaskDelay</label>
-                    <input type="text" name="TaskDelay" value="@Config.Parameter.TaskDelay" />
-                </p>
-
-                <p>
-
-                    <label for="TwitterUserUpdateInterval">TwitterUserUpdateInterval</label>
-                    <input type="text" name="TwitterUserUpdateInterval" value="@Config.Parameter.TwitterUserUpdateInterval" />
+                    <label for="ListSettings.UpdateDelay">UpdateDelay</label>
+                    <input type="number" asp-for="ListSettings.UpdateDelay"  />
                 </p>
                 <p>
 
-                    <label for="TwitterUserDailyUpdateInterval">TwitterUserDailyUpdateInterval</label>
-                    <input type="text" name="TaskTwitterUserDailyUpdateIntervalDelay" value="@Config.Parameter.TwitterUserDailyUpdateInterval" />
+                    <label for="ListSettings.TaskDelay">TaskDelay</label>
+                    <input type="number" asp-for="ListSettings.TaskDelay"/>
+                </p>
+
+                <p>
+
+                    <label for="ListSettings.TwitterUserUpdateInterval">TwitterUserUpdateInterval</label>
+                    <input type="number" asp-for="ListSettings.TwitterUserUpdateInterval" />
                 </p>
                 <p>
 
-                    <label for="TwitterUserDailyTaskDelay">TwitterUserDailyTaskDelay</label>
-                    <input type="text" name="TwitterUserDailyTaskDelay" value="@Config.Parameter.TwitterUserDailyTaskDelay" />
+                    <label for="ListSettings.TwitterUserDailyUpdateInterval">TwitterUserDailyUpdateInterval</label>
+                    <input type="number" asp-for="ListSettings.TwitterUserDailyUpdateInterval"  />
                 </p>
                 <p>
 
-                    <label for="TwitterUserDailyUpdateDelay">TwitterUserDailyUpdateDelay</label>
-                    <input type="text" name="TwitterUserDailyUpdateDelay" value="@Config.Parameter.TwitterUserDailyUpdateDelay" />
+                    <label for="ListSettings.TwitterUserDailyTaskDelay">TwitterUserDailyTaskDelay</label>
+                    <input type="number" asp-for="ListSettings.TwitterUserDailyTaskDelay"  />
+                </p>
+                <p>
+
+                    <label for="ListSettings.TwitterUserDailyUpdateDelay">TwitterUserDailyUpdateDelay</label>
+                    <input type="number" asp-for="ListSettings.TwitterUserDailyUpdateDelay" />
                 </p>
                 <br />
-                <button type="submit" value="Save Settings" class="btn btn-default">Save Settings</button>
+                <button type="submit" form="ListSettings" asp-page-handler="Settings" class="btn btn-default">Save Settings</button>
                 <br />
             </form>
         </div>
 
         <div class="emailSettingsView">
             <h3>Email Settings</h3>
-            <form>
+            <form  id="SendMailSettings" method="post">
                 <p>
 
-                    <label for="Mail Address"> Mail Address</label>
-                    <input type="text" name="Mail Address" value="@Config.Parameter.Mail_From_Email_Address" />
+                    <label for="SendMailSettings.MailAddress"> Mail Address</label>
+                    <input type="text" asp-for="SendMailSettings.MailAddress" />
                 </p>
                 <p>
 
-                    <label for="Mail Displayname">Mail Displayname</label>
-                    <input type="text" name="Mail Displayname" value="@Config.Parameter.Mail_From_Email_Address" />
+                    <label for="SendMailSettings.MailDisplayname">Mail Displayname</label>
+                    <input type="text" asp-for="SendMailSettings.MailDisplayname" />
                 </p>
                 <p>
 
-                    <label for="Mail Host">Mail Host</label>
-                    <input type="text" name="Mail Host" value="@Config.Parameter.Mail_Host" />
+                    <label for="SendMailSettings.MailHost">Mail Host</label>
+                    <input type="text" asp-for="SendMailSettings.MailHost"  />
                 </p>
                 <p>
 
-                    <label for="Mail Port">Mail Port</label>
-                    <input type="text" name="Mail Port" value="@Config.Parameter.Mail_Port" />
+                    <label for="SendMailSettings.MailPort">Mail Port</label>
+                    <input type="number" asp-for="SendMailSettings.MailPort"  />
                 </p>
                 <p>
 
-                    <label for="Login">Login</label>
-                    <input type="text" name="Login" value="@Config.Parameter.Mail_Email_Login" />
+                    <label for="SendMailSettings.Login">Login</label>
+                    <input type="text" asp-for="SendMailSettings.Login" />
                 </p>
                 <p>
 
-                    <label for="Password">Password</label>
-                    <input type="password" name="Password" value="@Config.Parameter.Mail_Email_Passwort" />
+                    <label for="SendMailSettings.Password">Password</label>
+                    <input type="text" asp-for="SendMailSettings.Password"/>
                 </p>
                 <br />
-                <button type="submit" value="Save Mail Settings" class="btn btn-default"> Save Mail Settings</button>
+                <button type="submit" form="SendMailSettings" asp-page-handler="MailSettings" class="btn btn-default"> Save Mail Settings</button>
                 <br />
             </form>
         </div>
-
+        
     </div>
     <hr />
     <div class="userOverview">
         <h5>User</h5>
         @foreach (var user in Model.UserWithRoles)
         {
-
             <p>
                 @user.Username
             </p>
-
         }
         <p>Total Users @Model.UserWithRoles.Count()</p>
     </div>

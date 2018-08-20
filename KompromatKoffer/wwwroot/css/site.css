@@ -583,6 +583,10 @@ margin:0;
   margin:0;
 }
 
+.emailSettingsView label {
+    margin-top: 5px;
+}
+
 .settingsContainer{
     margin:0;
 }

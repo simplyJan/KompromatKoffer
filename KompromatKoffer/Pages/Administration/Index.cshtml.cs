@@ -52,107 +52,91 @@ namespace KompromatKoffer.Pages.Administration
 
         public class Settings
         {
-            [Required]
-            [DataType(DataType.Text)]
+
             [Display(Name = "ListName")]
-            public string ListName { get; set; }
+            public string ListName { get; set; } //= Config.Parameter.ListName;
 
-            [Required]
-            [DataType(DataType.Text)]
+
             [Display(Name = "ListOwner")]
-            public string ListOwner { get; set; }
+            public string ListOwner { get; set; } //= Config.Parameter.ScreenName;
 
-            [Required]
-            [DataType(DataType.Text)]
+
             [Display(Name = "TweetsRetrieved")]
-            public int TweetsRetrieved { get; set; }
+            public int TweetsRetrieved { get; set; } //= Config.Parameter.TweetsRetrieved;
 
-            [Required]
-            [DataType(DataType.Text)]
+
             [Display(Name = "UpdateDelay")]
-            public int UpdateDelay { get; set; }
+            public int UpdateDelay { get; set; } //= Config.Parameter.UpdateDelay;
 
-            [Required]
-            [DataType(DataType.Text)]
+
             [Display(Name = "TaskDelay")]
-            public int TaskDelay { get; set; } 
+            public int TaskDelay { get; set; } //= Config.Parameter.TaskDelay;
 
-            [Required]
-            [DataType(DataType.Text)]
+
             [Display(Name = "TwitterUserUpdateInterval")]
-            public int TwitterUserUpdateInterval { get; set; } 
+            public int TwitterUserUpdateInterval { get; set; } //= Config.Parameter.TwitterUserUpdateInterval;
 
-            [Required]
-            [DataType(DataType.Text)]
+
             [Display(Name = "TwitterUserDailyUpdateInterval")]
-            public int TwitterUserDailyUpdateInterval { get; set; } 
+            public int TwitterUserDailyUpdateInterval { get; set; } //= Config.Parameter.TwitterUserDailyUpdateInterval;
 
-            [Required]
-            [DataType(DataType.Text)]
+ 
             [Display(Name = "TwitterUserDailyTaskDelay")]
-            public int TwitterUserDailyTaskDelay { get; set; } 
+            public int TwitterUserDailyTaskDelay { get; set; } //= Config.Parameter.TwitterUserDailyTaskDelay;
 
-            [Required]
-            [DataType(DataType.Text)]
+   
             [Display(Name = "TwitterUserDailyUpdateDelay")]
-            public int TwitterUserDailyUpdateDelay { get; set; } 
+            public int TwitterUserDailyUpdateDelay { get; set; } //= Config.Parameter.TwitterUserDailyUpdateDelay;
         }
 
         public class MailSettings
         {
-            [Required]
-            [DataType(DataType.Text)]
+     
             [Display(Name = "Mail Address")]
-            public string MailAddress { get; set; } 
+            public string MailAddress { get; set; } //= Config.Parameter.Mail_From_Email_Address;
 
-            [Required]
-            [DataType(DataType.Text)]
             [Display(Name = "Mail Displayname")]
-            public string MailDisplayname { get; set; } 
+            public string MailDisplayname { get; set; } //= Config.Parameter.Mail_From_Email_DisplayName;
 
-            [Required]
-            [DataType(DataType.Text)]
             [Display(Name = "Mail Host")]
-            public string MailHost { get; set; }
+            public string MailHost { get; set; } //= Config.Parameter.Mail_Host;
 
-            [Required]
-            [DataType(DataType.Text)]
             [Display(Name = "Mail Port")]
-            public string MailPort { get; set; }
+            public int MailPort { get; set; } //= Config.Parameter.Mail_Port;
 
-            [Required]
-            [DataType(DataType.Text)]
             [Display(Name = "Login")]
-            public string Login { get; set; }
+            public string Login { get; set; } //= Config.Parameter.Mail_Email_Login;
 
-            [Required]
-            [DataType(DataType.Text)]
             [Display(Name = "Password")]
-            public string Password { get; set; }
+            public string Password { get; set; } //= Config.Parameter.Mail_Email_Passwort;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public IActionResult OnGet()
         {
             //List Settings
-            /*
-            ListSettings.ListName = Config.Parameter.ListName;
-            ListSettings.ListOwner = Config.Parameter.ScreenName;
-            ListSettings.TweetsRetrieved = Config.Parameter.TweetsRetrieved;
-            ListSettings.UpdateDelay = Config.Parameter.UpdateDelay;
-            ListSettings.TaskDelay = Config.Parameter.TaskDelay;
-            ListSettings.TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval;
-            ListSettings.TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval;
-            ListSettings.TwitterUserDailyTaskDelay = Config.Parameter.TwitterUserTimelineTaskDelay;
-            ListSettings.TwitterUserDailyUpdateDelay = Config.Parameter.TwitterUserDailyUpdateDelay;
+            ListSettings = new Settings()
+            {
+                ListName = Config.Parameter.ListName,
+                ListOwner = Config.Parameter.ScreenName,
+                TweetsRetrieved = Config.Parameter.TweetsRetrieved,
+                UpdateDelay = Config.Parameter.UpdateDelay,
+                TaskDelay = Config.Parameter.TaskDelay,
+                TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
+                TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
+                TwitterUserDailyTaskDelay = Config.Parameter.TwitterUserDailyTaskDelay,
+                TwitterUserDailyUpdateDelay = Config.Parameter.TwitterUserDailyUpdateDelay
+            };
 
             //Mail Settings
-            SendMailSettings.MailAddress = Config.Parameter.Mail_From_Email_Address;
-            SendMailSettings.MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName;
-            SendMailSettings.MailHost = Config.Parameter.Mail_Host;
-            SendMailSettings.MailPort = Config.Parameter.Mail_Port;
-            SendMailSettings.Login = Config.Parameter.Mail_Email_Login;
-            SendMailSettings.Password = Config.Parameter.Mail_Email_Passwort;
-            */
+            SendMailSettings = new MailSettings()
+            {
+                MailAddress = Config.Parameter.Mail_From_Email_Address,
+                MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
+                MailHost = Config.Parameter.Mail_Host,
+                MailPort = Config.Parameter.Mail_Port,
+                Login = Config.Parameter.Mail_Email_Login,
+                Password = Config.Parameter.Mail_Email_Passwort
+            };
 
 
             var usersWithRoles = (from user in _context.Users
@@ -172,24 +156,129 @@ namespace KompromatKoffer.Pages.Administration
             UserWithRoles = usersWithRoles;
 
 
-            await Task.Delay(1);
+
 
             return Page();
 
         }
 
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostSettings()
         {
 
 
+                Config.Parameter.ListName = ListSettings.ListName;
+                Config.Parameter.ScreenName = ListSettings.ListOwner;
+                Config.Parameter.TweetsRetrieved = ListSettings.TweetsRetrieved;
+                Config.Parameter.UpdateDelay = ListSettings.UpdateDelay;
+                Config.Parameter.TaskDelay = ListSettings.TaskDelay;
+                Config.Parameter.TwitterUserUpdateInterval = ListSettings.TwitterUserUpdateInterval;
+                Config.Parameter.TwitterUserDailyUpdateInterval = ListSettings.TwitterUserDailyUpdateInterval;
+                Config.Parameter.TwitterUserDailyTaskDelay = ListSettings.TwitterUserDailyTaskDelay;
+                Config.Parameter.TwitterUserDailyUpdateDelay = ListSettings.TwitterUserDailyUpdateDelay;
 
 
+            //List Settings
+            ListSettings = new Settings()
+            {
+                ListName = Config.Parameter.ListName,
+                ListOwner = Config.Parameter.ScreenName,
+                TweetsRetrieved = Config.Parameter.TweetsRetrieved,
+                UpdateDelay = Config.Parameter.UpdateDelay,
+                TaskDelay = Config.Parameter.TaskDelay,
+                TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
+                TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
+                TwitterUserDailyTaskDelay = Config.Parameter.TwitterUserDailyTaskDelay,
+                TwitterUserDailyUpdateDelay = Config.Parameter.TwitterUserDailyUpdateDelay
+            };
+
+            //Mail Settings
+            SendMailSettings = new MailSettings()
+            {
+                MailAddress = Config.Parameter.Mail_From_Email_Address,
+                MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
+                MailHost = Config.Parameter.Mail_Host,
+                MailPort = Config.Parameter.Mail_Port,
+                Login = Config.Parameter.Mail_Email_Login,
+                Password = Config.Parameter.Mail_Email_Passwort
+            };
 
 
+            var usersWithRoles = (from user in _context.Users
+                                  select new
+                                  {
+                                      UserId = user.Id,
+                                      Username = user.UserName,
+                                      Email = user.Email
+                                  }).ToList().Select(p => new AdminModel()
+
+                                  {
+                                      UserId = p.UserId,
+                                      Username = p.Username,
+                                      Email = p.Email,
+                                  });
+
+            UserWithRoles = usersWithRoles;
 
 
-            await Task.Delay(1);
+            return Page();
+
+        }
+
+
+        public IActionResult OnPostMailSettings()
+        {
+            Config.Parameter.Mail_From_Email_Address = SendMailSettings.MailAddress;
+            Config.Parameter.Mail_From_Email_DisplayName = SendMailSettings.MailDisplayname;
+            Config.Parameter.Mail_Host = SendMailSettings.MailHost;
+            Config.Parameter.Mail_Port = SendMailSettings.MailPort;
+            Config.Parameter.Mail_Email_Login = SendMailSettings.Login;
+            Config.Parameter.Mail_Email_Passwort = SendMailSettings.Password;
+
+
+            //Mail Settings
+            SendMailSettings = new MailSettings()
+            {
+                MailAddress = Config.Parameter.Mail_From_Email_Address,
+                MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
+                MailHost = Config.Parameter.Mail_Host,
+                MailPort = Config.Parameter.Mail_Port,
+                Login = Config.Parameter.Mail_Email_Login,
+                Password = Config.Parameter.Mail_Email_Passwort
+            };
+
+            //List Settings
+            ListSettings = new Settings()
+            {
+                ListName = Config.Parameter.ListName,
+                ListOwner = Config.Parameter.ScreenName,
+                TweetsRetrieved = Config.Parameter.TweetsRetrieved,
+                UpdateDelay = Config.Parameter.UpdateDelay,
+                TaskDelay = Config.Parameter.TaskDelay,
+                TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
+                TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
+                TwitterUserDailyTaskDelay = Config.Parameter.TwitterUserDailyTaskDelay,
+                TwitterUserDailyUpdateDelay = Config.Parameter.TwitterUserDailyUpdateDelay
+            };
+
+
+            var usersWithRoles = (from user in _context.Users
+                                  select new
+                                  {
+                                      UserId = user.Id,
+                                      Username = user.UserName,
+                                      Email = user.Email
+                                  }).ToList().Select(p => new AdminModel()
+
+                                  {
+                                      UserId = p.UserId,
+                                      Username = p.Username,
+                                      Email = p.Email,
+                                  });
+
+            UserWithRoles = usersWithRoles;
+
+
             return Page();
         }
     }
