@@ -225,7 +225,6 @@ namespace KompromatKoffer.Pages.Administration
 
         }
 
-
         public IActionResult OnPostMailSettings()
         {
             Config.Parameter.Mail_From_Email_Address = SendMailSettings.MailAddress;
@@ -281,5 +280,60 @@ namespace KompromatKoffer.Pages.Administration
 
             return Page();
         }
+
+        public IActionResult OnPostDebugSettings()
+        {
+            //Mail Settings
+            SendMailSettings = new MailSettings()
+            {
+                MailAddress = Config.Parameter.Mail_From_Email_Address,
+                MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
+                MailHost = Config.Parameter.Mail_Host,
+                MailPort = Config.Parameter.Mail_Port,
+                Login = Config.Parameter.Mail_Email_Login,
+                Password = Config.Parameter.Mail_Email_Passwort
+            };
+
+            //List Settings
+            ListSettings = new Settings()
+            {
+                ListName = Config.Parameter.ListName,
+                ListOwner = Config.Parameter.ScreenName,
+                TweetsRetrieved = Config.Parameter.TweetsRetrieved,
+                UpdateDelay = Config.Parameter.UpdateDelay,
+                TaskDelay = Config.Parameter.TaskDelay,
+                TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
+                TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
+                TwitterUserDailyTaskDelay = Config.Parameter.TwitterUserDailyTaskDelay,
+                TwitterUserDailyUpdateDelay = Config.Parameter.TwitterUserDailyUpdateDelay
+            };
+
+
+            var usersWithRoles = (from user in _context.Users
+                                  select new
+                                  {
+                                      UserId = user.Id,
+                                      Username = user.UserName,
+                                      Email = user.Email
+                                  }).ToList().Select(p => new AdminModel()
+
+                                  {
+                                      UserId = p.UserId,
+                                      Username = p.Username,
+                                      Email = p.Email,
+                                  });
+
+            UserWithRoles = usersWithRoles;
+
+
+            _logger.LogInformation("MailSettings: "+Config.Parameter.Mail_From_Email_Address +" "+ Config.Parameter.Mail_From_Email_DisplayName + " " + Config.Parameter.Mail_Host+ Config.Parameter.Mail_Port + " " + Config.Parameter.Mail_Email_Login + " " + Config.Parameter.Mail_Email_Passwort);
+            _logger.LogInformation("Settings: " + Config.Parameter.ListName + " " + Config.Parameter.ScreenName + " " + Config.Parameter.TweetsRetrieved + " " + Config.Parameter.UpdateDelay + " " + Config.Parameter.TaskDelay + " " + Config.Parameter.TwitterUserUpdateInterval + " " + Config.Parameter.TwitterUserDailyUpdateInterval + " " + Config.Parameter.TwitterUserDailyTaskDelay + " " + Config.Parameter.TwitterUserDailyUpdateDelay);
+
+
+
+            return Page();
+        }
+
+
     }
 }

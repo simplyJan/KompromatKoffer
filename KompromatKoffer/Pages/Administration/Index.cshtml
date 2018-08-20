@@ -21,21 +21,21 @@
                 <p>
 
                     <label for="istSettings.ListOwner">ListOwner</label>
-                    <input type="text" asp-for="ListSettings.ListOwner"  />
+                    <input type="text" asp-for="ListSettings.ListOwner" />
                 </p>
                 <p>
 
                     <label for="ListSettings.TweetsRetrieved">TweetsRetrieved</label>
-                    <input type="number" asp-for="ListSettings.TweetsRetrieved"  />
+                    <input type="number" asp-for="ListSettings.TweetsRetrieved" />
                 </p>
                 <p>
                     <label for="ListSettings.UpdateDelay">UpdateDelay</label>
-                    <input type="number" asp-for="ListSettings.UpdateDelay"  />
+                    <input type="number" asp-for="ListSettings.UpdateDelay" />
                 </p>
                 <p>
 
                     <label for="ListSettings.TaskDelay">TaskDelay</label>
-                    <input type="number" asp-for="ListSettings.TaskDelay"/>
+                    <input type="number" asp-for="ListSettings.TaskDelay" />
                 </p>
 
                 <p>
@@ -46,12 +46,12 @@
                 <p>
 
                     <label for="ListSettings.TwitterUserDailyUpdateInterval">TwitterUserDailyUpdateInterval</label>
-                    <input type="number" asp-for="ListSettings.TwitterUserDailyUpdateInterval"  />
+                    <input type="number" asp-for="ListSettings.TwitterUserDailyUpdateInterval" />
                 </p>
                 <p>
 
                     <label for="ListSettings.TwitterUserDailyTaskDelay">TwitterUserDailyTaskDelay</label>
-                    <input type="number" asp-for="ListSettings.TwitterUserDailyTaskDelay"  />
+                    <input type="number" asp-for="ListSettings.TwitterUserDailyTaskDelay" />
                 </p>
                 <p>
 
@@ -66,7 +66,7 @@
 
         <div class="emailSettingsView">
             <h3>Email Settings</h3>
-            <form  id="SendMailSettings" method="post">
+            <form id="SendMailSettings" method="post">
                 <p>
 
                     <label for="SendMailSettings.MailAddress"> Mail Address</label>
@@ -80,12 +80,12 @@
                 <p>
 
                     <label for="SendMailSettings.MailHost">Mail Host</label>
-                    <input type="text" asp-for="SendMailSettings.MailHost"  />
+                    <input type="text" asp-for="SendMailSettings.MailHost" />
                 </p>
                 <p>
 
                     <label for="SendMailSettings.MailPort">Mail Port</label>
-                    <input type="number" asp-for="SendMailSettings.MailPort"  />
+                    <input type="number" asp-for="SendMailSettings.MailPort" />
                 </p>
                 <p>
 
@@ -95,14 +95,14 @@
                 <p>
 
                     <label for="SendMailSettings.Password">Password</label>
-                    <input type="text" asp-for="SendMailSettings.Password"/>
+                    <input type="text" asp-for="SendMailSettings.Password" />
                 </p>
                 <br />
-                <button type="submit" form="SendMailSettings" asp-page-handler="MailSettings" class="btn btn-default"> Save Mail Settings</button>
+                <button type="submit" form="SendMailSettings" asp-page-handler="MailSettings" class="btn btn-default">Save Mail Settings</button>
                 <br />
             </form>
         </div>
-        
+
     </div>
     <hr />
     <div class="userOverview">
@@ -125,7 +125,10 @@
         TwitterUser Daily Update: @Config.Parameter.UserDailyDataLastUpdated.ToString("dd.MM.yy - hh.mm")
     </p>
 
-    
+    <form method="post">
+        <button type="submit" asp-page-handler="DebugSettings" class="btn btn-default">Debug Settings</button>
+    </form>
+
 </div>
 
 
