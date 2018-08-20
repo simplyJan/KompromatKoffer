@@ -55,27 +55,7 @@ namespace KompromatKoffer.Pages.Database
 
             #endregion
 
-            CurrentRange = sinceDays;
-
-            DaysRange = sinceDays == 7 ? 14 : 7;
-
-
-            switch (sinceDays)
-            {
-                case 7:
-                    SinceDays = -7;
-                    break;
-                case 14:
-                    SinceDays = -14;
-                    break;
-                default:
-                    sinceDays = -30;
-                        break;
-            }
-
-
-
-
+            SinceDays = sinceDays;
 
 
             await Task.Delay(1);

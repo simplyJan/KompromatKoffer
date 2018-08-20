@@ -8,13 +8,31 @@
 <div class="interactionMenuBar">
     <a asp-page="/Database/People" title="Database" class="iconHoverPages interactionMenu">
         <i class="fas fa-database"> </i>
-        &nbsp; 
+        &nbsp;
     </a>
-
     <a asp-page=""
-       asp-route-sinceDays="@Model.DaysRange"
-       class="iconHoverPages" title="Change the TimeRange">
-        <i class="fas fa-clock"></i>
+       asp-route-sinceDays="-7"
+       class="iconHoverPages" title="die letzten 7 Tage">
+        7
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sinceDays="-14"
+       class="iconHoverPages" title="die letzten 14 Tage">
+        14
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sinceDays="-21"
+       class="iconHoverPages" title="die letzten 21 Tage">
+        21
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sinceDays="-28"
+       class="iconHoverPages" title="die letzten 28 Tage">
+        28
+        &nbsp;
     </a>
 </div>
 
