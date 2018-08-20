@@ -29,7 +29,12 @@ namespace KompromatKoffer.Pages.Database
 
         public string LittleTuple;
 
-        public void OnGet()
+        public int SinceDays { get; set; } = -7;
+
+        public int DaysRange { get; set; }
+        public int CurrentRange { get; set; }
+
+        public async Task OnGet(int sinceDays)
         {
 
             #region Database Connection - get TwitterUserDailyCollection
@@ -50,8 +55,30 @@ namespace KompromatKoffer.Pages.Database
 
             #endregion
 
+            CurrentRange = sinceDays;
+
+            DaysRange = sinceDays == 7 ? 14 : 7;
 
 
+            switch (sinceDays)
+            {
+                case 7:
+                    SinceDays = -7;
+                    break;
+                case 14:
+                    SinceDays = -14;
+                    break;
+                default:
+                    sinceDays = -30;
+                        break;
+            }
+
+
+
+
+
+
+            await Task.Delay(1);
 
 
            

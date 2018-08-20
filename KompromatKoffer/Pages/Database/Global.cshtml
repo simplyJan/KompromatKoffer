@@ -8,16 +8,24 @@
 <div class="interactionMenuBar">
     <a asp-page="/Database/People" title="Database" class="iconHoverPages interactionMenu">
         <i class="fas fa-database"> </i>
-        &nbsp;
+        &nbsp; 
+    </a>
+
+    <a asp-page=""
+       asp-route-sinceDays="@Model.DaysRange"
+       class="iconHoverPages" title="Change the TimeRange">
+        <i class="fas fa-clock"></i>
     </a>
 </div>
 
 <div class="GlobalChartView">
     @{
+    <h4>Globale Charts seit dem @DateTime.Today.AddDays(Model.SinceDays).ToString("dd.MM.yyyy") </h4>
+
 
         List<string> allScreenNames = new List<string>();
 
-        var name = Model.CompleteDB.Find(s => s.DateToday < DateTime.Today.AddDays(+1)).Where(s => s.Screen_name == s.Screen_name);
+        var name = Model.CompleteDB.Find(s => s.DateToday > DateTime.Today.AddDays(Model.SinceDays)).Where(s => s.Screen_name == s.Screen_name);
 
 
         var FollowersCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Followers_count).Last() - s.Select(item => item.Followers_count).First());
