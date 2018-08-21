@@ -137,6 +137,7 @@ h4 {
 .lasthundred {
     font-size: 1.5em;
     margin: 0 auto;
+    margin-top:20px;
 }
 
 .lasthundred img {
@@ -507,6 +508,7 @@ a.imageLink p {
         }
 
 
+
 /*PeopleDetail View*/
 
 .TwitterUserTimline{
@@ -532,6 +534,10 @@ a.TwitterUserTimeline:active, a.TwitterUserTimeline:hover, a.TwitterUserTimeline
     background-color: #440c50;
     display: block;
     border-radius: 0.5em;
+}
+
+.h4Down{
+    margin-top:15px;
 }
 
 /*Administration View*/

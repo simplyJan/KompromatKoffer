@@ -36,70 +36,73 @@
 
 </div>
 
-<h4>@Model.MemberCount Mitglieder des Bundestages</h4>
+<div class="h4Down">
+    <h4>@Model.MemberCount Mitglieder des Bundestages</h4>
+</div>
 
-@foreach (var item in Model.TwitterUserModel)
-{
-    <div class="twitterUserPosition">
-        @{
-            int indexpos = Model.TwitterUserModel.IndexOf(item);
+    @foreach (var item in Model.TwitterUserModel)
+    {
+        <div class="twitterUserPosition">
+            @{
+                int indexpos = Model.TwitterUserModel.IndexOf(item);
 
-            if (Model.TwitterUserModel.PageIndex == 1)
-            {
-                int newindex = indexpos + 1;
-                @newindex;
+                if (Model.TwitterUserModel.PageIndex == 1)
+                {
+                    int newindex = indexpos + 1;
+                    @newindex;
+                }
+                if (Model.TwitterUserModel.PageIndex > 1)
+                {
+                    int newindex = indexpos + (Model.TwitterUserModel.PageIndex * 100) + 1 - 100;
+                    @newindex
+                }
             }
-            if (Model.TwitterUserModel.PageIndex > 1)
-            {
-                int newindex = indexpos + (Model.TwitterUserModel.PageIndex * 100) + 1 - 100;
-                @newindex
-            }
-        }
-    </div>
+        </div>
 
-    <div class="twitterUserMainView">
+        <div class="twitterUserMainView">
 
-        <a asp-page="/Database/PeopleDetail" asp-route-screenname="@item.Screen_name" class="twitterUserLink">
-            <img class="twitterUserImage" src="@Html.DisplayFor(modelItem => item.Profile_image_url_https)" />
-            <p class="twitterUserScreenName">@Html.DisplayFor(modelItem => item.Name)</p>
-            <p class="twitterUserLocation">@Html.DisplayFor(modelItem => item.Location)</p>
-            <p class="twitterUserDesc">@Html.DisplayFor(modelItem => item.Description)
-            <p class="twitterUserCounts">
-                <i class="fab fa-twitter"></i>&nbsp;@Html.DisplayFor(modelItem => item.Statuses_count)
-                &nbsp;
-                <i class="fas fa-grin-hearts"></i>&nbsp;@Html.DisplayFor(modelItem => item.Followers_count)
-                &nbsp;
-                <i class="fas fa-meh-rolling-eyes"></i>&nbsp;@Html.DisplayFor(modelItem => item.Friends_count)
-                &nbsp;
-                <i class="fas fa-heart"></i>&nbsp;@Html.DisplayFor(modelItem => item.Favourites_count)
-                &nbsp;
-                <i class="fas fa-list-ul"></i>&nbsp;@Html.DisplayFor(modelItem => item.Listed_count)
-                &nbsp;
-                <i class="far fa-calendar-alt"></i>&nbsp;@item.UserUpdated.ToString("dd.MM.yy - HH:mm")
-            </p>
+            <a asp-page="/Database/PeopleDetail" asp-route-screenname="@item.Screen_name" class="twitterUserLink">
+                <img class="twitterUserImage" src="@Html.DisplayFor(modelItem => item.Profile_image_url_https)" />
+                <p class="twitterUserScreenName">@Html.DisplayFor(modelItem => item.Name)</p>
+                <p class="twitterUserLocation">@Html.DisplayFor(modelItem => item.Location)</p>
+                <p class="twitterUserDesc">@Html.DisplayFor(modelItem => item.Description)
+                <p class="twitterUserCounts">
+                    <i class="fab fa-twitter"></i>&nbsp;@Html.DisplayFor(modelItem => item.Statuses_count)
+                    &nbsp;
+                    <i class="fas fa-grin-hearts"></i>&nbsp;@Html.DisplayFor(modelItem => item.Followers_count)
+                    &nbsp;
+                    <i class="fas fa-meh-rolling-eyes"></i>&nbsp;@Html.DisplayFor(modelItem => item.Friends_count)
+                    &nbsp;
+                    <i class="fas fa-heart"></i>&nbsp;@Html.DisplayFor(modelItem => item.Favourites_count)
+                    &nbsp;
+                    <i class="fas fa-list-ul"></i>&nbsp;@Html.DisplayFor(modelItem => item.Listed_count)
+                    &nbsp;
+                    <i class="far fa-calendar-alt"></i>&nbsp;@item.UserUpdated.ToString("dd.MM.yy - HH:mm")
+                </p>
+            </a>
+        </div>
+    }
+
+    @{
+        var prevDisabled = !Model.TwitterUserModel.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.TwitterUserModel.HasNextPage ? "disabled" : "";
+
+    }
+
+    <div class="twitterUserPageing">
+        <a asp-page=""
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.TwitterUserModel.PageIndex - 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-default @prevDisabled">
+            <<
+        </a>
+        <a asp-page=""
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.TwitterUserModel.PageIndex + 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-default @nextDisabled">
+            >>
         </a>
     </div>
-}
 
-@{
-    var prevDisabled = !Model.TwitterUserModel.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.TwitterUserModel.HasNextPage ? "disabled" : "";
-
-}
-
-<div class="twitterUserPageing">
-    <a asp-page=""
-       asp-route-sortOrder="@Model.CurrentSort"
-       asp-route-pageIndex="@(Model.TwitterUserModel.PageIndex - 1)"
-       asp-route-currentFilter="@Model.CurrentFilter"
-       class="btn btn-default @prevDisabled">
-        <<
-    </a>
-    <a asp-page=""
-       asp-route-sortOrder="@Model.CurrentSort"
-       asp-route-pageIndex="@(Model.TwitterUserModel.PageIndex + 1)"
-       asp-route-currentFilter="@Model.CurrentFilter"
-       class="btn btn-default @nextDisabled">
-        >>
-    </a>
-</div>
