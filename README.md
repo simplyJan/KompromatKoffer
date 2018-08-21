@@ -1,6 +1,6 @@
 <b>компроматkoffer.de - Kompromittiere den Bundestag</b>
 
-ASP.Net Core 2.1 Web Application for displaying all recent tweets from every member of the german parliament. Currently the app outputs a twitter list made by martin fuchs (http://martin-fuchs.org) and right now I am implementing the NoSQL Database (LiteDB) to store  data and generate analytical profiles from each dataset.
+ASP.Net Core 2.1 Web Application for displaying all recent tweets from every member of the german parliament. Analytical chart overview for every politician and a global chart overview of all politicians. Currently only counts such as followers, likes etc. will be shown. Next step is a timeline detail view. 
 
 - Using https://github.com/linvi/tweetinvi - MIT License - Copyright (c) 2017 Thomas Imart
 - Using https://github.com/chartjs/Chart.js - MIT License - Copyright (c) 2018 Chart.js Contributors
@@ -43,26 +43,35 @@ namespace KompromatKoffer
         {
             //How many tweets would you like to receive
             public static int TweetsRetrieved { get; set; } = 500;
-            //Listname and Screename of the TwitterUser
-            public static string ListName { get; set; } 
-            public static string ScreenName { get; set; } 
+            //Twitter Listname and Name of Owner
+            public static string ListName { get; set; } = "listname";
+            public static string ScreenName { get; set; } = "listuser";
             //Save TwitterUserData to Database
             public static bool SaveToDatabase = true;
-            public static int TwitterUserUpdateInterval { get; set; } = 45;
-            //Standard Service Delay in ms for each Update to Database
-            public static int TaskDelay { get; set; } = 1000;
-            //Update Data
             public static DateTime DbLastUpdated { get; set; }
-            public static int UpdateDelay { get; set; } = 45;
-            public static int TwitterUserDailyUpdateInterval { get; set; } = 240;
+            public static int UpdateDelay { get; set; } = 15;
+            public static int TaskDelay { get; set; } = 100000;
+            //TwitterUser Data
+            public static int TwitterUserUpdateInterval { get; set; } = 120;
+            //TwitterUserDaily Data
+            public static DateTime UserDailyDataLastUpdated { get; set; }
+            public static int TwitterUserDailyUpdateInterval { get; set; } = 300;
             public static int TwitterUserDailyTaskDelay { get; set; } = 240000;
-            //Update Timeline Data
+            public static int TwitterUserDailyUpdateDelay { get; set; } = 35;
+            //TwitterUserTimeline Data
             public static DateTime TimelineDbLastUpdated { get; set; }
             public static int TimelineUpdateDelay { get; set; } = 90;
-            public static int TwitterUserTimelineUpdateInterval { get; set; } = 480;
+            public static int TwitterUserTimelineUpdateInterval { get; set; } = 600;
             public static int TwitterUserTimelineTaskDelay { get; set; } = 960000;
             public static int TimelineHardlimitTweets { get; set; } = 20;
             public static int TimelineSoftlimitTweets { get; set; } = 10;
+			
+			public static string Mail_From_Email_Address { get; set; } = "email@email..com";
+            public static string Mail_From_Email_DisplayName { get; set; } = "displayname";
+            public static string Mail_Host { get; set; } = "mail.mail.com";
+            public static int Mail_Port { get; set; } = 993;
+            public static string Mail_Email_Login { get; set; } = "email.email.com";
+            public static string Mail_Email_Passwort { get; set; } = "password";
         }
     }
 } 
@@ -81,9 +90,3 @@ namespace KompromatKoffer
     "ApplicationContextConnection": "Data Source=SERVERNAME;Integrated Security=False;User ID=USERLOGIN;Password=PASSWORD;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
   }
 ```
-
-
-<b>ProjectOverview:</b>
-Goal is to publish live tweets from every member of the german bundestag (Parliament) and make twitter data from this group of people available for analyticcal purpose through a database (LiteDB). The website (ASP.Net Core Razor Pages) will be free for all visitors and the project is mostly made as a tool for journalists and people who are interested in politics - to search for informations and see what our politicians are doing on twitter. Transparency and freedom of open information are the fundmental principles. The source code will be open for everyone on GitHub (https://github.com/Scobiform/KompromatKoffer). 
-
-The project is currently in alpha and I am still testing many parts of the project. Right now I am intregrating services for the updates to the database. Also I am starting to create charts for the count data.
