@@ -40,6 +40,12 @@ namespace KompromatKoffer.Pages.Database
         [BindProperty]
         public string CurrentUserScreenname { get; set; }
 
+
+        public int SinceDays { get; set; } = -7;
+
+        public int DaysRange { get; set; }
+        public int CurrentRange { get; set; }
+
         //Sorting
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
@@ -47,7 +53,7 @@ namespace KompromatKoffer.Pages.Database
         public string CreatedAtSort { get; set; }
         public string RetweetCountSort { get; set; }
 
-        public void OnGet(string screenname, string sortOrder, string currentFilter)
+        public void OnGet(string screenname, string sortOrder, string currentFilter, int sinceDays)
         {
             //Set Screenname if null - doh!
             if (screenname == null)
@@ -84,6 +90,8 @@ namespace KompromatKoffer.Pages.Database
 
             #endregion
 
+
+            SinceDays = sinceDays;
 
             //Get UserTimeline with screenname - doh!
             //await GetUserTimeline(screenname, sortOrder);

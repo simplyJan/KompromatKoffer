@@ -43,7 +43,7 @@
 
 
         <div id="tweetLink">
-            <a asp-page="/Database/PeopleDetail" asp-route-screenname="@x.CreatedBy.ScreenName" class="dataBaseProfile"><i class="fas fa-user-circle"></i></a>
+            <a asp-page="/Database/PeopleDetail" asp-route-screenname="@x.CreatedBy.ScreenName" asp-route-sinceDays="-7" class="dataBaseProfile"><i class="fas fa-user-circle"></i></a>
             <a href="@x.Url" target="_blank" class="tweetLink">
                 <img src="@x.CreatedBy.ProfileImageUrlHttps" />
                 <br>

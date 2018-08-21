@@ -61,7 +61,7 @@
 
         <div class="twitterUserMainView">
 
-            <a asp-page="/Database/PeopleDetail" asp-route-screenname="@item.Screen_name" class="twitterUserLink">
+            <a asp-page="/Database/PeopleDetail" asp-route-screenname="@item.Screen_name" asp-route-sinceDays="-7" class="twitterUserLink">
                 <img class="twitterUserImage" src="@Html.DisplayFor(modelItem => item.Profile_image_url_https)" />
                 <p class="twitterUserScreenName">@Html.DisplayFor(modelItem => item.Name)</p>
                 <p class="twitterUserLocation">@Html.DisplayFor(modelItem => item.Location)</p>

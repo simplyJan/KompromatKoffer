@@ -11,6 +11,42 @@
         <i class="fas fa-database"> </i>
         &nbsp;
     </a>
+    <a asp-page=""
+       asp-route-sinceDays="-2"
+       class="iconHoverPages" title="die letzten 2 Tage">
+        2
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sinceDays="-4"
+       class="iconHoverPages" title="die letzten 4 Tage">
+        4
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sinceDays="-7"
+       class="iconHoverPages" title="die letzten 7 Tage">
+        7
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sinceDays="-14"
+       class="iconHoverPages" title="die letzten 14 Tage">
+        14
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sinceDays="-21"
+       class="iconHoverPages" title="die letzten 21 Tage">
+        21
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sinceDays="-28"
+       class="iconHoverPages" title="die letzten 28 Tage">
+        28
+        &nbsp;
+    </a>
 </div>
 
 
@@ -22,7 +58,7 @@
     List<int> StatusesDaily = new List<int>();
     List<int> FavouritesDaily = new List<int>();
 
-    var name = Model.CompleteDB.Find(s => s.DateToday < DateTime.Today.AddDays(+1)).Where(s => s.Screen_name == Model.CurrentUserScreenname);
+    var name = Model.CompleteDB.Find(s => s.DateToday >= DateTime.Today.AddDays(Model.SinceDays)).Where(s => s.Screen_name == Model.CurrentUserScreenname);
 
     var groupBy = name.GroupBy(s => s.Screen_name);
 
@@ -50,7 +86,7 @@
 }
 
 <div class="TwitterUserTimline">
-
+    <h4>Charts seit dem @DateTime.Today.AddDays(Model.SinceDays).ToString("dd.MM.yyyy") </h4>
 
     <a href="https://twitter.com/@twitterUser.Screen_name" target="_blank" class="twitterUserLink">
 
