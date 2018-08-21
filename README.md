@@ -1,6 +1,6 @@
 <b>компроматkoffer.de - Kompromittiere den Bundestag</b>
 
-ASP.Net Core 2.1 Web Application for displaying all recent tweets from every member of the german parliament. Analytical chart overview for every politician and a global chart overview of all politicians. Currently only counts such as followers, likes etc. will be shown. Next step is a timeline detail view. 
+ASP.Net Core 2.1 Web Application for displaying all recent tweets from every member of the german parliament. Analytical chart overview for every politician and a global chart overview of all politicians. Currently the app only displays counts - such as followers, likes etc. Next step is a timeline detail view and a realtime userstream, hopefully with a filterbubble overview.
 
 - Using https://github.com/linvi/tweetinvi - MIT License - Copyright (c) 2017 Thomas Imart
 - Using https://github.com/chartjs/Chart.js - MIT License - Copyright (c) 2018 Chart.js Contributors
