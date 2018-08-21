@@ -23,5 +23,10 @@ namespace KompromatKoffer.Areas.Database.Model
 
         //Check when user was updated
         public DateTime UserUpdated { get; set; } = DateTime.Now;
+
+        //Political 
+        public string PoliticalParty { get; set; }
+
+
     }
 }
