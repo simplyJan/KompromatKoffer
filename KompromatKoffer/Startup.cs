@@ -1,4 +1,5 @@
 ﻿using KompromatKoffer.Areas.Identity.Data;
+using KompromatKoffer.Hubs;
 using KompromatKoffer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -43,6 +45,10 @@ namespace KompromatKoffer
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
 
+
+            
+
+
             //Set DB to Update after StartUp
             Config.Parameter.DbLastUpdated = DateTime.Now;
             Config.Parameter.UserDailyDataLastUpdated = DateTime.Now.AddMinutes(5);
@@ -62,6 +68,10 @@ namespace KompromatKoffer
             {
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
             });
+
+            services.AddSignalR();
+
+         
 
 
         }
@@ -93,6 +103,15 @@ namespace KompromatKoffer
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<UserStreamHub>("/userStreamHub");
+            });
+
+
+  
+
 
             app.UseMvc();
 

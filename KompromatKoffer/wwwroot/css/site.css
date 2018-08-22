@@ -631,6 +631,33 @@ input.settingssubmit{
     margin-top: 5px;
 }
 
+/*UserStream*/
+.userStreamView {
+    width: 85%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: #27182b;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    font-size: 1.0em;
+}
+
+    .userStreamView input {
+        color: #27182b;
+        border-radius: 5px;
+        padding: 5px;
+        border: 0;
+        height: 34px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+.userStreamView button {
+    margin-top:5px;
+    border-radius:5px;
+}
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
