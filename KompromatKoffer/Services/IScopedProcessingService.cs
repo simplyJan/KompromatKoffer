@@ -96,13 +96,11 @@ namespace KompromatKoffer.Services
                                     TweetUserDesc = tweet.CreatedBy.Description,
                                     TweetUserPicture = tweet.CreatedBy.ProfileImageUrlHttps,
                                     TweetCreatedAt = tweet.CreatedAt,
-                                    TweetText = tweet.Text,
-                                    TweetExtendedText = tweet.ExtendedTweet.Text,
-                                    TweetHashtags = tweet.Hashtags,
+                                    TweetText = tweet.ExtendedTweet.Text,
+                                    TweetHashtags = tweet.ExtendedTweet.LegacyEntities.Hashtags,
                                     TweetReTweetCount = tweet.RetweetCount,
                                     TweetFavoriteCount = tweet.FavoriteCount,
-                                    TweetReplyCount = tweet.ReplyCount,
-                                    TweetQuoteCount = tweet.QuoteCount
+                                    TweetUrl = tweet.Url
 
                                 };
 
@@ -126,8 +124,7 @@ namespace KompromatKoffer.Services
                                     TweetHashtags = tweet.Hashtags,
                                     TweetReTweetCount = tweet.RetweetCount,
                                     TweetFavoriteCount = tweet.FavoriteCount,
-                                    TweetReplyCount = tweet.ReplyCount,
-                                    TweetQuoteCount = tweet.QuoteCount
+                                    TweetUrl = tweet.Url
                                 };
 
                                 _logger.LogInformation("New Tweet posted..." + tweet.Id);

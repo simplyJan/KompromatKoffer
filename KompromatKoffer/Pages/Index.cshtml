@@ -8,7 +8,7 @@
 <div class="interactionMenuBar">
     <form>
         <input type="text" name="SearchString" class="twitterUserSearchInput" placeholder="Search...">
-    </form>  
+    </form>
     <a asp-page="/Database/People" title="Database" class="iconHoverPages interactionMenu">
         <i class="fas fa-database"> </i>
         &nbsp;
@@ -34,53 +34,30 @@
 
 
 <div class="lasthundred">
-    <h4>Die letzten @Convert.ToString(Model.TweetList.Count()) Tweets aus dem Bundestag</h4>
+    <h4>Die letzten @Convert.ToString(Model.CompleteDB.Count()) Tweets aus dem Bundestag</h4>
 
-    @foreach (var x in Model.TweetList)
+    @foreach (var x in Model.TwitterStreamModel)
     {
 
+
         <div id="tweetLink">
-            <a asp-page="/Database/PeopleDetail" asp-route-screenname="@x.CreatedBy.ScreenName" asp-route-sinceDays="-7" class="dataBaseProfile"><i class="fas fa-user-circle"></i></a>
-            <a href="@x.Url" target="_blank" class="tweetLink">
-                <img src="@x.CreatedBy.ProfileImageUrlHttps" />
+            <a asp-page="/Database/PeopleDetail" asp-route-screenname="@x.TweetUser" asp-route-sinceDays="-7" class="dataBaseProfile"><i class="fas fa-user-circle"></i></a>
+            <a href="@x.TweetUrl" target="_blank" class="tweetLink">
+                <img src="@x.TweetUserPicture" />
                 <br>
-                @x.CreatedBy
+                @x.TweetUser
                 <br>
-                <p class="profileDesc">@x.CreatedBy.Description</p>
-                @{
-                    if (x.InReplyToScreenName != null)
-                    {
-                        <p class="replyToName">Replying to: @x.InReplyToScreenName</p>
-                    }
-                }
-                @{
-                    if (x.QuotedTweet != null)
-                    {
+                <p class="profileDesc">@x.TweetUserDesc</p>
 
-                        <p class="quotedTweet">
-                            @x.QuotedTweet.CreatedBy
-                            <br>
-                            @x.QuotedTweet
-                        </p>
+                @Html.Raw(x.TweetText)
 
 
-                    }
-                }
-                @{
-                    if (x.ExtendedTweet != null)
-                    {
-                        @Html.Raw(x.ExtendedTweet.Text)
 
-                    }
-                    else
-                    {
-                        @Html.Raw(x.Text)
-                    }
-
-                }
                 <hr class="IndexHR" />
+
+
                 <p class="socialIconsIndex">
-                    <i class="fas fa-retweet"></i> @x.RetweetCount &emsp; <i class="fas fa-heart"></i> @x.FavoriteCount &emsp; @x.CreatedAt.ToString("dd.MM.yy - H:mm")
+                    <i class="fas fa-retweet"></i> @x.TweetReTweetCount &emsp; <i class="fas fa-heart"></i> @x.TweetFavoriteCount &emsp; @x.TweetCreatedAt.ToString("dd.MM.yy - H:mm")
                 </p>
 
             </a>
@@ -88,5 +65,29 @@
         </div>
 
     }
+
+    @{
+        var prevDisabled = !Model.TwitterStreamModel.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.TwitterStreamModel.HasNextPage ? "disabled" : "";
+
+    }
+
+    <div class="twitterUserPageing">
+        <a asp-page=""
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.TwitterStreamModel.PageIndex - 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-default @prevDisabled">
+            <<
+        </a>
+        <a asp-page=""
+           asp-route-sortOrder="@Model.CurrentSort"
+           asp-route-pageIndex="@(Model.TwitterStreamModel.PageIndex + 1)"
+           asp-route-currentFilter="@Model.CurrentFilter"
+           class="btn btn-default @nextDisabled">
+            >>
+        </a>
+
+    </div>
 
 </div>

@@ -20,12 +20,9 @@ namespace KompromatKoffer.Areas.Database.Model
         public List<Tweetinvi.Models.Entities.IHashtagEntity> TweetHashtags { get; set; }
         public int TweetReTweetCount { get; set; }
         public int TweetFavoriteCount { get; set; }
-        public int? TweetReplyCount { get; set; }
-        public int? TweetQuoteCount { get; set; }
         public DateTime TweetCreatedAt { get; set; }
+        public string TweetUrl { get; set; }
 
-        //Extended Tweet
-        public string TweetExtendedText { get; set; }
 
 
     }

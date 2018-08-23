@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KompromatKoffer.Areas.Database.Model;
+using LiteDB;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,7 +22,11 @@ namespace KompromatKoffer.Pages
             _logger = logger;
         }
 
-        public IEnumerable<ITweet> TweetList;
+        public IEnumerable<TwitterStreamModel> TweetList;
+
+        public IEnumerable<TwitterStreamModel> CompleteDB { get; set; }
+
+        public PaginatedList<TwitterStreamModel> TwitterStreamModel { get; set; }
 
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
@@ -29,73 +35,89 @@ namespace KompromatKoffer.Pages
 
 
         [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
-        public void OnGet(string sortOrder, string searchString, int? pageIndex, string currentFilter)
+        public async Task OnGet(string sortOrder, string searchString, int? pageIndex, string currentFilter)
         {
             try
             {
-                CurrentSort = sortOrder;
-
-                var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
-
-                //Settings for last 100
-                Tweetinvi.Parameters.GetTweetsFromListParameters getTweetsParameters = new Tweetinvi.Parameters.GetTweetsFromListParameters()
+                using (var db = new LiteDatabase("TwitterData.db"))
                 {
-                    MaximumNumberOfTweetsToRetrieve = Config.Parameter.TweetsRetrieved,
-                    IncludeRetweets = false,
-                    IncludeEntities = true,
-                };
+                    CurrentSort = sortOrder;
 
-                var tweets = list.GetTweets(getTweetsParameters);
 
-                TweetList = tweets;
+                    var col = db.GetCollection<TwitterStreamModel>("TwitterStream");
+                    var completeDB = col.FindAll();
+                    CompleteDB = completeDB;
 
-                if (searchString != null)
-                {
-                    pageIndex = 1;
+
+                    /*
+                    var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
+
+                    //Settings for last 100
+                    Tweetinvi.Parameters.GetTweetsFromListParameters getTweetsParameters = new Tweetinvi.Parameters.GetTweetsFromListParameters()
+                    {
+                        MaximumNumberOfTweetsToRetrieve = Config.Parameter.TweetsRetrieved,
+                        IncludeRetweets = false,
+                        IncludeEntities = true,
+                    };
+                    */
+
+                    var tweets = completeDB;
+
+                    TweetList = tweets;
+
+                    if (searchString != null)
+                    {
+                        pageIndex = 1;
+                    }
+                    else
+                    {
+                        searchString = currentFilter;
+                    }
+
+                    CurrentFilter = searchString;
+
+                    //Search Filtering
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                        TweetList = TweetList.Where(
+                            s => s.TweetText.ToLower().Contains(searchString.ToLower())
+                            );
+
+                    }
+
+                    //Sorting
+                    FavCountSort = sortOrder == "FavCount_Desc" ? "FavCount" : "FavCount_Desc";
+                    CreatedAtSort = sortOrder == "CreatedAtDate_desc" ? "CreatedAtDate" : "CreatedAtDate_desc";
+
+                    switch (sortOrder)
+                    {
+                        case "FavCount":
+                            TweetList = TweetList.OrderBy(s => s.TweetFavoriteCount);
+                            break;
+                        case "FavCount_Desc":
+                            TweetList = TweetList.OrderByDescending(s => s.TweetFavoriteCount);
+                            break;
+                        case "CreatedAtDate":
+                            TweetList = TweetList.OrderBy(s => s.TweetCreatedAt);
+                            break;
+                        case "CreatedAtDate_Desc":
+                            TweetList = TweetList.OrderByDescending(s => s.TweetCreatedAt);
+                            break;
+                        default:
+                            TweetList = TweetList.OrderByDescending(s => s.TweetCreatedAt);
+                            break;
+                    }
+
+                    if (sortOrder != null)
+                    {
+                        _logger.LogInformation("Sort order is... " + sortOrder);
+                    }
                 }
-                else
-                {
-                    searchString = currentFilter;
-                }
 
-                CurrentFilter = searchString;
+                int pageSize = 50;
+                TwitterStreamModel = await PaginatedList<TwitterStreamModel>.CreateAsync(
+                TweetList, pageIndex ?? 1, pageSize);
 
-                //Search Filtering
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    TweetList = TweetList.Where(
-                        s => s.Text.ToLower().Contains(searchString.ToLower())
-                        );
-
-                }
-
-                //Sorting
-                FavCountSort = sortOrder == "FavCount_Desc" ? "FavCount" : "FavCount_Desc";
-                CreatedAtSort = sortOrder == "CreatedAtDate_desc" ? "CreatedAtDate" : "CreatedAtDate_desc";
-
-                switch (sortOrder)
-                {
-                    case "FavCount":
-                        TweetList = TweetList.OrderBy(s => s.FavoriteCount);
-                        break;
-                    case "FavCount_Desc":
-                        TweetList = TweetList.OrderByDescending(s => s.FavoriteCount);
-                        break;
-                    case "CreatedAtDate":
-                        TweetList = TweetList.OrderBy(s => s.CreatedAt);
-                        break;
-                    case "CreatedAtDate_Desc":
-                        TweetList = TweetList.OrderByDescending(s => s.CreatedAt);
-                        break;
-                    default:
-                        TweetList = TweetList.OrderByDescending(s => s.CreatedAt);
-                        break;
-                }
-
-                if (sortOrder != null)
-                {
-                    _logger.LogInformation("Sort order is... " + sortOrder);
-                }
             }
             catch(Exception ex)
             {
