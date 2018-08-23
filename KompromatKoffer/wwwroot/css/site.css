@@ -159,10 +159,18 @@ h4 {
     width: 85%
 }
 
-/*#tweetLink:hover {
+#tweetLink:hover {
         width:90%;
         font-size:1.2em;
-}*/
+}
+
+.twitter-tweet{
+    display:none!important;
+}
+
+#tweetLink:hover .twitter-tweet{
+    display:block;
+}
 
 a.tweetLink {
         display: block;

@@ -40,29 +40,31 @@
     {
 
 
-        <div id="tweetLink">
-            <a asp-page="/Database/PeopleDetail" asp-route-screenname="@x.TweetUser" asp-route-sinceDays="-7" class="dataBaseProfile"><i class="fas fa-user-circle"></i></a>
-            <a href="@x.TweetUrl" target="_blank" class="tweetLink">
-                <img src="@x.TweetUserPicture" />
-                <br>
-                @x.TweetUser
-                <br>
-                <p class="profileDesc">@x.TweetUserDesc</p>
+    <div id="tweetLink">
+        <a asp-page="/Database/PeopleDetail" asp-route-screenname="@x.TweetUser" asp-route-sinceDays="-7" class="dataBaseProfile"><i class="fas fa-user-circle"></i></a>
+        <a href="@x.TweetUrl" target="_blank" class="tweetLink">
+            <img src="@x.TweetUserPicture" />
+            <br>
+            @x.TweetUserName
+            <br>
+            <p class="profileDesc">@x.TweetUserDesc</p>
 
-                @Html.Raw(x.TweetText)
+            @Html.Raw(x.TweetText)
 
+            <hr class="IndexHR" />
 
+            <p class="socialIconsIndex">
+                <i class="fas fa-retweet"></i> @x.TweetFavoriteCount &emsp; <i class="fas fa-heart"></i> @x.TweetReTweetCount &emsp; @x.TweetCreatedAt.ToString("dd.MM.yy - H:mm")
+            </p>
 
-                <hr class="IndexHR" />
+        </a>
 
+        <!--    
+                <blockquote class="twitter-tweet" data-lang="en"><p lang="de" dir="ltr"><a href="@x.TweetUrl"></blockquote>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        -->
 
-                <p class="socialIconsIndex">
-                    <i class="fas fa-retweet"></i> @x.TweetReTweetCount &emsp; <i class="fas fa-heart"></i> @x.TweetFavoriteCount &emsp; @x.TweetCreatedAt.ToString("dd.MM.yy - H:mm")
-                </p>
-
-            </a>
-
-        </div>
+    </div>
 
     }
 

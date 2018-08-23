@@ -55,6 +55,7 @@ namespace KompromatKoffer
             services.AddHostedService<TwitterUserData>();
             services.AddHostedService<TwitterUserDailyData>();
             //services.AddHostedService<TwitterUserTimelineData>();
+            //services.AddHostedService<TwitterStreamCountUpdate>();
 
             services.AddHostedService<ConsumeScopedServiceHostedService>();
             services.AddScoped<IScopedProcessingService, ScopedProcessingService>();

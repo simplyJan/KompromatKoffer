@@ -76,64 +76,74 @@ namespace KompromatKoffer.Services
 
                     stream.MatchingTweetReceived += async (sender, args) =>
                     {
-                        if (args.Tweet.IsRetweet == true)
+                        if (args.MatchOn == stream.MatchOn)
                         {
-                            _logger.LogInformation("Skipped ReTweet...");
-                        }
-                        else
-                        {
-                            var tweet = Tweet.GetTweet(args.Tweet.Id);
-
-                            if (tweet.ExtendedTweet != null)
+                            if (args.Tweet.IsRetweet == true)
                             {
-
-                                var tweetDB = new TwitterStreamModel
-                                {
-                                    //Tweet Details
-                                    TweetID = tweet.Id,
-                                    TweetUserID = tweet.CreatedBy.Id,
-                                    TweetUser = tweet.CreatedBy.ScreenName,
-                                    TweetUserDesc = tweet.CreatedBy.Description,
-                                    TweetUserPicture = tweet.CreatedBy.ProfileImageUrlHttps,
-                                    TweetCreatedAt = tweet.CreatedAt,
-                                    TweetText = tweet.ExtendedTweet.Text,
-                                    TweetHashtags = tweet.ExtendedTweet.LegacyEntities.Hashtags,
-                                    TweetReTweetCount = tweet.RetweetCount,
-                                    TweetFavoriteCount = tweet.FavoriteCount,
-                                    TweetUrl = tweet.Url
-
-                                };
-
-                                _logger.LogInformation("New ExtendedTweet posted..." + tweet.Id);
-                                await Task.Delay(1);
-                                //Insert Tweet in DB
-                                colTS.Insert(tweetDB);
+                                _logger.LogInformation("Skipped ReTweet...");
                             }
                             else
                             {
-                                var tweetDB = new TwitterStreamModel
-                                {
-                                    //Tweet Details
-                                    TweetID = tweet.Id,
-                                    TweetUserID = tweet.CreatedBy.Id,
-                                    TweetUser = tweet.CreatedBy.ScreenName,
-                                    TweetUserDesc = tweet.CreatedBy.Description,
-                                    TweetUserPicture = tweet.CreatedBy.ProfileImageUrlHttps,
-                                    TweetCreatedAt = tweet.CreatedAt,
-                                    TweetText = tweet.Text,
-                                    TweetHashtags = tweet.Hashtags,
-                                    TweetReTweetCount = tweet.RetweetCount,
-                                    TweetFavoriteCount = tweet.FavoriteCount,
-                                    TweetUrl = tweet.Url
-                                };
+                                var tweet = Tweet.GetTweet(args.Tweet.Id);
 
-                                _logger.LogInformation("New Tweet posted..." + tweet.Id);
-                                await Task.Delay(1);
-                                //Insert Tweet in DB
-                                colTS.Insert(tweetDB);
+                                if (tweet.ExtendedTweet != null)
+                                {
+
+                                    var tweetDB = new TwitterStreamModel
+                                    {
+                                        //Tweet Details
+                                        TweetID = tweet.Id,
+                                        TweetUserID = tweet.CreatedBy.Id,
+                                        TweetUser = tweet.CreatedBy.ScreenName,
+                                        TweetUserName = tweet.CreatedBy.Name,
+                                        TweetUserDesc = tweet.CreatedBy.Description,
+                                        TweetUserPicture = tweet.CreatedBy.ProfileImageUrlHttps,
+                                        TweetCreatedAt = tweet.CreatedAt,
+                                        TweetText = tweet.ExtendedTweet.Text,
+                                        TweetHashtags = tweet.ExtendedTweet.LegacyEntities.Hashtags,
+                                        TweetReTweetCount = tweet.RetweetCount,
+                                        TweetFavoriteCount = tweet.FavoriteCount,
+                                        TweetUrl = tweet.Url
+
+                                    };
+
+                                    _logger.LogInformation("New ExtendedTweet posted..." + tweet.Id);
+                                    await Task.Delay(1);
+                                    //Insert Tweet in DB
+                                    colTS.Insert(tweetDB);
+                                }
+                                else
+                                {
+                                    var tweetDB = new TwitterStreamModel
+                                    {
+                                        //Tweet Details
+                                        TweetID = tweet.Id,
+                                        TweetUserID = tweet.CreatedBy.Id,
+                                        TweetUser = tweet.CreatedBy.ScreenName,
+                                        TweetUserName = tweet.CreatedBy.Name,
+                                        TweetUserDesc = tweet.CreatedBy.Description,
+                                        TweetUserPicture = tweet.CreatedBy.ProfileImageUrlHttps,
+                                        TweetCreatedAt = tweet.CreatedAt,
+                                        TweetText = tweet.Text,
+                                        TweetHashtags = tweet.Hashtags,
+                                        TweetReTweetCount = tweet.RetweetCount,
+                                        TweetFavoriteCount = tweet.FavoriteCount,
+                                        TweetUrl = tweet.Url
+                                    };
+
+                                    _logger.LogInformation("New Tweet posted..." + tweet.Id);
+                                    await Task.Delay(1);
+                                    //Insert Tweet in DB
+                                    colTS.Insert(tweetDB);
+
+                                }
 
                             }
-                           
+
+                        }
+                        else
+                        {
+                            _logger.LogInformation("...Tweet not matched..." + args.Tweet.Id);
                         }
                     };
 

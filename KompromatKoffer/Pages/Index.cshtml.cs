@@ -48,7 +48,6 @@ namespace KompromatKoffer.Pages
                     var completeDB = col.FindAll();
                     CompleteDB = completeDB;
 
-
                     /*
                     var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
 
@@ -117,6 +116,8 @@ namespace KompromatKoffer.Pages
                 int pageSize = 50;
                 TwitterStreamModel = await PaginatedList<TwitterStreamModel>.CreateAsync(
                 TweetList, pageIndex ?? 1, pageSize);
+
+
 
             }
             catch(Exception ex)

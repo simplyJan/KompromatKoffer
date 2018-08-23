@@ -13,6 +13,7 @@ namespace KompromatKoffer.Areas.Database.Model
         [BsonId]
         public long TweetID { get; set; }
         public string TweetUser { get; set; }
+        public string TweetUserName { get; set; }
         public long TweetUserID { get; set; }
         public string TweetUserPicture { get; set; }
         public string TweetUserDesc { get; set; }
