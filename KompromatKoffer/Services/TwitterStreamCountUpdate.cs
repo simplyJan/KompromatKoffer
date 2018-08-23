@@ -67,8 +67,19 @@ namespace KompromatKoffer.Services
                             {
                                 var tweetModel = new TwitterStreamModel
                                 {
+                                    TweetID = tweet.Id,
+                                    TweetUserID = tweet.CreatedBy.Id,
+                                    TweetUser = tweet.CreatedBy.ScreenName,
+                                    TweetUserName = tweet.CreatedBy.Name,
+                                    TweetUserDesc = tweet.CreatedBy.Description,
+                                    TweetUserPicture = tweet.CreatedBy.ProfileImageUrlHttps,
+                                    TweetCreatedAt = tweet.CreatedAt,
+                                    TweetText = tweet.Text,
+                                    TweetHashtags = tweet.Hashtags,
                                     TweetReTweetCount = tweet.RetweetCount,
-                                    TweetFavoriteCount = tweet.FavoriteCount
+                                    TweetFavoriteCount = tweet.FavoriteCount,
+                                    TweetUrl = tweet.Url
+
                                 };
 
                                 //tweetModel.TweetReTweetCount = tweet.RetweetCount;
@@ -76,7 +87,7 @@ namespace KompromatKoffer.Services
 
                                 _logger.LogInformation("Updated Counts for " + x.TweetID);
                                 colTS.Update(tweetModel);
-                                await Task.Delay(5000);
+                                await Task.Delay(10000);
                             }
 
 
