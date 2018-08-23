@@ -57,7 +57,10 @@ namespace KompromatKoffer.Services
                         // Get Datbase Connection 
                         var colTS = db.GetCollection<TwitterStreamModel>("TwitterStream");
 
-                        var willBeUpdated = colTS.FindAll().Where(s => s.TweetCreatedAt < DateTime.Now);
+                        var willBeUpdated = colTS.FindAll().Where(s => s.TweetCreatedAt > DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours));
+
+                        _logger.LogInformation(">>>>> willBEUpdated {1} - {0} ", DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours), willBeUpdated.Count());
+
 
                         foreach (var x in willBeUpdated)
                         {
