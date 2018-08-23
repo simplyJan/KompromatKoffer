@@ -33,14 +33,11 @@
 </div>
 
 
-
 <div class="lasthundred">
     <h4>Die letzten @Convert.ToString(Model.TweetList.Count()) Tweets aus dem Bundestag</h4>
 
     @foreach (var x in Model.TweetList)
     {
-
-
 
         <div id="tweetLink">
             <a asp-page="/Database/PeopleDetail" asp-route-screenname="@x.CreatedBy.ScreenName" asp-route-sinceDays="-7" class="dataBaseProfile"><i class="fas fa-user-circle"></i></a>

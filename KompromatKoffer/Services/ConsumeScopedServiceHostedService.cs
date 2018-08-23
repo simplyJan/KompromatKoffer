@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KompromatKoffer.Areas.Lists.Services
+namespace KompromatKoffer.Services
 {
     internal class ConsumeScopedServiceHostedService : IHostedService
     {

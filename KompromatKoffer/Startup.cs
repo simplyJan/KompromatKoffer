@@ -1,5 +1,4 @@
 ﻿using KompromatKoffer.Areas.Identity.Data;
-using KompromatKoffer.Hubs;
 using KompromatKoffer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,33 +44,26 @@ namespace KompromatKoffer
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
 
-
-            
-
-
             //Set DB to Update after StartUp
             Config.Parameter.DbLastUpdated = DateTime.Now;
             Config.Parameter.UserDailyDataLastUpdated = DateTime.Now.AddMinutes(5);
 
-
             // Add application services.
             services.AddSingleton<IEmailSender, EmailSender>();
-
 
             //Background Service for daily saving TwitterUser data to database
             services.AddHostedService<TwitterUserData>();
             services.AddHostedService<TwitterUserDailyData>();
             //services.AddHostedService<TwitterUserTimelineData>();
 
+            services.AddHostedService<ConsumeScopedServiceHostedService>();
+            services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+
             //Authorize for Admins
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
             });
-
-            services.AddSignalR();
-
-         
 
 
         }
@@ -104,15 +96,7 @@ namespace KompromatKoffer
 
             app.UseAuthentication();
 
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<UserStreamHub>("/userStreamHub");
-            });
-
-
-  
-
-
+    
             app.UseMvc();
 
         }
