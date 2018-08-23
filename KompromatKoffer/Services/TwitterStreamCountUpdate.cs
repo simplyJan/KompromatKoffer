@@ -59,7 +59,7 @@ namespace KompromatKoffer.Services
 
                         var willBeUpdated = colTS.FindAll().Where(s => s.TweetCreatedAt > DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours));
 
-                        _logger.LogInformation(">>>>> willBEUpdated {1} - {0} ", DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours), willBeUpdated.Count());
+                        _logger.LogInformation("Tweets that will be Updated right now {1} - {0} ", DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours), willBeUpdated.Count());
 
 
                         foreach (var x in willBeUpdated)
