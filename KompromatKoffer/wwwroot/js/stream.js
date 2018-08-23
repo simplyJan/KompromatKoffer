@@ -1,9 +1,4 @@
-﻿// The following sample code uses modern ECMAScript 6 features 
-// that aren't supported in Internet Explorer 11.
-// To convert the sample for environments that do not support ECMAScript 6, 
-// such as Internet Explorer 11, use a transpiler such as 
-// Babel at http://babeljs.io/.
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+﻿var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
@@ -21,7 +16,8 @@ document.getElementById("streamButton").addEventListener("click", (event) => __a
                 next: (item) => {
                     var div = document.createElement("div");
                     div.innerHTML = item;
-                    document.getElementById("messagesList").appendChild(div);
+                    var messageList = document.getElementById("messagesList")
+                    messageList.insertBefore(div, messageList.firstChild);
                 },
                 complete: () => {
                     var li = document.createElement("li");

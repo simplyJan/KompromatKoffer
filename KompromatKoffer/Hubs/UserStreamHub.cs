@@ -115,8 +115,6 @@ namespace KompromatKoffer.Hubs
                             TweetUser = tweet.CreatedBy.ScreenName,
                             TweetUserProfilePicture = tweet.CreatedBy.ProfileBackgroundImageUrlHttps,
                             TweetText = tweet.Text,
-                            TweetFullText = tweet.FullText,
-                            TweetExtendedText = tweet.ExtendedTweet.Text,
                             TweetHashtags = tweet.Hashtags,
                             TweetReTweetCount = tweet.RetweetCount,
                             TweetFavoriteCount = tweet.FavoriteCount,
@@ -126,6 +124,7 @@ namespace KompromatKoffer.Hubs
                         
                         //Write OEmbedTweet
                         await writer.WriteAsync(embedTweet.HTML);
+                        _logger.LogInformation("New Tweet posted..." + tweet.Id);
                     }
                 };
 
@@ -144,8 +143,8 @@ namespace KompromatKoffer.Hubs
                 _logger.LogInformation("Exceptions", ex);
             }
 
-            await Task.Delay(5);
-            writer.TryComplete();
+
+
         }
 
     }
