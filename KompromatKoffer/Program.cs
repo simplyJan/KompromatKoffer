@@ -16,19 +16,9 @@ namespace KompromatKoffer
 {
     public class Program
     {
-        public static string path = System.IO.Directory.GetCurrentDirectory();
-
-        public static string dataDirectory = @"\logs\";
-
-        public static string dataDirectoryLinux = @"/logs";
-
-        public static string logFilePath;
-
+        
         public static int Main(string[] args)
         {
-
-
-            CreateCheckDirectoryLog();
 
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
@@ -36,7 +26,7 @@ namespace KompromatKoffer
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .WriteTo.File(
-            logFilePath+"kklog.txt",
+            "log.txt",
             fileSizeLimitBytes: 1_000_000,
             rollOnFileSizeLimit: true,
             shared: true,
@@ -46,8 +36,6 @@ namespace KompromatKoffer
             try
             {
                 Log.Information("Starting web host");
-
-                Log.Information("LogFIlePath: " + logFilePath);
 
                 var host = CreateWebHostBuilder(args).Build();
 
@@ -75,48 +63,6 @@ namespace KompromatKoffer
             WebHost.CreateDefaultBuilder(args)
                 .UseSerilog()
                 .UseStartup<Startup>();
-
-        public static void CreateCheckDirectoryLog()
-        {
-            try
-            {
-                // Determine whether the directory exists.
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    if (System.IO.Directory.Exists(dataDirectoryLinux))
-                    {
-
-                        logFilePath = path + dataDirectoryLinux + "/";
-                        return;
-
-                    }
-                }
-                else
-                {
-                    if (System.IO.Directory.Exists(path + dataDirectory))
-                    {
-                        logFilePath = path + dataDirectory;
-                        return;
-                    }
-                }
-
-                // Try to create the directory.
-
-
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(path + dataDirectoryLinux);
-                }
-                else
-                {
-                    System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(path + dataDirectory);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("...directory creation failed: {0}...", e.ToString());
-            }
-
-        }
+ 
     }
 }
