@@ -457,7 +457,7 @@ a.imageLink p {
 }
 /*Icon Menu*/
 .iconHoverPages {
-    font-size: 22px;
+    font-size: 18px;
     margin: 0 auto;
     text-align: center;
     color: #27182b;
@@ -499,6 +499,7 @@ a.imageLink p {
 .iconMenu {
     position: fixed;
     width:36px;
+    margin-left:2px;
 }
 
 

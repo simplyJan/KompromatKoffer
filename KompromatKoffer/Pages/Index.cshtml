@@ -41,7 +41,7 @@
 
 
 <div class="lasthundred">
-    <h4>@Convert.ToString(Model.TwitterStreamModel.Count()) Tweets aus dem Bundestag auf dieser Seite</h4>
+    <h4>@Convert.ToString(Model.TwitterStreamModel.Count()) von @Convert.ToString(Model.CompleteDB.Count()) Tweets aus dem Bundestag</h4>
 
     @foreach (var x in Model.TwitterStreamModel)
     {
