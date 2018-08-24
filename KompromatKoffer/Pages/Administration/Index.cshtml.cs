@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using KompromatKoffer.Areas.Administration.Model;
@@ -161,7 +162,6 @@ namespace KompromatKoffer.Pages.Administration
             return Page();
 
         }
-
 
         public IActionResult OnPostSettings()
         {
@@ -333,6 +333,8 @@ namespace KompromatKoffer.Pages.Administration
 
             return Page();
         }
+
+        
 
 
     }

@@ -429,7 +429,7 @@ a.imageLink p {
 .interactionMenuBar {
     text-align: center;
     margin: 0 auto;
-    height: 46px;
+    height: 50px;
     padding: 5px;
 }
 
@@ -611,6 +611,12 @@ margin:0;
 
 input.settingssubmit{
     width:100%;
+}
+
+.logWindow{
+    width:100%;
+    margin-top:5px;
+    height:600px;
 }
 
 /*AccountMainView*/
