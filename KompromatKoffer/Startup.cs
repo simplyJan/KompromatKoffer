@@ -1,19 +1,15 @@
-﻿using KompromatKoffer.Areas.Identity.Data;
-using KompromatKoffer.Services;
+﻿using KompromatKoffer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
+
 
 namespace KompromatKoffer
 {
@@ -31,12 +27,6 @@ namespace KompromatKoffer
         {
             Configuration = configuration;
         }
-
-        public static string path = System.IO.Directory.GetCurrentDirectory();
-
-        public static string dataDirectory = @"\logs\";
-
-        public static string dataDirectoryLinux = @"/logs";
 
 
         public IConfiguration Configuration { get; }
@@ -88,18 +78,6 @@ namespace KompromatKoffer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, IServiceProvider services, ILoggerFactory loggerFactory)
         {
-            CreateCheckDirectoryLog();
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                loggerFactory.AddFile(path + dataDirectoryLinux + "kklog-{Date}.txt");
-            }
-            else
-            {
-
-                loggerFactory.AddFile(path + dataDirectory + "kklog-{Date}.txt");
-            }
-
 
             if (env.IsDevelopment())
             {
@@ -130,54 +108,6 @@ namespace KompromatKoffer
         }
 
 
-
-        public void CreateCheckDirectoryLog()
-        {
-            try
-            {
-                // Determine whether the directory exists.
-
-
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    if (System.IO.Directory.Exists(dataDirectoryLinux))
-                    {
-                        _logger.LogInformation("...the data path exists already...");
-                        return;
-                    }
-                }
-                else
-                {
-                    if (System.IO.Directory.Exists(path + dataDirectory))
-                    {
-                        _logger.LogInformation("...the data path exists already...");
-                        return;
-                    }
-                }
-
-                // Try to create the directory.
-
-
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(path + dataDirectoryLinux);
-                    _logger.LogInformation("...the data directory was created successfully at {0}...", System.IO.Directory.GetCreationTime(path + dataDirectoryLinux));
-                }
-                else
-                {
-                    System.IO.DirectoryInfo di = System.IO.Directory.CreateDirectory(path + dataDirectory);
-                    _logger.LogInformation("...the data directory was created successfully at {0}...", System.IO.Directory.GetCreationTime(path + dataDirectory));
-
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("...directory creation failed: {0}...", e.ToString());
-            }
-
-        }
         
     }
 
