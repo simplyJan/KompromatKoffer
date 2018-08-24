@@ -51,6 +51,17 @@ hr.IndexHR {
     background-color: #e3e7d3;
 }
 
+/*Brand Header*/
+.navbar-inverse .navbar-brand {
+    color: #e3e7d3;
+    margin-left: -15px;
+}
+
+
+.navbar-brand:hover {
+    color: #fbfbfb;
+}
+
 
 /* Navbar - The Main NavBar */
 .navbar-inverse .navbar-brand:hover,
@@ -98,11 +109,16 @@ hr.IndexHR {
 }
 
 .navbar-right i{
-    font-size:1.25em;
+    font-size:16px;
 }
 
 .navbar-right a {
     font-size: 1.25em;
+}
+
+.navbar-header i {
+    font-size: 16px;
+    color: #e3e7d3;
 }
 
 /*Text format*/
@@ -137,7 +153,6 @@ h4 {
 .lasthundred {
     font-size: 1.5em;
     margin: 0 auto;
-    margin-top:20px;
 }
 
 .lasthundred img {
@@ -256,9 +271,10 @@ a.dataBaseProfile:hover, a.dataBaseProfile:focus, a.dataBaseProfile:active {
     width:150px;
 }
 
-.form-horizontal{
-    width:150px;
-    margin:0 auto;
+
+.form-horizontal {
+    width: 150px;
+    margin: 0 auto;
 }
 /*Cookie Consent*/
 #cookieConsent {
@@ -399,10 +415,6 @@ a.imageLink p {
 
 
 
-
-
-
-
 .twitterUserPageing{
     width:112px;
     margin:0 auto;
@@ -429,12 +441,8 @@ a.imageLink p {
 .interactionMenuBar {
     text-align: center;
     margin: 0 auto;
-    height: 50px;
     padding: 5px;
 }
-
-
-
 
 /*Icon for TweetLists*/
 .socialIconsIndex {
@@ -477,7 +485,7 @@ a.imageLink p {
 
 
 .iconHoverPages:hover {
-    font-size: 32px;
+    /*font-size: 32px;*/
     color: #e3e7d3;
 }
 
@@ -485,6 +493,15 @@ a.imageLink p {
     font-size: 32px;
     color: #e3e7d3;
 }
+
+/*Icon Menu Bar*/
+
+.iconMenu {
+    position: fixed;
+    width:36px;
+}
+
+
 /*Footer NAV*/
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img {

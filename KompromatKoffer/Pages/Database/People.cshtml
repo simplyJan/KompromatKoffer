@@ -3,12 +3,8 @@
 @{
 }
 
+<div class="iconMenu">
 
-
-<div class="interactionMenuBar">
-    <form>
-        <input type="text" name="SearchString" class="twitterUserSearchInput" placeholder="Search...">
-    </form>
     <a asp-page="/Database/Global" asp-route-sinceDays="-7" title="Global Chart" class="iconHoverPages interactionMenu">
         <i class="fas fa-chart-line"></i>
 
@@ -37,6 +33,14 @@
        asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Likes">
         <i class="fas fa-heart"></i>
     </a>
+
+</div>
+
+<div class="interactionMenuBar">
+    <form>
+        <input type="text" name="SearchString" class="twitterUserSearchInput" placeholder="Search...">
+    </form>
+   
 
 
 </div>
