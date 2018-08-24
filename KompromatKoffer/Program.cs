@@ -47,6 +47,8 @@ namespace KompromatKoffer
             {
                 Log.Information("Starting web host");
 
+                Log.Information("LogFIlePath: " + logFilePath);
+
                 var host = CreateWebHostBuilder(args).Build();
 
                 using (var scope = host.Services.CreateScope())
@@ -86,6 +88,7 @@ namespace KompromatKoffer
 
                         logFilePath = path + dataDirectoryLinux + "/";
                         return;
+
                     }
                 }
                 else
