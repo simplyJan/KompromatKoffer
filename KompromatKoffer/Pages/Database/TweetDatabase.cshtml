@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model TweetDatabase
 @{
     ViewData["Title"] = "компроматkoffer.de - Kompromittiere den Bundestag";
 
@@ -8,7 +8,6 @@
 <div class="iconMenu">
     <a asp-page="/Database/People" title="Politiker Bestenliste" class="iconHoverPages interactionMenu"><i class="fas fa-user-circle"></i></a>
     <a asp-page="/Database/Global" asp-route-sinceDays="-7" title="Politiker Statistik" class="iconHoverPages interactionMenu"><i class="fas fa-chart-line"></i></a>
-    <a asp-page="/Database/TweetDatabase" title="Tweet Datenbank" class="iconHoverPages interactionMenu"><i class="fas fa-binoculars"></i></i></a>
     <a asp-page=""
        asp-route-sortOrder="@Model.FavCountSort"
        asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Most Likes"><i class="fas fa-heart"> </i></a>

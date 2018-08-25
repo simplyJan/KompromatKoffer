@@ -6,8 +6,8 @@
 }
 
 <div class="interactionMenuBar">
-    <a asp-page="/Database/People" title="Database" class="iconHoverPages interactionMenu">
-        <i class="fas fa-database"> </i>
+    <a asp-page="/Database/People" title="Politiker Bestenliste" class="iconHoverPages interactionMenu">
+        <i class="fas fa-user-circle"> </i>
         &nbsp;
     </a>
     <a asp-page=""
@@ -38,7 +38,7 @@
 
 <div class="GlobalChartView">
     @{
-    <h4>Globale Charts seit dem @DateTime.Today.AddDays(Model.SinceDays).ToString("dd.MM.yyyy") </h4>
+        <h4>Globale Charts seit dem @DateTime.Today.AddDays(Model.SinceDays).ToString("dd.MM.yyyy") </h4>
 
 
         List<string> allScreenNames = new List<string>();
@@ -83,7 +83,7 @@
     }
 
 
-    <canvas id="TwitterUserActivity" width="1000" height="1000"></canvas>  
+    <canvas id="TwitterUserActivity" width="1000" height="1000"></canvas>
     <script>
         var ctx = document.getElementById("TwitterUserActivity").getContext('2d');
         var myChart = new Chart(ctx, {
@@ -187,4 +187,4 @@
         });
     </script>
 
-    </div>
+</div>

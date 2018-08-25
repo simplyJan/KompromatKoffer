@@ -1,5 +1,6 @@
 ﻿using KompromatKoffer.Areas.Database.Model;
 using LiteDB;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -12,12 +13,13 @@ using Tweetinvi.Models;
 
 namespace KompromatKoffer.Pages
 {
-    public class IndexModel : PageModel
+    [Authorize]
+    public class TweetDatabase : PageModel
     {
 
-        private readonly ILogger<IndexModel> _logger;
+        private readonly ILogger<TweetDatabase> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public TweetDatabase(ILogger<TweetDatabase> logger)
         {
             _logger = logger;
         }
@@ -63,7 +65,7 @@ namespace KompromatKoffer.Pages
 
                     var tweets = completeDB;
 
-                    TweetList = tweets.Where(s => s.TweetCreatedAt > DateTime.Now.AddDays(TimeRange));
+                    TweetList = tweets;
 
                     if (searchString != null)
                     {
