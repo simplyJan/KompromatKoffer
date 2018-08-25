@@ -5,34 +5,23 @@
 
 <div class="iconMenu">
 
-    <a asp-page="/Database/Global" asp-route-sinceDays="-7" title="Global Chart" class="iconHoverPages interactionMenu">
-        <i class="fas fa-chart-line"></i>
+    <a asp-page="/Database/Global" asp-route-sinceDays="-7" title="Global Chart" class="iconHoverPages interactionMenu"><i class="fas fa-chart-line"></i></a>
 
-    </a>
-    &nbsp;
     <a asp-page=""
        asp-route-sortOrder="@Model.StatusCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Tweets">
-        <i class="fab fa-twitter"></i>
-    </a>
-    &nbsp;
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Tweets"><i class="fab fa-twitter"></i></a>
+
     <a asp-page=""
        asp-route-sortOrder="@Model.FollowersCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Followers">
-        <i class="fas fa-grin-hearts"></i>
-    </a>
-    &nbsp;
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Followers"><i class="fas fa-grin-hearts"></i></a>
+
     <a asp-page=""
        asp-route-sortOrder="@Model.FriendsCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Friends">
-        <i class="fas fa-meh-rolling-eyes"></i>
-    </a>
-    &nbsp;
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Friends"><i class="fas fa-meh-rolling-eyes"></i></a>
+
     <a asp-page=""
        asp-route-sortOrder="@Model.FavCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Likes">
-        <i class="fas fa-heart"></i>
-    </a>
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Likes"><i class="fas fa-heart"></i></a>
 
 </div>
 

@@ -320,10 +320,6 @@ a.imageLink p {
     text-align: center;
 }
 
-.twitterUserPosition {
-    color: #27182b;
-    font-size: 1.3em;
-}
 
 /*
     TwitterUserMainVIew
@@ -443,6 +439,7 @@ a.imageLink p {
     margin: 0 auto;
     padding: 5px;
 }
+
 
 /*Icon for TweetLists*/
 .socialIconsIndex {
@@ -703,6 +700,49 @@ input.settingssubmit{
         font-size: 1.3em;
         text-align: center;
     }
+
+}
+
+/*Big Screens Adjustments*/
+@media screen and (min-width: 768px) {
+
+.iconMenu {
+    margin: 0;
+    width: 44px;
+    background-color: #27182b;
+    height: 100%;
+    color: #440c50;
+}
+
+
+.iconHoverPages {
+    font-size: 36px;
+    color: #e3e7d3;
+    -webkit-transition: color 0.5s, font-size 0.5s, background-color 0.5s !important;
+    -moz-transition: color 0.5s, font-size 0.5s background-color 0.5s !important;
+    -o-transition: color 0.5s, font-size 0.5s background-color 0.5s !important;
+    transition: color 0.5s, font-size 0.5s background-color 0.5s !important;
+    padding: 4px;
+}
+
+.iconHoverPages:hover {
+    padding: 4px;
+    font-size:44px;
+}
+
+.navbar-inverse .navbar-brand{
+    margin-left:0px!important;
+    font-size:36px;
+}
+
+
+.twitterUserPosition {
+    color: #27182b;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+
 
 }
 

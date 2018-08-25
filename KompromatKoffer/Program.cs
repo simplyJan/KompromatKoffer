@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,18 +10,16 @@ namespace KompromatKoffer
 {
     public class Program
     {
-        
         public static int Main(string[] args)
         {
-
-            Log.Logger = new LoggerConfiguration()
+                Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .WriteTo.File(
             "log.txt",
-            fileSizeLimitBytes: 1_000_000,
+            fileSizeLimitBytes: 10_000_000,
             rollOnFileSizeLimit: true,
             shared: true,
             flushToDiskInterval: TimeSpan.FromSeconds(1))

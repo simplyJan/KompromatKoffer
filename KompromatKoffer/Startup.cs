@@ -57,13 +57,34 @@ namespace KompromatKoffer
             services.AddSingleton<IEmailSender, EmailSender>();
 
             //Background Service for daily saving TwitterUser data to database
-            services.AddHostedService<TwitterUserData>();
-            services.AddHostedService<TwitterUserDailyData>();
-            //services.AddHostedService<TwitterUserTimelineData>();
-            services.AddHostedService<TwitterStreamCountUpdate>();
+            if (Config.Parameter.SaveToDatabase == true)
+            {
+                services.AddHostedService<TwitterUserData>();
+            }
 
-            services.AddHostedService<ConsumeScopedServiceHostedService>();
-            services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+            //Get the TwitterUser on a daily basis
+            if (Config.Parameter.TwitterUserDaily == true)
+            {
+                services.AddHostedService<TwitterUserDailyData>();
+            }
+
+            //Currently no TimeLineDatabase
+            //services.AddHostedService<TwitterUserTimelineData>();
+
+            //Update the TwitterCounts for the TwitterStream
+            if (Config.Parameter.UpdateTwittterCounts == true)
+            {
+                services.AddHostedService<TwitterStreamCountUpdate>();
+            }
+
+
+            if (Config.Parameter.TwitterStream == true)
+            {
+                services.AddHostedService<ConsumeScopedServiceHostedService>();
+                services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+            }
+
+            
 
             //Authorize for Admins
             services.AddAuthorization(options =>
