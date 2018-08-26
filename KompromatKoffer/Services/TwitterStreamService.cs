@@ -33,7 +33,7 @@ namespace KompromatKoffer.Services
 
         public async void DoWork()
         {
-            _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ TwitterStream Service is working " + DateTime.Now);
+            _logger.LogInformation("====> TwitterStream Service is working " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
             try
             {
@@ -57,7 +57,7 @@ namespace KompromatKoffer.Services
                     var AllMembers = list.GetMembers(list.MemberCount);
                     AllListMembers = AllMembers;
 
-                    _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ Members to Follow: " + AllMembers.Count());
+                    _logger.LogInformation("====> Members to Follow: " + AllMembers.Count());
 
                     //Create Stream
                     var stream = Tweetinvi.Stream.CreateFilteredStream();
@@ -143,7 +143,7 @@ namespace KompromatKoffer.Services
                         }
                         else
                         {
-                            _logger.LogInformation("...Tweet not matched..." + args.Tweet.Id);
+                            _logger.LogInformation(">> Tweet not matched..." + args.Tweet.Id);
                         }
                     };
 

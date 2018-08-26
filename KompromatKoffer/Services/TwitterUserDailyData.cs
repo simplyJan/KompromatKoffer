@@ -30,7 +30,7 @@ namespace KompromatKoffer.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Twitter User Daily Service is starting.");
+            _logger.LogInformation("====> TwitterUserDailyService is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromMinutes(Config.Parameter.TwitterUserDailyUpdateInterval));
@@ -40,7 +40,7 @@ namespace KompromatKoffer.Services
 
         private void DoWork(object state)
         {
-            _logger.LogInformation("Twitter User Daily Service is working.");
+            _logger.LogInformation("====> TwitterUserDailyService is working. " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
             Task.Delay(Config.Parameter.TwitterUserDailyTaskDelay);
 
@@ -87,11 +87,11 @@ namespace KompromatKoffer.Services
 
                                 //Create new database entry for given user
                                 colTUD.Insert(twitterUserDaily);
-                                _logger.LogInformation("...created new dbentry => " + x.ScreenName + " on " + DateTime.Now.ToString("dd MM yy - hh:mm:ss"));
+                                _logger.LogInformation(">> TU24...created new dbentry => " + x.ScreenName + " on " + DateTime.Now.ToString("dd MM yy - hh:mm:ss"));
                             }
                             else
                             {
-                                _logger.LogInformation("TU24...already uptodate => " + x.ScreenName);
+                                _logger.LogInformation(">> TU24...already uptodate => " + x.ScreenName);
                             }
 
                             Task.Delay(1000);
@@ -125,7 +125,7 @@ namespace KompromatKoffer.Services
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Twitter User Daily Service is stopping.");
+            _logger.LogInformation("====> TwitterUserDailyService is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 

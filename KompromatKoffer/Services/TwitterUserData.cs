@@ -30,7 +30,7 @@ namespace KompromatKoffer.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Twitter User Data Service is starting.");
+            _logger.LogInformation("====> TwitterUserData Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromMinutes(Config.Parameter.TwitterUserUpdateInterval));
@@ -40,7 +40,7 @@ namespace KompromatKoffer.Services
 
         private void DoWork(object state)
         {
-            _logger.LogInformation("Twitter User Data Service - " + DateTime.Now);
+            _logger.LogInformation("====> TwitterUserData Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
             Task.Delay(Config.Parameter.TaskDelay);
 
@@ -180,7 +180,7 @@ namespace KompromatKoffer.Services
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Twitter User Data Service is stopping.");
+            _logger.LogInformation("====> TwitterUserData Service is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 

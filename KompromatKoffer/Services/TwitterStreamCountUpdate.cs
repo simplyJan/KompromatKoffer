@@ -30,7 +30,7 @@ namespace KompromatKoffer.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ TwitterStreamCountUpdate Service is starting.");
+            _logger.LogInformation("====> TwitterStreamCountUpdate Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromMinutes(Config.Parameter.TwitterStreamCountUpdateInterval));
@@ -40,7 +40,7 @@ namespace KompromatKoffer.Services
 
         private async void DoWork(object state)
         {
-            _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ TwitterStreamCountUpdate Service is working.");
+            _logger.LogInformation("====> TwitterStreamCountUpdate Service is working.");
 
             await Task.Delay(Config.Parameter.TwitterStreamCountTaskDelay);
 
@@ -59,7 +59,7 @@ namespace KompromatKoffer.Services
 
                         var willBeUpdated = colTS.FindAll().Where(s => s.TweetCreatedAt > DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours));
 
-                        _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ Tweets that will be Updated right now {1} - {0} ", DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours), willBeUpdated.Count());
+                        _logger.LogInformation("====> Tweets that will be Updated right now {1} - {0} ", DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours), willBeUpdated.Count());
 
 
                         foreach (var x in willBeUpdated)
@@ -121,7 +121,7 @@ namespace KompromatKoffer.Services
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ TwitterStreamCountUpdate Service is stopping.");
+            _logger.LogInformation("====> TwitterStreamCountUpdate Service is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 

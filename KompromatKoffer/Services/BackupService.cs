@@ -31,7 +31,7 @@ namespace KompromatKoffer.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation(" ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ BackupService is starting.");
+            _logger.LogInformation("====> BackupService is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromHours(Config.Parameter.DBBackupSpawn));
@@ -41,7 +41,7 @@ namespace KompromatKoffer.Services
 
         private void DoWork(object state)
         {
-            _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ BackupService Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
+            _logger.LogInformation("====> BackupService Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
             Task.Delay(Config.Parameter.TaskDelay);
 
@@ -106,7 +106,7 @@ namespace KompromatKoffer.Services
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ BackupService is stopping.");
+            _logger.LogInformation("====> BackupService is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 
