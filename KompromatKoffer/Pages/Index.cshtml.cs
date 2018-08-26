@@ -124,6 +124,11 @@ namespace KompromatKoffer.Pages
 
 
             }
+            catch(LiteException ex)
+            {
+                _logger.LogInformation("Error with LiteDB... " + ex);
+
+            }
             catch(Exception ex)
             {
                 _logger.LogInformation("Error with tweetinvi... " + ex);

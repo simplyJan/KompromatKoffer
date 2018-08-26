@@ -39,7 +39,7 @@ namespace KompromatKoffer.Services
             {
                 var scopedProcessingService =
                     scope.ServiceProvider
-                        .GetRequiredService<IScopedProcessingService>();
+                        .GetRequiredService<TwitterStreamService>();
                 
                 scopedProcessingService.DoWork();
             }

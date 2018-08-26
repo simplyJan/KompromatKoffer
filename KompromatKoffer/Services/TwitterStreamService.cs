@@ -13,12 +13,12 @@ using Tweetinvi.Streaming;
 
 namespace KompromatKoffer.Services
 {    
-    internal interface IScopedProcessingService
+    internal interface TwitterStreamService
     {
         void DoWork();
     }
 
-    internal class ScopedProcessingService : IScopedProcessingService
+    internal class ScopedProcessingService : TwitterStreamService
     {
         private readonly ILogger _logger;
 
@@ -33,7 +33,7 @@ namespace KompromatKoffer.Services
 
         public async void DoWork()
         {
-            _logger.LogInformation("TwitterStream Service is working " + DateTime.Now);
+            _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ TwitterStream Service is working " + DateTime.Now);
 
             try
             {
@@ -48,7 +48,7 @@ namespace KompromatKoffer.Services
 
                     RateLimit.QueryAwaitingForRateLimit += (sender, args) =>
                     {
-                        _logger.LogInformation("Is awaiting for rate limits... " + args.Query);
+                        _logger.LogInformation(">> Is awaiting for rate limits... " + args.Query);
                     };
 
                     //Get TwitterList
@@ -57,18 +57,18 @@ namespace KompromatKoffer.Services
                     var AllMembers = list.GetMembers(list.MemberCount);
                     AllListMembers = AllMembers;
 
-                    _logger.LogInformation("Members to Follow: " + AllMembers.Count());
+                    _logger.LogInformation("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ Members to Follow: " + AllMembers.Count());
 
                     //Create Stream
                     var stream = Tweetinvi.Stream.CreateFilteredStream();
 
-                    _logger.LogInformation("Start UserStreams");
+                    _logger.LogInformation(">> Start UserStreams");
 
                     //Foreach Member in List addfollow stream
                     foreach (var item in AllMembers.Select((value, index) => new { value, index }))
                     {
                         stream.AddFollow(item.value.UserIdentifier);
-                        _logger.LogInformation("{1} Added User {0} to stream...", item.value.UserIdentifier, item.index);
+                        //_logger.LogInformation("{1} Added User {0} to stream...", item.value.UserIdentifier, item.index);
                     }
 
                     //Only Match the addfollows
@@ -80,7 +80,7 @@ namespace KompromatKoffer.Services
                         {
                             if (args.Tweet.IsRetweet == true)
                             {
-                                _logger.LogInformation("Skipped ReTweet...");
+                                _logger.LogInformation(">> Skipped ReTweet...");
                             }
                             else
                             {
@@ -107,7 +107,7 @@ namespace KompromatKoffer.Services
 
                                     };
 
-                                    _logger.LogInformation("New ExtendedTweet posted..." + tweet.Id);
+                                    _logger.LogInformation(">> New ExtendedTweet posted..." + tweet.Id);
                                     await Task.Delay(1);
                                     //Insert Tweet in DB
                                     colTS.Insert(tweetDB);
@@ -131,7 +131,7 @@ namespace KompromatKoffer.Services
                                         TweetUrl = tweet.Url
                                     };
 
-                                    _logger.LogInformation("New Tweet posted..." + tweet.Id);
+                                    _logger.LogInformation(">> New Tweet posted..." + tweet.Id);
                                     await Task.Delay(1);
                                     //Insert Tweet in DB
                                     colTS.Insert(tweetDB);

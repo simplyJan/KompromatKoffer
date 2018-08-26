@@ -76,22 +76,26 @@ namespace KompromatKoffer
             {
                 services.AddHostedService<TwitterStreamCountUpdate>();
             }
-
-
-            if (Config.Parameter.TwitterStream == true)
+         
+            if(Config.Parameter.DoBackup == true)
             {
-                services.AddHostedService<ConsumeScopedServiceHostedService>();
-                services.AddScoped<IScopedProcessingService, ScopedProcessingService>();
+                services.AddHostedService<BackupService>();
             }
 
             
-
             //Authorize for Admins
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
             });
 
+
+            //TwitterStream
+            if (Config.Parameter.TwitterStream == true)
+            {
+                services.AddHostedService<ConsumeScopedServiceHostedService>();
+                services.AddScoped<TwitterStreamService, ScopedProcessingService>();
+            }
 
         }
 

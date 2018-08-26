@@ -37,6 +37,8 @@ namespace KompromatKoffer.Pages.Database
 
         public LiteCollection<TwitterUserTimelineModel> TwitterUserTimelineData;
 
+        public LiteCollection<TwitterStreamModel> TwitterStreamData;
+
         [BindProperty]
         public string CurrentUserScreenname { get; set; }
 
@@ -77,8 +79,11 @@ namespace KompromatKoffer.Pages.Database
                     var col2 = db.GetCollection<TwitterUserModel>("TwitterUser");
                     TwitterUserData = col2;
 
-                    var col3 = db.GetCollection<TwitterUserTimelineModel>("TwitterUserTimeline");
-                    TwitterUserTimelineData = col3;
+                    //var col3 = db.GetCollection<TwitterUserTimelineModel>("TwitterUserTimeline");
+                    //TwitterUserTimelineData = col3;
+
+                    var col4 = db.GetCollection<TwitterStreamModel>("TwitterStream");
+                    TwitterStreamData = col4;
 
 
                 }

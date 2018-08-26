@@ -12,13 +12,37 @@ namespace KompromatKoffer
     {
         public static int Main(string[] args)
         {
-                Log.Logger = new LoggerConfiguration()
+
+            string FileName = "log.txt";
+            string TargetPath;
+            string SourcePath = System.IO.Directory.GetCurrentDirectory();
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                TargetPath = SourcePath + @"/logs/";
+            }
+            else
+            {
+                TargetPath = SourcePath + @"\logs\";
+            }
+
+            // Use Path class to manipulate file and directory paths.
+            string sourceFile = System.IO.Path.Combine(SourcePath, FileName);
+            string targetFile = System.IO.Path.Combine(TargetPath, FileName);
+
+            // To copy a folder's contents to a new location:
+            // Create a new target folder, if necessary.
+            if (!System.IO.Directory.Exists(TargetPath))
+            {
+                System.IO.Directory.CreateDirectory(TargetPath);
+            }
+
+            Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
             .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .WriteTo.File(
-            "log.txt",
+            targetFile,
             fileSizeLimitBytes: 10_000_000,
             rollOnFileSizeLimit: true,
             shared: true,
