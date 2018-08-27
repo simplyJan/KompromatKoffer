@@ -51,7 +51,7 @@ namespace KompromatKoffer
    
             try
             {
-                Log.Information("Starting web host");
+                Log.Information("===========> Starting web host " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
                 var host = CreateWebHostBuilder(args).Build();
 

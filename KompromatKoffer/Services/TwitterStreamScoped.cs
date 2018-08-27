@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace KompromatKoffer.Services
 {
-    internal class ConsumeScopedServiceHostedService : IHostedService
+    internal class TwitterStreamScoped : IHostedService
     {
         private readonly ILogger _logger;
 
-        public ConsumeScopedServiceHostedService(IServiceProvider services,
-            ILogger<ConsumeScopedServiceHostedService> logger)
+        public TwitterStreamScoped(IServiceProvider services,
+            ILogger<TwitterStreamScoped> logger)
         {
             Services = services;
             _logger = logger;
@@ -23,7 +23,7 @@ namespace KompromatKoffer.Services
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation(
-                "Consume Scoped Service Hosted Service is starting.");
+                "===========> TwitterStreamScopedService is starting.");
 
             DoWork();
 
@@ -33,7 +33,7 @@ namespace KompromatKoffer.Services
         private void DoWork()
         {
             _logger.LogInformation(
-                "Consume Scoped Service Hosted Service is working.");
+                "===========> TwitterStreamScopedService is working. " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
             using (var scope = Services.CreateScope())
             {
@@ -48,7 +48,7 @@ namespace KompromatKoffer.Services
         public Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation(
-                "Consume Scoped Service Hosted Service is stopping.");
+                "===========> TwitterStreamScopedService is stopping.");
 
             return Task.CompletedTask;
         }

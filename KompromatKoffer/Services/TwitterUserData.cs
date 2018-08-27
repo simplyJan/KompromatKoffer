@@ -30,7 +30,7 @@ namespace KompromatKoffer.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("====> TwitterUserData Service is starting.");
+            _logger.LogInformation("===========> TwitterUserData Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromMinutes(Config.Parameter.TwitterUserUpdateInterval));
@@ -40,7 +40,7 @@ namespace KompromatKoffer.Services
 
         private void DoWork(object state)
         {
-            _logger.LogInformation("====> TwitterUserData Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
+            _logger.LogInformation("===========> TwitterUserData Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
             Task.Delay(Config.Parameter.TaskDelay);
 
@@ -105,7 +105,7 @@ namespace KompromatKoffer.Services
 
                                 //Create new database entry for given user
                                 col.Insert(twitterUser);
-                                _logger.LogInformation("...created new dbentry => " + x.ScreenName);
+                                _logger.LogInformation(">> ...created new dbentry => " + x.ScreenName);
 
                             }
                             else
@@ -136,18 +136,18 @@ namespace KompromatKoffer.Services
 
                                     //Update User if name is not null and if the saveinterval is reached^^
                                     col.Update(twitterUser);
-                                    _logger.LogInformation("...updated dbentry => " + x.ScreenName);
+                                    _logger.LogInformation(">> ...updated dbentry => " + x.ScreenName);
 
                                 }
                                 else
                                 {
                                     if (id != null)
                                     {
-                                        _logger.LogInformation("TUD...already updated => " + x.ScreenName);
+                                        _logger.LogInformation(">> TUD...already updated => " + x.ScreenName);
                                     }
                                     else
                                     {
-                                        _logger.LogInformation("...not found => " + x.ScreenName);
+                                        _logger.LogInformation(">> ...not found => " + x.ScreenName);
                                     }
                                 }
                             }
@@ -180,7 +180,7 @@ namespace KompromatKoffer.Services
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("====> TwitterUserData Service is stopping.");
+            _logger.LogInformation("===========> TwitterUserData Service is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 

@@ -56,47 +56,46 @@ namespace KompromatKoffer
             // Add application services.
             services.AddSingleton<IEmailSender, EmailSender>();
 
-            //Background Service for daily saving TwitterUser data to database
-            if (Config.Parameter.SaveToDatabase == true)
+            if (Config.Parameter.SwitchOnAllServices == true)
             {
-                services.AddHostedService<TwitterUserData>();
+                //Background Service for daily saving TwitterUser data to database
+                if (Config.Parameter.SaveToDatabase == true)
+                {
+                    services.AddHostedService<TwitterUserData>();
+                }
+
+                //Get the TwitterUser on a daily basis
+                if (Config.Parameter.TwitterUserDaily == true)
+                {
+                    services.AddHostedService<TwitterUserDailyData>();
+                }
+
+                //Update the TwitterCounts for the TwitterStream
+                if (Config.Parameter.UpdateTwittterCounts == true)
+                {
+                    services.AddHostedService<TwitterStreamCountUpdate>();
+                }
+
+                if (Config.Parameter.DoBackup == true)
+                {
+                    services.AddHostedService<BackupService>();
+                }
+
+
+                //Authorize for Admins
+                services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
+                });
+
+
+                //TwitterStream
+                if (Config.Parameter.TwitterStream == true)
+                {
+                    services.AddHostedService<TwitterStreamScoped>();
+                    services.AddScoped<TwitterStreamService, ScopedProcessingService>();
+                }
             }
-
-            //Get the TwitterUser on a daily basis
-            if (Config.Parameter.TwitterUserDaily == true)
-            {
-                services.AddHostedService<TwitterUserDailyData>();
-            }
-
-            //Currently no TimeLineDatabase
-            //services.AddHostedService<TwitterUserTimelineData>();
-
-            //Update the TwitterCounts for the TwitterStream
-            if (Config.Parameter.UpdateTwittterCounts == true)
-            {
-                services.AddHostedService<TwitterStreamCountUpdate>();
-            }
-         
-            if(Config.Parameter.DoBackup == true)
-            {
-                services.AddHostedService<BackupService>();
-            }
-
-            
-            //Authorize for Admins
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
-            });
-
-
-            //TwitterStream
-            if (Config.Parameter.TwitterStream == true)
-            {
-                services.AddHostedService<ConsumeScopedServiceHostedService>();
-                services.AddScoped<TwitterStreamService, ScopedProcessingService>();
-            }
-
         }
 
 

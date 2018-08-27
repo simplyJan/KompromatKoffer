@@ -30,7 +30,7 @@ namespace KompromatKoffer.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("====> TwitterUserDailyService is starting.");
+            _logger.LogInformation("===========> TwitterUserDailyService is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromMinutes(Config.Parameter.TwitterUserDailyUpdateInterval));
@@ -40,7 +40,7 @@ namespace KompromatKoffer.Services
 
         private void DoWork(object state)
         {
-            _logger.LogInformation("====> TwitterUserDailyService is working. " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
+            _logger.LogInformation("===========> TwitterUserDailyService is working. " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
             Task.Delay(Config.Parameter.TwitterUserDailyTaskDelay);
 
@@ -94,7 +94,7 @@ namespace KompromatKoffer.Services
                                 _logger.LogInformation(">> TU24...already uptodate => " + x.ScreenName);
                             }
 
-                            Task.Delay(1000);
+                            Task.Delay(Config.Parameter.TwitterUserDailyWriteDelay);
                         }
 
 
@@ -125,7 +125,7 @@ namespace KompromatKoffer.Services
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("====> TwitterUserDailyService is stopping.");
+            _logger.LogInformation("===========> TwitterUserDailyService is stopping.");
 
             _timer?.Change(Timeout.Infinite, 0);
 

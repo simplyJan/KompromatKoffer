@@ -32,7 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="dbbackup\" />
     <Folder Include="Hubs\" />
+    <Folder Include="logs\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
