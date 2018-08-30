@@ -226,13 +226,7 @@
 
 @{
     var userTweets = Model.TwitterStreamData.Find(s => s.TweetUser == Model.CurrentUserScreenname);
-
-
-
-
 }
-
-
 
 <div class="lasthundred">
     <h4>@Convert.ToString(userTweets.Count()) Tweets </h4>
