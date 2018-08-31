@@ -89,6 +89,13 @@
 
 }
 
+@{
+
+    var userTweets = Model.TwitterStreamData.Find(s => s.TweetUser == Model.CurrentUserScreenname);
+
+
+}
+
 <div class="TwitterUserTimline">
     <h4>Charts seit dem @DateTime.Today.AddDays(Model.SinceDays).ToString("dd.MM.yyyy") </h4>
 
@@ -220,13 +227,51 @@
     </script>
 
 
+    <h4>Hashtags die dieser Politiker nutzt...</h4>
+
+    @{
+
+        List<string> hashTagList = new List<string>();
+
+
+        @foreach (var hashtags in userTweets)
+        {
+
+            var hashTags = hashtags.TweetHashtags;
+
+
+            foreach (var member in hashTags)
+            {
+
+                hashTagList.Add(member.ToString());
+
+            }
+
+
+        }
+    }
+
+
+
+
+    @{
+        var hashTagListClean = hashTagList.Distinct().ToList();
+    }
+
+    @foreach (var hashme in hashTagListClean)
+    {
+        string hashtag = hashme + " ";
+
+        <a href="https://twitter.com/search?q=@hashtag.Replace("#","%23")" target="_blank">@hashtag</a>
+
+    }
+
+
+
+
 </div>
 
 <!--UserTweets-->
-
-@{
-    var userTweets = Model.TwitterStreamData.Find(s => s.TweetUser == Model.CurrentUserScreenname);
-}
 
 <div class="lasthundred">
     <h4>@Convert.ToString(userTweets.Count()) Tweets </h4>
