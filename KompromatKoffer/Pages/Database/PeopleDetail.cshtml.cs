@@ -67,6 +67,7 @@ namespace KompromatKoffer.Pages.Database
 
             #region Database Connection - get TwitterUserDailyCollection
 
+            //Getting the collections
             try
             {
 
@@ -88,7 +89,11 @@ namespace KompromatKoffer.Pages.Database
 
                 }
             }
-            catch(Exception ex)
+            catch (LiteException ex)
+            {
+                _logger.LogInformation("LiteDB Exception " + ex);
+            }
+            catch (Exception ex)
             {
                 _logger.LogInformation("Exception " + ex);
             }
@@ -98,123 +103,42 @@ namespace KompromatKoffer.Pages.Database
 
             SinceDays = sinceDays;
 
-            //Get UserTimeline with screenname - doh!
-            //await GetUserTimeline(screenname, sortOrder);
+            /*
+            //Sorting - CUrrently off
+            FavCountSort = sortOrder == "FavCount_Desc" ? "FavCount" : "FavCount_Desc";
+            CreatedAtSort = sortOrder == "CreatedAtDate_desc" ? "CreatedAtDate" : "CreatedAtDate_desc";
+            RetweetCountSort = sortOrder == "RetweetCount_Desc" ? "RetweetCount" : "RetweetCount_Desc";
 
+            switch (sortOrder)
+            {
+                case "FavCount":
+                    AllTweetsFromUser = AllTweetsFromUser.OrderBy(s => s.FavoriteCount).ToList();
+                    break;
+                case "FavCount_Desc":
+                    AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.FavoriteCount).ToList();
+                    break;
+                case "RetweetCount":
+                    AllTweetsFromUser = AllTweetsFromUser.OrderBy(s => s.RetweetCount).ToList();
+                    break;
+                case "RetweetCount_Desc":
+                    AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.RetweetCount).ToList();
+                    break;
+                case "CreatedAtDate":
+                    AllTweetsFromUser = AllTweetsFromUser.OrderBy(s => s.CreatedAt).ToList();
+                    break;
+                case "CreatedAtDate_Desc":
+                    AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.CreatedAt).ToList();
+                    break;
+                default:
+                    AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.CreatedAt).ToList();
+                    break;
+
+
+
+
+            }
+            */
         }
-
-        public async Task GetUserTimeline(string currentUserScreenname, string sortOrder)
-        {
-            ExceptionHandler.SwallowWebExceptions = false;
-            try
-            {
-                //Sorting
-                CurrentSort = sortOrder;
-
-                //Check for Rate Limits
-                RateLimit.RateLimitTrackerMode = RateLimitTrackerMode.TrackAndAwait;
-
-                RateLimit.QueryAwaitingForRateLimit += (sender, args) =>
-                {
-                    _logger.LogInformation("Is awaiting for rate limits... " + args.Query);
-                };
-
-                    // Get user from twitter using screenname
-                var user = Tweetinvi.User.GetUserFromScreenName(currentUserScreenname);
-                CurrentTwitterUser = user;
-                var userIdentifier = user.UserIdentifier;
-
-                CurrentUserScreenname = currentUserScreenname;
-
-                #region Old Grab Timeline from Twitter
-                /*
-
-                var lastTweets = Timeline.GetUserTimeline(currentUserScreenname, 15).ToArray();
-
-                var allTweets = new List<ITweet>(lastTweets);
-                var beforeLast = allTweets;
-
-                //Get more Tweets from User
-                while (lastTweets.Length > 0 && allTweets.Count <= 30)
-                {
-                    var idOfOldestTweet = lastTweets.Select(x => x.Id).Min();
-
-                    var numberOfTweetsToRetrieve = allTweets.Count > 15 ? 30 - allTweets.Count : 15;
-
-                    // Get the UserTimeline
-                    // Get more control over the request with a UserTimelineParameters
-                    var userTimelineParameters = new UserTimelineParameters()
-                    {
-                        MaximumNumberOfTweetsToRetrieve = numberOfTweetsToRetrieve,
-                        IncludeRTS = false,
-                        ExcludeReplies = true,
-                        MaxId = idOfOldestTweet - 1
-                    };
-
-
-                    lastTweets = Timeline.GetUserTimeline(currentUserScreenname, userTimelineParameters).ToArray();
-                    allTweets.AddRange(lastTweets);
-
-                    //var userTimeline = Timeline.GetUserTimeline(userIdentifier, userTimelineParameters);
-                    //TwitterUserTimeline = userTimeline;
-
-                }
-
-                AllTweetsFromUser = allTweets;
-                */
-
-
-                #endregion
-
-
-                //Sorting
-                FavCountSort = sortOrder == "FavCount_Desc" ? "FavCount" : "FavCount_Desc";
-                CreatedAtSort = sortOrder == "CreatedAtDate_desc" ? "CreatedAtDate" : "CreatedAtDate_desc";
-                RetweetCountSort = sortOrder == "RetweetCount_Desc" ? "RetweetCount" : "RetweetCount_Desc";
-
-                switch (sortOrder)
-                {
-                    case "FavCount":
-                        AllTweetsFromUser = AllTweetsFromUser.OrderBy(s => s.FavoriteCount).ToList();
-                        break;
-                    case "FavCount_Desc":
-                        AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.FavoriteCount).ToList();
-                        break;
-                    case "RetweetCount":
-                        AllTweetsFromUser = AllTweetsFromUser.OrderBy(s => s.RetweetCount).ToList();
-                        break;
-                    case "RetweetCount_Desc":
-                        AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.RetweetCount).ToList();
-                        break;
-                    case "CreatedAtDate":
-                        AllTweetsFromUser = AllTweetsFromUser.OrderBy(s => s.CreatedAt).ToList();
-                        break;
-                    case "CreatedAtDate_Desc":
-                        AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.CreatedAt).ToList();
-                        break;
-                    default:
-                        AllTweetsFromUser = AllTweetsFromUser.OrderByDescending(s => s.CreatedAt).ToList();
-                        break;
-                }
-
-                await Task.Delay(1);
-
-            }
-            catch (TwitterException ex)
-            {
-                _logger.LogInformation("Error with tweetinvi... " + ex);
-            }
-            catch (ArgumentException ex)
-            {
-                _logger.LogInformation("ArgumentException... " + ex);
-            }
-            catch (Exception error)
-            {
-                _logger.LogInformation("Error... " + error);
-            }
-        }
-
-
 
     }
 }
