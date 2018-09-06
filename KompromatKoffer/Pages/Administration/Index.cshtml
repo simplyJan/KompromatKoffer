@@ -19,12 +19,10 @@
                     <input type="text" asp-for="ListSettings.ListName" />
                 </p>
                 <p>
-
                     <label for="istSettings.ListOwner">ListOwner</label>
                     <input type="text" asp-for="ListSettings.ListOwner" />
                 </p>
                 <p>
-
                     <label for="ListSettings.TweetsRetrieved">TweetsRetrieved</label>
                     <input type="number" asp-for="ListSettings.TweetsRetrieved" />
                 </p>
@@ -33,13 +31,6 @@
                     <input type="number" asp-for="ListSettings.UpdateDelay" />
                 </p>
                 <p>
-
-                    <label for="ListSettings.TaskDelay">TaskDelay</label>
-                    <input type="number" asp-for="ListSettings.TaskDelay" />
-                </p>
-
-                <p>
-
                     <label for="ListSettings.TwitterUserUpdateInterval">TwitterUserUpdateInterval</label>
                     <input type="number" asp-for="ListSettings.TwitterUserUpdateInterval" />
                 </p>
@@ -47,16 +38,6 @@
 
                     <label for="ListSettings.TwitterUserDailyUpdateInterval">TwitterUserDailyUpdateInterval</label>
                     <input type="number" asp-for="ListSettings.TwitterUserDailyUpdateInterval" />
-                </p>
-                <p>
-
-                    <label for="ListSettings.TwitterUserDailyTaskDelay">TwitterUserDailyTaskDelay</label>
-                    <input type="number" asp-for="ListSettings.TwitterUserDailyTaskDelay" />
-                </p>
-                <p>
-
-                    <label for="ListSettings.TwitterUserDailyUpdateDelay">TwitterUserDailyUpdateDelay</label>
-                    <input type="number" asp-for="ListSettings.TwitterUserDailyUpdateDelay" />
                 </p>
                 <br />
                 <button type="submit" form="ListSettings" asp-page-handler="Settings" class="btn btn-default">Save Settings</button>

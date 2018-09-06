@@ -38,11 +38,9 @@ namespace KompromatKoffer.Services
             return Task.CompletedTask;
         }
 
-        private void DoWork(object state)
+        private async void DoWork(object state)
         {
             _logger.LogInformation("===========> TwitterUserData Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
-
-            Task.Delay(Config.Parameter.TaskDelay);
 
             try
             {
@@ -152,8 +150,7 @@ namespace KompromatKoffer.Services
                                 }
                             }
                         }
-
-                        Task.Delay(2500);
+                        await Task.Delay(Config.Parameter.TwitterUserWriteDelay);
                     }
                 }
             }

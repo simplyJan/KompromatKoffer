@@ -121,11 +121,8 @@ namespace KompromatKoffer.Pages.Administration
                 ListOwner = Config.Parameter.ScreenName,
                 TweetsRetrieved = Config.Parameter.TweetsRetrieved,
                 UpdateDelay = Config.Parameter.UpdateDelay,
-                TaskDelay = Config.Parameter.TaskDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
-                TwitterUserDailyTaskDelay = Config.Parameter.TwitterUserDailyTaskDelay,
-                TwitterUserDailyUpdateDelay = Config.Parameter.TwitterUserDailyUpdateDelay
             };
 
             //Mail Settings
@@ -171,11 +168,8 @@ namespace KompromatKoffer.Pages.Administration
                 Config.Parameter.ScreenName = ListSettings.ListOwner;
                 Config.Parameter.TweetsRetrieved = ListSettings.TweetsRetrieved;
                 Config.Parameter.UpdateDelay = ListSettings.UpdateDelay;
-                Config.Parameter.TaskDelay = ListSettings.TaskDelay;
                 Config.Parameter.TwitterUserUpdateInterval = ListSettings.TwitterUserUpdateInterval;
                 Config.Parameter.TwitterUserDailyUpdateInterval = ListSettings.TwitterUserDailyUpdateInterval;
-                Config.Parameter.TwitterUserDailyTaskDelay = ListSettings.TwitterUserDailyTaskDelay;
-                Config.Parameter.TwitterUserDailyUpdateDelay = ListSettings.TwitterUserDailyUpdateDelay;
 
 
             //List Settings
@@ -185,11 +179,8 @@ namespace KompromatKoffer.Pages.Administration
                 ListOwner = Config.Parameter.ScreenName,
                 TweetsRetrieved = Config.Parameter.TweetsRetrieved,
                 UpdateDelay = Config.Parameter.UpdateDelay,
-                TaskDelay = Config.Parameter.TaskDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
-                TwitterUserDailyTaskDelay = Config.Parameter.TwitterUserDailyTaskDelay,
-                TwitterUserDailyUpdateDelay = Config.Parameter.TwitterUserDailyUpdateDelay
             };
 
             //Mail Settings
@@ -253,11 +244,8 @@ namespace KompromatKoffer.Pages.Administration
                 ListOwner = Config.Parameter.ScreenName,
                 TweetsRetrieved = Config.Parameter.TweetsRetrieved,
                 UpdateDelay = Config.Parameter.UpdateDelay,
-                TaskDelay = Config.Parameter.TaskDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
-                TwitterUserDailyTaskDelay = Config.Parameter.TwitterUserDailyTaskDelay,
-                TwitterUserDailyUpdateDelay = Config.Parameter.TwitterUserDailyUpdateDelay
             };
 
 
@@ -301,11 +289,8 @@ namespace KompromatKoffer.Pages.Administration
                 ListOwner = Config.Parameter.ScreenName,
                 TweetsRetrieved = Config.Parameter.TweetsRetrieved,
                 UpdateDelay = Config.Parameter.UpdateDelay,
-                TaskDelay = Config.Parameter.TaskDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
-                TwitterUserDailyTaskDelay = Config.Parameter.TwitterUserDailyTaskDelay,
-                TwitterUserDailyUpdateDelay = Config.Parameter.TwitterUserDailyUpdateDelay
             };
 
 
@@ -327,7 +312,7 @@ namespace KompromatKoffer.Pages.Administration
 
 
             _logger.LogInformation("MailSettings: "+Config.Parameter.Mail_From_Email_Address +" "+ Config.Parameter.Mail_From_Email_DisplayName + " " + Config.Parameter.Mail_Host+ Config.Parameter.Mail_Port + " " + Config.Parameter.Mail_Email_Login + " " + Config.Parameter.Mail_Email_Passwort);
-            _logger.LogInformation("Settings: " + Config.Parameter.ListName + " " + Config.Parameter.ScreenName + " " + Config.Parameter.TweetsRetrieved + " " + Config.Parameter.UpdateDelay + " " + Config.Parameter.TaskDelay + " " + Config.Parameter.TwitterUserUpdateInterval + " " + Config.Parameter.TwitterUserDailyUpdateInterval + " " + Config.Parameter.TwitterUserDailyTaskDelay + " " + Config.Parameter.TwitterUserDailyUpdateDelay);
+            _logger.LogInformation("Settings: " + Config.Parameter.ListName + " " + Config.Parameter.ScreenName + " " + Config.Parameter.TweetsRetrieved + " " + Config.Parameter.UpdateDelay + " " + Config.Parameter.TwitterUserUpdateInterval + " " + Config.Parameter.TwitterUserDailyUpdateInterval);
 
 
 

@@ -43,8 +43,6 @@ namespace KompromatKoffer.Services
         {
             _logger.LogInformation("===========> BackupService Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
-            Task.Delay(Config.Parameter.TaskDelay);
-
             try
             {
                 var dbLastBackup = Config.Parameter.DBLastBackup;

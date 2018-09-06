@@ -33,72 +33,95 @@ namespace KompromatKoffer.Services
             _logger.LogInformation("===========> TwitterUserDailyService is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromMinutes(Config.Parameter.TwitterUserDailyUpdateInterval));
+                TimeSpan.FromHours(Config.Parameter.TwitterUserDailyUpdateInterval));
 
             return Task.CompletedTask;
         }
 
-        private void DoWork(object state)
+        private async void DoWork(object state)
         {
             _logger.LogInformation("===========> TwitterUserDailyService is working. " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
-            Task.Delay(Config.Parameter.TwitterUserDailyTaskDelay);
+            //Set Last Update Time
+            Config.Parameter.UserDailyDataLastUpdated = DateTime.Now;
+
+            #region Repair DB easy fix for now
+            //Repair Routine for putting Collection back from Backup
+            /*
+            try
+            {
+
+                using (var db1 = new LiteDatabase("TwitterData3.db"))
+                using (var db2 = new LiteDatabase("TwitterData.db"))
+                {
+                    var from = db1.GetCollection("TwitterStream");
+                    var to = db2.GetCollection("TwitterStream");
+
+                    to.Insert(from.FindAll());
+                }
+
+
+            }
+            catch(Exception ex)
+            {
+                _logger.LogInformation("error", ex);
+            }
+
+
+            return;
+            */
+            #endregion
+
+            #region   // Try make the TwitterUserDaily Updates
 
             try
             {
-                var dbLastUpdated = Config.Parameter.UserDailyDataLastUpdated;
 
-                if (dbLastUpdated.AddMinutes(Config.Parameter.TwitterUserDailyUpdateDelay) < DateTime.Now)
+                //Get all members from TwitterList - Tweetinvi
+                var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
+                //var AllMembers = list.GetMembers(5); //Just 5 Records for Debug Reasons
+                var AllMembers = list.GetMembers(list.MemberCount);
+
+                using (var db = new LiteDatabase("TwitterData.db"))
                 {
-                    //Get all members from TwitterList - Tweetinvi
-                    var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
-                    //var AllMembers = list.GetMembers(5); //Just 5 Records for Debug Reasons
-                    var AllMembers = list.GetMembers(list.MemberCount);
+                    // Get Datbase Connection 
+                    var colTUD = db.GetCollection<TwitterUserDailyModel>("TwitterUserDaily");
 
-                    using (var db = new LiteDatabase("TwitterData.db"))
+                    //foreach user get Data from Twitter and save to database
+                    foreach (var x in AllMembers)
                     {
-                        // Get Datbase Connection 
-                        var colTUD = db.GetCollection<TwitterUserDailyModel>("TwitterUserDaily");
 
-                        //foreach user get Data from Twitter and save to database
-                        foreach (var x in AllMembers)
+                        //Get timeline for screenname from twitter using Tweetinvi
+                        var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
+
+                        var alreadyUpdated = colTUD.Find(s => s.TwitterId == x.Id).Where(s => s.DateToday == DateTime.Today);
+                      
+                        if (alreadyUpdated.Count() == 0)
                         {
-
-                            //Get timeline for screenname from twitter using Tweetinvi
-                            var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
-
-                            var alreadyUpdated = colTUD.Find(s => s.Screen_name == x.ScreenName).Where(s => s.DateToday == DateTime.Today);
-
-                            if (alreadyUpdated.Count() == 0)
+                            var twitterUserDaily = new TwitterUserDailyModel
                             {
-                                var twitterUserDaily = new TwitterUserDailyModel
-                                {
-                                    Screen_name = x.ScreenName,
-                                    Statuses_count = x.StatusesCount,
-                                    Followers_count = x.FollowersCount,
-                                    Friends_count = x.FriendsCount,
-                                    Favourites_count = x.FavouritesCount,
-                                    Listed_count = x.ListedCount,
-                                    DateToday = DateTime.Today,
-                                    TwitterId = x.Id,
-                                    TwitterName = x.Name
-                                };
+                                Screen_name = x.ScreenName,
+                                Statuses_count = x.StatusesCount,
+                                Followers_count = x.FollowersCount,
+                                Friends_count = x.FriendsCount,
+                                Favourites_count = x.FavouritesCount,
+                                Listed_count = x.ListedCount,
+                                DateToday = DateTime.Today,
+                                TwitterId = x.Id,
+                                TwitterName = x.Name
+                            };
 
-
-                                //Create new database entry for given user
-                                colTUD.Insert(twitterUserDaily);
-                                _logger.LogInformation(">> TU24...created new dbentry => " + x.ScreenName + " on " + DateTime.Now.ToString("dd MM yy - hh:mm:ss"));
-                            }
-                            else
-                            {
-                                _logger.LogInformation(">> TU24...already uptodate => " + x.ScreenName);
-                            }
-
-                            Task.Delay(Config.Parameter.TwitterUserDailyWriteDelay);
+                            //Create new database entry for given user
+                            colTUD.Insert(twitterUserDaily);
+                            _logger.LogInformation(">> TU24...created new dbentry => " + x.ScreenName + " on " + DateTime.Now.ToString("dd MM yy - hh:mm:ss"));
+                            
+                        }
+                        else
+                        {
+                            _logger.LogInformation(">> TU24...already uptodate => " + x.ScreenName);
                         }
 
-
-
+                        await Task.Delay(Config.Parameter.TwitterUserDailyWriteDelay);
                     }
                 }
             }
@@ -106,12 +129,12 @@ namespace KompromatKoffer.Services
             {
                 _logger.LogInformation("Twitter has problems..." + ex);
             }
-            catch (ArgumentException ex )
+            catch (ArgumentException ex)
             {
                 _logger.LogInformation("ArgumentException..." + ex);
 
             }
-            catch(LiteException ex)
+            catch (LiteException ex)
             {
                 _logger.LogInformation("LiteDB Exception..." + ex);
             }
@@ -119,6 +142,9 @@ namespace KompromatKoffer.Services
             {
                 _logger.LogInformation("Exception..." + ex);
             }
+
+            #endregion
+
 
 
         }
@@ -138,3 +164,5 @@ namespace KompromatKoffer.Services
         }
     }
 }
+
+

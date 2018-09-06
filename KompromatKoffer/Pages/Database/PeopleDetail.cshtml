@@ -56,6 +56,12 @@
         56
         &nbsp;
     </a>
+    <a asp-page=""
+       asp-route-sinceDays="-112"
+       class="iconHoverPages" title="die letzten 112 Tage">
+        112
+        &nbsp;
+    </a>
 </div>
 
 
@@ -74,7 +80,6 @@
     foreach (var item in groupBy)
     {
 
-
         foreach (var items in item)
         {
 
@@ -85,7 +90,6 @@
             DailyDate.Add(items.DateToday);
 
         }
-
     }
 
 
