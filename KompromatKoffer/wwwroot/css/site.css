@@ -238,6 +238,22 @@ a.dataBaseProfile:hover, a.dataBaseProfile:focus, a.dataBaseProfile:active {
     font-size: 2em;
     text-align: center;
 }
+
+.showTwitter {
+    font-size: 0.72em;
+    text-align: center;
+    padding-left: 6px;
+    float: right;
+    margin-top:-24px;
+}
+
+
+a.showTwitter:hover, a.showTwitter:focus, a.showTwitter:active {
+    font-size: 0.72em;
+}
+
+
+
 /*User Account View | Login | ETC */
 .form-group a {
     color: #fff;
