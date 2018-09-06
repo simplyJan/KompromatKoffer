@@ -43,29 +43,48 @@ namespace KompromatKoffer
         {
             //How many tweets would you like to receive
             public static int TweetsRetrieved { get; set; } = 500;
+			
             //Twitter Listname and Name of Owner
             public static string ListName { get; set; } = "listname";
             public static string ScreenName { get; set; } = "listuser";
-            //Save TwitterUserData to Database
+            
+			 // Service Switches
+            public static bool DoBackup = true;
+            public static bool SwitchOnAllServices = false;
             public static bool SaveToDatabase = true;
+            public static bool TwitterUserDaily { get; set; } = true;
+            public static bool TwitterStream { get; set; } = true;
+            public static bool UpdateTwittterCounts { get; set; } = true;
+
+            //Backup
+            public static DateTime DBLastBackup { get; set; }
+            public static int DBBackupInterval { get; set; } = 8;
+            public static int DBBackupSpawn { get; set; } = 5;
+
+            //♣♣♣♣♣♣♣♣♣♣♣♣♣♣ Save TwitterUserData to Database
             public static DateTime DbLastUpdated { get; set; }
             public static int UpdateDelay { get; set; } = 15;
-            public static int TaskDelay { get; set; } = 100000;
+            public static int TaskDelay { get; set; } = 100000; //ms
             //TwitterUser Data
             public static int TwitterUserUpdateInterval { get; set; } = 120;
-            //TwitterUserDaily Data
+
+            //♣♣♣♣♣♣♣♣♣♣♣♣♣♣ TwitterUserDaily Data
             public static DateTime UserDailyDataLastUpdated { get; set; }
             public static int TwitterUserDailyUpdateInterval { get; set; } = 300;
-            public static int TwitterUserDailyTaskDelay { get; set; } = 240000;
+            public static int TwitterUserDailyTaskDelay { get; set; } = 240000; //ms
             public static int TwitterUserDailyUpdateDelay { get; set; } = 35;
-            //TwitterUserTimeline Data
-            public static DateTime TimelineDbLastUpdated { get; set; }
-            public static int TimelineUpdateDelay { get; set; } = 90;
-            public static int TwitterUserTimelineUpdateInterval { get; set; } = 600;
-            public static int TwitterUserTimelineTaskDelay { get; set; } = 960000;
-            public static int TimelineHardlimitTweets { get; set; } = 20;
-            public static int TimelineSoftlimitTweets { get; set; } = 10;
-			
+            public static int TwitterUserDailyWriteDelay { get; set; } = 10000; //ms
+
+            //♣♣♣♣♣♣♣♣♣♣♣♣♣♣ TwitterStream
+            public static int TwitterStreamCountUpdateInterval { get; set; } = 30; //min
+            public static DateTime TwitterStreamUpdated { get; set; }
+            public static int TwitterStreamCountUpdateDelay { get; set; } = 30; //min
+            public static int TwitterStreamCountWriteDelay { get; set; } = 2000; //ms
+            public static int TwitterStreamCountTaskDelay { get; set; } = 50000; //ms
+            public static int TwitterStreamCountUpdateLastHours { get; set; } = -24; //h
+            public static int TwitterStreamDayRange { get; set; } = -1; //h
+
+            //♣♣♣♣♣♣♣♣♣♣♣♣♣♣ Mail Config		
 			public static string Mail_From_Email_Address { get; set; } = "email@email..com";
             public static string Mail_From_Email_DisplayName { get; set; } = "displayname";
             public static string Mail_Host { get; set; } = "mail.mail.com";
