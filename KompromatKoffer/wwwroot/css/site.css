@@ -470,11 +470,10 @@ a.imageLink p {
 }
 /*Icon Menu*/
 .iconHoverPages {
-    font-size: 18px;
+    font-size: 16px;
     margin: 0 auto;
     text-align: center;
-    color: #27182b;
-    margin-top: 10px;
+    color: #e3e7d3;
     padding-top: 5px;
     -webkit-transition: color 0.5s, font-size 0.5s !important;
     -moz-transition: color 0.5s, font-size 0.5s !important;
@@ -715,6 +714,18 @@ input.settingssubmit{
         color: #27182b;
         font-size: 1.3em;
         text-align: center;
+    }
+
+    .iconMenu {
+        margin: 0;
+        width: 22px;
+        height: 100%;
+        color: #440c50;
+        margin-left:1px;
+    }
+
+    .iconHoverPages:hover {
+        font-size: 20px;
     }
 
 }

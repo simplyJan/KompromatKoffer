@@ -64,9 +64,8 @@ namespace KompromatKoffer
             //♣♣♣♣♣♣♣♣♣♣♣♣♣♣ Save TwitterUserData to Database
             public static DateTime DbLastUpdated { get; set; }
             public static int UpdateDelay { get; set; } = 15;
-            public static int TaskDelay { get; set; } = 100000; //ms
-            //TwitterUser Data
             public static int TwitterUserUpdateInterval { get; set; } = 120;
+			public static int TwitterUserWriteDelay { get; set; } = 10000; //ms
 
             //♣♣♣♣♣♣♣♣♣♣♣♣♣♣ TwitterUserDaily Data
             public static DateTime UserDailyDataLastUpdated { get; set; }
