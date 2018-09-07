@@ -20,13 +20,22 @@
                     <input type="text" asp-for="ListSettings.ListName" />
                 </p>
                 <p>
-                    <label for="istSettings.ListOwner">ListOwner</label>
+                    <label for="ListSettings.ListOwner">ListOwner</label>
                     <input type="text" asp-for="ListSettings.ListOwner" />
                 </p>
                 <h5>Pagesettings</h5>
                 <p>
-                    <label for="istSettings.ShowEntries">ShowEntries</label>
+                    <label for="ListSettings.ShowEntries">ShowEntries</label>
                     <input type="text" asp-for="ListSettings.ShowEntries" />
+                </p>
+                <h5>Database Backups</h5>
+                <p>
+                    <label for="ListSettings.DBBackupInterval">DBBackupInterval</label>
+                    <input type="text" asp-for="ListSettings.DBBackupInterval" />
+                </p>
+                <p>
+                    <label for="ListSettings.DBBackupSpawn">DBBackupSpawn</label>
+                    <input type="text" asp-for="ListSettings.DBBackupSpawn" />
                 </p>
                 <h5>TwitterUserData Collection</h5>
                 <p>

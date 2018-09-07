@@ -106,6 +106,12 @@ namespace KompromatKoffer.Pages.Administration
 
             [Display(Name = "ShowEntries")]
             public int ShowEntries { get; set; }
+
+            [Display(Name = "DBBackupInterval")]
+            public int DBBackupInterval { get; set; }
+
+            [Display(Name = "DBBackupSpawn")]
+            public int DBBackupSpawn { get; set; }
         }
 
         public class MailSettings
@@ -145,7 +151,9 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
-                ShowEntries = Config.Parameter.ShowEntries
+                ShowEntries = Config.Parameter.ShowEntries,
+                DBBackupInterval = Config.Parameter.DBBackupInterval,
+                DBBackupSpawn = Config.Parameter.DBBackupSpawn
             };
 
             //Mail Settings
@@ -198,6 +206,8 @@ namespace KompromatKoffer.Pages.Administration
                 Config.Parameter.TwitterStreamCountUpdateLastHours = ListSettings.TwitterStreamCountUpdateLastHours;
                 Config.Parameter.TwitterStreamDayRange = ListSettings.TwitterStreamDayRange;
                 Config.Parameter.ShowEntries = ListSettings.ShowEntries;
+                Config.Parameter.DBBackupInterval = ListSettings.DBBackupInterval;
+                Config.Parameter.DBBackupSpawn = ListSettings.DBBackupSpawn;
 
 
             //List Settings
@@ -213,7 +223,9 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
-                ShowEntries = Config.Parameter.ShowEntries
+                ShowEntries = Config.Parameter.ShowEntries,
+                DBBackupInterval = Config.Parameter.DBBackupInterval,
+                DBBackupSpawn = Config.Parameter.DBBackupSpawn
             };
 
             //Mail Settings
@@ -283,7 +295,9 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
-                ShowEntries = Config.Parameter.ShowEntries
+                ShowEntries = Config.Parameter.ShowEntries,
+                DBBackupInterval = Config.Parameter.DBBackupInterval,
+                DBBackupSpawn = Config.Parameter.DBBackupSpawn
             };
 
 
@@ -333,7 +347,9 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
-                ShowEntries = Config.Parameter.ShowEntries
+                ShowEntries = Config.Parameter.ShowEntries,
+                DBBackupInterval = Config.Parameter.DBBackupInterval,
+                DBBackupSpawn = Config.Parameter.DBBackupSpawn
             };
 
 
