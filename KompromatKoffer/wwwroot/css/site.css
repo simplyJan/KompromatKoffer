@@ -255,6 +255,7 @@ a.showTwitter:hover, a.showTwitter:focus, a.showTwitter:active {
 .indexWarning {
     width:65%;
     margin:0 auto;
+    padding-top:4px;
 }
 
 .indexWarning p {
@@ -618,6 +619,12 @@ margin:0;
 
 .settingsView label{
     margin-top:5px;
+}
+
+.settingsView h5{
+    padding-bottom:0px;
+    padding-top:5px;
+    margin-bottom:0px;
 }
 
 .emailSettingsView {

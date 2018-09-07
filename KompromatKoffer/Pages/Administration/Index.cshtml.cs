@@ -88,6 +88,21 @@ namespace KompromatKoffer.Pages.Administration
    
             [Display(Name = "TwitterUserDailyUpdateDelay")]
             public int TwitterUserDailyUpdateDelay { get; set; } //= Config.Parameter.TwitterUserDailyUpdateDelay;
+
+            [Display(Name = "TwitterStreamCountUpdateDelay")]
+            public int TwitterStreamCountUpdateDelay { get; set; }
+
+            [Display(Name = "TwitterStreamCountWriteDelay")]
+            public int TwitterStreamCountWriteDelay { get; set; }
+
+            [Display(Name = "TwitterStreamCountTaskDelay")]
+            public int TwitterStreamCountTaskDelay { get; set; }
+
+            [Display(Name = "TwitterStreamCountUpdateLastHours")]
+            public int TwitterStreamCountUpdateLastHours { get; set; }
+
+            [Display(Name = "TwitterStreamDayRange")]
+            public int TwitterStreamDayRange { get; set; }
         }
 
         public class MailSettings
@@ -119,10 +134,14 @@ namespace KompromatKoffer.Pages.Administration
             {
                 ListName = Config.Parameter.ListName,
                 ListOwner = Config.Parameter.ScreenName,
-                TweetsRetrieved = Config.Parameter.TweetsRetrieved,
                 UpdateDelay = Config.Parameter.UpdateDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
+                TwitterStreamCountUpdateDelay = Config.Parameter.TwitterStreamCountUpdateDelay,
+                TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
+                TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
+                TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
+                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange
             };
 
             //Mail Settings
@@ -166,10 +185,14 @@ namespace KompromatKoffer.Pages.Administration
 
                 Config.Parameter.ListName = ListSettings.ListName;
                 Config.Parameter.ScreenName = ListSettings.ListOwner;
-                Config.Parameter.TweetsRetrieved = ListSettings.TweetsRetrieved;
                 Config.Parameter.UpdateDelay = ListSettings.UpdateDelay;
                 Config.Parameter.TwitterUserUpdateInterval = ListSettings.TwitterUserUpdateInterval;
                 Config.Parameter.TwitterUserDailyUpdateInterval = ListSettings.TwitterUserDailyUpdateInterval;
+                Config.Parameter.TwitterStreamCountUpdateDelay = ListSettings.TwitterStreamCountUpdateDelay;
+                Config.Parameter.TwitterStreamCountWriteDelay = ListSettings.TwitterStreamCountWriteDelay;
+                Config.Parameter.TwitterStreamCountTaskDelay = ListSettings.TwitterStreamCountTaskDelay;
+                Config.Parameter.TwitterStreamCountUpdateLastHours = ListSettings.TwitterStreamCountUpdateLastHours;
+                Config.Parameter.TwitterStreamDayRange = ListSettings.TwitterStreamDayRange;
 
 
             //List Settings
@@ -177,10 +200,14 @@ namespace KompromatKoffer.Pages.Administration
             {
                 ListName = Config.Parameter.ListName,
                 ListOwner = Config.Parameter.ScreenName,
-                TweetsRetrieved = Config.Parameter.TweetsRetrieved,
                 UpdateDelay = Config.Parameter.UpdateDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
+                TwitterStreamCountUpdateDelay = Config.Parameter.TwitterStreamCountUpdateDelay,
+                TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
+                TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
+                TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
+                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange
             };
 
             //Mail Settings
@@ -242,10 +269,14 @@ namespace KompromatKoffer.Pages.Administration
             {
                 ListName = Config.Parameter.ListName,
                 ListOwner = Config.Parameter.ScreenName,
-                TweetsRetrieved = Config.Parameter.TweetsRetrieved,
                 UpdateDelay = Config.Parameter.UpdateDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
+                TwitterStreamCountUpdateDelay = Config.Parameter.TwitterStreamCountUpdateDelay,
+                TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
+                TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
+                TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
+                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange
             };
 
 
@@ -287,10 +318,14 @@ namespace KompromatKoffer.Pages.Administration
             {
                 ListName = Config.Parameter.ListName,
                 ListOwner = Config.Parameter.ScreenName,
-                TweetsRetrieved = Config.Parameter.TweetsRetrieved,
                 UpdateDelay = Config.Parameter.UpdateDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
+                TwitterStreamCountUpdateDelay = Config.Parameter.TwitterStreamCountUpdateDelay,
+                TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
+                TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
+                TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
+                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange
             };
 
 
@@ -312,7 +347,7 @@ namespace KompromatKoffer.Pages.Administration
 
 
             _logger.LogInformation("MailSettings: "+Config.Parameter.Mail_From_Email_Address +" "+ Config.Parameter.Mail_From_Email_DisplayName + " " + Config.Parameter.Mail_Host+ Config.Parameter.Mail_Port + " " + Config.Parameter.Mail_Email_Login + " " + Config.Parameter.Mail_Email_Passwort);
-            _logger.LogInformation("Settings: " + Config.Parameter.ListName + " " + Config.Parameter.ScreenName + " " + Config.Parameter.TweetsRetrieved + " " + Config.Parameter.UpdateDelay + " " + Config.Parameter.TwitterUserUpdateInterval + " " + Config.Parameter.TwitterUserDailyUpdateInterval);
+            _logger.LogInformation("Settings: " + Config.Parameter.ListName + " " + Config.Parameter.ScreenName + " " + Config.Parameter.UpdateDelay + " " + Config.Parameter.TwitterUserUpdateInterval + " " + Config.Parameter.TwitterUserDailyUpdateInterval);
 
 
 
