@@ -116,7 +116,6 @@ namespace KompromatKoffer.Services
                 _logger.LogInformation("Exception..." + ex);
             }
 
-
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
