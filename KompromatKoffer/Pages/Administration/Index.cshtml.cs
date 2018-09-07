@@ -103,6 +103,9 @@ namespace KompromatKoffer.Pages.Administration
 
             [Display(Name = "TwitterStreamDayRange")]
             public int TwitterStreamDayRange { get; set; }
+
+            [Display(Name = "ShowEntries")]
+            public int ShowEntries { get; set; }
         }
 
         public class MailSettings
@@ -141,7 +144,8 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
-                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange
+                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
+                ShowEntries = Config.Parameter.ShowEntries
             };
 
             //Mail Settings
@@ -193,6 +197,7 @@ namespace KompromatKoffer.Pages.Administration
                 Config.Parameter.TwitterStreamCountTaskDelay = ListSettings.TwitterStreamCountTaskDelay;
                 Config.Parameter.TwitterStreamCountUpdateLastHours = ListSettings.TwitterStreamCountUpdateLastHours;
                 Config.Parameter.TwitterStreamDayRange = ListSettings.TwitterStreamDayRange;
+                Config.Parameter.ShowEntries = ListSettings.ShowEntries;
 
 
             //List Settings
@@ -207,7 +212,8 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
-                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange
+                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
+                ShowEntries = Config.Parameter.ShowEntries
             };
 
             //Mail Settings
@@ -276,7 +282,8 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
-                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange
+                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
+                ShowEntries = Config.Parameter.ShowEntries
             };
 
 
@@ -325,7 +332,8 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
-                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange
+                TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
+                ShowEntries = Config.Parameter.ShowEntries
             };
 
 

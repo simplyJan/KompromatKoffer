@@ -117,7 +117,7 @@ namespace KompromatKoffer.Pages
                     }
                 }
 
-                int pageSize = 50;
+                int pageSize = Config.Parameter.ShowEntries;
                 TwitterStreamModel = await PaginatedList<TwitterStreamModel>.CreateAsync(
                 TweetList, pageIndex ?? 1, pageSize);
 
