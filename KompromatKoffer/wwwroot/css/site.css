@@ -253,14 +253,17 @@ a.showTwitter:hover, a.showTwitter:focus, a.showTwitter:active {
 }
 
 .indexWarning {
-    width:65%;
-    margin:0 auto;
-    padding-top:4px;
+    margin: 0 auto;
+    padding-top: 4px;
+    text-align: center;
+    padding-left:25px;
+    padding-right:25px;
 }
 
 .indexWarning p {
     font-size:1em;
 }
+
 /*User Account View | Login | ETC */
 .form-group a {
     color: #fff;
