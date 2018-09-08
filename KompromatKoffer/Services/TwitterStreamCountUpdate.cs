@@ -88,11 +88,12 @@ namespace KompromatKoffer.Services
                                 //tweetModel.TweetReTweetCount = tweet.RetweetCount;
                                 //tweetModel.TweetFavoriteCount = tweet.FavoriteCount;
 
-                                _logger.LogInformation(">> Updated Counts for " + x.TweetID + DateTime.Now.ToString("hh:mm - dd.MM.yy"));
+                                _logger.LogInformation(">> Updated Counts for " + x.TweetID + DateTime.Now.ToString("  hh:mm:ss - dd.MM.yy"));
                                 colTS.Update(tweetModel);
-                                await Task.Delay(Config.Parameter.TwitterStreamCountWriteDelay);
+                                
                             }
 
+                            await Task.Delay(Config.Parameter.TwitterStreamCountWriteDelay);
 
                         }
                     }
