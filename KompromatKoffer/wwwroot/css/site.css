@@ -302,6 +302,45 @@ a.showTwitter:hover, a.showTwitter:focus, a.showTwitter:active {
     width: 150px;
     margin: 0 auto;
 }
+
+.disclaimerLoginContainer {
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #27182b;
+    color: #d8dbe2;
+    display: block;
+    padding: 0.5em;
+    transition: width 1s, font-size 1s;
+    -webkit-transition: width 1s, font-size 1s; /* Safari 3.1 to 6.0 */
+    -moz-transition: width 1s, font-size 1s;
+    -o-transition: width 1s, font-size 1s;
+    margin: 0.5em auto;
+    width: 55%
+}
+
+.disclaimerLoginContainer:hover {
+    width: 60%;
+    font-size: 1.2em;
+}
+
+.disclaimerLogin {
+    margin: 0 auto;
+    text-align: justify;
+    padding: 5px;
+}
+
+.disclaimerLogin {
+    font-size:1.2em;
+}
+
+h5.disclaimerLogin {
+    font-size:1.5em;
+    padding-bottom:0px;
+    margin-bottom:-2px;
+    font-weight:300;
+    letter-spacing:2px;
+}
+
 /*Cookie Consent*/
 #cookieConsent {
     position: relative;
@@ -769,7 +808,7 @@ input.settingssubmit{
 }
 
 .interActionMenuSmall {
-    font-size: 28px !important;
+    font-size: 29px !important;
 }
 
 .iconHoverPages:hover {
@@ -778,7 +817,7 @@ input.settingssubmit{
 }
 
 .interActionMenuSmall:hover {
-    font-size: 38px !important;
+    font-size: 39px !important;
 }
 
 .navbar-inverse .navbar-brand{
