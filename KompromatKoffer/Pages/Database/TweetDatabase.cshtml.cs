@@ -33,6 +33,7 @@ namespace KompromatKoffer.Pages
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
         public string FavCountSort { get; set; }
+        public string RetweetCountSort { get; set; }
         public string CreatedAtSort { get; set; }
 
         public int TimeRange { get; set; } = Config.Parameter.TwitterStreamDayRange;
@@ -92,6 +93,7 @@ namespace KompromatKoffer.Pages
 
                     //Sorting
                     FavCountSort = sortOrder == "FavCount_Desc" ? "FavCount" : "FavCount_Desc";
+                    RetweetCountSort = sortOrder == "RetweetCount_Desc" ? "RetweetCount" : "RetweetCount_Desc";
                     CreatedAtSort = sortOrder == "CreatedAtDate_desc" ? "CreatedAtDate" : "CreatedAtDate_desc";
 
                     switch (sortOrder)
@@ -101,6 +103,12 @@ namespace KompromatKoffer.Pages
                             break;
                         case "FavCount_Desc":
                             TweetList = TweetList.OrderByDescending(s => s.TweetFavoriteCount);
+                            break;
+                        case "RetweetCount":
+                            TweetList = TweetList.OrderBy(s => s.TweetReTweetCount);
+                            break;
+                        case "RetweetCount_Desc":
+                            TweetList = TweetList.OrderByDescending(s => s.TweetReTweetCount);
                             break;
                         case "CreatedAtDate":
                             TweetList = TweetList.OrderBy(s => s.TweetCreatedAt);

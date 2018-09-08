@@ -768,9 +768,17 @@ input.settingssubmit{
     padding: 4px;
 }
 
+.interActionMenuSmall {
+    font-size: 28px !important;
+}
+
 .iconHoverPages:hover {
     padding: 4px;
     font-size:44px;
+}
+
+.interActionMenuSmall:hover {
+    font-size: 38px !important;
 }
 
 .navbar-inverse .navbar-brand{

@@ -11,7 +11,10 @@
     <a asp-page="/Database/TweetDatabase" title="Tweet Datenbank" class="iconHoverPages interactionMenu"><i class="fas fa-binoculars"></i></i></a>
     <a asp-page=""
        asp-route-sortOrder="@Model.FavCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Most Likes"><i class="fas fa-heart"> </i></a>
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Most Likes"><i class="fas fa-heart"></i></a>
+    <a asp-page=""
+       asp-route-sortOrder="@Model.RetweetCountSort"
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu interActionMenuSmall" title="Most Retweets"><i class="fas fa-retweet"></i></a>
     <a asp-page=""
        asp-route-sortOrder="@Model.CreatedAtSort"
        asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Latest Tweets"><i class="fas fa-clock"></i></a>
