@@ -329,7 +329,7 @@ a.showTwitter:hover, a.showTwitter:focus, a.showTwitter:active {
     padding: 5px;
 }
 
-.disclaimerLogin {
+disclaimerLogin:hover {
     font-size:1.2em;
 }
 
@@ -337,8 +337,6 @@ h5.disclaimerLogin {
     font-size:1.5em;
     padding-bottom:0px;
     margin-bottom:-2px;
-    font-weight:300;
-    letter-spacing:2px;
 }
 
 /*Cookie Consent*/
