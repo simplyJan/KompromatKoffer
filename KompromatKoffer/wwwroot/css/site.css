@@ -326,7 +326,8 @@ a.showTwitter:hover, a.showTwitter:focus, a.showTwitter:active {
 .disclaimerLogin {
     margin: 0 auto;
     text-align: justify;
-    padding: 5px;
+    padding-bottom: 5px;
+    padding-top:5px;
 }
 
 disclaimerLogin:hover {
