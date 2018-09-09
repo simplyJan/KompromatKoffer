@@ -61,15 +61,12 @@ namespace KompromatKoffer.Pages
                     CurrentFilter = searchString;
 
 
-                    //The Problem here is there is one tweet with NULL Text
-
                     //Search Filtering
                     if (!String.IsNullOrEmpty(searchString))
                     {
                         CompleteDB = CompleteDB.Where(
                             s => s.TweetText != null).Where(s => s.TweetText.ToLower().Contains(searchString.ToLower())
                             );
-
                     }
 
                     //TimeRange
