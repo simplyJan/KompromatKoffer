@@ -1,16 +1,12 @@
-
 using KompromatKoffer.Areas.Database.Model;
 using KompromatKoffer.Pages;
 using LiteDB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Tweetinvi.Models;
 
@@ -68,7 +64,7 @@ namespace KompromatKoffer.Areas.Database.Pages
 
                 MemberCount = Convert.ToString(TwitterUserCol.Count());
 
-                _logger.LogInformation(Convert.ToString(TwitterUserCol.Count())+"MdB in der Datenbank");
+                _logger.LogInformation(Convert.ToString(TwitterUserCol.Count())+" MdB in der Datenbank");
 
                 if (searchString != null)
                 {

@@ -22,8 +22,6 @@ namespace KompromatKoffer.Pages
             _logger = logger;
         }
 
-        public IEnumerable<TwitterStreamModel> TweetList;
-
         public IEnumerable<TwitterStreamModel> CompleteDB { get; set; }
 
         public PaginatedList<TwitterStreamModel> TwitterStreamModel { get; set; }
@@ -36,8 +34,7 @@ namespace KompromatKoffer.Pages
 
         public int TimeRange { get; set; } = Config.Parameter.TwitterStreamDayRange;
 
-        [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
-        public async Task OnGet(string sortOrder, string searchString, int? pageIndex, string currentFilter)
+        public async Task OnGet(string searchString, int? pageIndex, string currentFilter, string sortOrder)
         {
             try
             {
@@ -48,23 +45,9 @@ namespace KompromatKoffer.Pages
 
                     var col = db.GetCollection<TwitterStreamModel>("TwitterStream");
                     var completeDB = col.FindAll();
-                    CompleteDB = completeDB;
 
-                    /*
-                    var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
 
-                    //Settings for last 100
-                    Tweetinvi.Parameters.GetTweetsFromListParameters getTweetsParameters = new Tweetinvi.Parameters.GetTweetsFromListParameters()
-                    {
-                        MaximumNumberOfTweetsToRetrieve = Config.Parameter.TweetsRetrieved,
-                        IncludeRetweets = false,
-                        IncludeEntities = true,
-                    };
-                    */
-
-                    var tweets = completeDB;
-
-                    TweetList = tweets.Where(s => s.TweetCreatedAt > DateTime.Now.AddDays(TimeRange));
+                    CompleteDB = completeDB.Where(s => s.TweetCreatedAt > DateTime.Now.AddDays(TimeRange));
 
                     if (searchString != null)
                     {
@@ -77,11 +60,14 @@ namespace KompromatKoffer.Pages
 
                     CurrentFilter = searchString;
 
+
+                    //The Problem here is there is one tweet with NULL Text
+
                     //Search Filtering
                     if (!String.IsNullOrEmpty(searchString))
                     {
-                        TweetList = TweetList.Where(
-                            s => s.TweetText.ToLower().Contains(searchString.ToLower())
+                        CompleteDB = CompleteDB.Where(
+                            s => s.TweetText != null).Where(s => s.TweetText.ToLower().Contains(searchString.ToLower())
                             );
 
                     }
@@ -97,25 +83,25 @@ namespace KompromatKoffer.Pages
                     switch (sortOrder)
                     {
                         case "FavCount":
-                            TweetList = TweetList.OrderBy(s => s.TweetFavoriteCount);
+                            CompleteDB = CompleteDB.OrderBy(s => s.TweetFavoriteCount);
                             break;
                         case "FavCount_Desc":
-                            TweetList = TweetList.OrderByDescending(s => s.TweetFavoriteCount);
+                            CompleteDB = CompleteDB.OrderByDescending(s => s.TweetFavoriteCount);
                             break;
                         case "RetweetCount":
-                            TweetList = TweetList.OrderBy(s => s.TweetReTweetCount);
+                            CompleteDB = CompleteDB.OrderBy(s => s.TweetReTweetCount);
                             break;
                         case "RetweetCount_Desc":
-                            TweetList = TweetList.OrderByDescending(s => s.TweetReTweetCount);
+                            CompleteDB = CompleteDB.OrderByDescending(s => s.TweetReTweetCount);
                             break;
                         case "CreatedAtDate":
-                            TweetList = TweetList.OrderBy(s => s.TweetCreatedAt);
+                            CompleteDB = CompleteDB.OrderBy(s => s.TweetCreatedAt);
                             break;
                         case "CreatedAtDate_Desc":
-                            TweetList = TweetList.OrderByDescending(s => s.TweetCreatedAt);
+                            CompleteDB = CompleteDB.OrderByDescending(s => s.TweetCreatedAt);
                             break;
                         default:
-                            TweetList = TweetList.OrderByDescending(s => s.TweetCreatedAt);
+                            CompleteDB = CompleteDB.OrderByDescending(s => s.TweetCreatedAt);
                             break;
                     }
 
@@ -127,10 +113,14 @@ namespace KompromatKoffer.Pages
 
                 int pageSize = Config.Parameter.ShowEntries;
                 TwitterStreamModel = await PaginatedList<TwitterStreamModel>.CreateAsync(
-                TweetList, pageIndex ?? 1, pageSize);
+                CompleteDB, pageIndex ?? 1, pageSize);
 
 
 
+            }
+            catch(ArgumentException ex)
+            {
+                _logger.LogInformation("Argument Exception... " + ex);
             }
             catch(LiteException ex)
             {

@@ -32,15 +32,11 @@
     <p>Derzeit leidet die Datenbank noch unter einigen Schreibfehlern - die Vollständigkeit der Daten kann derzeit nicht garantiert werden. Die Arbeit an einer Lösung läuft 😲 </p>
 </div>
 
-@{
-    var tweets = Model.TwitterStreamModel; //.Where(s => s.TweetCreatedAt > DateTime.Now.AddDays(Model.TimeRange));
-}
-
 <div class="lasthundred">
-    <h4>@Convert.ToString(tweets.Count()) von @Convert.ToString(Model.TweetList.Count()) Tweets aus dem Bundestag</h4>
+    <h4>@Convert.ToString(Model.TwitterStreamModel.Count()) von @Convert.ToString(Model.CompleteDB.Count()) Tweets aus dem Bundestag</h4>
 
 
-    @foreach (var x in tweets)
+    @foreach (var x in Model.TwitterStreamModel)
     {
 
 

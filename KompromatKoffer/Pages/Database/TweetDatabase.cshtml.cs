@@ -83,7 +83,7 @@ namespace KompromatKoffer.Pages
                     if (!String.IsNullOrEmpty(searchString))
                     {
                         TweetList = TweetList.Where(
-                            s => s.TweetText.ToLower().Contains(searchString.ToLower())
+                            s => s.TweetText != null).Where(s => s.TweetText.ToLower().Contains(searchString.ToLower())
                             );
 
                     }
