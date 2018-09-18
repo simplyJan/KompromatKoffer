@@ -299,6 +299,15 @@
         var elevenpm = tweetTime.FindAll(s => s == 23).Count();
         var twelvepm = tweetTime.FindAll(s => s == 0).Count();
 
+
+        var monday = tweetWeekday.FindAll(s => s == "Monday").Count();
+        var tuesday = tweetWeekday.FindAll(s => s == "Tuesday").Count();
+        var wednesday = tweetWeekday.FindAll(s => s == "Wednesday").Count();
+        var thursday = tweetWeekday.FindAll(s => s == "Thursday").Count();
+        var friday = tweetWeekday.FindAll(s => s == "Friday").Count();
+        var saturday = tweetWeekday.FindAll(s => s == "Saturday").Count();
+        var sunday = tweetWeekday.FindAll(s => s == "Sunday").Count();
+
     }
 
     <br />
@@ -321,10 +330,53 @@
                     data: [
                          @one,@two,@three,@four,@five,@six,@seven,@eight,@nine,@ten,@eleven,@twelve,@onepm,@twopm,@threepm,@fourpm,@fivepm,@sixpm,@sevenpm,@eightpm,@ninepm,@tenpm,@elevenpm,@twelvepm
                     ],
-                    backgroundColor: 
+                    backgroundColor:
+                        'rgba(130, 32, 74, 1.0)'
+                    ,
+                    borderColor:
                         'rgba(227, 231, 211, 1.0)'
                     ,
-                    borderColor: 
+                    borderWidth: 0
+                }
+               ]
+            },
+            options: {
+                legend: {
+                    display: false,
+                    labels: {
+                        fontColor: 'rgb(255, 99, 132)'
+                    }
+                }
+
+            }
+        });
+    </script>
+
+
+    <br />
+
+    <h4>Wochentagaktivität</h4>
+
+    <canvas id="TwitterUserPostingDay" width="200" height="100"></canvas>
+
+
+    <script>
+    var ctxTUPD = document.getElementById("TwitterUserPostingDay").getContext('2d');
+    var tupdChart = new Chart(ctxTUPD, {
+            type: 'bar',
+            data: {
+                labels: [
+                    "Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"
+                ],
+                datasets: [{
+                    label: 'Tweets',
+                    data: [
+                         @monday,@tuesday,@wednesday,@thursday,@friday,@saturday,@sunday
+                    ],
+                    backgroundColor:
+                        'rgba(130, 32, 74, 1.0)'
+                    ,
+                    borderColor:
                         'rgba(227, 231, 211, 1.0)'
                     ,
                     borderWidth: 0
