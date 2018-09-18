@@ -5,6 +5,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+<!--Interaction MenuBar begins here-->
 <div class="interactionMenuBar">
     <a asp-page="/Database/People" title="Politiker Bestenliste" class="iconHoverPages interactionMenu">
         <i class="fas fa-user-circle"></i>
@@ -63,7 +64,7 @@
         &nbsp;
     </a>
 </div>
-
+<!--Interaction MenuBar ends here-->
 
 @{
 
@@ -236,6 +237,119 @@
     </script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <br />
+
+
+
+
+
+
+
+
+    @{
+
+        List<int> tweetTime = new List<int>();
+        List<string> tweetWeekday = new List<string>();
+
+
+        foreach (var date in userTweets)
+        {
+            tweetTime.Add(date.TweetCreatedAt.Hour);
+            tweetWeekday.Add(date.TweetCreatedAt.DayOfWeek.ToString());
+
+        }
+
+
+        var one = tweetTime.FindAll(s => s == 1).Count();
+        var two = tweetTime.FindAll(s => s == 2).Count();
+        var three = tweetTime.FindAll(s => s == 3).Count();
+        var four = tweetTime.FindAll(s => s == 4).Count();
+        var five = tweetTime.FindAll(s => s == 5).Count();
+        var six = tweetTime.FindAll(s => s == 6).Count();
+        var seven = tweetTime.FindAll(s => s == 7).Count();
+        var eight = tweetTime.FindAll(s => s == 8).Count();
+        var nine = tweetTime.FindAll(s => s == 9).Count();
+        var ten = tweetTime.FindAll(s => s == 10).Count();
+        var eleven = tweetTime.FindAll(s => s == 11).Count();
+        var twelve = tweetTime.FindAll(s => s == 12).Count();
+
+        var onepm = tweetTime.FindAll(s => s == 13).Count();
+        var twopm = tweetTime.FindAll(s => s == 14).Count();
+        var threepm = tweetTime.FindAll(s => s == 15).Count();
+        var fourpm = tweetTime.FindAll(s => s == 16).Count();
+        var fivepm = tweetTime.FindAll(s => s == 17).Count();
+        var sixpm = tweetTime.FindAll(s => s == 18).Count();
+        var sevenpm = tweetTime.FindAll(s => s == 19).Count();
+        var eightpm = tweetTime.FindAll(s => s == 20).Count();
+        var ninepm = tweetTime.FindAll(s => s == 21).Count();
+        var tenpm = tweetTime.FindAll(s => s == 22).Count();
+        var elevenpm = tweetTime.FindAll(s => s == 23).Count();
+        var twelvepm = tweetTime.FindAll(s => s == 0).Count();
+
+    }
+
+    <br />
+
+    <h4>Tageszeitaktivität</h4>
+
+    <canvas id="TwitterUserPostingTime" width="200" height="100"></canvas>
+
+
+    <script>
+    var ctxTUPT = document.getElementById("TwitterUserPostingTime").getContext('2d');
+    var tuptChart = new Chart(ctxTUPT, {
+            type: 'bar',
+            data: {
+                labels: [
+                    1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
+                ],
+                datasets: [{
+                    label: 'Tweets',
+                    data: [
+                         @one,@two,@three,@four,@five,@six,@seven,@eight,@nine,@ten,@eleven,@twelve,@onepm,@twopm,@threepm,@fourpm,@fivepm,@sixpm,@sevenpm,@eightpm,@ninepm,@tenpm,@elevenpm,@twelvepm
+                    ],
+                    backgroundColor: 
+                        'rgba(227, 231, 211, 1.0)'
+                    ,
+                    borderColor: 
+                        'rgba(227, 231, 211, 1.0)'
+                    ,
+                    borderWidth: 0
+                }
+               ]
+            },
+            options: {
+                legend: {
+                    display: false,
+                    labels: {
+                        fontColor: 'rgb(255, 99, 132)'
+                    }
+                }
+
+            }
+        });
+    </script>
+
+
+
+
+    <br />
+
+
+    <!--Hashtag Analaysis starts here-->
     <h4>Hashtags die dieser Politiker nutzt...</h4>
 
     @{
@@ -275,15 +389,15 @@
 
     }
 
+    <!--Hashtag Analysis ends here-->
+
 
 
 
 </div>
 
-<br />
 
-<!--UserTweets-->
-
+<!--UserTweets starts here-->
 <div class="lasthundred">
     <h4>@Convert.ToString(userTweets.Count()) Tweets </h4>
 
@@ -315,7 +429,7 @@
         </div>
 
     }
-
+    <!--UserTweets ends here-->
 
 
 </div>

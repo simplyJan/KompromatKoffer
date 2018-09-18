@@ -42,7 +42,6 @@ namespace KompromatKoffer.Pages.Database
         [BindProperty]
         public string CurrentUserScreenname { get; set; }
 
-
         public int SinceDays { get; set; } = -7;
 
         public int DaysRange { get; set; }
@@ -70,8 +69,6 @@ namespace KompromatKoffer.Pages.Database
             //Getting the collections
             try
             {
-
-
                 using (var db = new LiteDatabase("TwitterData.db"))
                 {
                     var col = db.GetCollection<TwitterUserDailyModel>("TwitterUserDaily");
@@ -85,8 +82,6 @@ namespace KompromatKoffer.Pages.Database
 
                     var col4 = db.GetCollection<TwitterStreamModel>("TwitterStream");
                     TwitterStreamData = col4;
-
-
                 }
             }
             catch (LiteException ex)
@@ -99,7 +94,6 @@ namespace KompromatKoffer.Pages.Database
             }
 
             #endregion
-
 
             SinceDays = sinceDays;
 
