@@ -32,12 +32,16 @@ namespace KompromatKoffer.Pages
         public string RetweetCountSort { get; set; }
         public string CreatedAtSort { get; set; }
 
+        public string WarningMessage { get; set; }
+
         public int TimeRange { get; set; } = Config.Parameter.TwitterStreamDayRange;
 
         public async Task OnGet(string searchString, int? pageIndex, string currentFilter, string sortOrder)
         {
             try
             {
+                WarningMessage = Config.Parameter.WarningMessage;
+
                 using (var db = new LiteDatabase("TwitterData.db"))
                 {
                     CurrentSort = sortOrder;

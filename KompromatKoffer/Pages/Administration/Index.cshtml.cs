@@ -112,6 +112,10 @@ namespace KompromatKoffer.Pages.Administration
 
             [Display(Name = "DBBackupSpawn")]
             public int DBBackupSpawn { get; set; }
+
+            [DataType(DataType.MultilineText)]
+            public string IndexWarningMessage { get; set; }
+
         }
 
         public class MailSettings
@@ -153,7 +157,8 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
                 ShowEntries = Config.Parameter.ShowEntries,
                 DBBackupInterval = Config.Parameter.DBBackupInterval,
-                DBBackupSpawn = Config.Parameter.DBBackupSpawn
+                DBBackupSpawn = Config.Parameter.DBBackupSpawn,
+                IndexWarningMessage = Config.Parameter.WarningMessage
             };
 
             //Mail Settings
@@ -208,6 +213,7 @@ namespace KompromatKoffer.Pages.Administration
                 Config.Parameter.ShowEntries = ListSettings.ShowEntries;
                 Config.Parameter.DBBackupInterval = ListSettings.DBBackupInterval;
                 Config.Parameter.DBBackupSpawn = ListSettings.DBBackupSpawn;
+                Config.Parameter.WarningMessage = ListSettings.IndexWarningMessage;
 
 
             //List Settings
@@ -225,7 +231,8 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
                 ShowEntries = Config.Parameter.ShowEntries,
                 DBBackupInterval = Config.Parameter.DBBackupInterval,
-                DBBackupSpawn = Config.Parameter.DBBackupSpawn
+                DBBackupSpawn = Config.Parameter.DBBackupSpawn,
+                IndexWarningMessage = Config.Parameter.WarningMessage
             };
 
             //Mail Settings
@@ -297,7 +304,8 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
                 ShowEntries = Config.Parameter.ShowEntries,
                 DBBackupInterval = Config.Parameter.DBBackupInterval,
-                DBBackupSpawn = Config.Parameter.DBBackupSpawn
+                DBBackupSpawn = Config.Parameter.DBBackupSpawn,
+                IndexWarningMessage = Config.Parameter.WarningMessage
             };
 
 
@@ -349,7 +357,8 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
                 ShowEntries = Config.Parameter.ShowEntries,
                 DBBackupInterval = Config.Parameter.DBBackupInterval,
-                DBBackupSpawn = Config.Parameter.DBBackupSpawn
+                DBBackupSpawn = Config.Parameter.DBBackupSpawn,
+                IndexWarningMessage = Config.Parameter.WarningMessage
             };
 
 

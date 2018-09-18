@@ -264,6 +264,12 @@ a.showTwitter:hover, a.showTwitter:focus, a.showTwitter:active {
     font-size:1em;
 }
 
+.warningMsgInput{
+    width:100%;
+    border-radius:5px;
+    border:none;
+    color:#27182b;
+}
 /*User Account View | Login | ETC */
 .form-group a {
     color: #fff;

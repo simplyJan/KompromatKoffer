@@ -72,6 +72,11 @@
                     <label for="ListSettings.TwitterStreamDayRange">TwitterStream DayRange (days)</label>
                     <input type="number" asp-for="ListSettings.TwitterStreamDayRange" />
                 </p>
+                <h5>Textareas</h5>
+                <p>
+                    <label for="ListSettings.IndexWarningMessage">Info / Warning Message</label>
+                    @Html.TextAreaFor(e => e.ListSettings.IndexWarningMessage, 10, 50, new { @class = "warningMsgInput" })
+                </p>
                 <br />
                 <button type="submit" form="ListSettings" asp-page-handler="Settings" class="btn btn-default">Save Settings</button>
                 <br />
