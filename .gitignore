@@ -21,3 +21,6 @@
 /KompromatKoffer/log.txt
 /KompromatKoffer/dbbackup
 /KompromatKoffer/logs
+/DatabaseMaintenance/bin
+/DatabaseMaintenance/obj
+/DatabaseMaintenance/TwitterData.db

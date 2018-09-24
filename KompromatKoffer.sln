@@ -5,16 +5,42 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KompromatKoffer", "KompromatKoffer\KompromatKoffer.csproj", "{83A1CF06-A480-41C5-ACBB-76E71305EBD3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseMaintenance", "DatabaseMaintenance\DatabaseMaintenance.csproj", "{51868B9B-043F-428C-8A78-014543424061}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Ubuntu1604x64 = Debug|Ubuntu1604x64
 		NET CORE 2.1|Any CPU = NET CORE 2.1|Any CPU
 		NET CORE 2.1|Ubuntu1604x64 = NET CORE 2.1|Ubuntu1604x64
+		Release|Any CPU = Release|Any CPU
+		Release|Ubuntu1604x64 = Release|Ubuntu1604x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.Debug|Ubuntu1604x64.ActiveCfg = Debug|Any CPU
+		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.Debug|Ubuntu1604x64.Build.0 = Debug|Any CPU
 		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.NET CORE 2.1|Any CPU.ActiveCfg = Debug|x64
 		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.NET CORE 2.1|Any CPU.Build.0 = Debug|x64
 		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.NET CORE 2.1|Ubuntu1604x64.ActiveCfg = Debug|x64
 		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.NET CORE 2.1|Ubuntu1604x64.Build.0 = Debug|x64
+		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.Release|Ubuntu1604x64.ActiveCfg = Release|Any CPU
+		{83A1CF06-A480-41C5-ACBB-76E71305EBD3}.Release|Ubuntu1604x64.Build.0 = Release|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.Debug|Ubuntu1604x64.ActiveCfg = Debug|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.Debug|Ubuntu1604x64.Build.0 = Debug|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.NET CORE 2.1|Any CPU.ActiveCfg = Debug|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.NET CORE 2.1|Any CPU.Build.0 = Debug|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.NET CORE 2.1|Ubuntu1604x64.ActiveCfg = Debug|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.NET CORE 2.1|Ubuntu1604x64.Build.0 = Debug|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.Release|Ubuntu1604x64.ActiveCfg = Release|Any CPU
+		{51868B9B-043F-428C-8A78-014543424061}.Release|Ubuntu1604x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
