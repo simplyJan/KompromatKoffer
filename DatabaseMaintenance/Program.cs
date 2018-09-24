@@ -25,8 +25,16 @@ namespace DatabaseMaintenance
                     var col = db.GetCollection<TwitterUserModel>("TwitterUser");
 
 
-                    col.Find
 
+
+
+
+
+
+
+
+
+                    Console.ReadKey();
 
                 }
                 catch(LiteException ex)
