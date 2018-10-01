@@ -129,7 +129,6 @@ namespace KompromatKoffer.Services
                                         Favourites_count = x.FavouritesCount,
                                         Listed_count = x.ListedCount,
                                         UserUpdated = DateTime.Now,
-                                        PoliticalParty = "filloutbyhandfornow"
                                     };
 
                                     //Update User if name is not null and if the saveinterval is reached^^
