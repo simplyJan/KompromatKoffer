@@ -13,4 +13,10 @@
     <ProjectReference Include="..\KompromatKoffer\KompromatKoffer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TwitterData.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
