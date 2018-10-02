@@ -48,7 +48,9 @@ namespace KompromatKoffer.Areas.Database.Pages
         public string CurrentSort { get; set; }
         public string CreatedAtSort { get; set; }
 
-        public async Task OnGet(string searchString, int? pageIndex, string currentFilter, string sortOrder)
+        public string PoliticalParty { get; set; }
+
+        public async Task OnGet(string searchString, int? pageIndex, string currentFilter, string sortOrder, string politicalParty)
         {
             
             using (var db = new LiteDatabase("TwitterData.db"))
@@ -56,9 +58,51 @@ namespace KompromatKoffer.Areas.Database.Pages
 
                 CurrentSort = sortOrder;
 
+                
                 var col = db.GetCollection<TwitterUserModel>("TwitterUser");
-                var completeDB = col.FindAll();
-                CompleteDB = completeDB;
+                if (politicalParty == "SPD")
+                {
+                    var completeDB = col.FindAll().Where(s => s.PoliticalParty == "SPD");
+                    CompleteDB = completeDB;
+                }
+                else if(politicalParty == "LINKE")
+                {
+                    var completeDB = col.FindAll().Where(s => s.PoliticalParty == "Die Linke");
+                    CompleteDB = completeDB;
+                }
+                else if(politicalParty == "CDUCSU")
+                {
+                    var completeDB = col.FindAll().Where(s => s.PoliticalParty == "CDU/CSU");
+                    CompleteDB = completeDB;
+                }
+                else if(politicalParty == "GRUENE")
+                {
+                    var completeDB = col.FindAll().Where(s => s.PoliticalParty == "BÜNDNIS 90/DIE GRÜNEN");
+                    CompleteDB = completeDB;
+                }
+                else if(politicalParty == "FDP")
+                {
+                    var completeDB = col.FindAll().Where(s => s.PoliticalParty == "FDP");
+                    CompleteDB = completeDB;
+                }
+                else if(politicalParty == "BLAUEN")
+                {
+                    var completeDB = col.FindAll().Where(s => s.PoliticalParty == "Die Blauen");
+                    CompleteDB = completeDB;
+                }
+                else if(politicalParty == "AFD")
+                {
+                    var completeDB = col.FindAll().Where(s => s.PoliticalParty == "AFD");
+                    CompleteDB = completeDB;
+                }
+                else
+                {
+                    var completeDB = col.FindAll();
+                    CompleteDB = completeDB;
+                }
+
+
+                //
 
                 TwitterUserCol = col;
 

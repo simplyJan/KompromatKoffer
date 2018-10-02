@@ -510,6 +510,9 @@ a.imageLink p {
     padding: 5px;
 }
 
+.smallIcons a {
+    font-size: 0.8em !important;
+}
 
 /*Icon for TweetLists*/
 .socialIconsIndex {
@@ -547,6 +550,23 @@ a.imageLink p {
     -o-transition: color 0.5s, font-size 0.5s !important;
     transition: color 0.5s, font-size 0.5s !important;
 }
+
+.iconHoverPagesPeopleAll {
+    font-size: 14px;
+    margin: 0 auto;
+    text-align: center;
+    color: #e3e7d3;
+    padding-top: 5px;
+    -webkit-transition: color 0.5s, font-size 0.5s !important;
+    -moz-transition: color 0.5s, font-size 0.5s !important;
+    -o-transition: color 0.5s, font-size 0.5s !important;
+    transition: color 0.5s, font-size 0.5s !important;
+}
+
+    .iconHoverPagesPeopleAll:hover {
+        font-size: 16px;
+        color: #e3e7d3;
+    }
 
 
 
@@ -788,6 +808,12 @@ input.settingssubmit{
         font-size: 20px;
     }
 
+    .PoliticalPartyMenu{
+        width:45%;
+        margin:0 auto;
+        padding-top:5px;
+    }
+
 }
 
 /*Big Screens Adjustments*/
@@ -837,7 +863,11 @@ input.settingssubmit{
     text-align: center;
 }
 
-
+    .PoliticalPartyMenu{
+        width:65%;
+        margin:0 auto;
+        padding-top:5px;
+    }
 
 }
 
