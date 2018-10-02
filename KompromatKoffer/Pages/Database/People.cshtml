@@ -9,19 +9,19 @@
 
     <a asp-page=""
        asp-route-sortOrder="@Model.StatusCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Tweets"><i class="fab fa-twitter"></i></a>
+       asp-route-currentFilter="@Model.CurrentFilter" asp-route-politicalParty="@Model.CurrentPoliticalParty" class="iconHoverPages" title="Most Tweets"><i class="fab fa-twitter"></i></a>
 
     <a asp-page=""
        asp-route-sortOrder="@Model.FollowersCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Followers"><i class="fas fa-grin-hearts"></i></a>
+       asp-route-currentFilter="@Model.CurrentFilter" asp-route-politicalParty="@Model.CurrentPoliticalParty"  class="iconHoverPages" title="Most Followers"><i class="fas fa-grin-hearts"></i></a>
 
     <a asp-page=""
        asp-route-sortOrder="@Model.FriendsCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Friends"><i class="fas fa-meh-rolling-eyes"></i></a>
+       asp-route-currentFilter="@Model.CurrentFilter" asp-route-politicalParty="@Model.CurrentPoliticalParty"  class="iconHoverPages" title="Most Friends"><i class="fas fa-meh-rolling-eyes"></i></a>
 
     <a asp-page=""
        asp-route-sortOrder="@Model.FavCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages" title="Most Likes"><i class="fas fa-heart"></i></a>
+       asp-route-currentFilter="@Model.CurrentFilter" asp-route-politicalParty="@Model.CurrentPoliticalParty"  class="iconHoverPages" title="Most Likes"><i class="fas fa-heart"></i></a>
 
 </div>
 
@@ -30,36 +30,36 @@
         <input type="text" name="SearchString" class="twitterUserSearchInput" placeholder="Search...">
     </form>
     <div class="PoliticalPartyMenu">
-        <a asp-page="" asp-route-politicalParty="" class="iconHoverPagesPeopleAll interactionMenu smallIcons">
-            ALL
+        <a asp-page="" asp-route-politicalParty="" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorall" title="Alle Parteien">
+            <i class="fas fa-circle"></i>
             &nbsp;
         </a>
-        <a asp-page="" asp-route-politicalParty="AFD" class="iconHoverPagesPeopleAll interactionMenu smallIcons">
-            AFD
+        <a asp-page="" asp-route-politicalParty="AFD" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorafd" title="AFD">
+            <i class="fas fa-circle"></i>
             &nbsp;
         </a>
-        <a asp-page="" asp-route-politicalParty="BLAUEN" class="iconHoverPagesPeopleAll interactionMenu smallIcons">
-            BLAUEN
+        <a asp-page="" asp-route-politicalParty="CDUCSU" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorcdsu" title="CDU/CSU">
+            <i class="fas fa-circle"></i>
             &nbsp;
         </a>
-        <a asp-page="" asp-route-politicalParty="CDUCSU" class="iconHoverPagesPeopleAll interactionMenu smallIcons">
-            CDU/CSU
+        <a asp-page="" asp-route-politicalParty="FDP" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorfdp" title="FDP">
+            <i class="fas fa-circle"></i>
             &nbsp;
         </a>
-        <a asp-page="" asp-route-politicalParty="FDP" class="iconHoverPagesPeopleAll interactionMenu smallIcons">
-            FDP
+        <a asp-page="" asp-route-politicalParty="GRUENE" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorgruene" title="BÜNDNIS 90 / DIE GRÜNEN">
+            <i class="fas fa-circle"></i>
             &nbsp;
         </a>
-        <a asp-page="" asp-route-politicalParty="GRUENE" class="iconHoverPagesPeopleAll interactionMenu smallIcons">
-            GRÜNE
+        <a asp-page="" asp-route-politicalParty="LINKE" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorlinke" title="DIE LINKE">
+            <i class="fas fa-circle"></i>
             &nbsp;
         </a>
-        <a asp-page="" asp-route-politicalParty="LINKE" class="iconHoverPagesPeopleAll interactionMenu smallIcons">
-            LINKE
+        <a asp-page="" asp-route-politicalParty="SPD" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorspd" title="SPD">
+            <i class="fas fa-circle"></i>
             &nbsp;
         </a>
-        <a asp-page="" asp-route-politicalParty="SPD" class="iconHoverPagesPeopleAll interactionMenu smallIcons">
-            SPD
+        <a asp-page="" asp-route-politicalParty="BLAUEN" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorsonstige" title="Fraktionslos">
+            <i class="fas fa-circle"></i>
             &nbsp;
         </a>
     </div>

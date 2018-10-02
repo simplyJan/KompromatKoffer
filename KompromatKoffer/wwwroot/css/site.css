@@ -552,7 +552,7 @@ a.imageLink p {
 }
 
 .iconHoverPagesPeopleAll {
-    font-size: 14px;
+    font-size: 22px;
     margin: 0 auto;
     text-align: center;
     color: #e3e7d3;
@@ -563,10 +563,7 @@ a.imageLink p {
     transition: color 0.5s, font-size 0.5s !important;
 }
 
-    .iconHoverPagesPeopleAll:hover {
-        font-size: 16px;
-        color: #e3e7d3;
-    }
+
 
 
 
@@ -782,6 +779,41 @@ input.settingssubmit{
     margin-top:5px;
     border-radius:5px;
 }
+
+/*Color Scheme*/
+.colorall{
+    color:#fbfbfb;
+}
+
+.colorafd {
+    color:#2caae2;
+}
+
+.colorcdsu {
+    color: #221f1f;
+}
+
+.colorfdp {
+    color: #fcdc00;
+}
+
+.colorgruene {
+    color: #24b34b;
+}
+
+.colorlinke {
+    color: #b47bb5;
+}
+
+.colorspd {
+    color: #ec2027;
+}
+
+.colorsonstige {
+    color: #a8aaae;
+}
+
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
@@ -812,6 +844,11 @@ input.settingssubmit{
         width:45%;
         margin:0 auto;
         padding-top:5px;
+    }
+
+    .iconHoverPagesPeopleAll:hover {
+        font-size: 20px;
+        color: #e3e7d3;
     }
 
 }
@@ -846,6 +883,11 @@ input.settingssubmit{
     padding: 4px;
     font-size:44px;
 }
+
+    .iconHoverPagesPeopleAll:hover {
+        font-size: 29px;
+        color: #e3e7d3;
+    }
 
 .interActionMenuSmall:hover {
     font-size: 39px !important;

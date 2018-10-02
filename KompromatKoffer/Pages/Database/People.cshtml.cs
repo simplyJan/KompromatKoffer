@@ -49,6 +49,7 @@ namespace KompromatKoffer.Areas.Database.Pages
         public string CreatedAtSort { get; set; }
 
         public string PoliticalParty { get; set; }
+        public string CurrentPoliticalParty { get; set; }
 
         public async Task OnGet(string searchString, int? pageIndex, string currentFilter, string sortOrder, string politicalParty)
         {
@@ -57,7 +58,7 @@ namespace KompromatKoffer.Areas.Database.Pages
             {
 
                 CurrentSort = sortOrder;
-
+                CurrentPoliticalParty = politicalParty;
                 
                 var col = db.GetCollection<TwitterUserModel>("TwitterUser");
                 if (politicalParty == "SPD")
