@@ -74,7 +74,7 @@ namespace DatabaseMaintenance
                                 {
                                     Id = entry.Id,
                                     Name = entry.Name,
-                                    Screen_name = entry.Name,
+                                    Screen_name = entry.Screen_name,
                                     Description = entry.Description,
                                     Created_at = entry.Created_at,
                                     Location = entry.Location,
@@ -112,7 +112,7 @@ namespace DatabaseMaintenance
                                 {
                                     Id = entry.Id,
                                     Name = entry.Name,
-                                    Screen_name = entry.Name,
+                                    Screen_name = entry.Screen_name,
                                     Description = entry.Description,
                                     Created_at = entry.Created_at,
                                     Location = entry.Location,
@@ -151,7 +151,7 @@ namespace DatabaseMaintenance
                                 {
                                     Id = entry.Id,
                                     Name = entry.Name,
-                                    Screen_name = entry.Name,
+                                    Screen_name = entry.Screen_name,
                                     Description = entry.Description,
                                     Created_at = entry.Created_at,
                                     Location = entry.Location,
@@ -190,7 +190,7 @@ namespace DatabaseMaintenance
                                 {
                                     Id = entry.Id,
                                     Name = entry.Name,
-                                    Screen_name = entry.Name,
+                                    Screen_name = entry.Screen_name,
                                     Description = entry.Description,
                                     Created_at = entry.Created_at,
                                     Location = entry.Location,
@@ -226,7 +226,7 @@ namespace DatabaseMaintenance
                                 {
                                     Id = entry.Id,
                                     Name = entry.Name,
-                                    Screen_name = entry.Name,
+                                    Screen_name = entry.Screen_name,
                                     Description = entry.Description,
                                     Created_at = entry.Created_at,
                                     Location = entry.Location,
@@ -261,7 +261,7 @@ namespace DatabaseMaintenance
                                 {
                                     Id = entry.Id,
                                     Name = entry.Name,
-                                    Screen_name = entry.Name,
+                                    Screen_name = entry.Screen_name,
                                     Description = entry.Description,
                                     Created_at = entry.Created_at,
                                     Location = entry.Location,
@@ -293,7 +293,7 @@ namespace DatabaseMaintenance
                                 {
                                     Id = entry.Id,
                                     Name = entry.Name,
-                                    Screen_name = entry.Name,
+                                    Screen_name = entry.Screen_name,
                                     Description = entry.Description,
                                     Created_at = entry.Created_at,
                                     Location = entry.Location,
