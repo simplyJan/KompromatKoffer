@@ -104,6 +104,9 @@ namespace KompromatKoffer.Pages.Administration
             [Display(Name = "TwitterStreamDayRange")]
             public int TwitterStreamDayRange { get; set; }
 
+            [Display(Name = "IndexTweetLimit")]
+            public int IndexTweetLimit { get; set; }
+
             [Display(Name = "ShowEntries")]
             public int ShowEntries { get; set; }
 
@@ -156,6 +159,7 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
                 ShowEntries = Config.Parameter.ShowEntries,
+                IndexTweetLimit = Config.Parameter.IndexTweetLimit,
                 DBBackupInterval = Config.Parameter.DBBackupInterval,
                 DBBackupSpawn = Config.Parameter.DBBackupSpawn,
                 IndexWarningMessage = Config.Parameter.WarningMessage
@@ -210,10 +214,12 @@ namespace KompromatKoffer.Pages.Administration
                 Config.Parameter.TwitterStreamCountTaskDelay = ListSettings.TwitterStreamCountTaskDelay;
                 Config.Parameter.TwitterStreamCountUpdateLastHours = ListSettings.TwitterStreamCountUpdateLastHours;
                 Config.Parameter.TwitterStreamDayRange = ListSettings.TwitterStreamDayRange;
+                Config.Parameter.IndexTweetLimit = ListSettings.IndexTweetLimit;
                 Config.Parameter.ShowEntries = ListSettings.ShowEntries;
                 Config.Parameter.DBBackupInterval = ListSettings.DBBackupInterval;
                 Config.Parameter.DBBackupSpawn = ListSettings.DBBackupSpawn;
                 Config.Parameter.WarningMessage = ListSettings.IndexWarningMessage;
+           
 
 
             //List Settings
@@ -229,6 +235,7 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
+                IndexTweetLimit = Config.Parameter.IndexTweetLimit,
                 ShowEntries = Config.Parameter.ShowEntries,
                 DBBackupInterval = Config.Parameter.DBBackupInterval,
                 DBBackupSpawn = Config.Parameter.DBBackupSpawn,
@@ -302,6 +309,7 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
+                IndexTweetLimit = Config.Parameter.IndexTweetLimit,
                 ShowEntries = Config.Parameter.ShowEntries,
                 DBBackupInterval = Config.Parameter.DBBackupInterval,
                 DBBackupSpawn = Config.Parameter.DBBackupSpawn,
@@ -355,6 +363,7 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
+                IndexTweetLimit = Config.Parameter.IndexTweetLimit,
                 ShowEntries = Config.Parameter.ShowEntries,
                 DBBackupInterval = Config.Parameter.DBBackupInterval,
                 DBBackupSpawn = Config.Parameter.DBBackupSpawn,
@@ -377,11 +386,6 @@ namespace KompromatKoffer.Pages.Administration
                                   });
 
             UserWithRoles = usersWithRoles;
-
-
-            _logger.LogInformation("MailSettings: "+Config.Parameter.Mail_From_Email_Address +" "+ Config.Parameter.Mail_From_Email_DisplayName + " " + Config.Parameter.Mail_Host+ Config.Parameter.Mail_Port + " " + Config.Parameter.Mail_Email_Login + " " + Config.Parameter.Mail_Email_Passwort);
-            _logger.LogInformation("Settings: " + Config.Parameter.ListName + " " + Config.Parameter.ScreenName + " " + Config.Parameter.UpdateDelay + " " + Config.Parameter.TwitterUserUpdateInterval + " " + Config.Parameter.TwitterUserDailyUpdateInterval);
-
 
 
             return Page();
