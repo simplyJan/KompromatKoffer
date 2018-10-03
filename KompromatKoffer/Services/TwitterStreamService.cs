@@ -62,7 +62,7 @@ namespace KompromatKoffer.Services
                     //Create Stream
                     var stream = Tweetinvi.Stream.CreateFilteredStream();
 
-                    _logger.LogInformation(">> Start UserStreams");
+                    _logger.LogInformation("===========> Start UserStreams");
 
                     //Foreach Member in List addfollow stream
                     foreach (var item in AllMembers.Select((value, index) => new { value, index }))

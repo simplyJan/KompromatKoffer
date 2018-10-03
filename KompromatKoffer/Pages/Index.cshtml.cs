@@ -36,6 +36,8 @@ namespace KompromatKoffer.Pages
 
         public int TimeRange { get; set; } = Config.Parameter.TwitterStreamDayRange;
 
+        public int TweetLimit { get; set; } = Config.Parameter.IndexTweetLimit;
+
         public async Task OnGet(string searchString, int? pageIndex, string currentFilter, string sortOrder)
         {
             try
@@ -46,12 +48,13 @@ namespace KompromatKoffer.Pages
                 {
                     CurrentSort = sortOrder;
 
-
                     var col = db.GetCollection<TwitterStreamModel>("TwitterStream");
-                    var completeDB = col.FindAll();
 
+                    //var completeDB = col.FindAll().Where(s => s.TweetCreatedAt > DateTime.Now.AddDays(TimeRange));
 
-                    CompleteDB = completeDB.Where(s => s.TweetCreatedAt > DateTime.Now.AddDays(TimeRange));
+                    var completeDB = col.Find(Query.All(Query.Descending), limit: TweetLimit);
+
+                    CompleteDB = completeDB;
 
                     if (searchString != null)
                     {
