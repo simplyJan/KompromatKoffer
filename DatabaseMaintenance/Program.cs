@@ -27,7 +27,7 @@ namespace DatabaseMaintenance
                     Console.WriteLine(">>> Getting Collection...");
                     var col = db.GetCollection<TwitterUserModel>("TwitterUser");
 
-                    var partyList = col.FindAll().Where(s => s.PoliticalParty == "filloutbyhandfornow");
+                    var partyList = col.FindAll().Where(s => s.PoliticalParty == null);
 
                     Console.WriteLine(">>> Political Partymembers:");
 

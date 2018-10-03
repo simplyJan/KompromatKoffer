@@ -33,7 +33,7 @@ namespace KompromatKoffer.Services
             _logger.LogInformation("===========> TwitterUserData Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromMinutes(Config.Parameter.TwitterUserUpdateInterval));
+                TimeSpan.FromHours(Config.Parameter.TwitterUserUpdateInterval));
 
             return Task.CompletedTask;
         }
@@ -41,40 +41,39 @@ namespace KompromatKoffer.Services
         private async void DoWork(object state)
         {
             _logger.LogInformation("===========> TwitterUserData Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
+            _logger.LogInformation("===========> TwitterUserData Service UpdateDelay is - " + Config.Parameter.UpdateDelay);
+            var taskDelay = Config.Parameter.UpdateDelay;
 
+            await Task.Delay(taskDelay);
             try
             {
-                var dbLastUpdated = Config.Parameter.DbLastUpdated;
-
-                //Updatedelay reached => New Update => wait for new Update
-                if (dbLastUpdated.AddMinutes(Config.Parameter.UpdateDelay) < DateTime.Now)
-                {
-                    //Set database was last updated
-                    Config.Parameter.DbLastUpdated = DateTime.Now;
-
                     //Get all members from TwitterList - Tweetinvi
                     var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
                     //var AllMembers = list.GetMembers(5); //Just 5 Records for Debug Reasons
                     var AllMembers = list.GetMembers(list.MemberCount);
 
-                    //foreach user get json from Twitter and save to disk
-                    foreach (var x in AllMembers)
+                    using (var db = new LiteDatabase("TwitterData.db"))
                     {
-                        //Get timeline for screenname from twitter using Tweetinvi
-                        var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
 
-                        using (var db = new LiteDatabase("TwitterData.db"))
+                        var mapper = BsonMapper.Global;
+
+                        mapper.Entity<TwitterUserModel>()
+                            .Id(y => y.Id); // set your document ID
+
+                        var col = db.GetCollection<TwitterUserModel>("TwitterUser");
+
+
+                        //foreach user make the database update
+                        foreach (var x in AllMembers)
                         {
-
-                            var mapper = BsonMapper.Global;
-
-                            mapper.Entity<TwitterUserModel>()
-                                .Id(y => y.Id); // set your document ID
-
-                            var col = db.GetCollection<TwitterUserModel>("TwitterUser");
-
-                            //Search for the Name
+                            
+                            //Get timeline for screenname from twitter using Tweetinvi
+                            //var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
+     
+                            //Search for the TweetUser ID
                             var id = col.FindOne(a => a.Id == x.Id);
+
+                            var politicalParty = id.PoliticalParty;
 
                             if (id == null)
                             {
@@ -129,6 +128,7 @@ namespace KompromatKoffer.Services
                                         Favourites_count = x.FavouritesCount,
                                         Listed_count = x.ListedCount,
                                         UserUpdated = DateTime.Now,
+                                        PoliticalParty = politicalParty
                                     };
 
                                     //Update User if name is not null and if the saveinterval is reached^^
@@ -148,10 +148,9 @@ namespace KompromatKoffer.Services
                                     }
                                 }
                             }
+                            await Task.Delay(Config.Parameter.TwitterUserWriteDelay);
                         }
-                        await Task.Delay(Config.Parameter.TwitterUserWriteDelay);
                     }
-                }
             }
             catch (TwitterException ex)
             {
