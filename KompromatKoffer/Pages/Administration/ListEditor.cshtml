@@ -60,16 +60,66 @@
                             <td>@item.Screen_name</td>
                             <td class="PartyDropDown">
 
+                                @{ 
+                                    var polPaMembership = 0;
 
-                                @Html.DropDownListFor(x => x.PoliticalParty, new List<SelectListItem>
-                                {
-                                new SelectListItem() {Text = @item.PoliticalParty, Value = item.PoliticalParty },
-                                })
+                                    if (item.PoliticalParty == "AFD")
+                                    {
+                                        polPaMembership = 0;
+                                    }
 
+                                    if (item.PoliticalParty == "BÜNDNIS 90/DIE GRÜNEN")
+                                    {
+                                        polPaMembership = 1;
+                                    }
 
+                                    if (item.PoliticalParty == "CDU/CSU")
+                                    {
+                                        polPaMembership = 2;
+                                    }
 
+                                    if (item.PoliticalParty == "Die Linke")
+                                    {
+                                        polPaMembership = 3;
+                                    }
 
+                                    if (item.PoliticalParty == "FDP")
+                                    {
+                                        polPaMembership = 4;
+                                    }
 
+                                    if (item.PoliticalParty == "SPD")
+                                    {
+                                        polPaMembership = 5;
+                                    }
+
+                                    if (item.PoliticalParty == "Fraktionslos")
+                                    {
+                                        polPaMembership = 6;
+                                    }
+
+                                    if (item.PoliticalParty == null)
+                                    {
+                                        polPaMembership = 7;
+                                    }
+
+                                }
+
+                                    @Html.DropDownListFor(model => model.PoliticalParty, new SelectList(
+                                      new List<Object>{
+                                       new { value = 0 , text = "AFD"  },
+                                       new { value = 1 , text = "BÜNDNIS 90/DIE GRÜNEN"},
+                                       new { value = 2 , text = "CDU/CSU" },
+                                       new { value = 3 , text = "Die Linke" },
+                                       new { value = 4 , text = "FDP"  },
+                                       new { value = 5 , text = "SPD"},
+                                       new { value = 6 , text = "Fraktionslos"  },
+                                       new { value = 7 , text = "" }
+                                    },
+                                  "value",
+                                  "text",
+                                   polPaMembership
+                                   ))
 
                             </td>
 

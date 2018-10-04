@@ -27,8 +27,8 @@ namespace KompromatKoffer.Pages.Administration
         {
             public static String AFD = "AFD";
             public static String GRUEN = "BÜNDNIS 90/DIE GRÜNEN";
-            public static string LINKE = "Die Linke";
             public static string UNION = "CDU/CSU";
+            public static string LINKE = "Die Linke";
             public static string FDP = "FDP";
             public static string SPD = "SPD";
             public static string OTHER = "Fraktionslos";
