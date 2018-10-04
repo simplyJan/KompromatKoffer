@@ -813,10 +813,31 @@ input.settingssubmit{
 }
 
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
+/*List Editor */
+.listEditor-table{
+    margin:0;
+}
+
+.nameCol{
+    width:10%;
+}
+
+.PartyDropDown{
+    color:#27182b;
+}
+
+.polFoto img{
+    border-radius:50%;
+    padding: 5px;
+}
+
+.PartyDropDown select{
+    width:150px;
+}
+    /* Hide/rearrange for smaller screens */
+    @media screen and (max-width: 767px) {
+        /* Hide captions */
+        .carousel-caption {
         display: none;
 
     }

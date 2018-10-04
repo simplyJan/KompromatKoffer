@@ -1,0 +1,99 @@
+﻿@page
+@model KompromatKoffer.Pages.Administration.ListEditorModel
+@{
+    ViewData["Title"] = "ListEditor";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+
+<div class="iconMenu">
+    <a asp-page="Index" title="Main Settings" class="iconHoverPages interactionMenu"><i class="fas fa-wrench"></i></a>
+    <a asp-page="Index" title="Main Settings" class="iconHoverPages interactionMenu"><i class="fas fa-list-alt"></i></a>
+</div>
+
+<div class="interactionMenuBar">
+
+</div>
+
+<div class="adminMainView">
+    <div class="settingsContainer">
+        <div class="settingsView">
+            <h3>ListEditor</h3>
+
+            
+
+
+            @{ 
+                var completeDB = Model.CompleteDB;
+
+
+            }
+
+            <table class="listEditor-table">
+
+        
+
+
+                    <!--Table Header-->
+                    @{
+
+
+
+                <tr>
+                    <th>Foto</th>
+                    <th>ID</th>
+                    <th class="nameCol">Name</th>
+                    <th>Screen Name</th>
+                    <th>Party</th>
+                </tr>
+
+                        <!--Table Rows-->
+
+                        foreach (var item in completeDB)
+                        {
+
+                        <tr>
+                            <td class="polFoto"><img src="@item.Profile_image_url_https" /></td>
+                            <td>@item.Id</td>
+
+                            <td>@item.Name</td>
+                            <td>@item.Screen_name</td>
+                            <td class="PartyDropDown">
+
+
+                                @Html.DropDownListFor(x => x.PoliticalParty, new List<SelectListItem>
+                                {
+                                new SelectListItem() {Text = @item.PoliticalParty, Value = item.PoliticalParty },
+                                })
+
+
+
+
+
+
+                            </td>
+
+
+
+                        </tr>
+
+
+                        }
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
