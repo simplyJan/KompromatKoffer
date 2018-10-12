@@ -18,20 +18,21 @@
 <div class="adminMainView">
     <div class="settingsContainer">
         <div class="settingsView">
-            <h3>ListEditor</h3>
 
-            
-
-
-            @{ 
-                var completeDB = Model.CompleteDB;
+                <h3>ListEditor</h3>
 
 
-            }
 
-            <table class="listEditor-table">
 
-        
+                @{
+                    var completeDB = Model.CompleteDB;
+
+
+                }
+
+                <table class="listEditor-table">
+
+
 
 
                     <!--Table Header-->
@@ -39,93 +40,122 @@
 
 
 
-                <tr>
-                    <th>Foto</th>
-                    <th>ID</th>
-                    <th class="nameCol">Name</th>
-                    <th>Screen Name</th>
-                    <th>Party</th>
-                </tr>
+                        <tr>
+                            <th>Foto</th>
+                            <th>ID</th>
+                            <th class="nameCol">Name</th>
+                            <th>Screen Name</th>
+                            <th>Party</th>
+                        </tr>
 
                         <!--Table Rows-->
 
                         foreach (var item in completeDB)
                         {
 
-                        <tr>
-                            <td class="polFoto"><img src="@item.Profile_image_url_https" /></td>
-                            <td>@item.Id</td>
+                            <tr>
+                                <td class="polFoto"><img src="@item.Profile_image_url_https" /></td>
+                                <td>@item.Id</td>
 
-                            <td>@item.Name</td>
-                            <td>@item.Screen_name</td>
-                            <td class="PartyDropDown">
+                                <td>@item.Name</td>
+                                <td>@item.Screen_name</td>
+                                <td class="PartyDropDown">
+                                    
+                                    <form method="post">
 
-                                @{ 
-                                    var polPaMembership = 0;
+                                        @{
+                                            var polPaMembership = 0;
 
-                                    if (item.PoliticalParty == "AFD")
-                                    {
-                                        polPaMembership = 0;
-                                    }
+                                            if (item.PoliticalParty == "AFD")
+                                            {
+                                                polPaMembership = 0;
+                                            }
 
-                                    if (item.PoliticalParty == "BÜNDNIS 90/DIE GRÜNEN")
-                                    {
-                                        polPaMembership = 1;
-                                    }
+                                            if (item.PoliticalParty == "BÜNDNIS 90/DIE GRÜNEN")
+                                            {
+                                                polPaMembership = 1;
+                                            }
 
-                                    if (item.PoliticalParty == "CDU/CSU")
-                                    {
-                                        polPaMembership = 2;
-                                    }
+                                            if (item.PoliticalParty == "CDU/CSU")
+                                            {
+                                                polPaMembership = 2;
+                                            }
 
-                                    if (item.PoliticalParty == "Die Linke")
-                                    {
-                                        polPaMembership = 3;
-                                    }
+                                            if (item.PoliticalParty == "Die Linke")
+                                            {
+                                                polPaMembership = 3;
+                                            }
 
-                                    if (item.PoliticalParty == "FDP")
-                                    {
-                                        polPaMembership = 4;
-                                    }
+                                            if (item.PoliticalParty == "FDP")
+                                            {
+                                                polPaMembership = 4;
+                                            }
 
-                                    if (item.PoliticalParty == "SPD")
-                                    {
-                                        polPaMembership = 5;
-                                    }
+                                            if (item.PoliticalParty == "SPD")
+                                            {
+                                                polPaMembership = 5;
+                                            }
 
-                                    if (item.PoliticalParty == "Fraktionslos")
-                                    {
-                                        polPaMembership = 6;
-                                    }
+                                            if (item.PoliticalParty == "Fraktionslos")
+                                            {
+                                                polPaMembership = 6;
+                                            }
 
-                                    if (item.PoliticalParty == null)
-                                    {
-                                        polPaMembership = 7;
-                                    }
+                                            if (item.PoliticalParty == null)
+                                            {
+                                                polPaMembership = 7;
+                                            }
 
-                                }
-
-                                    @Html.DropDownListFor(model => model.PoliticalParty, new SelectList(
-                                      new List<Object>{
-                                       new { value = 0 , text = "AFD"  },
-                                       new { value = 1 , text = "BÜNDNIS 90/DIE GRÜNEN"},
-                                       new { value = 2 , text = "CDU/CSU" },
-                                       new { value = 3 , text = "Die Linke" },
-                                       new { value = 4 , text = "FDP"  },
-                                       new { value = 5 , text = "SPD"},
-                                       new { value = 6 , text = "Fraktionslos"  },
-                                       new { value = 7 , text = "" }
-                                    },
-                                  "value",
-                                  "text",
-                                   polPaMembership
-                                   ))
-
-                            </td>
+                                            <!--SelectList for Political Party-->
 
 
+                                            var selectList = new SelectList(
+                                            new List<Object>{
+                                                                        new { value = 0 , text = "AFD"  },
+                                                                        new { value = 1 , text = "BÜNDNIS 90/DIE GRÜNEN"},
+                                                                        new { value = 2 , text = "CDU/CSU" },
+                                                                        new { value = 3 , text = "Die Linke" },
+                                                                        new { value = 4 , text = "FDP"  },
+                                                                        new { value = 5 , text = "SPD"},
+                                                                        new { value = 6 , text = "Fraktionslos"  },
+                                                                        new { value = 7 , text = "" }
+                                            },
+                                            "value",
+                                            "text",
+                                            polPaMembership
+                                            );
 
-                        </tr>
+                                        }
+
+                                        @Html.DropDownListFor(model => model.PoliticalParty, selectList, new { @onchange = "changePolPa(this.value)", @Id = item.Screen_name })
+
+
+
+                                        <script>
+                                            function changePolPa(party) {
+                                                //alert("The input value has changed. The new value is: " + val);
+                                            }
+                                        </script>
+
+
+                                        <button type="submit" asp-page-handler="SaveEntry"
+                                                asp-route-id="@item.Id" asp-route-polPa="@Convert.ToInt32(selectList.SelectedValue)">
+                                            Update
+                                        </button>
+
+                                    </form>
+                                </td>
+
+                                <td>
+
+                                    
+
+                                    
+
+                                </td>
+
+
+                            </tr>
 
 
                         }
@@ -143,7 +173,8 @@
 
 
                 </table>
-            </div>
+                
+</div>
         </div>
     </div>
 
