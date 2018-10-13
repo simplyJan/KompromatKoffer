@@ -114,13 +114,9 @@ namespace KompromatKoffer.Pages
                         _logger.LogInformation("Sort order is... " + sortOrder);
                     }
                 }
-
                 int pageSize = Config.Parameter.ShowEntries;
                 TwitterStreamModel = await PaginatedList<TwitterStreamModel>.CreateAsync(
                 CompleteDB, pageIndex ?? 1, pageSize);
-
-
-
             }
             catch(ArgumentException ex)
             {

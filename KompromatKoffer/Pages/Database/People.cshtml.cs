@@ -86,9 +86,9 @@ namespace KompromatKoffer.Areas.Database.Pages
                     var completeDB = col.FindAll().Where(s => s.PoliticalParty == "FDP");
                     CompleteDB = completeDB;
                 }
-                else if(politicalParty == "BLAUEN")
+                else if(politicalParty == "Fraktionslos")
                 {
-                    var completeDB = col.FindAll().Where(s => s.PoliticalParty == "Die Blauen");
+                    var completeDB = col.FindAll().Where(s => s.PoliticalParty == "Fraktionslos");
                     CompleteDB = completeDB;
                 }
                 else if(politicalParty == "AFD")

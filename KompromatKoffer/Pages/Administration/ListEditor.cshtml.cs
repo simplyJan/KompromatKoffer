@@ -29,8 +29,10 @@ namespace KompromatKoffer.Pages.Administration
         [BindProperty]
         public int PoliticalPartyMember { get; set; }
         public IList<SelectListItem> PoliticalParty { get; set; }
-  
-        public IActionResult OnGet()
+
+        public string FavCountSort { get; set; }
+
+        public IActionResult OnGet(string sortOrder)
         {
 
             PoliticalParty = new List<SelectListItem> {
@@ -59,7 +61,22 @@ namespace KompromatKoffer.Pages.Administration
                 var completeCollection = col.FindAll();
 
                 CompleteDB = completeCollection;
-                
+
+                FavCountSort = sortOrder == "FavCount_Desc" ? "FavCount" : "FavCount_Desc";
+
+                switch (sortOrder)
+                {
+
+                    default:
+                        CompleteDB = CompleteDB.OrderBy(s => s.PoliticalParty);
+                        break;
+                }
+
+                if (sortOrder != null)
+                {
+                    _logger.LogInformation("Sort order is... " + sortOrder);
+                }
+
             }
             return Page();
         }
