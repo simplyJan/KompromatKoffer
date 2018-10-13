@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using KompromatKoffer.Areas.Database.Model;
@@ -7,6 +8,7 @@ using LiteDB;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 
 namespace KompromatKoffer.Pages.Administration
@@ -22,28 +24,26 @@ namespace KompromatKoffer.Pages.Administration
             _logger = logger;
         }
 
-
         public IEnumerable<TwitterUserModel> CompleteDB { get; set; }
 
-        public class PoliticalPartyModel
+        [BindProperty]
+        public int PoliticalPartyMember { get; set; }
+        public IList<SelectListItem> PoliticalParty { get; set; }
+  
+        public IActionResult OnGet()
         {
-            public static String AFD = "AFD";
-            public static String GRUEN = "BÜNDNIS 90/DIE GRÜNEN";
-            public static string UNION = "CDU/CSU";
-            public static string LINKE = "Die Linke";
-            public static string FDP = "FDP";
-            public static string SPD = "SPD";
-            public static string OTHER = "Fraktionslos";
-        }
 
-        public IList<PoliticalPartyModel> PoliticalParty { get; set; }
+            PoliticalParty = new List<SelectListItem> {
+            new SelectListItem { Value = "1", Text = "AFD" },
+            new SelectListItem { Value = "2", Text = "BÜNDNIS 90/DIE GRÜNEN" },
+            new SelectListItem { Value = "3", Text = "CDU/CSU" },
+            new SelectListItem { Value = "4", Text = "Die Linke" },
+            new SelectListItem { Value = "5", Text = "FDP" },
+            new SelectListItem { Value = "6", Text = "SPD" },
+            new SelectListItem { Value = "7", Text = "Fraktionslos" },
+            new SelectListItem { Value = "8", Text = null },
+            };
 
-        public string NewPolPaParty { get; set; }
-
-        
-
-        public void OnGet()
-        {
             using (var db = new LiteDatabase("TwitterData.db"))
             {
 
@@ -61,11 +61,12 @@ namespace KompromatKoffer.Pages.Administration
                 CompleteDB = completeCollection;
                 
             }
+            return Page();
         }
 
-
-        public IActionResult OnPostSaveEntry(long id, string polPa)
+        public IActionResult OnPostSaveEntry(long id)
         {
+            
             using (var db = new LiteDatabase("TwitterData.db"))
             {
                 _logger.LogInformation(">>>>>>>>> Checking DB for {0} ...", id);
@@ -77,36 +78,90 @@ namespace KompromatKoffer.Pages.Administration
                 if (changeEntry != null)
 
                 {
+                    var politicalPartyMembership = "";
 
-                    foreach(var item in changeEntry)
+                    if(PoliticalPartyMember == 1)
                     {
-                        _logger.LogInformation(">>>>>>>>> Updated DB Entry\n>>>>>>>>> {0} - {1} - {2}", item.Id, item.Name, item.PoliticalParty);
+                        politicalPartyMembership = "AFD";
+                    }
+
+                    if (PoliticalPartyMember == 2)
+                    {
+                        politicalPartyMembership = "BÜNDNIS 90/DIE GRÜNEN";
                     }
 
 
+                    if (PoliticalPartyMember == 3)
+                    {
+                        politicalPartyMembership = "CDU/CSU";
+                    }
 
 
-                    //do stuff
+                    if (PoliticalPartyMember == 4)
+                    {
+                        politicalPartyMembership = "Die Linke";
+                    }
 
-                    _logger.LogInformation(">>>>>>>>> Updated DB Entry for {0} ... ", polPa);
+
+                    if (PoliticalPartyMember == 5)
+                    {
+                        politicalPartyMembership = "FDP";
+                    }
+
+
+                    if (PoliticalPartyMember == 6)
+                    {
+                        politicalPartyMembership = "SPD";
+                    }
+
+                    if (PoliticalPartyMember == 7)
+                    {
+                        politicalPartyMembership = "Fraktionslos";
+                    }
+
+                    if (PoliticalPartyMember == 8)
+                    {
+                        politicalPartyMembership = null;
+                    }
+
+                    foreach (var item in changeEntry)
+                    {
+                        _logger.LogInformation(">>>>>>>>> Found DB Entry\n>>>>>>>>> {0} - {1} - {2}", item.Id, item.Name, item.PoliticalParty);
+
+                        var twitterUser = new TwitterUserModel
+                        {
+                            Id = item.Id,
+                            Name = item.Name,
+                            Screen_name = item.Screen_name,
+                            Description = item.Description,
+                            Created_at = item.Created_at,
+                            Location = item.Location,
+                            Geo_enabled = item.Geo_enabled,
+                            Url = item.Url,
+                            Statuses_count = item.Statuses_count,
+                            Followers_count = item.Followers_count,
+                            Friends_count = item.Friends_count,
+                            Verified = item.Verified,
+                            Profile_image_url_https = item.Profile_image_url_https,
+                            Favourites_count = item.Favourites_count,
+                            Listed_count = item.Listed_count,
+                            UserUpdated = DateTime.Now,
+                            PoliticalParty = politicalPartyMembership
+                        };
+
+                        //Update User if name is not null and if the saveinterval is reached^^
+                        col.Update(twitterUser);
+                        _logger.LogInformation(">>>>>>>>> Updated {0} with {1} ... ", politicalPartyMembership, item.Id);
+
+                    }
 
                 }
 
             }
 
-
-           
-
             return RedirectToPage();
 
-
-
-
         }
-
-
-
-
 
 
     }

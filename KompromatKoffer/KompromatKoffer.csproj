@@ -34,6 +34,7 @@
   <ItemGroup>
     <Folder Include="dbbackup\" />
     <Folder Include="logs\" />
+    <Folder Include="Pages\Administration\Editor\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
