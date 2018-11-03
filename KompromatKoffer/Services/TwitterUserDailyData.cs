@@ -1,5 +1,4 @@
-﻿
-using KompromatKoffer.Areas.Database.Model;
+﻿using KompromatKoffer.Areas.Database.Model;
 using KompromatKoffer.Models;
 using KompromatKoffer.Pages;
 using LiteDB;
@@ -116,8 +115,6 @@ namespace KompromatKoffer.Services
             }
 
             #endregion
-
-
 
         }
 

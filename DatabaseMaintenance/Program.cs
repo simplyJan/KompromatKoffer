@@ -370,7 +370,6 @@ namespace DatabaseMaintenance
 
         }
 
-
         private static void FixDBwithLast()
         {
             #region Repair DB easy fix for now
