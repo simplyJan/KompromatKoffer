@@ -35,6 +35,8 @@ namespace KompromatKoffer.Services
         {
             _logger.LogInformation("===========> TwitterStream Service is working " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
+            ExceptionHandler.SwallowWebExceptions = false;
+
             try
             {
 
