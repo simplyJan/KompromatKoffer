@@ -12,8 +12,8 @@ namespace DatabaseMaintenance
         {
 
 
-            PoliticalPartyUpdate();
-            
+            //PoliticalPartyUpdate();
+            //FixDBwithLast();
 
         }
 
@@ -367,6 +367,45 @@ namespace DatabaseMaintenance
             }
 
 
+
+        }
+
+
+        private static void FixDBwithLast()
+        {
+            #region Repair DB easy fix for now
+            //Repair Routine for putting Collection back from Backup
+
+            try
+            {
+
+                try
+                {
+                    using (var db1 = new LiteDatabase("TwitterData2.db"))
+                    using (var db2 = new LiteDatabase("TwitterData.db"))
+                    {
+                        var from = db1.GetCollection("TwitterUserDaily");
+                        var to = db2.GetCollection("TwitterUserDaily");
+
+                        to.Insert(from.FindAll());
+                        Console.WriteLine("=>>>> DB fixed....");
+                    }
+                }
+                catch (LiteException ex)
+                {
+                    Console.WriteLine("=>>> fixing Lite DB error", ex);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("=>>> error", ex);
+            }
+
+
+            return;
+
+            #endregion
 
         }
 

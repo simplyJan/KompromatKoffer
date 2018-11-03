@@ -27,7 +27,6 @@ namespace KompromatKoffer.Services
 
         public PaginatedList<TwitterUserDailyModel> TwitterUserDailyModel { get; set; }
 
-
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("===========> TwitterUserDailyService is starting.");
@@ -44,33 +43,6 @@ namespace KompromatKoffer.Services
 
             //Set Last Update Time
             Config.Parameter.UserDailyDataLastUpdated = DateTime.Now;
-
-            #region Repair DB easy fix for now
-            //Repair Routine for putting Collection back from Backup
-            /*
-            try
-            {
-
-                using (var db1 = new LiteDatabase("TwitterData3.db"))
-                using (var db2 = new LiteDatabase("TwitterData.db"))
-                {
-                    var from = db1.GetCollection("TwitterStream");
-                    var to = db2.GetCollection("TwitterStream");
-
-                    to.Insert(from.FindAll());
-                }
-
-
-            }
-            catch(Exception ex)
-            {
-                _logger.LogInformation("error", ex);
-            }
-
-
-            return;
-            */
-            #endregion
 
             #region   // Try make the TwitterUserDaily Updates
 
