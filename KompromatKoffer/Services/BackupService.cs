@@ -45,11 +45,8 @@ namespace KompromatKoffer.Services
 
             try
             {
-                var dbLastBackup = Config.Parameter.DBLastBackup;
-
-
-                if (dbLastBackup.AddHours(Config.Parameter.DBBackupInterval) < DateTime.Now)
-                {
+                
+                
                     string TargetPath;
 
                     string FileName = "TwitterData.db";
@@ -78,7 +75,7 @@ namespace KompromatKoffer.Services
                     // overwrite the destination file if it already exists.
                     System.IO.File.Copy(sourceFile, destFile, true);
   
-                }
+                
 
             }
             catch (TwitterException ex)

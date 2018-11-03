@@ -60,14 +60,6 @@ namespace KompromatKoffer.Pages.Database
 
             await Task.Delay(1);
 
-
-           
-
-           
-
-           
-
-
         }
 
 
