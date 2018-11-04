@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -16,13 +15,7 @@ namespace KompromatKoffer.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
-        private readonly ILogger _logger;
-
-        public IdentityHostingStartup(ILogger<IdentityHostingStartup> logger)
-        {
-            _logger = logger;
-        }
-
+        
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {

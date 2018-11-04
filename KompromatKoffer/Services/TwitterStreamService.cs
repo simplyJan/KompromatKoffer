@@ -70,8 +70,9 @@ namespace KompromatKoffer.Services
                         stream.AddFollow(item.value.UserIdentifier);
                         //_logger.LogInformation("{1} Added User {0} to stream...", item.value.UserIdentifier, item.index);
                     }
+                    
                     // Get notfified about shutdown of the stream
-                    stream.StallWarnings = true;
+                    //stream.StallWarnings = false;
 
                     //Only Match the addfollows
                     stream.MatchOn = MatchOn.Follower;
@@ -151,13 +152,30 @@ namespace KompromatKoffer.Services
 
                     stream.StartStreamMatchingAllConditions();
 
+
+                    
+                    stream.StreamStarted += (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream has started...");
+
+
+                    };
+
+                    stream.StreamResumed += (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Resumded to stream...");
+
+
+                    };
+
                     stream.StreamStopped += (sender, args) =>
                     {
                         var exceptionThatCausedTheStreamToStop = args.Exception;
                         var twitterDisconnectMessage = args.DisconnectMessage;
-                        _logger.LogWarning("===========> Stream has stopped..." + exceptionThatCausedTheStreamToStop + "\n" + twitterDisconnectMessage);
+                        _logger.LogWarning("===========> Stream has stopped unexpectedly..." + exceptionThatCausedTheStreamToStop + "\n" + twitterDisconnectMessage);
 
                     };
+                    
 
                 }
             }
