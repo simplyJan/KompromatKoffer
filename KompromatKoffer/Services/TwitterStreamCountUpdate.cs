@@ -48,7 +48,6 @@ namespace KompromatKoffer.Services
             {
                 var dbLastUpdated = Config.Parameter.TwitterStreamUpdated;
 
-
                 if (dbLastUpdated.AddMinutes(Config.Parameter.TwitterStreamCountUpdateDelay) < DateTime.Now)
                 {
 
@@ -56,7 +55,6 @@ namespace KompromatKoffer.Services
                     {
                         // Get Datbase Connection 
                         var colTS = db.GetCollection<TwitterStreamModel>("TwitterStream");
-
 
                         //Breaks why? - - If there is nothing to update?
                         var willBeUpdated = colTS.FindAll().Where(s => s.TweetCreatedAt > DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours));

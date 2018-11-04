@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 using Tweetinvi;
 
@@ -14,6 +16,13 @@ namespace KompromatKoffer.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
+        private readonly ILogger _logger;
+
+        public IdentityHostingStartup(ILogger<IdentityHostingStartup> logger)
+        {
+            _logger = logger;
+        }
+
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
@@ -21,18 +30,10 @@ namespace KompromatKoffer.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("ApplicationContextConnection")));
 
-                /*services.AddDefaultIdentity<ApplicationUser>()
-                    .AddRoles<IdentityRole>()
-                    .AddRoleManager<RoleManager<IdentityRole>>()
-                    .AddEntityFrameworkStores<ApplicationContext>()
-                .AddDefaultTokenProviders();
-                */
-
                 services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
-
 
                 services.AddAuthentication().AddTwitter(twitterOptions =>
                 {
@@ -41,10 +42,10 @@ namespace KompromatKoffer.Areas.Identity
                     twitterOptions.SaveTokens = true;
                 });
 
+
+                // Try authenticate the TwitterUser
                 Auth.SetUserCredentials(Config.Credentials.CONSUMER_KEY, Config.Credentials.CONSUMER_SECRET, Config.Credentials.ACCESS_TOKEN, Config.Credentials.ACCESS_TOKEN_SECRET);
-
-
-
+               
 
             });
         }

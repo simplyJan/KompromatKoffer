@@ -35,8 +35,6 @@ namespace KompromatKoffer.Services
         {
             _logger.LogInformation("===========> TwitterStream Service is working " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
-            ExceptionHandler.SwallowWebExceptions = false;
-
             try
             {
 
@@ -59,9 +57,9 @@ namespace KompromatKoffer.Services
                     var AllMembers = list.GetMembers(list.MemberCount);
                     AllListMembers = AllMembers;
 
-                    _logger.LogInformation("===========> Members to Follow: " + AllMembers.Count());
+                    _logger.LogInformation("===========> Member to Follow: " + AllMembers.Count());
 
-                    //Create Stream
+                    //Create new Stream
                     var stream = Tweetinvi.Stream.CreateFilteredStream();
 
                     _logger.LogInformation("===========> Start UserStreams");
@@ -72,6 +70,8 @@ namespace KompromatKoffer.Services
                         stream.AddFollow(item.value.UserIdentifier);
                         //_logger.LogInformation("{1} Added User {0} to stream...", item.value.UserIdentifier, item.index);
                     }
+                    // Get notfified about shutdown of the stream
+                    stream.StallWarnings = true;
 
                     //Only Match the addfollows
                     stream.MatchOn = MatchOn.Follower;
@@ -150,6 +150,14 @@ namespace KompromatKoffer.Services
                     };
 
                     stream.StartStreamMatchingAllConditions();
+
+                    stream.StreamStopped += (sender, args) =>
+                    {
+                        var exceptionThatCausedTheStreamToStop = args.Exception;
+                        var twitterDisconnectMessage = args.DisconnectMessage;
+                        _logger.LogWarning("===========> Stream has stopped..." + exceptionThatCausedTheStreamToStop + "\n" + twitterDisconnectMessage);
+
+                    };
 
                 }
             }
