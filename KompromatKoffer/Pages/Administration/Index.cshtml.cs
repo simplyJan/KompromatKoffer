@@ -150,7 +150,6 @@ namespace KompromatKoffer.Pages.Administration
                 UpdateDelay = Config.Parameter.UpdateDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
-                TwitterStreamCountUpdateDelay = Config.Parameter.TwitterStreamCountUpdateDelay,
                 TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
@@ -205,7 +204,6 @@ namespace KompromatKoffer.Pages.Administration
                 Config.Parameter.UpdateDelay = ListSettings.UpdateDelay;
                 Config.Parameter.TwitterUserUpdateInterval = ListSettings.TwitterUserUpdateInterval;
                 Config.Parameter.TwitterUserDailyUpdateInterval = ListSettings.TwitterUserDailyUpdateInterval;
-                Config.Parameter.TwitterStreamCountUpdateDelay = ListSettings.TwitterStreamCountUpdateDelay;
                 Config.Parameter.TwitterStreamCountWriteDelay = ListSettings.TwitterStreamCountWriteDelay;
                 Config.Parameter.TwitterStreamCountTaskDelay = ListSettings.TwitterStreamCountTaskDelay;
                 Config.Parameter.TwitterStreamCountUpdateLastHours = ListSettings.TwitterStreamCountUpdateLastHours;
@@ -225,7 +223,6 @@ namespace KompromatKoffer.Pages.Administration
                 UpdateDelay = Config.Parameter.UpdateDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
-                TwitterStreamCountUpdateDelay = Config.Parameter.TwitterStreamCountUpdateDelay,
                 TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
@@ -298,7 +295,6 @@ namespace KompromatKoffer.Pages.Administration
                 UpdateDelay = Config.Parameter.UpdateDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
-                TwitterStreamCountUpdateDelay = Config.Parameter.TwitterStreamCountUpdateDelay,
                 TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
@@ -351,7 +347,6 @@ namespace KompromatKoffer.Pages.Administration
                 UpdateDelay = Config.Parameter.UpdateDelay,
                 TwitterUserUpdateInterval = Config.Parameter.TwitterUserUpdateInterval,
                 TwitterUserDailyUpdateInterval = Config.Parameter.TwitterUserDailyUpdateInterval,
-                TwitterStreamCountUpdateDelay = Config.Parameter.TwitterStreamCountUpdateDelay,
                 TwitterStreamCountWriteDelay = Config.Parameter.TwitterStreamCountWriteDelay,
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,

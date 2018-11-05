@@ -44,10 +44,6 @@
                     </p>
                     <h5>TwitterUserData Collection</h5>
                     <p>
-                        <label for="ListSettings.UpdateDelay">TwitterUserData UpdateDelay (min)</label>
-                        <input type="number" asp-for="ListSettings.UpdateDelay" />
-                    </p>
-                    <p>
                         <label for="ListSettings.TwitterUserUpdateInterval">TwitterUserData UpdateInterval (min)</label>
                         <input type="number" asp-for="ListSettings.TwitterUserUpdateInterval" />
                     </p>
@@ -57,10 +53,7 @@
                         <input type="number" asp-for="ListSettings.TwitterUserDailyUpdateInterval" />
                     </p>
                     <h5>TwitterStream Collection</h5>
-                    <p>
-                        <label for="ListSettings.TwitterStreamCountUpdateDelay">TwitterStreamCount UpdateDelay (min)</label>
-                        <input type="number" asp-for="ListSettings.TwitterStreamCountUpdateDelay" />
-                    </p>
+                    <p>@Html.Display(Config.Parameter.StreamState)
                     <p>
                         <label for="ListSettings.TwitterStreamCountWriteDelay">TwitterStreamCount WriteDelay (ms)</label>
                         <input type="number" asp-for="ListSettings.TwitterStreamCountWriteDelay" />

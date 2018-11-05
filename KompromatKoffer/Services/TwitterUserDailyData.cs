@@ -45,6 +45,8 @@ namespace KompromatKoffer.Services
 
             #region   // Try make the TwitterUserDaily Updates
 
+            await Task.Delay((Config.Parameter.TwitterUserDailyTaskDelay * 60) * 1000);
+
             try
             {
 

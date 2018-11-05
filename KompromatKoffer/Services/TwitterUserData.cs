@@ -41,10 +41,10 @@ namespace KompromatKoffer.Services
         private async void DoWork(object state)
         {
             _logger.LogInformation("===========> TwitterUserData Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
-            _logger.LogInformation("===========> TwitterUserData Service UpdateDelay is - " + Config.Parameter.UpdateDelay);
-            var taskDelay = Config.Parameter.UpdateDelay;
 
-            await Task.Delay(taskDelay);
+            //Perform Task Delay
+            await Task.Delay(Config.Parameter.UpdateDelay*60*1000);
+
             try
             {
                     //Get all members from TwitterList - Tweetinvi
@@ -148,7 +148,7 @@ namespace KompromatKoffer.Services
                                     }
                                 }
                             }
-                            await Task.Delay(Config.Parameter.TwitterUserWriteDelay);
+                            await Task.Delay(Config.Parameter.TwitterUserWriteDelay*1000);
                         }
                     }
             }

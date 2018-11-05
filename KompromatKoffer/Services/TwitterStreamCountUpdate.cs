@@ -42,15 +42,10 @@ namespace KompromatKoffer.Services
         {
             _logger.LogInformation("===========> TwitterStreamCountUpdate Service is working.");
 
-            await Task.Delay(Config.Parameter.TwitterStreamCountTaskDelay);
+            await Task.Delay(Config.Parameter.TwitterStreamCountTaskDelay*1000);
 
             try
             {
-                var dbLastUpdated = Config.Parameter.TwitterStreamUpdated;
-
-                if (dbLastUpdated.AddMinutes(Config.Parameter.TwitterStreamCountUpdateDelay) < DateTime.Now)
-                {
-
                     using (var db = new LiteDatabase("TwitterData.db"))
                     {
                         // Get Datbase Connection 
@@ -84,19 +79,15 @@ namespace KompromatKoffer.Services
 
                                 };
 
-                                //tweetModel.TweetReTweetCount = tweet.RetweetCount;
-                                //tweetModel.TweetFavoriteCount = tweet.FavoriteCount;
-
                                 _logger.LogInformation(">> Updated Counts for " + x.TweetID);
                                 colTS.Update(tweetModel);
                                 
                             }
 
-                            await Task.Delay(Config.Parameter.TwitterStreamCountWriteDelay);
+                            await Task.Delay(Config.Parameter.TwitterStreamCountWriteDelay*1000);
 
-                        }
                     }
-                }
+                    }
             }
             catch (TwitterException ex)
             {

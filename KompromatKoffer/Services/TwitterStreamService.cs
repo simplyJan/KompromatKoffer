@@ -72,7 +72,7 @@ namespace KompromatKoffer.Services
                     }
                     
                     // Get notfified about shutdown of the stream
-                    //stream.StallWarnings = false;
+                    stream.StallWarnings = true;
 
                     //Only Match the addfollows
                     stream.MatchOn = MatchOn.Follower;
@@ -81,9 +81,14 @@ namespace KompromatKoffer.Services
                     {
                         if (args.MatchOn == stream.MatchOn)
                         {
+                            
                             if (args.Tweet.IsRetweet == true)
                             {
                                 _logger.LogInformation(">> Skipped ReTweet...");
+
+                                Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                                Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                                _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
                             }
                             else
                             {
@@ -114,6 +119,9 @@ namespace KompromatKoffer.Services
                                     await Task.Delay(1);
                                     //Insert Tweet in DB
                                     colTS.Insert(tweetDB);
+
+                                    Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                                    _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
                                 }
                                 else
                                 {
@@ -139,6 +147,9 @@ namespace KompromatKoffer.Services
                                     //Insert Tweet in DB
                                     colTS.Insert(tweetDB);
 
+
+                                    Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                                    _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
                                 }
 
                             }
@@ -147,23 +158,29 @@ namespace KompromatKoffer.Services
                         else
                         {
                             _logger.LogInformation(">> Tweet not matched..." + args.Tweet.Id);
+
+                            Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                            _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
                         }
                     };
 
                     stream.StartStreamMatchingAllConditions();
-
-
                     
                     stream.StreamStarted += (sender, args) =>
                     {
                         _logger.LogWarning("===========> Stream has started...");
 
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
 
                     };
 
                     stream.StreamResumed += (sender, args) =>
                     {
                         _logger.LogWarning("===========> Resumded to stream...");
+
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
 
 
                     };
@@ -174,8 +191,36 @@ namespace KompromatKoffer.Services
                         var twitterDisconnectMessage = args.DisconnectMessage;
                         _logger.LogWarning("===========> Stream has stopped unexpectedly..." + exceptionThatCausedTheStreamToStop + "\n" + twitterDisconnectMessage);
 
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
+
                     };
-                    
+
+                    stream.WarningFallingBehindDetected += (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream Warning... " + args.WarningMessage);
+                        
+                    };
+
+                    stream.UnmanagedEventReceived += (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream UnmanagedEventReceived... " + args.JsonMessageReceived);
+                    };
+
+                    stream.LimitReached += (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream Warning... " + args.NumberOfTweetsNotReceived);
+                    };
+
+                    stream.DisconnectMessageReceived += async (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream got disconnected... " + args.DisconnectMessage);
+                        
+                        stream.StopStream();
+                        await Task.Delay(5 * 60 * 1000);
+                        stream.StartStreamMatchingAllConditions();
+                        _logger.LogWarning("!RESTART!===========> Stream restarted at " + DateTime.Now);
+                    };
 
                 }
             }
@@ -183,13 +228,13 @@ namespace KompromatKoffer.Services
             {
                 _logger.LogInformation("Twitter Exception", ex);
             }
-            catch (ArgumentException ex)
-            {
-                _logger.LogInformation("Argument Exception", ex);
-            }
             catch (LiteException ex)
             {
                 _logger.LogInformation("LiteDB Exception", ex);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogInformation("Argument Exception", ex);
             }
             catch (Exception ex)
             {
