@@ -51,7 +51,6 @@ namespace KompromatKoffer
 
             //Set DB to Update after StartUp
             Config.Parameter.DbLastUpdated = DateTime.Now;
-            Config.Parameter.UserDailyDataLastUpdated = DateTime.Now.AddMinutes(5);
 
             // Add application services.
             services.AddSingleton<IEmailSender, EmailSender>();
@@ -81,21 +80,18 @@ namespace KompromatKoffer
                     services.AddHostedService<BackupService>();
                 }
 
-
-                //Authorize for Admins
-                services.AddAuthorization(options =>
-                {
-                    options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
-                });
-
-
                 //TwitterStream
                 if (Config.Parameter.TwitterStream == true)
                 {
-                    services.AddHostedService<TwitterStreamScoped>();
-                    services.AddScoped<TwitterStreamService, ScopedProcessingService>();
+                    services.AddHostedService<TwitterTrackStreamService>();
                 }
             }
+
+            //Authorize for Admins
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
+            });
         }
 
 

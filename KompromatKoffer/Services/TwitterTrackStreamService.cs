@@ -1,28 +1,29 @@
-﻿using KompromatKoffer.Areas.Database.Model;
+﻿
+using KompromatKoffer.Areas.Database.Model;
+using KompromatKoffer.Models;
 using KompromatKoffer.Pages;
 using LiteDB;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Tweetinvi;
+using Tweetinvi.Core.Extensions;
 using Tweetinvi.Exceptions;
 using Tweetinvi.Models;
 using Tweetinvi.Streaming;
 
 namespace KompromatKoffer.Services
-{    
-    internal interface TwitterStreamService
-    {
-        void DoWork();
-    }
-
-    internal class ScopedProcessingService : TwitterStreamService
+{
+    internal class TwitterTrackStreamService : IHostedService, IDisposable
     {
         private readonly ILogger _logger;
+        private Timer _timer;
 
-        public ScopedProcessingService(ILogger<ScopedProcessingService> logger)
+        public TwitterTrackStreamService(ILogger<TwitterTrackStreamService> logger)
         {
             _logger = logger;
         }
@@ -31,13 +32,22 @@ namespace KompromatKoffer.Services
 
         public IEnumerable<IUser> AllListMembers;
 
-        public async void DoWork()
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("===========> TwitterStream Service is working " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
+            _logger.LogInformation("===========> TwitterUserStreamService is starting..." + DateTime.Now);
+
+            _timer = new Timer(DoWork, null, TimeSpan.Zero,
+                TimeSpan.FromHours(Config.Parameter.TwitterTrackStreamUpdateInterval));
+
+            return Task.CompletedTask;
+        }
+
+        private void DoWork(object state)
+        {
+            _logger.LogInformation("===========> TwitterUserData Service - " + DateTime.Now.ToString("dd.MM.yy - hh:mm"));
 
             try
             {
-
                 using (var db = new LiteDatabase("TwitterData.db"))
                 {
                     // Get Datbase Connection 
@@ -70,7 +80,7 @@ namespace KompromatKoffer.Services
                         stream.AddFollow(item.value.UserIdentifier);
                         //_logger.LogInformation("{1} Added User {0} to stream...", item.value.UserIdentifier, item.index);
                     }
-                    
+
                     // Get notfified about shutdown of the stream
                     stream.StallWarnings = true;
 
@@ -81,7 +91,7 @@ namespace KompromatKoffer.Services
                     {
                         if (args.MatchOn == stream.MatchOn)
                         {
-                            
+
                             if (args.Tweet.IsRetweet == true)
                             {
                                 _logger.LogInformation(">> Skipped ReTweet...");
@@ -116,7 +126,7 @@ namespace KompromatKoffer.Services
                                     };
 
                                     _logger.LogInformation(">> New ExtendedTweet posted..." + tweet.Id);
-                                    await Task.Delay(1);
+                     
                                     //Insert Tweet in DB
                                     colTS.Insert(tweetDB);
 
@@ -143,7 +153,7 @@ namespace KompromatKoffer.Services
                                     };
 
                                     _logger.LogInformation(">> New Tweet posted..." + tweet.Id);
-                                    await Task.Delay(1);
+                                    
                                     //Insert Tweet in DB
                                     colTS.Insert(tweetDB);
 
@@ -165,7 +175,9 @@ namespace KompromatKoffer.Services
                     };
 
                     stream.StartStreamMatchingAllConditions();
-                    
+
+                    #region
+                    //Check if this is firing
                     stream.StreamStarted += (sender, args) =>
                     {
                         _logger.LogWarning("===========> Stream has started...");
@@ -199,7 +211,7 @@ namespace KompromatKoffer.Services
                     stream.WarningFallingBehindDetected += (sender, args) =>
                     {
                         _logger.LogWarning("===========> Stream Warning... " + args.WarningMessage);
-                        
+
                     };
 
                     stream.UnmanagedEventReceived += (sender, args) =>
@@ -215,37 +227,52 @@ namespace KompromatKoffer.Services
                     stream.DisconnectMessageReceived += async (sender, args) =>
                     {
                         _logger.LogWarning("===========> Stream got disconnected... " + args.DisconnectMessage);
-                        
+
                         stream.StopStream();
                         await Task.Delay(5 * 60 * 1000);
                         stream.StartStreamMatchingAllConditions();
                         _logger.LogWarning("!RESTART!===========> Stream restarted at " + DateTime.Now);
                     };
-
+                    #endregion
                 }
             }
             catch (TwitterException ex)
             {
-                _logger.LogInformation("Twitter Exception", ex);
-            }
-            catch (LiteException ex)
-            {
-                _logger.LogInformation("LiteDB Exception", ex);
+                _logger.LogInformation("Twitter has problems..." + ex);
             }
             catch (ArgumentException ex)
             {
-                _logger.LogInformation("Argument Exception", ex);
+                _logger.LogInformation("ArgumentException..." + ex);
+
+            }
+            catch (LiteException ex)
+            {
+                _logger.LogInformation("LiteDB Exception..." + ex);
             }
             catch (Exception ex)
             {
-                _logger.LogInformation("Exceptions", ex);
+                _logger.LogInformation("Exception..." + ex);
             }
-
-            await Task.Delay(1);
 
 
         }
+
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("===========> TwitterUserData Service is stopping.");
+
+            _timer?.Change(Timeout.Infinite, 0);
+
+            return Task.CompletedTask;
+        }
+
+        public void Dispose()
+        {
+            _timer?.Dispose();
+
+
+        }
+
     }
-
-
 }
+
