@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using KompromatKoffer.Areas.Administration.Model;
 using KompromatKoffer.Areas.Identity.Data;
 using KompromatKoffer.Models;
+using KompromatKoffer.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -21,7 +23,6 @@ namespace KompromatKoffer.Pages.Administration
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
 
         private ApplicationContext _context;
@@ -31,13 +32,12 @@ namespace KompromatKoffer.Pages.Administration
         public AdministrationModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender,
             ILogger<AdministrationModel> logger,
-            ApplicationContext context)
+            ApplicationContext context
+)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
             _logger = logger;
             _context = context;
         }
@@ -140,6 +140,7 @@ namespace KompromatKoffer.Pages.Administration
             public string Password { get; set; } //= Config.Parameter.Mail_Email_Passwort;
         }
 
+        //PageView
         public IActionResult OnGet()
         {
             //List Settings
@@ -188,15 +189,14 @@ namespace KompromatKoffer.Pages.Administration
 
             UserWithRoles = usersWithRoles;
 
-
-
-
             return Page();
 
         }
 
+        //Update Settings
         public IActionResult OnPostSettings()
         {
+
 
 
                 Config.Parameter.ListName = ListSettings.ListName;
@@ -266,6 +266,7 @@ namespace KompromatKoffer.Pages.Administration
 
         }
 
+        //Update eMail Settings
         public IActionResult OnPostMailSettings()
         {
             Config.Parameter.Mail_From_Email_Address = SendMailSettings.MailAddress;
@@ -326,18 +327,19 @@ namespace KompromatKoffer.Pages.Administration
             return Page();
         }
 
-        public IActionResult OnPostDebugSettings()
+        public IActionResult OnPostStartStopStream()
         {
-            //Mail Settings
-            SendMailSettings = new MailSettings()
-            {
-                MailAddress = Config.Parameter.Mail_From_Email_Address,
-                MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
-                MailHost = Config.Parameter.Mail_Host,
-                MailPort = Config.Parameter.Mail_Port,
-                Login = Config.Parameter.Mail_Email_Login,
-                Password = Config.Parameter.Mail_Email_Passwort
-            };
+
+
+            //Do Stuff to switch Stream
+
+            _logger.LogInformation("====> Stream started");
+
+
+
+
+            //Show the Page with Data
+
 
             //List Settings
             ListSettings = new Settings()
@@ -351,10 +353,21 @@ namespace KompromatKoffer.Pages.Administration
                 TwitterStreamCountTaskDelay = Config.Parameter.TwitterStreamCountTaskDelay,
                 TwitterStreamCountUpdateLastHours = Config.Parameter.TwitterStreamCountUpdateLastHours,
                 TwitterStreamDayRange = Config.Parameter.TwitterStreamDayRange,
-                IndexTweetLimit = Config.Parameter.IndexTweetLimit,
                 ShowEntries = Config.Parameter.ShowEntries,
+                IndexTweetLimit = Config.Parameter.IndexTweetLimit,
                 DBBackupSpawn = Config.Parameter.DBBackupSpawn,
                 IndexWarningMessage = Config.Parameter.WarningMessage
+            };
+
+            //Mail Settings
+            SendMailSettings = new MailSettings()
+            {
+                MailAddress = Config.Parameter.Mail_From_Email_Address,
+                MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
+                MailHost = Config.Parameter.Mail_Host,
+                MailPort = Config.Parameter.Mail_Port,
+                Login = Config.Parameter.Mail_Email_Login,
+                Password = Config.Parameter.Mail_Email_Passwort
             };
 
 
@@ -374,12 +387,8 @@ namespace KompromatKoffer.Pages.Administration
 
             UserWithRoles = usersWithRoles;
 
-
             return Page();
+
         }
-
-        
-
-
     }
 }

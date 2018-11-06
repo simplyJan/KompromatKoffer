@@ -25,8 +25,7 @@ namespace KompromatKoffer.Services
             _logger = logger;
         }
 
-        public PaginatedList<TwitterStreamModel> TwitterStreamModel { get; set; }
-
+        public PaginatedList<TwitterStreamModel> TwitterStreamModel { get; set; }       
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
@@ -80,7 +79,7 @@ namespace KompromatKoffer.Services
                                 };
 
                                 _logger.LogInformation(">> Updated Counts for " + x.TweetID);
-                                colTS.Update(tweetModel);
+                                colTS.Update(tweetModel);  
                                 
                             }
                             if(tweet.IsTweetDestroyed == true)

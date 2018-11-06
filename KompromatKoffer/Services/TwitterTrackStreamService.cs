@@ -18,7 +18,7 @@ using Tweetinvi.Streaming;
 
 namespace KompromatKoffer.Services
 {
-    internal class TwitterTrackStreamService : IHostedService, IDisposable
+    public class TwitterTrackStreamService : IHostedService, IDisposable
     {
         private readonly ILogger _logger;
         private Timer _timer;

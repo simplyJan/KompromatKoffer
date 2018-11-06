@@ -14,124 +14,135 @@
 
 </div>
 
-    <div class="adminMainView">
-        <div class="settingsContainer">
-            <div class="settingsView">
-                <form id="ListSettings" method="post">
-                    <h3>Main Settings</h3>
-                    <h5>TwitterList</h5>
-                    <p>
-                        <label for="ListSettings.ListName">ListName</label>
-                        <input type="text" asp-for="ListSettings.ListName" />
-                    </p>
-                    <p>
-                        <label for="ListSettings.ListOwner">ListOwner</label>
-                        <input type="text" asp-for="ListSettings.ListOwner" />
-                    </p>
-                    <h5>Pagesettings</h5>
-                    <p>
-                        <label for="ListSettings.ShowEntries">ShowEntries</label>
-                        <input type="text" asp-for="ListSettings.ShowEntries" />
-                    </p>
-                    <p>
-                        <label for="ListSettings.IndexTweetLimit">IndexTweetLimit</label>
-                        <input type="text" asp-for="ListSettings.IndexTweetLimit" />
-                    </p>
-                    <h5>Database Backups</h5>
-                    <p>
-                        <label for="ListSettings.DBBackupSpawn">DBBackupSpawn</label>
-                        <input type="text" asp-for="ListSettings.DBBackupSpawn" />
-                    </p>
-                    <h5>TwitterUserData Collection</h5>
-                    <p>
-                        <label for="ListSettings.TwitterUserUpdateInterval">TwitterUserData UpdateInterval (hours)</label>
-                        <input type="number" asp-for="ListSettings.TwitterUserUpdateInterval" />
-                    </p>
-                    <h5>TwitterUserDaily Collection</h5>
-                    <p>
-                        <label for="ListSettings.TwitterUserDailyUpdateInterval">TwitterUserDaily UpdateInterval (hours)</label>
-                        <input type="number" asp-for="ListSettings.TwitterUserDailyUpdateInterval" />
-                    </p>
-                    <h5>TwitterStream Collection</h5>
-                    <p>@Html.Display(Config.Parameter.StreamState)
-                    <p>
-                        <label for="ListSettings.TwitterStreamCountWriteDelay">TwitterStreamCount WriteDelay (ms)</label>
-                        <input type="number" asp-for="ListSettings.TwitterStreamCountWriteDelay" />
-                    </p>
-                    <p>
-                        <label for="ListSettings.TwitterStreamCountTaskDelay">TwitterStreamCount TaskDelay (ms)</label>
-                        <input type="number" asp-for="ListSettings.TwitterStreamCountTaskDelay" />
-                    </p>
-                    <p>
-                        <label for="ListSettings.TwitterStreamCountUpdateLastHours">TwitterStreamCount UpdateLastHours (hours)</label>
-                        <input type="number" asp-for="ListSettings.TwitterStreamCountUpdateLastHours" />
-                    </p>
-                    <p>
-                        <label for="ListSettings.TwitterStreamDayRange">TwitterStream DayRange (days)</label>
-                        <input type="number" asp-for="ListSettings.TwitterStreamDayRange" />
-                    </p>
-                    <h5>Textareas</h5>
-                    <p>
-                        <label for="ListSettings.IndexWarningMessage">Info / Warning Message</label>
-                        @Html.TextAreaFor(e => e.ListSettings.IndexWarningMessage, 10, 50, new { @class = "warningMsgInput" })
-                    </p>
-                    <br />
-                    <button type="submit" form="ListSettings" asp-page-handler="Settings" class="btn btn-default">Save Settings</button>
-                    <br />
-                </form>
-            </div>
+<div class="adminMainView">
+    <div class="settingsContainer">
+        <div class="settingsView">
 
-            <div class="emailSettingsView">
-                <h3>Email Settings</h3>
-                <form id="SendMailSettings" method="post">
-                    <p>
+            <p>@Config.Parameter.StreamState</p>
 
-                        <label for="SendMailSettings.MailAddress"> Mail Address</label>
-                        <input type="text" asp-for="SendMailSettings.MailAddress" />
-                    </p>
-                    <p>
+            <form id="StartStopStream" method="post">
 
-                        <label for="SendMailSettings.MailDisplayname">Mail Displayname</label>
-                        <input type="text" asp-for="SendMailSettings.MailDisplayname" />
-                    </p>
-                    <p>
+                <button type="submit" form="StartStopStream" asp-page-handler="StartStopStream" class="btn btn-default">Start / Stop</button>
+                <br />
 
-                        <label for="SendMailSettings.MailHost">Mail Host</label>
-                        <input type="text" asp-for="SendMailSettings.MailHost" />
-                    </p>
-                    <p>
+            </form>
 
-                        <label for="SendMailSettings.MailPort">Mail Port</label>
-                        <input type="number" asp-for="SendMailSettings.MailPort" />
-                    </p>
-                    <p>
 
-                        <label for="SendMailSettings.Login">Login</label>
-                        <input type="text" asp-for="SendMailSettings.Login" />
-                    </p>
-                    <p>
 
-                        <label for="SendMailSettings.Password">Password</label>
-                        <input type="text" asp-for="SendMailSettings.Password" />
-                    </p>
-                    <br />
-                    <button type="submit" form="SendMailSettings" asp-page-handler="MailSettings" class="btn btn-default">Save Mail Settings</button>
-                    <br />
-                </form>
-            </div>
-
-        </div>
-        <hr />
-        <div class="userOverview">
-            <h5>User</h5>
-            @foreach (var user in Model.UserWithRoles)
-            {
+            <form id="ListSettings" method="post">
+                <h3>Main Settings</h3>
+                <h5>TwitterList</h5>
                 <p>
-                    @user.Username
+                    <label for="ListSettings.ListName">ListName</label>
+                    <input type="text" asp-for="ListSettings.ListName" />
                 </p>
-            }
-            <p>Total Users @Model.UserWithRoles.Count()</p>
+                <p>
+                    <label for="ListSettings.ListOwner">ListOwner</label>
+                    <input type="text" asp-for="ListSettings.ListOwner" />
+                </p>
+                <h5>Pagesettings</h5>
+                <p>
+                    <label for="ListSettings.ShowEntries">ShowEntries</label>
+                    <input type="text" asp-for="ListSettings.ShowEntries" />
+                </p>
+                <p>
+                    <label for="ListSettings.IndexTweetLimit">IndexTweetLimit</label>
+                    <input type="text" asp-for="ListSettings.IndexTweetLimit" />
+                </p>
+                <h5>Database Backups</h5>
+                <p>
+                    <label for="ListSettings.DBBackupSpawn">DBBackupSpawn</label>
+                    <input type="text" asp-for="ListSettings.DBBackupSpawn" />
+                </p>
+                <h5>TwitterUserData Collection</h5>
+                <p>
+                    <label for="ListSettings.TwitterUserUpdateInterval">TwitterUserData UpdateInterval (hours)</label>
+                    <input type="number" asp-for="ListSettings.TwitterUserUpdateInterval" />
+                </p>
+                <h5>TwitterUserDaily Collection</h5>
+                <p>
+                    <label for="ListSettings.TwitterUserDailyUpdateInterval">TwitterUserDaily UpdateInterval (hours)</label>
+                    <input type="number" asp-for="ListSettings.TwitterUserDailyUpdateInterval" />
+                </p>
+                <h5>TwitterStream Collection</h5>
+                <p>
+                    <label for="ListSettings.TwitterStreamCountWriteDelay">TwitterStreamCount WriteDelay (ms)</label>
+                    <input type="number" asp-for="ListSettings.TwitterStreamCountWriteDelay" />
+                </p>
+                <p>
+                    <label for="ListSettings.TwitterStreamCountTaskDelay">TwitterStreamCount TaskDelay (ms)</label>
+                    <input type="number" asp-for="ListSettings.TwitterStreamCountTaskDelay" />
+                </p>
+                <p>
+                    <label for="ListSettings.TwitterStreamCountUpdateLastHours">TwitterStreamCount UpdateLastHours (hours)</label>
+                    <input type="number" asp-for="ListSettings.TwitterStreamCountUpdateLastHours" />
+                </p>
+                <p>
+                    <label for="ListSettings.TwitterStreamDayRange">TwitterStream DayRange (days)</label>
+                    <input type="number" asp-for="ListSettings.TwitterStreamDayRange" />
+                </p>
+                <h5>Textareas</h5>
+                <p>
+                    <label for="ListSettings.IndexWarningMessage">Info / Warning Message</label>
+                    @Html.TextAreaFor(e => e.ListSettings.IndexWarningMessage, 10, 50, new { @class = "warningMsgInput" })
+                </p>
+                <br />
+                <button type="submit" form="ListSettings" asp-page-handler="Settings" class="btn btn-default">Save Settings</button>
+                <br />
+            </form>
         </div>
+
+        <div class="emailSettingsView">
+            <h3>Email Settings</h3>
+            <form id="SendMailSettings" method="post">
+                <p>
+
+                    <label for="SendMailSettings.MailAddress"> Mail Address</label>
+                    <input type="text" asp-for="SendMailSettings.MailAddress" />
+                </p>
+                <p>
+
+                    <label for="SendMailSettings.MailDisplayname">Mail Displayname</label>
+                    <input type="text" asp-for="SendMailSettings.MailDisplayname" />
+                </p>
+                <p>
+
+                    <label for="SendMailSettings.MailHost">Mail Host</label>
+                    <input type="text" asp-for="SendMailSettings.MailHost" />
+                </p>
+                <p>
+
+                    <label for="SendMailSettings.MailPort">Mail Port</label>
+                    <input type="number" asp-for="SendMailSettings.MailPort" />
+                </p>
+                <p>
+
+                    <label for="SendMailSettings.Login">Login</label>
+                    <input type="text" asp-for="SendMailSettings.Login" />
+                </p>
+                <p>
+
+                    <label for="SendMailSettings.Password">Password</label>
+                    <input type="text" asp-for="SendMailSettings.Password" />
+                </p>
+                <br />
+                <button type="submit" form="SendMailSettings" asp-page-handler="MailSettings" class="btn btn-default">Save Mail Settings</button>
+                <br />
+            </form>
+        </div>
+
     </div>
+    <hr />
+    <div class="userOverview">
+        <h5>User</h5>
+        @foreach (var user in Model.UserWithRoles)
+        {
+            <p>
+                @user.Username
+            </p>
+        }
+        <p>Total Users @Model.UserWithRoles.Count()</p>
+    </div>
+</div>
 
 
