@@ -60,7 +60,7 @@ namespace KompromatKoffer.Services
                         {
                             var tweet = Tweetinvi.Tweet.GetTweet(x.TweetID);
 
-                            if (tweet != null)
+                            if (tweet != null && tweet.IsTweetDestroyed == false)
                             {
                                 var tweetModel = new TwitterStreamModel
                                 {
@@ -82,6 +82,10 @@ namespace KompromatKoffer.Services
                                 _logger.LogInformation(">> Updated Counts for " + x.TweetID);
                                 colTS.Update(tweetModel);
                                 
+                            }
+                            if(tweet.IsTweetDestroyed == true)
+                            {
+
                             }
 
                             await Task.Delay(Config.Parameter.TwitterStreamCountWriteDelay*1000);
