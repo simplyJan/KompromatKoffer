@@ -87,10 +87,87 @@ namespace KompromatKoffer.Services
                     //Only Match the addfollows
                     stream.MatchOn = MatchOn.Follower;
 
-                    stream.KeepAliveReceived += (sender, args) =>
+                    #region
+                    
+                    stream.KeepAliveReceived += async (sender, args) =>
                     {
                         _logger.LogInformation("===========> Stream keeps alive received ...");
+                        await Task.Delay(1);
                     };
+
+                    //Check if this is firing
+                    stream.StreamStarted += async (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream has started...");
+
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
+                        await Task.Delay(1);
+
+                    };
+
+                    stream.StreamResumed += async  (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Resumded to stream...");
+
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
+
+                        await Task.Delay(1);
+                    };
+
+                    stream.StreamStopped += async (sender, args) =>
+                    {
+                        var exceptionThatCausedTheStreamToStop = args.Exception;
+                        var twitterDisconnectMessage = args.DisconnectMessage;
+                        _logger.LogWarning("===========> Stream has stopped unexpectedly..." + exceptionThatCausedTheStreamToStop + "\n" + twitterDisconnectMessage);
+
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
+
+                        await Task.Delay(1);
+
+                    };
+
+                    stream.WarningFallingBehindDetected += async (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream Warning... " + args.WarningMessage);
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+
+                        await Task.Delay(1);
+
+                    };
+
+                    stream.UnmanagedEventReceived += async (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream UnmanagedEventReceived... " + args.JsonMessageReceived);
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+
+                        await Task.Delay(1);
+                    };
+
+                    stream.LimitReached += async (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream Warning... " + args.NumberOfTweetsNotReceived);
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+
+                        await Task.Delay(1);
+                    };
+
+                    stream.DisconnectMessageReceived += async (sender, args) =>
+                    {
+                        _logger.LogWarning("===========> Stream got disconnected... " + args.DisconnectMessage);
+
+                        stream.StopStream();
+                        await Task.Delay(5 * 60 * 1000);
+                        stream.StartStreamMatchingAllConditions();
+                        _logger.LogWarning("!RESTART!===========> Stream restarted at " + DateTime.Now);
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+
+                        await Task.Delay(1);
+                    };
+                    #endregion
+
 
                     stream.MatchingTweetReceived += async (sender, args) =>
                     {
@@ -176,68 +253,7 @@ namespace KompromatKoffer.Services
 
                     stream.StartStreamMatchingAllConditions();
 
-                    #region
-                    //Check if this is firing
-                    stream.StreamStarted += (sender, args) =>
-                    {
-                        _logger.LogWarning("===========> Stream has started...");
-
-                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
-
-                    };
-
-                    stream.StreamResumed += (sender, args) =>
-                    {
-                        _logger.LogWarning("===========> Resumded to stream...");
-
-                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
-
-
-                    };
-
-                    stream.StreamStopped += (sender, args) =>
-                    {
-                        var exceptionThatCausedTheStreamToStop = args.Exception;
-                        var twitterDisconnectMessage = args.DisconnectMessage;
-                        _logger.LogWarning("===========> Stream has stopped unexpectedly..." + exceptionThatCausedTheStreamToStop + "\n" + twitterDisconnectMessage);
-
-                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
-
-                    };
-
-                    stream.WarningFallingBehindDetected += (sender, args) =>
-                    {
-                        _logger.LogWarning("===========> Stream Warning... " + args.WarningMessage);
-                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-
-                    };
-
-                    stream.UnmanagedEventReceived += (sender, args) =>
-                    {
-                        _logger.LogWarning("===========> Stream UnmanagedEventReceived... " + args.JsonMessageReceived);
-                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                    };
-
-                    stream.LimitReached += (sender, args) =>
-                    {
-                        _logger.LogWarning("===========> Stream Warning... " + args.NumberOfTweetsNotReceived);
-                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                    };
-
-                    stream.DisconnectMessageReceived += async (sender, args) =>
-                    {
-                        _logger.LogWarning("===========> Stream got disconnected... " + args.DisconnectMessage);
-
-                        stream.StopStream();
-                        await Task.Delay(5 * 60 * 1000);
-                        stream.StartStreamMatchingAllConditions();
-                        _logger.LogWarning("!RESTART!===========> Stream restarted at " + DateTime.Now);
-                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                    };
-                    #endregion
+                    
                 }
             }
             catch (TwitterException ex)

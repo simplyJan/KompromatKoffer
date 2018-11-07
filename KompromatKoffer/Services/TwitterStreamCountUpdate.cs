@@ -42,25 +42,27 @@ namespace KompromatKoffer.Services
 
             try
             {
-                    using (var db = new LiteDatabase("TwitterData.db"))
+                using (var db = new LiteDatabase("TwitterData.db"))
+                {
+                    // Get Datbase Connection 
+                    var colTS = db.GetCollection<TwitterStreamModel>("TwitterStream");
+
+                    //Breaks why? - - If there is nothing to update?
+                    var willBeUpdated = colTS.FindAll().Where(s => s.TweetCreatedAt > DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours));
+
+                    if (willBeUpdated != null)
                     {
-                        // Get Datbase Connection 
-                        var colTS = db.GetCollection<TwitterStreamModel>("TwitterStream");
-
-                        //Breaks why? - - If there is nothing to update?
-                        var willBeUpdated = colTS.FindAll().Where(s => s.TweetCreatedAt > DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours));
-
                         foreach (var x in willBeUpdated)
                         {
                             var tweet = Tweetinvi.Tweet.GetTweet(x.TweetID);
 
-                        if (tweet.IsTweetDestroyed == true)
-                        {
-                            _logger.LogInformation(">> Tweet is destroyed " + x.TweetID);
-                            //Do shit with destroyed Tweet
+                            if (tweet.IsTweetDestroyed == true)
+                            {
+                                _logger.LogInformation(">> Tweet is destroyed " + x.TweetID);
+                                //Do shit with destroyed Tweet
 
-                        }
-                        else if(tweet != null)
+                            }
+                            else if (tweet != null)
                             {
                                 var tweetModel = new TwitterStreamModel
                                 {
@@ -80,14 +82,15 @@ namespace KompromatKoffer.Services
                                 };
 
                                 _logger.LogInformation(">> Updated Counts for " + x.TweetID);
-                                colTS.Update(tweetModel);  
-                                
-                            }                         
+                                colTS.Update(tweetModel);
 
-                            await Task.Delay(Config.Parameter.TwitterStreamCountWriteDelay*1000);
+                            }
 
+                            await Task.Delay(Config.Parameter.TwitterStreamCountWriteDelay * 1000);
+
+                        }
                     }
-                    }
+                }
             }
             catch (TwitterException ex)
             {
