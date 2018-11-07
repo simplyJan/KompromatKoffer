@@ -58,7 +58,7 @@ namespace KompromatKoffer.Services
 
                     RateLimit.QueryAwaitingForRateLimit += (sender, args) =>
                     {
-                        _logger.LogInformation(">> Is awaiting for rate limits... " + args.Query);
+                        _logger.LogInformation("===========> Is awaiting for rate limits... " + args.Query);
                     };
 
                     //Get TwitterList
@@ -87,6 +87,11 @@ namespace KompromatKoffer.Services
                     //Only Match the addfollows
                     stream.MatchOn = MatchOn.Follower;
 
+                    stream.KeepAliveReceived += (sender, args) =>
+                    {
+                        _logger.LogInformation("===========> Stream keeps alive received ...");
+                    };
+
                     stream.MatchingTweetReceived += async (sender, args) =>
                     {
                         if (args.MatchOn == stream.MatchOn)
@@ -97,8 +102,6 @@ namespace KompromatKoffer.Services
                                 _logger.LogInformation(">> Skipped ReTweet...");
 
                                 Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                                Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                                _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
                             }
                             else
                             {
@@ -131,7 +134,6 @@ namespace KompromatKoffer.Services
                                     colTS.Insert(tweetDB);
 
                                     Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                                    _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
                                 }
                                 else
                                 {
@@ -159,7 +161,6 @@ namespace KompromatKoffer.Services
 
 
                                     Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                                    _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
                                 }
 
                             }
@@ -170,7 +171,6 @@ namespace KompromatKoffer.Services
                             _logger.LogInformation(">> Tweet not matched..." + args.Tweet.Id);
 
                             Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
-                            _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
                         }
                     };
 
@@ -211,17 +211,20 @@ namespace KompromatKoffer.Services
                     stream.WarningFallingBehindDetected += (sender, args) =>
                     {
                         _logger.LogWarning("===========> Stream Warning... " + args.WarningMessage);
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
 
                     };
 
                     stream.UnmanagedEventReceived += (sender, args) =>
                     {
                         _logger.LogWarning("===========> Stream UnmanagedEventReceived... " + args.JsonMessageReceived);
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
                     };
 
                     stream.LimitReached += (sender, args) =>
                     {
                         _logger.LogWarning("===========> Stream Warning... " + args.NumberOfTweetsNotReceived);
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
                     };
 
                     stream.DisconnectMessageReceived += async (sender, args) =>
@@ -232,6 +235,7 @@ namespace KompromatKoffer.Services
                         await Task.Delay(5 * 60 * 1000);
                         stream.StartStreamMatchingAllConditions();
                         _logger.LogWarning("!RESTART!===========> Stream restarted at " + DateTime.Now);
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
                     };
                     #endregion
                 }

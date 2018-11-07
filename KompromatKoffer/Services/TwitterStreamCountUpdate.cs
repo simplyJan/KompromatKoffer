@@ -1,16 +1,13 @@
-﻿
-using KompromatKoffer.Areas.Database.Model;
+﻿using KompromatKoffer.Areas.Database.Model;
 using KompromatKoffer.Models;
 using KompromatKoffer.Pages;
 using LiteDB;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Tweetinvi.Core.Extensions;
 using Tweetinvi.Exceptions;
 
 namespace KompromatKoffer.Services
@@ -52,8 +49,6 @@ namespace KompromatKoffer.Services
 
                         //Breaks why? - - If there is nothing to update?
                         var willBeUpdated = colTS.FindAll().Where(s => s.TweetCreatedAt > DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours));
-
-                        //_logger.LogInformation("===========> Tweets that will be Updated right now {1} - {0} ", DateTime.Now.AddHours(Config.Parameter.TwitterStreamCountUpdateLastHours), willBeUpdated.Count());
 
                         foreach (var x in willBeUpdated)
                         {
