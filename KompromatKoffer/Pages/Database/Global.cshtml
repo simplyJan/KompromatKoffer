@@ -41,18 +41,24 @@
         <h4>Globale Charts seit dem @DateTime.Today.AddDays(Model.SinceDays).ToString("dd.MM.yyyy") </h4>
 
 
+        //
+
         List<string> allScreenNames = new List<string>();
 
+
+        //
         var name = Model.CompleteDB.Find(s => s.DateToday > DateTime.Today.AddDays(Model.SinceDays)).Where(s => s.Screen_name == s.Screen_name);
 
 
+        //
         var FollowersCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Followers_count).Last() - s.Select(item => item.Followers_count).First());
         var FriendsCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Friends_count).Last() - s.Select(item => item.Friends_count).First());
         var StatusesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Statuses_count).Last() - s.Select(item => item.Statuses_count).First());
         var FavouritesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Favourites_count).Last() - s.Select(item => item.Favourites_count).First());
 
-        var allEntries = name.GroupBy(s => s.Screen_name);
 
+        //
+        var allEntries = name.GroupBy(s => s.Screen_name);
 
 
         /*
@@ -66,6 +72,8 @@
         }
         */
 
+
+        //
         foreach (var item in allEntries)
         {
             foreach (var items in item)
@@ -76,6 +84,8 @@
 
         }
 
+
+        //
         var distinctScreenNames = allScreenNames.Distinct();
 
 
@@ -83,11 +93,11 @@
     }
 
 
-    <canvas id="TwitterUserActivity" width="1000" height="1000"></canvas>
+    <canvas id="TwitterUserActivity" height="1400"></canvas>
     <script>
         var ctx = document.getElementById("TwitterUserActivity").getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'horizontalBar',
             data: {
                 labels: [
                     @foreach (var item in distinctScreenNames)
@@ -116,7 +126,7 @@
                     borderColor: 
                         'rgba(0, 172, 237, 1.0)'
                     ,
-                    borderWidth: 1
+                    borderWidth: 4
                 },{
                     label: 'Followers',
                     data: [
@@ -134,7 +144,7 @@
                     borderColor: 
                         'rgba(130, 32, 74, 1.0)'
                     ,
-                    borderWidth: 1
+                    borderWidth: 4
                 },{
                     label: 'Following',
                     data: [
@@ -152,7 +162,7 @@
                     borderColor: 
                         'rgba(68, 12, 80, 1.0)'
                     ,
-                    borderWidth: 1
+                    borderWidth: 4
                 },{
                     label: 'Likes',
                     data: [
@@ -170,7 +180,7 @@
                     borderColor: 
                         'rgba(251, 251, 251, 1.0)'
                     ,
-                    borderWidth: 1
+                    borderWidth: 4
                 }
                ]
             },

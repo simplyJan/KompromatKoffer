@@ -84,6 +84,8 @@ namespace KompromatKoffer.Services
                             }
                             if(tweet.IsTweetDestroyed == true)
                             {
+                            _logger.LogInformation(">> Tweet is destroyed " + x.TweetID);
+                            //Do shit with destroyed Tweet
 
                             }
 
