@@ -64,7 +64,9 @@ namespace KompromatKoffer.Services
                     foreach (var x in AllMembers)
                     {
 
-                        //Get timeline for screenname from twitter using Tweetinvi
+                        // Get timeline for screenname from twitter using Tweetinvi
+                        // Change to User ID ASAP!
+                        //
                         var user = Tweetinvi.User.GetUserFromScreenName(x.ScreenName);
 
                         var alreadyUpdated = colTUD.Find(s => s.TwitterId == x.Id).Where(s => s.DateToday == DateTime.Today);

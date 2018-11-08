@@ -127,6 +127,15 @@ namespace KompromatKoffer.Services
 
                         await Task.Delay(1);
 
+                        _logger.LogInformation("===========> Restarting stream in 20 sec. ");
+
+                        await Task.Delay(20 * 1000);
+
+                        stream.StartStreamMatchingAllConditions();
+
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
+                        _logger.LogInformation("#### StreamState #### => " + stream.StreamState);
+
                     };
 
                     stream.WarningFallingBehindDetected += async (sender, args) =>
