@@ -56,13 +56,7 @@ namespace KompromatKoffer.Services
                         {
                             var tweet = Tweetinvi.Tweet.GetTweet(x.TweetID);
 
-                            if (tweet.IsTweetDestroyed == true)
-                            {
-                                _logger.LogInformation(">> Tweet is destroyed " + x.TweetID);
-                                //Do shit with destroyed Tweet
-
-                            }
-                            else if (tweet != null)
+                            if (tweet != null)
                             {
                                 var tweetModel = new TwitterStreamModel
                                 {

@@ -91,7 +91,7 @@ namespace KompromatKoffer.Services
                     
                     stream.KeepAliveReceived += async (sender, args) =>
                     {
-                        _logger.LogInformation("===========> Stream keeps alive received ...");
+                        Config.Parameter.StreamState = Convert.ToString(stream.StreamState);
                         await Task.Delay(1);
                     };
 
