@@ -424,7 +424,35 @@ namespace DatabaseMaintenance
 
                     var update = col.FindAll().Where(s => s.TwitterName == null);
 
-                    Console.WriteLine(update.Count());
+                    Console.WriteLine("Entries that will be updated: " + update.Count());
+                    Console.WriteLine(">>> Starting Update...");
+
+
+                    //Update TwitterID and TwitterName
+                    //use Tweetinvi to get the TwitterID
+                    //or use existing TwitterUserDatabase
+                    
+                    foreach (var x in update)
+                    {
+
+                        var twitterUserDaily = new TwitterUserDailyModel
+                        {
+                            Screen_name = x.Screen_name,
+                            Statuses_count = x.Statuses_count,
+                            Followers_count = x.Followers_count,
+                            Friends_count = x.Friends_count,
+                            Favourites_count = x.Favourites_count,
+                            Listed_count = x.Listed_count,
+                            DateToday = DateTime.Today,
+                            TwitterId = x.TwitterId,
+                            TwitterName = x.TwitterName
+                        };
+
+                        col.Update(twitterUserDaily);
+
+                    }
+
+
 
 
 
@@ -438,7 +466,7 @@ namespace DatabaseMaintenance
                     Console.WriteLine("Exception: " + ex);
                 }
 
-
+                Console.WriteLine("Update successful");
                 Console.ReadKey();
 
             }
