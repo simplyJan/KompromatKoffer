@@ -425,6 +425,10 @@ namespace DatabaseMaintenance
                     var update = col.FindAll().Where(s => s.TwitterName == null);
 
                     Console.WriteLine("Entries that will be updated: " + update.Count());
+
+                    var twitterUser = db.GetCollection<TwitterUserModel>("TwitterUser");
+                    Console.WriteLine(">>> Getting TwitterUser from Main Database...");
+
                     Console.WriteLine(">>> Starting Update...");
 
 
@@ -434,21 +438,42 @@ namespace DatabaseMaintenance
                     
                     foreach (var x in update)
                     {
-
-                        var twitterUserDaily = new TwitterUserDailyModel
+                        try
                         {
-                            Screen_name = x.Screen_name,
-                            Statuses_count = x.Statuses_count,
-                            Followers_count = x.Followers_count,
-                            Friends_count = x.Friends_count,
-                            Favourites_count = x.Favourites_count,
-                            Listed_count = x.Listed_count,
-                            DateToday = DateTime.Today,
-                            TwitterId = x.TwitterId,
-                            TwitterName = x.TwitterName
-                        };
+                            var userDetail = twitterUser.FindAll().Where(s => s.Screen_name == x.Screen_name).First();
+                        
+                        if (userDetail != null)
+                        {
+                            Console.WriteLine(">>> Updating..." + x.Screen_name + " TwitterUser found: " + userDetail.Id);
 
-                        col.Update(twitterUserDaily);
+
+                            var twitterUserDaily = new TwitterUserDailyModel
+                            {
+                                Id = x.Id,
+                                Screen_name = x.Screen_name,
+                                Statuses_count = x.Statuses_count,
+                                Followers_count = x.Followers_count,
+                                Friends_count = x.Friends_count,
+                                Favourites_count = x.Favourites_count,
+                                Listed_count = x.Listed_count,
+                                DateToday = DateTime.Today,
+                                TwitterId = userDetail.Id,
+                                TwitterName = userDetail.Name
+                            };
+
+                            col.Update(twitterUserDaily);
+
+                            Console.WriteLine(">>> Updating..." + userDetail.Id + " successful...");
+                        }
+                        else
+                        {
+                            Console.WriteLine(">>> Skipped..." + x.Id);
+                        }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Exception: " + ex);
+                        }
 
                     }
 
