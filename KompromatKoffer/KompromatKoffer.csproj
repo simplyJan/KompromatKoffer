@@ -5,6 +5,7 @@
     <Platforms>AnyCPU;x64</Platforms>
     <Copyright>https://scobiform.com</Copyright>
     <UserSecretsId>79035936-7ef9-48c4-ba7c-d0e122e0d9a9</UserSecretsId>
+	<TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -22,7 +23,8 @@
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
     <PackageReference Include="LiteDB" Version="4.1.4" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.6" />
+	<PackageReference Include="Microsoft.NetCore.App" Version="2.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="2.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
