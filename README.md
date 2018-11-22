@@ -1,5 +1,7 @@
 # <b>компроматkoffer.de - Kompromittiere den Bundestag</b>
 
+![kompromatkoffer.de](https://github.com/Scobiform/KompromatKoffer/blob/master/Images/kompromatkoffer.png)
+
 - Using https://github.com/linvi/tweetinvi - MIT License - Copyright (c) 2017 Thomas Imart
 - Using https://github.com/chartjs/Chart.js - MIT License - Copyright (c) 2018 Chart.js Contributors
 
@@ -11,11 +13,6 @@
 
 Case study for building a web app to analyze a special watchgroup on
 twitter. In this case all members of the german parliament (MDB)
-
-Any commerical or non-commercial use of this document is strongly
-forbidden. Any reproduction or spreading of this document is also strongly
-forbidden by any means. Please respect that this is only a draft paper and any ideas belong only
-to the author.
 
 If you want to participate in this project you can contact the author.
 
