@@ -456,7 +456,7 @@ namespace DatabaseMaintenance
                                 Friends_count = x.Friends_count,
                                 Favourites_count = x.Favourites_count,
                                 Listed_count = x.Listed_count,
-                                DateToday = DateTime.Today,
+                                DateToday = x.DateToday,
                                 TwitterId = userDetail.Id,
                                 TwitterName = userDetail.Name
                             };
