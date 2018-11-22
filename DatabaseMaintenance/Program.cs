@@ -15,7 +15,9 @@ namespace DatabaseMaintenance
             //PoliticalPartyUpdate();
             //FixDBwithLast();
 
-            UpdateTwitterUserDaily();
+            InsertNewUserDaily();
+
+            //UpdateTwitterUserDaily();
 
         }
 
@@ -495,6 +497,126 @@ namespace DatabaseMaintenance
                 Console.ReadKey();
 
             }
+        }
+
+        private static void InsertNewUserDaily()
+        {
+            IEnumerable<TwitterUserDailyModel> update;
+            IEnumerable<TwitterStreamModel> update2;
+
+            try
+            {
+                Console.WriteLine("How many past days do you want to Input...?");
+                var days = Convert.ToInt16(Console.ReadLine());
+
+                Console.WriteLine("Which Data Collection do you want to use...?\n1 - TwitterUserDaily\n2 - TwitterStream ");
+                var collection = Convert.ToInt16(Console.ReadLine());
+
+                try
+                {
+
+
+                    using (var db2 = new LiteDatabase("TwitterData2.db"))
+                    using (var db1 = new LiteDatabase("TwitterData.db"))
+                    {
+                        if (collection == 1)
+                        {
+
+                            var from = db2.GetCollection<TwitterUserDailyModel>("TwitterUserDaily");
+                            update = from.FindAll().Where(s => s.DateToday == DateTime.Today.AddDays(-days));
+                            var updatecheck = from.FindAll();
+                            Console.WriteLine("Do you want to update... " + "\n" + update.Count() + "\t" + DateTime.Today.AddDays(-1) + "\n" + updatecheck.Count() + "\t" + DateTime.Today + "\n Press enter if YES!");
+                            Console.ReadKey();
+
+                            var to = db1.GetCollection<TwitterUserDailyModel>("TwitterUserDaily");
+
+                            foreach (var x in update)
+                            {
+                                Console.WriteLine("Insert>" + x.Id);
+
+                                var twitterUserDaily = new TwitterUserDailyModel
+                                {
+                                    Id = x.Id,
+                                    Screen_name = x.Screen_name,
+                                    Statuses_count = x.Statuses_count,
+                                    Followers_count = x.Followers_count,
+                                    Friends_count = x.Friends_count,
+                                    Favourites_count = x.Favourites_count,
+                                    Listed_count = x.Listed_count,
+                                    DateToday = x.DateToday,
+                                    TwitterId = x.Id,
+                                    TwitterName = x.TwitterName
+                                };
+
+                                to.Upsert(twitterUserDaily);
+
+                            }
+
+                        }
+                        if (collection == 2)
+                        {
+                            var from = db2.GetCollection<TwitterStreamModel>("TwitterStream");
+                            update2 = from.FindAll().Where(s => s.TweetCreatedAt > DateTime.Now.AddDays(-days));
+                            var updatecheck = from.FindAll();
+                            Console.WriteLine("Do you want to update... " + "\n" + update2.Count() + "\t" + DateTime.Today.AddDays(-1) + "\n" + updatecheck.Count() + "\t" + DateTime.Today + "\n Press enter if YES!");
+                            Console.ReadKey();
+
+
+                            var to = db1.GetCollection<TwitterStreamModel>("TwitterStream");
+
+                            foreach (var x in update2)
+                            {
+                                Console.WriteLine("Insert>" + x.TweetID);
+
+                                var twitterStream = new TwitterStreamModel
+                                {
+                                    TweetID = x.TweetID,
+                                    TweetUser = x.TweetUser,
+                                    TweetUserName = x.TweetUserName,
+                                    TweetUserID = x.TweetUserID,
+                                    TweetUserPicture = x.TweetUserPicture,
+                                    TweetUserDesc = x.TweetUserDesc,
+                                    TweetText = x.TweetText,
+                                    TweetHashtags = x.TweetHashtags,
+                                    TweetReTweetCount = x.TweetReTweetCount,
+                                    TweetFavoriteCount = x.TweetFavoriteCount,
+                                    TweetCreatedAt = x.TweetCreatedAt,
+                                    TweetUrl = x.TweetUrl
+                                };
+
+                                to.Upsert(twitterStream);
+
+
+
+                            }
+
+                        }
+
+                        Console.WriteLine("=>>>> DB updated....");
+
+                    }
+
+
+                   
+
+                }
+                catch (LiteException ex)
+                {
+                    Console.WriteLine("=>>> fixing Lite DB error", ex);
+     
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("=>>> error", ex);
+            }
+
+            Console.ReadKey();
+            return;
+
+
+
         }
     }
 }
