@@ -251,16 +251,15 @@ every tweet. Every tweet directly links to twitter. The Design is a
 rough base and for sure it is possible to match more of the guidelines
 by twitter.
 
-![](Pictures/10000201000004C6000000F2760F6332.png){width="16.138cm"
-height="3.194cm"}
+
+![](https://github.com/Scobiform/KompromatKoffer/blob/master/Images/tweet_on_kk.png)
 
 Tweets are displayed on the IndexView, PeopleDetailView,
 SearchAllTweetsView.
 
 7.1 Color palette
 
-![](Pictures/1000000000000471000002FBD4FC0CC0.png){width="17cm"
-height="11.407cm"}
+![](https://github.com/Scobiform/KompromatKoffer/blob/master/Images/kkcolors.png)
 
 8.
 
