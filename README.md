@@ -147,7 +147,6 @@ will hurt the clean- and openness of viewing the data.
 -   How much impact has media on the watchgroup
 -   Which media is likely trusted by which party
 -   What was the top topic in each week
--   
 
 ### 3.2 Empirical research
 
