@@ -181,9 +181,6 @@ simple API similar to MongoDB (1).
 Every tweet that is matching criteria is saved to database.
 
 -   long TweetID { get; set; }
-
-<!-- -->
-
 -   string TweetUser { get; set; }
 -   string TweetUserName { get; set; }
 -   long TweetUserID { get; set; }
