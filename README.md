@@ -1,4 +1,4 @@
-<b>компроматkoffer.de - Kompromittiere den Bundestag</b>
+# <b>компроматkoffer.de - Kompromittiere den Bundestag</b>
 
 - Using https://github.com/linvi/tweetinvi - MIT License - Copyright (c) 2017 Thomas Imart
 - Using https://github.com/chartjs/Chart.js - MIT License - Copyright (c) 2018 Chart.js Contributors
@@ -19,7 +19,7 @@ to the author.
 
 If you want to participate in this project you can contact the author.
 
-Index of Contents
+## компроматkoffer.de - Index of Contents
 
 1.  Why I started the project
 2.  Core use-case / Intent
