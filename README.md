@@ -14,11 +14,6 @@
 Case study for building a web app to analyze a special watchgroup on
 twitter. In this case all members of the german parliament (MDB)
 
-Any commerical or non-commercial use of this document is strongly
-forbidden. Any reproduction or spreading of this document is also strongly
-forbidden by any means. Please respect that this is only a draft paper and any ideas belong only
-to the author.
-
 If you want to participate in this project you can contact the author.
 
 ## компроматkoffer.de - Index of Contents
