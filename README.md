@@ -1,4 +1,4 @@
-<b>компроматkoffer.de - Kompromittiere den Bundestag</b>
+# <b>компроматkoffer.de - Kompromittiere den Bundestag</b>
 
 - Using https://github.com/linvi/tweetinvi - MIT License - Copyright (c) 2017 Thomas Imart
 - Using https://github.com/chartjs/Chart.js - MIT License - Copyright (c) 2018 Chart.js Contributors
@@ -19,7 +19,7 @@ to the author.
 
 If you want to participate in this project you can contact the author.
 
-Index of Contents
+## компроматkoffer.de - Index of Contents
 
 1.  Why I started the project
 2.  Core use-case / Intent
@@ -49,7 +49,7 @@ Index of Contents
 
     7.1 Color palette
 
-1\. Why I started the project
+### 1\. Why I started the project
 
 The intial idea to start the project came from a talk at the 34C3
 congress in germany - \"34C3 - Social Bots, Fake News und Filterblasen\"
@@ -88,7 +88,7 @@ this as fake news because there is clearly no evidence for this number
 
 My research flys arround this topics\...
 
-2\. Core use-case / Intent
+### 2\. Core use-case / Intent
 
 The web app is free of charge for interested journalist and other people
 who want to analyse data from a watchgroup that is generated from a
@@ -107,7 +107,7 @@ papers that are currently out spread mostly fake beliefs and manipulated
 values -- there can´t be any real evidence that bots have impact on the
 individuals in a certain watchgroup.
 
-2.1 Business Model?! There is no business model!
+#### 2.1 Business Model?! There is no business model!
 
 Actually there is no real business model planned. If a open source or a
 transparency foundation wants to help the project with money it would be
@@ -119,11 +119,11 @@ Also advertisment is not planned in any way, because nothing is more
 shameful as commercials flackering over the screen of a web app and it
 will hurt the clean- and openness of viewing the data.
 
-3\. Analytical Purpose
+### 3\. Analytical Purpose
 
-3.1 Overview
+#### 3.1 Overview
 
-3.1.1 Current Status
+##### 3.1.1 Current Status
 
 -   How much is a individual tweeting
 -   How many followers, likes etc. is the individual gaining
@@ -135,7 +135,7 @@ will hurt the clean- and openness of viewing the data.
 -   Which end-devices uses the individual
 -   An archive of tweets of every individual even the deleted ones.
 
-3.1.2 Future Status / may be or not integrated
+##### 3.1.2 Future Status / may be or not integrated
 
 -   Analysis of relationships between individuals (who follows who /
     political filter bubble overview)
@@ -147,9 +147,8 @@ will hurt the clean- and openness of viewing the data.
 -   How much impact has media on the watchgroup
 -   Which media is likely trusted by which party
 -   What was the top topic in each week
--   
 
-3.2 Empirical research
+### 3.2 Empirical research
 
 The main questions is: Are political parties in germany using startegies
 to manipulate the opinion of people on twitter? Which political party
@@ -157,34 +156,31 @@ uses fake news and bot-activity to influence people on twitter? And how
 do members of the german paliament use twitter. Finally who is gaining
 and reaching audience on twitter.
 
-4\. Architecture / Design
+### 4\. Architecture / Design
 
-4.1.1 Backend
+#### 4.1.1 Backend
 
-4.1.2 Frontend
+#### 4.1.2 Frontend
 
-5\. Database Design
+### 5\. Database Design
 
-MSSQL
+#### MSSQL
 
 Micorsoft SQL database is used to store all user account related data.
 Login process and twitter tokens are manged through the twitter
 authentication for ASP.NET apps in combination with tweetinvi.
 
-LiteDB
+#### LiteDB
 
 The database currently consists of 3 collections to store data from
 twitter for analysis. LiteDB is a Serverless NoSQL Document Store, a
 simple API similar to MongoDB (1).
 
-TwitterStream
+#### TwitterStream
 
 Every tweet that is matching criteria is saved to database.
 
 -   long TweetID { get; set; }
-
-<!-- -->
-
 -   string TweetUser { get; set; }
 -   string TweetUserName { get; set; }
 -   long TweetUserID { get; set; }
@@ -198,7 +194,7 @@ Every tweet that is matching criteria is saved to database.
 -   DateTime TweetCreatedAt { get; set; }
 -   string TweetUrl { get; set; }
 
-TwitterUser
+#### TwitterUser
 
 Listmember will pe put each interval to database -- this collection gets
 overwritten every interval.
@@ -219,7 +215,7 @@ overwritten every interval.
 -   int Favourites\_count { get; set; }
 -   int Listed\_count { get; set; }
 
-TwitterUserDaily
+#### TwitterUserDaily
 
 If today no user was saved to database -- the service will insert a new
 entry into the collection.
@@ -235,7 +231,7 @@ entry into the collection.
 -   long TwitterId { get; set; }
 -   string TwitterName { get; set; }
 
-6\. User Interactions
+### 6\. User Interactions
 
 Currently there are no user interactions. In the future it is might be
 possible to easily add all members of the watchlist to the personal
@@ -243,7 +239,7 @@ twitter account and help users to build own watchlists through the app.
 But currently nothing is planned and is very unlikely that it will be
 implented because there is no real need for such processes.
 
-7\. Frontend use of twitter data / how the data will be displayed
+### 7\. Frontend use of twitter data / how the data will be displayed
 
 The tweets are displayed in row fashion like on twitter with a seperate
 design to match the app. The TwitterLogo is shown in the bottom-left of
@@ -251,18 +247,18 @@ every tweet. Every tweet directly links to twitter. The Design is a
 rough base and for sure it is possible to match more of the guidelines
 by twitter.
 
-![](Pictures/10000201000004C6000000F2760F6332.png){width="16.138cm"
-height="3.194cm"}
+
+![](https://github.com/Scobiform/KompromatKoffer/blob/master/Images/tweet_on_kk.png)
 
 Tweets are displayed on the IndexView, PeopleDetailView,
 SearchAllTweetsView.
 
-7.1 Color palette
+#### 7.1 Color palette
 
-![](Pictures/1000000000000471000002FBD4FC0CC0.png){width="17cm"
-height="11.407cm"}
+![](https://github.com/Scobiform/KompromatKoffer/blob/master/Images/kkcolors.png)
 
-8.
+
+______________________________________________________________________________
 
 [^1]:  Angriff der Meinungsroboter" und „Gefangen in der Filterblase"
     titelten die deutschen Medien. Doch was ist wirklich daran? Michael
