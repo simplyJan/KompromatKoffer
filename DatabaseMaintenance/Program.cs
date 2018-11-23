@@ -561,7 +561,6 @@ namespace DatabaseMaintenance
                             Console.WriteLine("Do you want to update... " + "\n" + update2.Count() + "\t" + DateTime.Today.AddDays(-1) + "\n" + updatecheck.Count() + "\t" + DateTime.Today + "\n Press enter if YES!");
                             Console.ReadKey();
 
-
                             var to = db1.GetCollection<TwitterStreamModel>("TwitterStream");
 
                             foreach (var x in update2)
@@ -585,8 +584,6 @@ namespace DatabaseMaintenance
                                 };
 
                                 to.Upsert(twitterStream);
-
-
 
                             }
 

@@ -74,6 +74,12 @@
     List<int> StatusesDaily = new List<int>();
     List<int> FavouritesDaily = new List<int>();
 
+    //Make use of Unique TwitterID not the screenname
+
+    //DO IT NOW!
+
+
+    //Change to more efficient Method - - slow as hell
     var name = Model.CompleteDB.Find(s => s.DateToday >= DateTime.Today.AddDays(Model.SinceDays)).Where(s => s.Screen_name == Model.CurrentUserScreenname);
 
     var groupBy = name.GroupBy(s => s.Screen_name);
