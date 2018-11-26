@@ -34,6 +34,18 @@
         28
         &nbsp;
     </a>
+    <a asp-page=""
+       asp-route-sinceDays="-56"
+       class="iconHoverPages" title="die letzten 56 Tage">
+        56
+        &nbsp;
+    </a>
+    <a asp-page=""
+       asp-route-sinceDays="-112"
+       class="iconHoverPages" title="die letzten 112 Tage">
+        112
+        &nbsp;
+    </a>
 </div>
 
 <div class="GlobalChartView">
@@ -47,11 +59,11 @@
 
 
         //
-        var name = Model.CompleteDB.Find(s => s.DateToday > DateTime.Today.AddDays(Model.SinceDays)).Where(s => s.Screen_name == s.Screen_name);
+        var name = Model.CompleteDB.Find(s => s.DateToday > DateTime.Today.AddDays(Model.SinceDays));
 
 
         //
-        var FollowersCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Followers_count).Last() - s.Select(item => item.Followers_count).First());
+        var FollowersCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Followers_count).Last() - s.Select(item => item.Followers_count).First());   
         var FriendsCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Friends_count).Last() - s.Select(item => item.Friends_count).First());
         var StatusesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Statuses_count).Last() - s.Select(item => item.Statuses_count).First());
         var FavouritesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Favourites_count).Last() - s.Select(item => item.Favourites_count).First());
@@ -93,7 +105,7 @@
     }
 
 
-    <canvas id="TwitterUserActivity" height="1400"></canvas>
+    <canvas id="TwitterUserActivity" height="2200"></canvas>
     <script>
         var ctx = document.getElementById("TwitterUserActivity").getContext('2d');
         var myChart = new Chart(ctx, {

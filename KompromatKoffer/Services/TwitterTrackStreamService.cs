@@ -64,18 +64,29 @@ namespace KompromatKoffer.Services
                     //Get TwitterList
                     var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
 
-                    var AllMembers = list.GetMembers(list.MemberCount);
-                    AllListMembers = AllMembers;
+                    //Sometimes Null Reference - - find way to catch and restart stream
+                    //Make own Method?!? 
+                    //What the fuck...
+                    if (list.GetMembers(list.MemberCount) != null)
+                    {
+                        var AllMembers = list.GetMembers(list.MemberCount);
+                        AllListMembers = AllMembers;
+                        _logger.LogInformation("===========> Member to Follow: " + AllListMembers.Count());
+                    }
+                    else
+                    {
+                        _logger.LogInformation("!!!> Problem with Tweetinvi ");
+                        //Do something
 
-                    _logger.LogInformation("===========> Member to Follow: " + AllMembers.Count());
-
+                    }
+           
                     //Create new Stream
                     var stream = Tweetinvi.Stream.CreateFilteredStream();
 
                     _logger.LogInformation("===========> Start UserStreams");
 
                     //Foreach Member in List addfollow stream
-                    foreach (var item in AllMembers.Select((value, index) => new { value, index }))
+                    foreach (var item in AllListMembers.Select((value, index) => new { value, index }))
                     {
                         stream.AddFollow(item.value.UserIdentifier);
                         //_logger.LogInformation("{1} Added User {0} to stream...", item.value.UserIdentifier, item.index);
@@ -281,6 +292,9 @@ namespace KompromatKoffer.Services
             catch (Exception ex)
             {
                 _logger.LogInformation("Exception..." + ex);
+                
+                //Do Something
+
             }
 
 
