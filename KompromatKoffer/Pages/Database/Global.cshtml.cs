@@ -36,6 +36,7 @@ namespace KompromatKoffer.Pages.Database
         public int CurrentRange { get; set; }
 
         public IEnumerable<string> DistinctNames { get; set;}
+        public IEnumerable<IGrouping <string, TwitterUserDailyModel>> AllEntries { get; set; }
         public IEnumerable<int> FollowersCountAll { get; set; }
         public IEnumerable<int> FriendsCountAll { get; set; }
         public IEnumerable<int> StatusesCountAll { get; set; }
@@ -43,9 +44,7 @@ namespace KompromatKoffer.Pages.Database
 
         public async Task OnGet(int sinceDays)
         {
-
-            #region Database Connection - get TwitterUserDailyCollection
-
+            
             try
             {
                 //Getting Collection from LiteDB
@@ -56,10 +55,10 @@ namespace KompromatKoffer.Pages.Database
 
                 }
 
+                
 
                 // Get all Rows from Collection since x days
                 var name = CompleteDB.Find(s => s.DateToday > DateTime.Today.AddDays(sinceDays));
-
 
                 //Get follower count sorted by Screen_name
                 FollowersCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Followers_count).Last() - s.Select(item => item.Followers_count).First());
@@ -68,13 +67,14 @@ namespace KompromatKoffer.Pages.Database
                 FavouritesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Favourites_count).Last() - s.Select(item => item.Favourites_count).First());
 
                 //Sort all entries by Screen_name
-                var allEntries = name.GroupBy(s => s.Screen_name);
+                AllEntries = name.GroupBy(s => s.Screen_name);
+                
 
                 //new list for allScreennames
                 List<string> allScreenNames = new List<string>();
 
                 //Add all to List
-                foreach (var item in allEntries)
+                foreach (var item in AllEntries)
                 {
 
                     foreach (var items in item)
@@ -90,14 +90,21 @@ namespace KompromatKoffer.Pages.Database
 
                 DistinctNames = distinctScreenNames;
 
+                //Put both in one --concat --combine
 
+
+
+            }
+            catch (LiteException ex)
+            {
+                _logger.LogInformation("LiteDB Exception..." + ex);
             }
             catch (Exception ex)
             {
                 _logger.LogInformation("Exception " + ex);
             }
 
-            #endregion
+            
 
             SinceDays = sinceDays;
 
