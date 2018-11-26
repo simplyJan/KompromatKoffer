@@ -51,58 +51,7 @@
 <div class="GlobalChartView">
     @{
         <h4>Globale Charts seit dem @DateTime.Today.AddDays(Model.SinceDays).ToString("dd.MM.yyyy") </h4>
-
-
-        //
-
-        List<string> allScreenNames = new List<string>();
-
-
-        //
-        var name = Model.CompleteDB.Find(s => s.DateToday > DateTime.Today.AddDays(Model.SinceDays));
-
-
-        //
-        var FollowersCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Followers_count).Last() - s.Select(item => item.Followers_count).First());
-        var FriendsCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Friends_count).Last() - s.Select(item => item.Friends_count).First());
-        var StatusesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Statuses_count).Last() - s.Select(item => item.Statuses_count).First());
-        var FavouritesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Favourites_count).Last() - s.Select(item => item.Favourites_count).First());
-
-
-        //
-        var allEntries = name.GroupBy(s => s.Screen_name);
-
-        /*
-        foreach (var item in StatusesCountAll.Select((value, i) => new { i, value }))
-        {
-            <p>
-                @item.i
-                @item.value
-            </p>
-
-        }
-        */
-
-
-        //
-        foreach (var item in allEntries)
-        {
-            foreach (var items in item)
-            {
-                allScreenNames.Add(items.Screen_name);
-
-            }
-
-        }
-
-
-        //
-        var distinctScreenNames = allScreenNames.Distinct();
-
-
-
     }
-
 
     <canvas id="TwitterUserActivity" height="2200"></canvas>
     <script>
@@ -111,7 +60,7 @@
             type: 'horizontalBar',
             data: {
                 labels: [
-                    @foreach (var item in distinctScreenNames)
+                    @foreach (var item in Model.DistinctNames)
                     {
                         var dateConvert = "'" + item + "'" + ", ";
 
@@ -123,7 +72,7 @@
                 datasets: [{
                     label: 'Tweets',
                     data: [
-                         @foreach (var item in StatusesCountAll)
+                         @foreach (var item in Model.StatusesCountAll)
                          {
                              var statusesConvert = "'" + Convert.ToString(item) + "'" + ", ";
 
@@ -141,7 +90,7 @@
                 },{
                     label: 'Followers',
                     data: [
-                         @foreach (var item in FollowersCountAll)
+                         @foreach (var item in Model.FollowersCountAll)
                          {
                              var followerConvert = "'" + Convert.ToString(item) + "'" + ", ";
 
@@ -159,7 +108,7 @@
                 },{
                     label: 'Following',
                     data: [
-                         @foreach (var item in FriendsCountAll)
+                         @foreach (var item in Model.FriendsCountAll)
                          {
                              var friendsConvert = "'" + Convert.ToString(item) + "'" + ", ";
 
@@ -177,7 +126,7 @@
                 },{
                     label: 'Likes',
                     data: [
-                         @foreach (var item in FavouritesCountAll)
+                         @foreach (var item in Model.FavouritesCountAll)
                          {
                              var favouriteConvert = "'" + Convert.ToString(item) + "'" + ", ";
 
