@@ -63,7 +63,7 @@
 
 
         //
-        var FollowersCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Followers_count).Last() - s.Select(item => item.Followers_count).First());   
+        var FollowersCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Followers_count).Last() - s.Select(item => item.Followers_count).First());
         var FriendsCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Friends_count).Last() - s.Select(item => item.Friends_count).First());
         var StatusesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Statuses_count).Last() - s.Select(item => item.Statuses_count).First());
         var FavouritesCountAll = name.GroupBy(s => s.Screen_name).Select(s => s.Select(item => item.Favourites_count).Last() - s.Select(item => item.Favourites_count).First());
@@ -71,7 +71,6 @@
 
         //
         var allEntries = name.GroupBy(s => s.Screen_name);
-
 
         /*
         foreach (var item in StatusesCountAll.Select((value, i) => new { i, value }))
