@@ -55,8 +55,6 @@ namespace KompromatKoffer.Pages.Database
 
                 }
 
-                
-
                 // Get all Rows from Collection since x days
                 var name = CompleteDB.Find(s => s.DateToday > DateTime.Today.AddDays(sinceDays));
 
@@ -69,7 +67,6 @@ namespace KompromatKoffer.Pages.Database
                 //Sort all entries by Screen_name
                 AllEntries = name.GroupBy(s => s.Screen_name);
                 
-
                 //new list for allScreennames
                 List<string> allScreenNames = new List<string>();
 
@@ -103,8 +100,7 @@ namespace KompromatKoffer.Pages.Database
             {
                 _logger.LogInformation("Exception " + ex);
             }
-
-            
+      
 
             SinceDays = sinceDays;
 

@@ -38,7 +38,6 @@ namespace KompromatKoffer.Pages
 
         public int TimeRange { get; set; } = Config.Parameter.TwitterStreamDayRange;
 
-        [ResponseCache(VaryByHeader = "User-Agent", Duration = 30)]
         public async Task OnGet(string sortOrder, string searchString, int? pageIndex, string currentFilter)
         {
             try
