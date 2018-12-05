@@ -873,10 +873,16 @@ input.settingssubmit{
 
 }
 
+
+    /*Data Scraping*/
+
+
+
+
+
 /*Big Screens Adjustments*/
 @media screen and (min-width: 768px) {
-
-.iconMenu {
+    .iconMenu {
     margin: 0;
     width: 44px;
     background-color: #27182b;

@@ -24,6 +24,9 @@ namespace KompromatKoffer.Pages.DataScraping
             _logger = logger;
         }
 
+        public string OutputBTW { get; set; }
+
+
         //Scrap Data from given websites and build with it
         public void OnGet()
         {
@@ -38,7 +41,7 @@ namespace KompromatKoffer.Pages.DataScraping
             var configJson = @"
             {
                 'title': '//h1',
-                'body': '//div[contains(@class, \'article\')]'
+                'body': '//table[contains(@class, \'wilko\')]'
             }
             ";
 
@@ -49,6 +52,9 @@ namespace KompromatKoffer.Pages.DataScraping
 
             //Log the Data Scraping
             _logger.LogInformation(JsonConvert.SerializeObject(scrapingResults, Formatting.Indented));
+
+            var output = JsonConvert.SerializeObject(scrapingResults);
+            OutputBTW = output;
 
 
 
