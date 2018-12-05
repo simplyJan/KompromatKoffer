@@ -14,20 +14,12 @@
 
 <div class="TwitterUserTimline">
 
-    <h2><a href="http://wahlrecht.de">Wahlrecht.de</a> - Wenn am nächsten Sonntag Bundestagswahl wäre …</h2>
-    <h3>INSA / YOUGOV</h3>
-
-    @foreach (var item in Model.INSATable.SelectNodes("//thead //tr //th"))
-    {
-
-        <p>@Html.Raw(item.InnerText)</p>
-
-    }
+    <h5>INSA / YOUGOV</h5>
 
     @foreach (var tr in Model.INSATable.SelectNodes("//tbody //tr"))
     {
 
-        @Html.Raw(tr.InnerHtml)
+        <a href="">@Html.Raw(tr.InnerText)</a>
         <br />
 
     }
