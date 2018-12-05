@@ -5,22 +5,36 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>Wahlrecht</h2>
+<div class="iconMenu">
+    <a asp-page="/Database/People" title="Politiker Bestenliste" class="iconHoverPages interactionMenu"><i class="fas fa-user-circle"></i></a>
+    <a asp-page="/Database/Global" asp-route-sinceDays="-7" title="Politiker Statistik" class="iconHoverPages interactionMenu"><i class="fas fa-chart-line"></i></a>
+    <a asp-page="/Database/TweetDatabase" title="Tweet Datenbank" class="iconHoverPages interactionMenu"><i class="fas fa-binoculars"></i></a>
+    <a asp-page="/DataScraping/Wahlrecht" title="Sonntagsfrage Bundestagswahl" class="iconHoverPages interactionMenu interActionMenuSmall"><i class="fas fa-person-booth"></i></a>
+</div>
+
+<div class="TwitterUserTimline">
+
+    <h2><a href="http://wahlrecht.de">Wahlrecht.de</a> - Wenn am nächsten Sonntag Bundestagswahl wäre …</h2>
+    <h3>INSA / YOUGOV</h3>
+
+    @foreach (var item in Model.INSATable.SelectNodes("//thead //tr //th"))
+    {
+
+        <p>@Html.Raw(item.InnerText)</p>
+
+    }
+
+    @foreach (var tr in Model.INSATable.SelectNodes("//tbody //tr"))
+    {
+
+        @Html.Raw(tr.InnerHtml)
+        <br />
+
+    }
 
 
 
-@foreach (var item in Model.INSATable.SelectNodes("//thead"))
-        {
-            @item.InnerText
-            <p></p>
-        }
-
-@foreach (var tr in Model.INSATable.SelectNodes("//tr"))
-        {
-            @tr.InnerText
-        }
-   
-
+</div>
 
 
 

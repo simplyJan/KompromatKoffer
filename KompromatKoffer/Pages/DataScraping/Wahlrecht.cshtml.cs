@@ -38,8 +38,6 @@ namespace KompromatKoffer.Pages.DataScraping
 
             var table = doc.DocumentNode.SelectSingleNode("//table[contains(@class, 'wilko')]");
 
-            _logger.LogInformation(Convert.ToString(table.SelectNodes("//tr").Count));
-
             INSATable = table;
 
 
