@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Tweetinvi;
-using OpenScraping;
-using OpenScraping.Config;
 using Newtonsoft.Json;
 using System.Text;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using System.IO;
+using System.Collections;
+using HtmlAgilityPack;
 
 namespace KompromatKoffer.Pages.DataScraping
 {
@@ -24,45 +24,26 @@ namespace KompromatKoffer.Pages.DataScraping
             _logger = logger;
         }
 
-        public string OutputBTW { get; set; }
-
+        public HtmlAgilityPack.HtmlNode INSATable { get; set; }
 
         //Scrap Data from given websites and build with it
         public void OnGet()
         {
 
-            WebRequest request = WebRequest.Create("http://www.wahlrecht.de/umfragen/index.htm");
-            WebResponse response = request.GetResponse();
-            System.IO.Stream dataStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(dataStream);
-            string responseFromServer = reader.ReadToEnd();
+            WebClient webClient = new WebClient();
+            string page = webClient.DownloadString("http://www.wahlrecht.de/umfragen/insa.htm");
 
-            // www.bbc.com.json contains the JSON configuration file pasted above
-            var configJson = @"
-            {
-                'title': '//h1',
-                'body': '//table[contains(@class, \'wilko\')]'
-            }
-            ";
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(page);
 
-            var config = StructuredDataConfig.ParseJsonString(configJson);
+            var table = doc.DocumentNode.SelectSingleNode("//table[contains(@class, 'wilko')]");
 
-            var openScraping = new StructuredDataExtractor(config);
-            var scrapingResults = openScraping.Extract(responseFromServer);
+            _logger.LogInformation(Convert.ToString(table.SelectNodes("//tr").Count));
 
-            //Log the Data Scraping
-            _logger.LogInformation(JsonConvert.SerializeObject(scrapingResults, Formatting.Indented));
-
-            var output = JsonConvert.SerializeObject(scrapingResults);
-            OutputBTW = output;
-
-
+            INSATable = table;
 
 
         }
-
-
-
 
     }
 }

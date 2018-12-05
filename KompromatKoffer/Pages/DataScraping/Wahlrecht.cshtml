@@ -7,5 +7,20 @@
 
 <h2>Wahlrecht</h2>
 
-@Html.Raw(Model.OutputBTW)
+
+
+@foreach (var item in Model.INSATable.SelectNodes("//thead"))
+        {
+            @item.InnerText
+            <p></p>
+        }
+
+@foreach (var tr in Model.INSATable.SelectNodes("//tr"))
+        {
+            @tr.InnerText
+        }
+   
+
+
+
 
