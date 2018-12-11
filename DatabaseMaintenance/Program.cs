@@ -10,15 +10,12 @@ namespace DatabaseMaintenance
     {
         static void Main(string[] args)
         {
-
-
             //PoliticalPartyUpdate();
             //FixDBwithLast();
 
             InsertNewUserDaily();
 
             //UpdateTwitterUserDaily();
-
         }
 
 
@@ -378,6 +375,7 @@ namespace DatabaseMaintenance
         {
             #region Repair DB easy fix for now
             //Repair Routine for putting Collection back from Backup
+            //
 
             try
             {
@@ -515,7 +513,6 @@ namespace DatabaseMaintenance
                 try
                 {
 
-
                     using (var db2 = new LiteDatabase("TwitterData2.db"))
                     using (var db1 = new LiteDatabase("TwitterData.db"))
                     {
@@ -591,18 +588,13 @@ namespace DatabaseMaintenance
 
                         Console.WriteLine("=>>>> DB updated....");
 
-                    }
-
-
-                   
+                    }  
 
                 }
                 catch (LiteException ex)
                 {
-                    Console.WriteLine("=>>> fixing Lite DB error", ex);
-     
+                    Console.WriteLine("=>>> fixing Lite DB error", ex);  
                 }
-
             }
             catch (Exception ex)
             {

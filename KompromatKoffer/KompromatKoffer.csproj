@@ -12,6 +12,10 @@
     <DefineConstants>DEBUG;TRACE;NETCOREAPP2_1;RELEASE;NETCOREAPP;NETCOREAPP2_1;RELEASE;NETCOREAPP;NETCOREAPP2_1;RELEASE;NETCOREAPP;NETCOREAPP2_1</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup> 
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+  </PropertyGroup>
+  
   <ItemGroup>
     <Compile Remove="Database\**" />
     <Content Remove="Database\**" />
