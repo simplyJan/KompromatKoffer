@@ -65,7 +65,7 @@ communicate on twitter. With my programming language C\# and the use of
 Tweetinvi [^2] by Thomas Imart I was able to put a basic conecpt
 together for receiving tweets and start basic analysis of the stream I
 was getting from twitter. After awhile I decided to build a web app for
-journalists arround the basic concept to watch over every member of ther
+journalists arround the basic concept to watch over every member of the
 german parliament.
 
 The intention of the project is to help people analyze their politicians
@@ -243,7 +243,6 @@ design to match the app. The TwitterLogo is shown in the bottom-left of
 every tweet. Every tweet directly links to twitter. The Design is a
 rough base and for sure it is possible to match more of the guidelines
 by twitter.
-
 
 ![](https://github.com/Scobiform/KompromatKoffer/blob/master/Images/tweet_on_kk.png)
 
