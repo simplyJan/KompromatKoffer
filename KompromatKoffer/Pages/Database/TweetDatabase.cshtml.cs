@@ -51,18 +51,6 @@ namespace KompromatKoffer.Pages
                     var completeDB = col.FindAll();
                     CompleteDB = completeDB;
 
-                    /*
-                    var list = Tweetinvi.TwitterList.GetExistingList(Config.Parameter.ListName, Config.Parameter.ScreenName);
-
-                    //Settings for last 100
-                    Tweetinvi.Parameters.GetTweetsFromListParameters getTweetsParameters = new Tweetinvi.Parameters.GetTweetsFromListParameters()
-                    {
-                        MaximumNumberOfTweetsToRetrieve = Config.Parameter.TweetsRetrieved,
-                        IncludeRetweets = false,
-                        IncludeEntities = true,
-                    };
-                    */
-
                     var tweets = completeDB;
 
                     TweetList = tweets;

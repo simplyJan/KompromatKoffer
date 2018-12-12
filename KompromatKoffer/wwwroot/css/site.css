@@ -901,6 +901,11 @@ input.settingssubmit{
     font-size: 29px !important;
 }
 
+.interActionMenuGreat {
+        font-size: 36px !important;
+}
+
+
 .iconHoverPages:hover {
     padding: 4px;
     font-size:44px;
@@ -914,6 +919,10 @@ input.settingssubmit{
 .interActionMenuSmall:hover {
     font-size: 39px !important;
 }
+
+    .interActionMenuGreat:hover {
+        font-size: 46px !important;
+    }
 
 .navbar-inverse .navbar-brand{
     margin-left:0px!important;

@@ -1,0 +1,251 @@
+﻿@page
+@model KompromatKoffer.Pages.Database.NewsDatabaseModel
+@{
+}
+
+
+<div class="iconMenu">
+    <a asp-page="/Database/People" title="Politiker Bestenliste" class="iconHoverPages interactionMenu"><i class="fas fa-user-circle"></i></a>
+    <a asp-page="/Database/Global" asp-route-sinceDays="-7" title="Politiker Statistik" class="iconHoverPages interactionMenu"><i class="fas fa-chart-line"></i></a>
+    <a asp-page="/Database/TweetDatabase" title="Tweet Datenbank" class="iconHoverPages interactionMenu"><i class="fas fa-binoculars"></i></a>
+    <a asp-page="/Database/NewsDatabase" asp-route-searchstring="@Model.CurrentFilter" title="RSS Feed Scanner" class="iconHoverPages interactionMenu interActionMenuGreat"><i class="fas fa-rss"></i></a>
+</div>
+
+<div class="interactionMenuBar">
+
+    <form>
+        <input type="text" name="SearchString" class="twitterUserSearchInput" placeholder="Search...">
+    </form>
+
+
+</div>
+
+<div class="lasthundred">
+
+    @{ 
+        //Change CSS Classes!
+
+    }
+    <div class="TwitterUserTimline">
+
+
+        <h3>Tagesschau.de</h3>
+        @foreach (var item in Model.Tagesschau.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Zdf.de - Heute Journal</h3>
+        @foreach (var item in Model.Zdf.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Welt.de</h3>
+        @foreach (var item in Model.WeltDe.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Spiegel.de</h3>
+        @foreach (var item in Model.SpiegelOnline.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Nzz.ch</h3>
+        @foreach (var item in Model.Nzz.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Standard.at</h3>
+        @foreach (var item in Model.StandardAt.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Bild.de</h3>
+        @foreach (var item in Model.BildDe.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>n-tv.de</h3>
+        @foreach (var item in Model.Ntv.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>FocusOnline</h3>
+        @foreach (var item in Model.FocusOnline.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Süddeutsche.de</h3>
+        @foreach (var item in Model.SueddeutscheDe.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Zeit.de</h3>
+        @foreach (var item in Model.SueddeutscheDe.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Faz.net</h3>
+        @foreach (var item in Model.FazNet.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>Stern.de</h3>
+        @foreach (var item in Model.SternDe.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h3>de.Sputniknews.com</h3>
+        @foreach (var item in Model.Sputnik.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
