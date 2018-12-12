@@ -4,6 +4,7 @@
 
 - Using https://github.com/linvi/tweetinvi - MIT License - Copyright (c) 2017 Thomas Imart
 - Using https://github.com/chartjs/Chart.js - MIT License - Copyright (c) 2018 Chart.js Contributors
+- Using https://github.com/codehollow/FeedReader - MIT License - Copyright (c) 2017 Armin Reiter
 
 - URL: https://kompromatkoffer.de
 - Author: https://scobiform.com
