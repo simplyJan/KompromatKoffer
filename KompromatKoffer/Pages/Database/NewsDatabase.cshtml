@@ -23,18 +23,19 @@
 <div class="lasthundred">
 
     @{ 
-        //Change CSS Classes!
+//Change CSS Classes!
 
     }
-    <div class="TwitterUserTimline">
+    <div class="RSSFeedSearch">
 
 
-        <h5>Tagesschau.de</h5>
+
+        <h5><b>Tagesschau.de</b></h5>
         @foreach (var item in Model.Tagesschau.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -43,12 +44,45 @@
             }
         }
 
-        <h5>Zdf.de - Heute Journal</h5>
+
+
+
+        <h5><b>Deutschlandfunk</b></h5>
+        @foreach (var item in Model.DlandFunk.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+        <h5><b>Deutsche Welle</b></h5>
+        @foreach (var item in Model.DeutscheWelle.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+
+
+        <h5><b>ZDF.de - Heute Journal</b></h5>
         @foreach (var item in Model.Zdf.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -57,12 +91,14 @@
             }
         }
 
-        <h5>Welt.de</h5>
+
+
+        <h5><b>Welt.de</b></h5>
         @foreach (var item in Model.WeltDe.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -71,13 +107,14 @@
             }
         }
 
-        <h5>Spiegel.de</h5>
+
+        <h5><b>Spiegel.de</b></h5>
         @foreach (var item in Model.SpiegelOnline.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
 
             }
@@ -87,13 +124,15 @@
             }
         }
 
-        <h5>Nzz.ch</h5>
+
+
+        <h5><b>Nzz.ch</b></h5>
         @foreach (var item in Model.Nzz.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -102,13 +141,15 @@
             }
         }
 
-        <h5>Standard.at</h5>
+
+
+        <h5><b>Standard.at</b></h5>
         @foreach (var item in Model.StandardAt.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -117,13 +158,15 @@
             }
         }
 
-        <h5>Bild.de</h5>
+
+
+        <h5><b>Bild.de</b></h5>
         @foreach (var item in Model.BildDe.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -132,13 +175,15 @@
             }
         }
 
-        <h5>n-tv.de</h5>
+
+
+        <h5><b>n-tv.de</b></h5>
         @foreach (var item in Model.Ntv.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -147,13 +192,31 @@
             }
         }
 
-        <h5>FocusOnline</h5>
+
+        <h5><b>Tagesspiegel.de</b></h5>
+        @foreach (var item in Model.Tagesspiegel.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
+
+
+
+        <h5><b>FocusOnline</b></h5>
         @foreach (var item in Model.FocusOnline.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -162,13 +225,15 @@
             }
         }
 
-        <h5>Süddeutsche.de</h5>
+
+
+        <h5><b>Süddeutsche.de</b></h5>
         @foreach (var item in Model.SueddeutscheDe.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -177,13 +242,15 @@
             }
         }
 
-        <h5>Zeit.de</h5>
-        @foreach (var item in Model.SueddeutscheDe.Items)
+
+
+        <h5><b>Zeit.de</b></h5>
+        @foreach (var item in Model.ZeitDe.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -192,13 +259,15 @@
             }
         }
 
-        <h5>Faz.net</h5>
+
+
+        <h5><b>Faz.net</b></h5>
         @foreach (var item in Model.FazNet.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -207,13 +276,15 @@
             }
         }
 
-        <h5>Stern.de</h5>
+
+
+        <h5><b>Stern.de</b></h5>
         @foreach (var item in Model.SternDe.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -222,12 +293,14 @@
             }
         }
 
-        <h5>de.Sputniknews.com</h5>
+
+
+        <h5><b>de.Sputniknews.com</b></h5>
         @foreach (var item in Model.Sputnik.Items)
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <a href="@item.Link" target="_blank">@item.Title</a>
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -235,6 +308,7 @@
 
             }
         }
+
 
 
 

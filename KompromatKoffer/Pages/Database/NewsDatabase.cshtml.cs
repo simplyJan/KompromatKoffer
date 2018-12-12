@@ -36,6 +36,10 @@ namespace KompromatKoffer.Pages.Database
         public CodeHollow.FeedReader.Feed SternDe;
         public CodeHollow.FeedReader.Feed Tagesschau;
         public CodeHollow.FeedReader.Feed Zdf;
+        public CodeHollow.FeedReader.Feed DlandFunk;
+        public CodeHollow.FeedReader.Feed DeutscheWelle;
+        public CodeHollow.FeedReader.Feed Tagesspiegel;
+
 
         public string CurrentFilter { get; set; }
 
@@ -101,13 +105,26 @@ namespace KompromatKoffer.Pages.Database
                 var sternDe = FeedReader.Read("https://www.stern.de/feed/standard/alle-nachrichten/");
                 SternDe = sternDe;
 
-                //YTagesschau.de
+                //Tagesschau.de
                 var tagesschau = FeedReader.Read("http://www.tagesschau.de/xml/rss2");
                 Tagesschau = tagesschau;
 
-                //https://www.zdf.de/rss/podcast/video/zdf/nachrichten/heute-journal
-                var zdf = FeedReader.Read("http://www.tagesschau.de/xml/rss2");
+                //Deutschlandfunk
+                var dlandFunk = FeedReader.Read("https://www.deutschlandfunk.de/die-nachrichten.353.de.rss");
+                DlandFunk = dlandFunk;
+
+                //ZDF
+                var zdf = FeedReader.Read("https://www.zdf.de/rss/podcast/video/zdf/nachrichten/heute-journal");
                 Zdf = zdf;
+
+                //Deutsche Welle
+                var deutscheWelle = FeedReader.Read("http://rss.dw.com/xml/rss-de-all");
+                DeutscheWelle = deutscheWelle;
+
+                //Der Tagesspiegel
+                var tagesspiegel = FeedReader.Read("https://www.tagesspiegel.de/contentexport/feed/home");
+                Tagesspiegel = tagesspiegel;
+
 
                 //Searchstring for RSS Feeds
                 CurrentFilter = searchString;
