@@ -17,13 +17,43 @@
         <input type="text" name="SearchString" class="twitterUserSearchInput" placeholder="Search...">
     </form>
 
+    <div class="PoliticalPartyMenu">
+        <a asp-page="" asp-route-searchstring="" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorall" title="Alle Parteien">
+            <i class="fas fa-circle"></i>
+            &nbsp;
+        </a>
+        <a asp-page="" asp-route-searchstring="AFD" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorafd" title="AFD">
+            <i class="fas fa-circle"></i>
+            &nbsp;
+        </a>
+        <a asp-page="" asp-route-searchstring="CDU" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorcdsu" title="CDU/CSU">
+            <i class="fas fa-circle"></i>
+            &nbsp;
+        </a>
+        <a asp-page="" asp-route-searchstring="FDP" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorfdp" title="FDP">
+            <i class="fas fa-circle"></i>
+            &nbsp;
+        </a>
+        <a asp-page="" asp-route-searchstring="GRÜNE" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorgruene" title="BÜNDNIS 90 / DIE GRÜNEN">
+            <i class="fas fa-circle"></i>
+            &nbsp;
+        </a>
+        <a asp-page="" asp-route-searchstring="LINKE" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorlinke" title="DIE LINKE">
+            <i class="fas fa-circle"></i>
+            &nbsp;
+        </a>
+        <a asp-page="" asp-route-searchstring="SPD" class="iconHoverPagesPeopleAll interactionMenu smallIcons colorspd" title="SPD">
+            <i class="fas fa-circle"></i>
+            &nbsp;
+        </a>
+    </div>
+
 
 </div>
 
 <div class="lasthundred">
 
  
-
 {<div class="RSSFeedSearch">
     <h5><a href="@Model.Tagesschau.Link" target"_blank"> Tagesschau.de</a></h5>
     <p class="newsCopyright">@Model.Tagesschau.Copyright</p>
@@ -31,12 +61,8 @@
     {
         if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
         {
-            <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+            <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
             <br />
-        }
-        else
-        {
-
         }
     }
 </div>
@@ -53,7 +79,7 @@
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -71,7 +97,7 @@
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -89,7 +115,7 @@
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -108,7 +134,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
 
             }
@@ -129,7 +155,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -149,7 +175,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -168,7 +194,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -187,7 +213,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -206,7 +232,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -225,7 +251,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -244,7 +270,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -263,7 +289,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -282,7 +308,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -302,7 +328,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -323,7 +349,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -344,7 +370,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -365,7 +391,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -384,7 +410,7 @@
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
 
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -404,7 +430,7 @@
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -423,7 +449,7 @@
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -442,7 +468,7 @@
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else
@@ -461,7 +487,7 @@
         {
             if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
             {
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+                <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
                 <br />
             }
             else

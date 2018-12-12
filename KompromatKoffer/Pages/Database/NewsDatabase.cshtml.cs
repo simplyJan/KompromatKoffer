@@ -186,15 +186,11 @@ namespace KompromatKoffer.Pages.Database
 
 
 
-                }
+            }
             catch(Exception ex)
             {
                 _logger.LogWarning(" " + ex);
             }
-
-
-
-
 
         }
 
