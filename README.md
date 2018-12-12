@@ -62,7 +62,7 @@ own search for answers.
 Also, big data is an interesting topic for me as a junior developer and
 my intention was to learn the twitter api and investigate how people
 communicate on twitter. With my programming language C\# and the use of
-Tweetinvi [^2] by Thomas Imart I was able to put a basic conecpt
+Tweetinvi [^2] by Thomas Imart I was able to put a basic concept
 together for receiving tweets and start basic analysis of the stream I
 was getting from twitter. After awhile I decided to build a web app for
 journalists arround the basic concept to watch over every member of the
