@@ -40,6 +40,14 @@ namespace KompromatKoffer.Pages.Database
         public CodeHollow.FeedReader.Feed DeutscheWelle;
         public CodeHollow.FeedReader.Feed Tagesspiegel;
         public CodeHollow.FeedReader.Feed Wdr;
+        public CodeHollow.FeedReader.Feed RpOnline;
+        public CodeHollow.FeedReader.Feed Orf;
+        public CodeHollow.FeedReader.Feed Srf;
+        public CodeHollow.FeedReader.Feed Bellingcat;
+        public CodeHollow.FeedReader.Feed BBC;
+        public CodeHollow.FeedReader.Feed BerlinerZeitung;
+        public CodeHollow.FeedReader.Feed MuenchMerkur;
+        public CodeHollow.FeedReader.Feed Cicero;
 
 
         public string CurrentFilter { get; set; }
@@ -48,9 +56,6 @@ namespace KompromatKoffer.Pages.Database
 
         public void OnGet(string searchString, string currentFilter)
         {
-            //Set searchstring Dummy
-            CurrentFilter = "Russland";
-
 
             try
             {
@@ -115,8 +120,8 @@ namespace KompromatKoffer.Pages.Database
                 DlandFunk = dlandFunk;
 
                 //ZDF
-                var zdf = FeedReader.Read("https://www.zdf.de/rss/podcast/video/zdf/nachrichten/heute-journal");
-                Zdf = zdf;
+                //var zdf = FeedReader.Read("https://www.zdf.de/rss/podcast/video/zdf/nachrichten/heute-journal");
+                //Zdf = zdf;
 
                 //Deutsche Welle
                 var deutscheWelle = FeedReader.Read("http://rss.dw.com/xml/rss-de-all");
@@ -130,7 +135,41 @@ namespace KompromatKoffer.Pages.Database
                 var wdr = FeedReader.Read("https://www1.wdr.de/uebersicht-100.feed");
                 Wdr = wdr;
 
+                //RP Online
+                var rponline = FeedReader.Read("https://rp-online.de/feed.rss");
+                RpOnline = rponline;
+
+                //ORF
+                var orf = FeedReader.Read("https://rss.orf.at/news.xml");
+                Orf = orf;
+
+                //SRF
+                var srf = FeedReader.Read("https://www.srf.ch/news/bnf/rss/1922");
+                Srf = srf;
+
+                //Bellingcat
+                //var bellingcat = FeedReader.Read("https://www.bellingcat.com/feed/");
+                //Bellingcat = bellingcat;
+
+                //BBC
+                //var bbc = FeedReader.Read("http://feeds.bbci.co.uk/news/rss.xml");
+                //BBC = bbc;
+
+                //Berliner Zeitung
+                var berlinerZeitung = FeedReader.Read("https://www.berliner-zeitung.de/blueprint/servlet/xml/berliner-zeitung/23701214-asYahooFeed.xml");
+                BerlinerZeitung = berlinerZeitung;
+
+                //Münchner Merkur
+                var muenchMerkur = FeedReader.Read("https://www.merkur.de/welt/rssfeed.rdf");
+                MuenchMerkur = muenchMerkur;
+
+                //Cicero
+                var cicero = FeedReader.Read("http://cicero.de/rss.xml");
+                Cicero = cicero;
+
+
                 
+
 
                 //Searchstring for RSS Feeds
                 CurrentFilter = searchString;
@@ -139,9 +178,9 @@ namespace KompromatKoffer.Pages.Database
 
 
                 //Search Filtering
-                if (!String.IsNullOrEmpty(searchString))
+                if (String.IsNullOrEmpty(searchString))
                 {
-
+                    CurrentFilter = " ";
 
                 }
 

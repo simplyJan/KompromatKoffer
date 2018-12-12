@@ -9,16 +9,16 @@
     <a asp-page="/Database/People" title="Politiker Bestenliste" class="iconHoverPages interactionMenu"><i class="fas fa-user-circle"></i></a>
     <a asp-page="/Database/Global" asp-route-sinceDays="-7" title="Politiker Statistik" class="iconHoverPages interactionMenu"><i class="fas fa-chart-line"></i></a>
     <a asp-page="/Database/TweetDatabase" title="Tweet Datenbank" class="iconHoverPages interactionMenu"><i class="fas fa-binoculars"></i></a>
-    <a asp-page="/Database/NewsDatabase" asp-route-searchstring="Russland" title="RSS Feed Scanner" class="iconHoverPages interactionMenu interActionMenuGreat"><i class="fas fa-rss"></i></a>
+    <a asp-page="/Database/NewsDatabase" asp-route-searchstring="" title="RSS Nachrichtenseiten Scanner" class="iconHoverPages interactionMenu interActionMenuGreat"><i class="fas fa-rss"></i></a>
     <a asp-page=""
        asp-route-sortOrder="@Model.FavCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Most Likes"><i class="fas fa-heart"></i></a>
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Sortieren nach Likes"><i class="fas fa-heart"></i></a>
     <a asp-page=""
        asp-route-sortOrder="@Model.RetweetCountSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu interActionMenuSmall" title="Most Retweets"><i class="fas fa-retweet"></i></a>
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu interActionMenuSmall" title="Sortieren nach Retweets"><i class="fas fa-retweet"></i></a>
     <a asp-page=""
        asp-route-sortOrder="@Model.CreatedAtSort"
-       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Latest Tweets"><i class="fas fa-clock"></i></a>
+       asp-route-currentFilter="@Model.CurrentFilter" class="iconHoverPages interactionMenu" title="Die letzten Tweets"><i class="fas fa-clock"></i></a>
 </div>
 
 <div class="interactionMenuBar">

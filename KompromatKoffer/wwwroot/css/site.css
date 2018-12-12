@@ -878,11 +878,24 @@ input.settingssubmit{
 
 .RSSFeedSearch {
     margin: 0 auto;
-    width: 65%;
+    width: 85%;
     border-radius: 15px;
     background-color: #27182b;
     padding: 15px;
     margin-top: 5px;
+}
+
+.newsCopyright{
+    font-size: 8px;
+    margin-top:-5px;
+}
+
+.newsLink{
+    font-size:11px;
+}
+
+.seperate{
+    float:none;
 }
 
 /*Big Screens Adjustments*/
