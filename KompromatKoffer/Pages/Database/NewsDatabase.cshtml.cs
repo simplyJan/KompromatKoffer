@@ -49,7 +49,7 @@ namespace KompromatKoffer.Pages.Database
         public void OnGet(string searchString, string currentFilter)
         {
             //Set searchstring Dummy
-            CurrentFilter = "Putin";
+            CurrentFilter = "Russland";
 
 
             try
