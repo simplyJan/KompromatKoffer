@@ -22,31 +22,29 @@
 
 <div class="lasthundred">
 
-    @{
-        //Change CSS Classes!
+ 
 
-  
-
-    }
-    <div class="RSSFeedSearch">
-
-        <h5><a href="@Model.Tagesschau.Link" target"_blank"> Tagesschau.de</a></h5>
-        <p class="newsCopyright">@Model.Tagesschau.Copyright</p>
-
-        @foreach (var item in Model.Tagesschau.Items)
+{<div class="RSSFeedSearch">
+    <h5><a href="@Model.Tagesschau.Link" target"_blank"> Tagesschau.de</a></h5>
+    <p class="newsCopyright">@Model.Tagesschau.Copyright</p>
+    @foreach (var item in Model.Tagesschau.Items)
+    {
+        if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
         {
-            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
-            {
-                <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
-                <br />
-            }
-            else
-            {
-
-            }
+            <small>@item.PublishingDate</small> <a href="@item.Link" class="newsLink" target="_blank">-> @item.Title</a>
+            <br />
         }
+        else
+        {
 
-    </div>
+        }
+    }
+</div>
+
+
+
+
+
     <div class="RSSFeedSearch">
 
         <h5><a href="@Model.DlandFunk.Link" target="_blank">Deutschlandfunk</a></h5>
