@@ -39,6 +39,7 @@ namespace KompromatKoffer.Pages.Database
         public CodeHollow.FeedReader.Feed DlandFunk;
         public CodeHollow.FeedReader.Feed DeutscheWelle;
         public CodeHollow.FeedReader.Feed Tagesspiegel;
+        public CodeHollow.FeedReader.Feed Wdr;
 
 
         public string CurrentFilter { get; set; }
@@ -125,6 +126,11 @@ namespace KompromatKoffer.Pages.Database
                 var tagesspiegel = FeedReader.Read("https://www.tagesspiegel.de/contentexport/feed/home");
                 Tagesspiegel = tagesspiegel;
 
+                //WDR
+                var wdr = FeedReader.Read("https://www1.wdr.de/uebersicht-100.feed");
+                Wdr = wdr;
+
+                
 
                 //Searchstring for RSS Feeds
                 CurrentFilter = searchString;

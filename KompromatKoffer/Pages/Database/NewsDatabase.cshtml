@@ -47,6 +47,7 @@
 
 
 
+
         <h5><b>Deutschlandfunk</b></h5>
         @foreach (var item in Model.DlandFunk.Items)
         {
@@ -208,6 +209,20 @@
             }
         }
 
+        <h5><b>WDR</b></h5>
+        @foreach (var item in Model.Wdr.Items)
+        {
+            if (item.Title.ToLower().Contains(Model.CurrentFilter.ToLower()) == true)
+            {
+
+                <a href="@item.Link" target="_blank">-> @item.Title</a>
+                <br />
+            }
+            else
+            {
+
+            }
+        }
 
 
         <h5><b>FocusOnline</b></h5>
