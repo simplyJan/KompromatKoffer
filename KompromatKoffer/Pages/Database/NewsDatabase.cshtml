@@ -4,6 +4,9 @@
 }
 
 
+
+
+
 <div class="iconMenu">
     <a asp-page="/Database/People" title="Politiker Bestenliste" class="iconHoverPages interactionMenu"><i class="fas fa-user-circle"></i></a>
     <a asp-page="/Database/Global" asp-route-sinceDays="-7" title="Politiker Statistik" class="iconHoverPages interactionMenu"><i class="fas fa-chart-line"></i></a>
@@ -48,13 +51,32 @@
         </a>
     </div>
 
+    @{ 
+        //Put all in one foreach for the news site array
+
+    }
+
+    <a href="" onclick="myFunction()" class="iconHoverPagesPeopleAll newsSiteNav">
+        Tagesschau
+        &nbsp;
+    </a>
+
+    <a href="" onclick="myFunction()" class="iconHoverPagesPeopleAll newsSiteNav">
+        Deutschlandfunk
+        &nbsp;
+    </a>
+
+    <a href="" onclick="myFunction()" class="iconHoverPagesPeopleAll newsSiteNav">
+        Deutsche Welle
+        &nbsp;
+    </a>
 
 </div>
 
 <div class="lasthundred">
 
  
-{<div class="RSSFeedSearch">
+{<div class="RSSFeedSearch" id="Tagesschau">
     <h5><a href="@Model.Tagesschau.Link" target"_blank"> Tagesschau.de</a></h5>
     <p class="newsCopyright">@Model.Tagesschau.Copyright</p>
     @foreach (var item in Model.Tagesschau.Items)
@@ -501,3 +523,21 @@
     <div class="seperate"></div>
 
 </div>
+
+<script>
+
+    //Use news site array for function
+    //Show and hide news sites
+
+    function myFunction() {
+        var x = document.getElementById("Tagesschau");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    } 
+
+
+
+</script>

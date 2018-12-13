@@ -49,10 +49,7 @@ namespace KompromatKoffer.Pages.Database
         public CodeHollow.FeedReader.Feed MuenchMerkur;
         public CodeHollow.FeedReader.Feed Cicero;
 
-
         public string CurrentFilter { get; set; }
-
-
 
         public void OnGet(string searchString, string currentFilter)
         {
