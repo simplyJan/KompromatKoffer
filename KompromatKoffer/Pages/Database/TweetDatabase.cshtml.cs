@@ -48,12 +48,12 @@ namespace KompromatKoffer.Pages
 
 
                     var col = db.GetCollection<TwitterStreamModel>("TwitterStream");
-                    var completeDB = col.FindAll();
+                    var completeDB = col.Find(Query.All());
                     CompleteDB = completeDB;
 
-                    var tweets = completeDB;
+                    //var tweets = completeDB;
 
-                    TweetList = tweets;
+                    TweetList = completeDB;
 
                     if (searchString != null)
                     {
@@ -118,19 +118,21 @@ namespace KompromatKoffer.Pages
                 TwitterStreamModel = await PaginatedList<TwitterStreamModel>.CreateAsync(
                 TweetList, pageIndex ?? 1, pageSize);
 
-
-
+            }
+            catch(LiteException ex)
+            {
+                _logger.LogInformation("LiteDB Exception... " + ex);
+            }
+            catch(ArgumentException ex)
+            {
+                _logger.LogInformation("ArgumentException... " + ex);
             }
             catch(Exception ex)
             {
-                _logger.LogInformation("Error with tweetinvi... " + ex);
+                _logger.LogInformation("Exception... " + ex);
             }
 
 
         }
-
-    
-
-
     }
 }
