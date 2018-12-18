@@ -48,6 +48,7 @@ namespace KompromatKoffer.Pages
 
 
                     var col = db.GetCollection<TwitterStreamModel>("TwitterStream");
+                    col.EnsureIndex(x => x.TweetCreatedAt);
                     var completeDB = col.Find(Query.All());
                     CompleteDB = completeDB;
 
