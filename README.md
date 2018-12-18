@@ -211,6 +211,8 @@ overwritten every interval.
 -   string Profile\_image\_url\_https { get; set; }
 -   int Favourites\_count { get; set; }
 -   int Listed\_count { get; set; }
+-   DateTime UserUpdated { get; set; }
+-   string PoliticalParty { get; set; }
 
 #### TwitterUserDaily
 
