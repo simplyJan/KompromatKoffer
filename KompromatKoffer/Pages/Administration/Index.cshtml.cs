@@ -331,13 +331,6 @@ namespace KompromatKoffer.Pages.Administration
         {
 
 
-            //Do Stuff to switch Stream
-
-            _logger.LogInformation("====> Stream started");
-
-
-
-
             //Show the Page with Data
 
 
