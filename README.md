@@ -130,7 +130,6 @@ will hurt the clean- and openness of viewing the data.
 -   Hashtag usage for the individual profiles
 -   Toplists of the watchgroup
 -   At which hour of the day is a individual tweeting.
--   Which end-devices uses the individual
 -   An archive of tweets of every individual even the deleted ones.
 
 ##### 3.1.2 Future Status / may be or not integrated
@@ -212,6 +211,8 @@ overwritten every interval.
 -   string Profile\_image\_url\_https { get; set; }
 -   int Favourites\_count { get; set; }
 -   int Listed\_count { get; set; }
+-   DateTime UserUpdated { get; set; }
+-   string PoliticalParty { get; set; }
 
 #### TwitterUserDaily
 
