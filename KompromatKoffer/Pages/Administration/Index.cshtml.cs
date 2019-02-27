@@ -166,10 +166,6 @@ namespace KompromatKoffer.Pages.Administration
             {
                 MailAddress = Config.Parameter.Mail_From_Email_Address,
                 MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
-                MailHost = Config.Parameter.Mail_Host,
-                MailPort = Config.Parameter.Mail_Port,
-                Login = Config.Parameter.Mail_Email_Login,
-                Password = Config.Parameter.Mail_Email_Passwort
             };
 
 
@@ -238,10 +234,7 @@ namespace KompromatKoffer.Pages.Administration
             {
                 MailAddress = Config.Parameter.Mail_From_Email_Address,
                 MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
-                MailHost = Config.Parameter.Mail_Host,
-                MailPort = Config.Parameter.Mail_Port,
-                Login = Config.Parameter.Mail_Email_Login,
-                Password = Config.Parameter.Mail_Email_Passwort
+
             };
 
 
@@ -271,10 +264,6 @@ namespace KompromatKoffer.Pages.Administration
         {
             Config.Parameter.Mail_From_Email_Address = SendMailSettings.MailAddress;
             Config.Parameter.Mail_From_Email_DisplayName = SendMailSettings.MailDisplayname;
-            Config.Parameter.Mail_Host = SendMailSettings.MailHost;
-            Config.Parameter.Mail_Port = SendMailSettings.MailPort;
-            Config.Parameter.Mail_Email_Login = SendMailSettings.Login;
-            Config.Parameter.Mail_Email_Passwort = SendMailSettings.Password;
 
 
             //Mail Settings
@@ -282,10 +271,7 @@ namespace KompromatKoffer.Pages.Administration
             {
                 MailAddress = Config.Parameter.Mail_From_Email_Address,
                 MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
-                MailHost = Config.Parameter.Mail_Host,
-                MailPort = Config.Parameter.Mail_Port,
-                Login = Config.Parameter.Mail_Email_Login,
-                Password = Config.Parameter.Mail_Email_Passwort
+
             };
 
             //List Settings
@@ -357,10 +343,6 @@ namespace KompromatKoffer.Pages.Administration
             {
                 MailAddress = Config.Parameter.Mail_From_Email_Address,
                 MailDisplayname = Config.Parameter.Mail_From_Email_DisplayName,
-                MailHost = Config.Parameter.Mail_Host,
-                MailPort = Config.Parameter.Mail_Port,
-                Login = Config.Parameter.Mail_Email_Login,
-                Password = Config.Parameter.Mail_Email_Passwort
             };
 
 
