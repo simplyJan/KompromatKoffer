@@ -28,7 +28,7 @@
     <PackageReference Include="CodeHollow.FeedReader" Version="1.1.6" />
     <PackageReference Include="LiteDB" Version="4.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-	<PackageReference Include="Microsoft.NetCore.App" Version="2.2.2" />
+	<PackageReference Include="Microsoft.NetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.2" />
     <PackageReference Include="Sendgrid" Version="9.10.0" />
