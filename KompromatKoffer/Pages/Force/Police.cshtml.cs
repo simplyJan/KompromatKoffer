@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KompromatKoffer.Areas.Database.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Tweetinvi;
 
 namespace KompromatKoffer.Pages.Force
 {
+    [Authorize]
     public class PoliceModel : PageModel
     {
         public IEnumerable<Tweetinvi.Models.ITweet> TimeLine;
