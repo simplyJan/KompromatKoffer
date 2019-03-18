@@ -9,9 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tweetinvi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KompromatKoffer.Pages
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
 
