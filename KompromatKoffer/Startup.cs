@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
 namespace KompromatKoffer
@@ -18,10 +19,13 @@ namespace KompromatKoffer
 
         private readonly ILogger _logger;
 
+
         public Startup(ILogger<Startup> logger)
         {
             _logger = logger;
         }
+
+
 
         public Startup(IConfiguration configuration)
         {
@@ -34,6 +38,7 @@ namespace KompromatKoffer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -52,8 +57,12 @@ namespace KompromatKoffer
             //Set DB to Update after StartUp
             Config.Parameter.DbLastUpdated = DateTime.Now;
 
-            // Add application services.
+            //Add application services
+
+            //Email
             services.AddSingleton<IEmailSender, EmailSender>();
+
+
 
             if (Config.Parameter.SwitchOnAllServices == true)
             {

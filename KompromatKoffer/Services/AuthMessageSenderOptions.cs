@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace KompromatKoffer.Services
 {
-    public interface IEmailSender
+    public class AuthMessageSenderOptions
     {
-        Task SendEmailAsync(string email, string subject, string message);
+        public string SendGridUser { get; set; }
+        public string SendGridKey { get; set; }
     }
 }
