@@ -5,63 +5,55 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net; 
 using System.Net.Mail;
+using Microsoft.Extensions.Options;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using Microsoft.Extensions.Logging;
 
 namespace KompromatKoffer.Services
 {
     public class EmailSender : IEmailSender
     {
-        public async Task SendEmailAsync(string To_Email_Address, string subject, string message)
 
-        {
-            if (To_Email_Address == null) return; 
+        private readonly ILogger _logger;
 
-            try
+
+
+        private string _sendGridKey;
+
+
+        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor, ILogger<EmailSender> logger)
             {
+                _sendGridKey = optionsAccessor.Value.SendGridKey;
+            _logger = logger;
+        }
 
-                string sFrom_Email_Address = Config.Parameter.Mail_From_Email_Address;
+            public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
 
-                string sFrom_Email_DisplayName = Config.Parameter.Mail_From_Email_DisplayName;
+            public Task SendEmailAsync(string email, string subject, string message)
+            {
+                _logger.LogWarning(">>>> Trying send mail with: " + _sendGridKey);
 
-                string sHost = Config.Parameter.Mail_Host;
-
-                int intPort = Config.Parameter.Mail_Port;
-
-                string sEmail_Login = Config.Parameter.Mail_Email_Login;
-
-                string sEmail_Passwort = Config.Parameter.Mail_Email_Passwort;
-
-
-                MailMessage email = new MailMessage();
-
-                email.To.Add(new MailAddress(To_Email_Address));
-
-                email.From = new MailAddress(sFrom_Email_Address, sFrom_Email_DisplayName);
-
-                email.Subject = subject;
-
-                email.Body = message;
-
-                email.IsBodyHtml = true;
-
-
-                SmtpClient smtp = new SmtpClient();
-
-                smtp.Host = sHost;
-
-                smtp.Port = Convert.ToInt32(intPort);
-
-                smtp.Credentials = new NetworkCredential(sEmail_Login, sEmail_Passwort);
-
-                smtp.EnableSsl = false;
-
-
-                await smtp.SendMailAsync(email);
+                return Execute(_sendGridKey, subject, message, email);
             }
-            catch (Exception ex)
 
+            public Task Execute(string apiKey, string subject, string message, string email)
             {
-                Console.WriteLine("Error EmailSender.cs error:" + ex.Message);
+                var client = new SendGridClient(apiKey);
+                var msg = new SendGridMessage()
+                {
+                    From = new EmailAddress(Config.Parameter.Mail_From_Email_Address, Config.Parameter.Mail_From_Email_DisplayName),
+                    Subject = subject,
+                    PlainTextContent = message,
+                    HtmlContent = message
+                };
+                msg.AddTo(new EmailAddress(email));
+
+                // Disable click tracking.
+                // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
+                msg.SetClickTracking(false, false);
+
+                return client.SendEmailAsync(msg);
             }
         }
     }
-}
