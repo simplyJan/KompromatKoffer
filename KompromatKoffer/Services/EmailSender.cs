@@ -22,14 +22,6 @@ namespace KompromatKoffer.Services
 
                 string sFrom_Email_DisplayName = Config.Parameter.Mail_From_Email_DisplayName;
 
-                string sHost = Config.Parameter.Mail_Host;
-
-                int intPort = Config.Parameter.Mail_Port;
-
-                string sEmail_Login = Config.Parameter.Mail_Email_Login;
-
-                string sEmail_Passwort = Config.Parameter.Mail_Email_Passwort;
-
 
                 MailMessage email = new MailMessage();
 
@@ -46,11 +38,11 @@ namespace KompromatKoffer.Services
 
                 SmtpClient smtp = new SmtpClient();
 
-                smtp.Host = sHost;
+                //smtp.Host = sHost;
 
-                smtp.Port = Convert.ToInt32(intPort);
+                //smtp.Port = Convert.ToInt32(intPort);
 
-                smtp.Credentials = new NetworkCredential(sEmail_Login, sEmail_Passwort);
+                //smtp.Credentials = new NetworkCredential(sEmail_Login, sEmail_Passwort);
 
                 smtp.EnableSsl = false;
 
